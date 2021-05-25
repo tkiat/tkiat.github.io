@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactMarkdown from 'react-markdown'
-// const ReactMarkdownWithHtml = require('react-markdown/with-html')
+import React          from 'react'
+
+import Markdown from './Markdown'
 
 const Content = props => {
   return (
   <div className={'markdown-content' + (props.isActive ? ' markdown-content--active' : '')}>
-    <ReactMarkdown children={props.content} allowDangerousHtml />
+    <Markdown content={props.content} />
   </div>
   )
 }

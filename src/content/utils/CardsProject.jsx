@@ -1,3 +1,5 @@
+import React from 'react'
+
 const CardsProject = props => {
   return (
     <div className={'cards-project' + (props.isActive ? ' cards-project--active' : '')}>

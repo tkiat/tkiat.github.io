@@ -1,7 +1,6 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
-// import ReactMarkdownWithHtml from 'react-markdown/with-html'
-// const ReactMarkdownWithHtml = require('react-markdown/with-html')
+
+import Markdown from './Markdown'
 
 const Cards = props => {
   return (
@@ -10,7 +9,7 @@ const Cards = props => {
         props.items.map((item, i) => {
           return (
             <div className='cards__item' key={i}>
-              <ReactMarkdown children={item} allowDangerousHtml />
+              <Markdown content={item} />
             </div>
           )
         })

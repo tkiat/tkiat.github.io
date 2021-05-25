@@ -29,7 +29,7 @@ const routes = {
     </Suspense>,
 }
 
-const About = props => {
+const About = () => {
   const routeResult = useRoutes(routes)
   return (
     <>

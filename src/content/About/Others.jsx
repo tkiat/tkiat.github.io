@@ -10,7 +10,7 @@ const credits = [`
   - **Raleway**: by The Raleway Project Authors (impallari@gmail.com) - SIL Open Font License, Version 1.1
 `, `
 # SVG
-<strong><a href="https://www.vecteezy.com/free-vector/nature">Nature Vectors by Vecteezy</a></strong>
+<strong><a href="https://www.vecteezy.com/free-vector/nature">Vecteezy</a></strong>
 - [Sea background](https://www.vecteezy.com/vector-art/229917-high-seas-vector-illustration), [Desert background](https://www.vecteezy.com/vector-art/192739-stone-gate-in-the-desert-landscape-vector), [Cheery blossom background](https://www.vecteezy.com/vector-art/271238-cherry-blossoms-background-illustration), [Snow background](https://www.vecteezy.com/vector-art/2395226-snow-mountain-background-vector)
 
 <strong>https://freesvg.org</strong>

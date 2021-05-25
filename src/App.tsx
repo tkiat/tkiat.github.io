@@ -1,7 +1,9 @@
 import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
-import {useRoutes, useRedirect} from 'hookrouter'
+// import {useRoutes, useRedirect} from 'hookrouter'
 import {useImmer} from 'use-immer'
+import {Route, useRoute} from "wouter"
 
+import Content          from '@/content/Content'
 import About          from '@/content/About'
 import Hobby          from '@/content/Hobby'
 import Resume          from '@/content/Resume'
@@ -118,6 +120,7 @@ function App() {
     'shakiness': 0,
   })
 
+
   const shouldMoveWave = currentIndex === 0 || currentIndex === 1
   const wavesConfig = useMemo(() => {
     const {from, to} = (function(){
@@ -183,8 +186,10 @@ function App() {
     1: parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
   }
   const navItemsAtIndex = {
-    0: ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
-    1: ['/Web', '/PC', '/Environment', '/Others'],
+    0: ['/intro', '/whoiam', '/whatiuse', '/others'],
+    1: ['/web', '/pc', '/environment', '/others'],
+//     0: ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
+//     1: ['/Web', '/PC', '/Environment', '/Others'],
   }
 
   const getBackground = (theme: string) => {
@@ -202,11 +207,54 @@ function App() {
     }
   }
 
-  useRedirect('/', '/about')
-  useRedirect('/about', '/about'       + navItemsAtIndex[0][tabIndexDefault[0]])
-  useRedirect('/hobby', '/hobby' + navItemsAtIndex[1][tabIndexDefault[1]])
+//   useRedirect('/', '/about')
+//   useRedirect('/about', '/about'       + navItemsAtIndex[0][tabIndexDefault[0]])
+//   useRedirect('/hobby', '/hobby' + navItemsAtIndex[1][tabIndexDefault[1]])
 
-  const routeResult = useRoutes(routes)
+  // const routeResult = useRoutes(routes)
+  console.log(5)
+//   const temp = {
+//     0: ['intro', 'whoiam', 'whatiuse', 'others'],
+//     1: ['web', 'pc', 'environment', 'others'],
+//   }
+
+  // const url = window.location.pathname
+  const urls = window.location.pathname.slice(1).split('/')
+  const urlMain = urls[0]
+  const urlSub  = urls[1]
+  console.log(urlMain, urlSub)
+
+  if(urlMain === '' && urlSub === undefined) {
+    history.pushState(null, null, '/about/intro')
+  } else if (urlMain === 'about' && urlSub === undefined) {
+    history.pushState(null, null, '/about' + navItemsAtIndex[0][tabIndexDefault[0]])
+  } else if (urlMain === 'hobby' && urlSub === undefined) {
+    history.pushState(null, null, '/hobby' + navItemsAtIndex[1][tabIndexDefault[1]])
+  }
+
+  // const [, params] = useRoute("/:main/:sub")
+  // console.log(params)
+
+//   return (
+//   <>
+//     <Route path="/about">about</Route>
+//     <Route path="/hobby">hobby</Route>
+//     <Route path="/about3">3</Route>
+// 
+//     <Link href="/about" onClick={() => triggerReRender({})}>
+//       <a className="link">about</a>
+//     </Link>
+// 
+//     <Link href="/hobby" onClick={() => triggerReRender({})}>
+//       <a className="link">hobby</a>
+//     </Link>
+// 
+//     <Link href="/about3" onClick={() => triggerReRender({})}>
+//       <a className="link">Profile 3</a>
+//     </Link>
+//     <Redirect to='/about/whoIAm' />
+//   </>
+//   )
 
   if(willShowSafariPrompt){
     return <SafariWarning onclick={() => {willShowSafariPrompt = false; localStorage.setItem('will-skip-safari-prompt', 'true'); triggerReRender({})}} />
@@ -222,7 +270,9 @@ function App() {
         }
         <Title index={currentIndex} />
         {currentIndex === 2 && <Contact />}
-        {routeResult !== null ? routeResult({}) : <NotFound />}
+        <Content main={urlMain} sub={urlSub} />
+        {/*{currentIndex < 2 && <Content test={navItemsAtIndex[currentIndex][tabIndexDefault[currentIndex]]} />}*/}
+        {/*{routeResult !== null ? routeResult({}) : <NotFound />}*/}
 
         {['DuckAboutMe', 'DuckHobby', 'DuckResume'].map((duck, index) =>
         <Duck
@@ -231,7 +281,8 @@ function App() {
           href={urlAtIndex[index]}
           isActive={currentIndex === index}
           shape={duck}
-          text={['About', 'Hobby', 'Resume'][index]} />
+          text={['About', 'Hobby', 'Resume'][index]}
+          onclick={() => triggerReRender({})} />
         )}
         <DuckSidebar
           myId='duck-sidebar'
