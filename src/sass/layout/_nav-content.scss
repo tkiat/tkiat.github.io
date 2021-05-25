@@ -1,0 +1,38 @@
+.nav {
+  $root: &;
+  &--content {
+    position: initial;
+
+    display: block;
+    font-size: 1rem;
+    #{$root}__list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      margin: 0;
+      padding: 0;
+
+      list-style-type: none;
+      #{$root}__item {
+        margin: 2px;
+        #{$root}__button {
+          font-size: 1em;
+          padding: 10px;
+
+          border: none;
+          border-radius: 5px;
+          background-color: hsl(var(--hue-p180), var(--saturation), var(--luminance-base-content-nav));
+          color: var(--body-bg-color);
+          cursor: pointer;
+          &:not(&--active):hover {
+            background-color: hsl(var(--hue-p180), var(--saturation), calc(var(--luminance-base-content-nav) + 10%));
+          }
+          &--active {
+            background-color: hsl(var(--hue-p180), var(--saturation), calc(var(--luminance-base-content-nav) + 20%));
+          }
+        }
+      }
+    }
+  }
+}

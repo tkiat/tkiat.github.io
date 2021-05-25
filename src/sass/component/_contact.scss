@@ -1,0 +1,13 @@
+.contact {
+  position: absolute;
+  top: 0;
+  right: var(--sidebar-width);
+  padding: 10px;
+  text-align: right;
+  &__header {
+    margin: 0;
+  }
+  &__paragraph {
+    margin: 5px;
+  }
+}

@@ -1,0 +1,14 @@
+@use '../abstract/_mixins.scss';
+
+[theme-base='ocean'] {
+  @include mixins.gen-hs(210, 100%);
+}
+[theme-base='desert'] {
+  @include mixins.gen-hs(30, 100%);
+}
+[theme-base='sakura'] {
+  @include mixins.gen-hs(330, 100%);
+}
+[theme-base='snow'] {
+  @include mixins.gen-hs(0, 0%);
+}

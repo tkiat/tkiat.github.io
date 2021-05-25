@@ -1,0 +1,60 @@
+@use '_functions.scss';
+
+@mixin fluid-type($properties, $min-vw-px, $max-vw-px, $min-val, $max-val) {
+  & {
+    @each $property in $properties {
+      #{$property}: $min-val;
+    }
+
+    @media screen and (min-width: $min-vw-px) and (max-width: $max-vw-px) {
+      @each $property in $properties {
+        #{$property}: calc(#{$min-val} + #{functions.strip-unit($max-val - $min-val)} * ((100vw - #{$min-vw-px}) / #{functions.strip-unit($max-vw-px - $min-vw-px)}));
+      }
+    }
+    @media screen and (min-width: $max-vw-px) {
+      @each $property in $properties {
+        #{$property}: $max-val;
+      }
+    }
+  }
+}
+
+@mixin gen-hs($h, $s) {
+  --hue: #{$h};
+  --saturation: #{$s};
+
+  --hue-m30: #{$h - 30};
+  --hue-p30: #{$h + 30};
+  --hue-p90: #{$h + 90};
+  --hue-p150: #{$h + 150};
+  --hue-p180: #{$h + 180};
+  --hue-p210: #{$h + 210};
+  --hue-p270: #{$h + 270};
+}
+
+@mixin theme-base {
+  --body-bg-hsl:                   var(--hue),      var(--saturation), var(--luminance-body-bg-color);
+
+  --body-bg-color:                 hsl(var(--hue),      var(--saturation), var(--luminance-body-bg-color));
+  --body-text-color:               hsl(var(--hue),      var(--saturation), var(--luminance-body-text-color));
+  --body-text-color-underwater:    hsl(var(--hue-p90),  var(--saturation), 90%);
+  --header-text-color:             hsl(var(--hue),      var(--saturation), var(--luminance-header-text-color));
+  --li-marker-color:               hsl(var(--hue),      var(--saturation), var(--luminance-li-marker-color));
+  --link-text-color:               hsl(var(--hue-p180), var(--saturation), var(--luminance-link-text-color));
+  --mobile-title-text-color:       hsl(var(--hue),      var(--saturation), var(--luminance-mobile-title-text-color));
+  --nav-button-hover-shadow-color: hsl(var(--hue),      var(--saturation), var(--luminance-nav-button-hover-shadow-color));
+  --text-strong-color-underwater:  hsl(var(--hue-p180), var(--saturation), 70%);
+}
+
+@mixin theme-supplement {
+  --duck-body-color: hsl(var(--hue-p180), var(--saturation), 50%);
+  --duck-beak-color: hsl(var(--hue-p270), var(--saturation), 50%);
+  --duck-wing-color: hsl(var(--hue-p90),  var(--saturation), 50%);
+
+  --tube-stroke-color: hsl(var(--hue),      var(--saturation), var(--luminance-tube-stroke-color));
+  --tube-water-color:  hsla(var(--hue-p180), var(--saturation), var(--luminance-tube-water-color), 0.8);
+
+  --wave-front0-color: hsl(var(--hue), var(--saturation), var(--luminance-wave-front0-color));
+  --wave-front1-color: hsl(var(--hue), var(--saturation), var(--luminance-wave-front1-color));
+  --wave-front2-color: hsl(var(--hue), var(--saturation), var(--luminance-wave-front2-color));
+}

@@ -1,0 +1,13 @@
+<svg class='valve-border' width="1200" height="180" preserveAspectRatio="xMidYMid slice" version="1.1" viewBox="0 0 317.49999 47.625001" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipPath-valve1">
+      <path class='valve-border__clip-path' d="m591.9082 0v163.65234h-591.9082v16.18555h608.0918v-163.6543h591.9082v-16.183594h-591.9082z" fill="none"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(160.89104,1.6212463e-5)">
+    <path class='valve-border__path' transform="matrix(.26458333 0 0 .26482183 -160.89103 -1.6212463e-5)" d="m1200 0h-608.0918v163.65234h-591.9082m0 16.18555h608.0918v-163.6543h591.9082" clip-path="url(#clipPath-valve1)" fill="none" stroke="#000" stroke-width="6"/>
+    <rect class='valve-border__rect' x="-160.89104" y="1.4614339e-8" width="156.60899" height="4.2858768" fill="#010101"/>
+    <rect class='valve-border__rect' x="-7.6610304e-5" y="43.342968" width="156.60899" height="4.2820168" fill="#010101"/>
+    <path class='valve-border__path' transform="matrix(.26458333 0 0 .26482183 -160.89103 -1.6212463e-5)" d="m1200 0h-608.0918v163.66847h-591.9082m0 16.16942h608.0918v-163.66846h591.9082" clip-path="url(#clipPath-valve1)" fill="none" stroke="#000" stroke-width="6"/>
+  </g>
+</svg>

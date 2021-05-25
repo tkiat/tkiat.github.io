@@ -1,0 +1,21 @@
+.valve {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  &-border {
+    height: 100%;
+    width: auto;
+    &__path {
+      stroke: var(--tube-stroke-color);
+    }
+  }
+  &-mask {
+    position: absolute;
+    left: 0;
+
+    height: 100%;
+    width: auto;
+
+    fill: var(--body-bg-color);
+  }
+}

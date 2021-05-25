@@ -1,0 +1,32 @@
+@use '../abstract/_mixins.scss';
+
+[time='day'] {
+  --luminance-body-bg-color:                 98%;
+  --luminance-body-text-color:               10%;
+  --luminance-header-text-color:             35%;
+  --luminance-li-marker-color:               35%;
+  --luminance-link-text-color:               35%;
+  --luminance-mobile-title-text-color:       25%;
+  --luminance-nav-button-hover-shadow-color: 25%;
+
+  --luminance-base-content-nav:              15%;
+}
+
+[time='dark'] {
+  --luminance-body-bg-color:                 5%;
+  --luminance-body-text-color:               90%;
+  --luminance-header-text-color:             75%;
+  --luminance-li-marker-color:               75%;
+  --luminance-link-text-color:               75%;
+  --luminance-mobile-title-text-color:       75%;
+  --luminance-nav-button-hover-shadow-color: 75%;
+
+  --luminance-base-content-nav:              30%;
+}
+
+[theme-base='ocean'],
+[theme-base='desert'],
+[theme-base='sakura'],
+[theme-base='snow'] {
+  @include mixins.theme-base;
+}

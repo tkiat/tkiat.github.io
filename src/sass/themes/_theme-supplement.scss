@@ -1,0 +1,25 @@
+@use '../abstract/_mixins.scss';
+
+[time='day'] {
+  --luminance-tube-stroke-color: 25%;
+  --luminance-tube-water-color:  50%;
+
+  --luminance-wave-front0-color: 25%;
+  --luminance-wave-front1-color: 50%;
+  --luminance-wave-front2-color: 75%;
+}
+[time='dark'] {
+  --luminance-tube-stroke-color: 35%;
+  --luminance-tube-water-color:  65%;
+
+  --luminance-wave-front0-color: 15%;
+  --luminance-wave-front1-color: 30%;
+  --luminance-wave-front2-color: 45%;
+}
+
+[theme-supplement='ocean'],
+[theme-supplement='desert'],
+[theme-supplement='sakura'],
+[theme-supplement='snow'] {
+  @include mixins.theme-supplement;
+}

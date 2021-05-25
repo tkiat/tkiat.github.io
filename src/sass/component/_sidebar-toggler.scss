@@ -1,0 +1,55 @@
+.sidebar-toggler {
+  position: absolute;
+  top: calc(var(--nav-tube-height) + 50px);
+  right: var(--sidebar-width);
+  font-weight: bold;
+  width: 25px;
+  height: 25px;
+
+  pointer-events: initial;
+  user-select: initial;
+
+  font-size: 1rem;
+  color: var(--body-bg-color);
+  background: var(--body-text-color);
+  border: none;
+
+  cursor: pointer;
+  filter: saturate(0%);
+  visibility: hidden;
+  z-index: 1;
+
+  transform: translateX(1500px);
+  transition: transform 1s;
+  &:after {
+    content: 'x';
+    display: inline-block;
+  }
+  &--appear {
+    transform: translateX(0);
+    visibility: visible;
+    filter: none !important;
+  }
+  &:hover {
+    filter: saturate(0%) !important;
+    transition-delay: unset;
+    &:after {
+      animation: x-toggle 1s linear forwards;
+    }
+    & + * {
+      filter: saturate(0%) !important;
+    }
+  }
+}
+
+@keyframes x-toggle {
+  0%, 50%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(22.5deg);
+  }
+  75% {
+    transform: rotate(-22.5deg);
+  }
+}

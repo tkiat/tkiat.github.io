@@ -1,0 +1,83 @@
+/*TODO changes to duck main menu*/
+.duck {
+  $root: &;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1rem;
+  height: calc(var(--duck-height) + 1.5rem);
+  padding: 0;
+
+  border: none;
+  color: var(--body-text-color);
+  &:after {
+    content: none;
+  }
+  &--active {
+    #{$root}__svg {
+      filter: none;
+    }
+    #{$root}__text {
+      color: var(--link-text-color);
+    }
+    #{$root}__text:after {
+      width: 0;
+    }
+  }
+  &--sidebar {
+    cursor: pointer;
+    background: none;
+  }
+  &:hover {
+    #{$root}__svg {
+      filter: drop-shadow(0px 0px 2px var(--duck-body-color));
+    }
+    #{$root}__text {
+      color: var(--link-text-color);
+    }
+    #{$root}__text:after {
+      width: 0;
+    }
+  }
+  &:active {
+    #{$root}__svg {
+      filter: drop-shadow(0px 0px 12px var(--duck-body-color));
+    }
+  }
+  &__svg {
+    width: var(--duck-width);
+    height: 80%;
+    filter: brightness(6%) drop-shadow(0px 0px 4px black);
+    #{$root}__beak {
+      fill: var(--duck-beak-color);
+    }
+    #{$root}__body {
+      fill: var(--duck-body-color);
+    }
+    #{$root}__wing {
+      fill: var(--duck-wing-color);
+    }
+  }
+  &__text {
+    position: relative;
+
+    color: inherit;
+    font-weight: bold;
+    user-select: none;
+    transition: color 500ms;
+    &:after {
+      position: absolute;
+      bottom: 0;
+      content: '';
+      width: 100%;
+      height: 2px;
+      display: block;
+      background-color: var(--link-text-color);
+      transition: 500ms;
+    }
+  }
+}

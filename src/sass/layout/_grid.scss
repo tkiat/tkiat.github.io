@@ -1,0 +1,21 @@
+.grid {
+  $root: &;
+
+  display: grid;
+  &--sidebar {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+
+    text-align: center;
+    width: 100%;
+    #{$root}__item {
+      text-align: center;
+
+      width: 100%;
+      height: 8em;
+      &--6em {
+        height: 6em;
+      }
+    }
+  }
+}

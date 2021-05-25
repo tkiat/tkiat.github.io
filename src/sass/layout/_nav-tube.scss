@@ -1,0 +1,93 @@
+@use '../abstract/_variables.scss';
+
+.nav {
+  $root: &;
+  &--tube {
+    position: absolute;
+    font-size: 2.441rem;
+    height: var(--nav-tube-height);
+    width: calc(100% - 20px - var(--sidebar-width));
+    margin: 10px;
+    #{$root}__list {
+      display: flex;
+
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+      list-style-type: none;
+      #{$root}__item {
+        position: relative;
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        &, #{$root}__link {
+          #{$root}__highlighter-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            z-index: -1;
+            display: inline-block;
+            #{$root}__highlighter-item {
+              background-color: var(--tube-water-color);
+              height: 100%;
+              width: 100%;
+              transform: translateY(100%);
+              &--init {
+                transform: translateY(20%);
+              }
+            }
+          }
+        }
+        #{$root}__link {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          height: 100%;
+
+          text-decoration: none;
+          &:after {
+            content: none;
+          }
+          &:hover {
+            filter: invert(25%);
+            z-index: 2;
+          }
+          &.waiting {
+            cursor: wait;
+          }
+          &.waiting:active {
+            pointer-events: none;
+          }
+          &.waiting:hover {
+            opacity: 0.5;
+          }
+        }
+        /*TODO*/
+        .valve {
+          width: auto;
+          &-border {
+            width: 100%;
+            &__rect {
+              fill: var(--tube-stroke-color);
+            }
+          }
+          &-mask {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: variables.$w-max-mobile) {
+  .nav--tube {
+    display: none;
+  }
+}

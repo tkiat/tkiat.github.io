@@ -1,0 +1,137 @@
+@use '../abstract/_mixins.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  @include mixins.fluid-type(font-size, 400px, 768px, 14px, 18px);
+  @include mixins.fluid-type(--duck-height, 400px, 768px, 45px, 60px);
+  @include mixins.fluid-type(--duck-width,  400px, 768px, 30px, 40px);
+  @include mixins.fluid-type(--nav-tube-height, 768px, 1024px, 60px, 90px);
+  --anim-period: 0.5s;
+  --sidebar-width: min(400px, 70vw);
+
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Lato, sans-serif;
+  background: var(--body-bg-color);
+  color: var(--body-text-color);
+}
+
+h1, h2, h3, a, button, strong {
+  font-family: Raleway, sans-serif;
+  font-feature-settings: "lnum";
+  font-kerning: none;
+}
+
+.root {
+  width: calc(100% + var(--sidebar-width));
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  &.move {
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+    & .main .sidebar {
+      filter: none;
+      visibility: visible;
+      transition: initial;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  display: inline-block;
+  color: var(--body-text-color);
+  text-decoration: none;
+  transition: color 500ms;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    display: block;
+    background-color: var(--link-text-color);
+    transition: 500ms;
+  }
+  &:hover {
+    color: var(--link-text-color);
+    transition: 500ms;
+  }
+  &:hover:after {
+    width: 0;
+  }
+}
+
+a:focus, button:focus {
+  outline: none;
+  &:focus-visible {
+    outline: 3px solid red;
+    filter: none !important;
+    z-index: 9;
+  }
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background: url(@/duck/svg/duck.svg);
+    background-size: 100%;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    &::-webkit-slider-thumb {
+      background: none;
+    }
+    &::-webkit-slider-runnable-track {
+      background: #333;
+    }
+    &::-moz-range-thumb {
+      background: none;
+    }
+    &::-moz-range-track {
+      background: #333;
+    }
+  }
+  &::-webkit-slider-runnable-track {
+    background: #ddd;
+    border: 2px solid black;
+  }
+  &::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    background: url(@/duck/svg/duck.svg);
+    background-size: 100%;
+    border: none;
+  }
+  &::-moz-range-track {
+    background: #ddd;
+    height: 20px;
+    border: 2px solid black;
+  }
+}
+
