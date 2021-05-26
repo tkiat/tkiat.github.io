@@ -3,14 +3,12 @@ import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
 
 import Content       from '@/content/Content'
-
 import NavBar        from '@/navbar/NavBar'
 import Contact       from '@/content/Contact'
 import Title         from '@/content/Title'
 import Canvas        from '@/canvas/Canvas'
 import SafariWarning from '@/SafariWarning'
 import useDebounce   from '@/hook-custom/useDebounce'
-// import getMainRoutes from '@/router/getMainRoutes'
 import Sidebar       from '@/content/Sidebar'
 import Duck          from '@/duck/Duck'
 import DuckSidebar   from '@/duck/DuckSidebar'
@@ -213,7 +211,12 @@ function App() {
         <NavBar navIndexs={navIndexs} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} level={currentIndex} keyOffset={[0, navItemsAtIndex[0].length]}/>
         }
 
-        <Title index={currentIndex} />
+        {currentIndex < 2 &&
+        <Title className={'title title--' + currentIndex}>
+          {navItemsAtIndex[currentIndex][navIndexs[currentIndex]].slice(1)}
+        </Title>
+        }
+
         {currentIndex === 2 && <Contact />}
         <Content isInsideWater={currentIndex === 2} />
 

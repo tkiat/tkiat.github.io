@@ -1,5 +1,6 @@
 import React from 'react'
-const Contact = () => (
+
+const Contact: React.FunctionComponent<null> = () => (
   <div className='contact'>
     <h1 className='contact__header'>Contact</h1>
 

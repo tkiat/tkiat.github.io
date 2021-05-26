@@ -1,11 +1,12 @@
-import React from 'react'
+import React  from 'react'
 import {Link} from "@reach/router"
-import {Fragment}                      from 'react'
+
+import {moveWater}                     from './moveWater.js'
+
+import TubeText                        from './TubeText'
 
 import {ReactComponent as ValveBorder} from './valve/border.svg'
 import {ReactComponent as ValveMask}   from './valve/mask.svg'
-import {moveWater}                     from './moveWater.js'
-import TubeText                        from './TubeText'
 
 const toggleElemsClassName = (elems, className) => {
   elems.forEach(elem => elem.classList.toggle(className))
@@ -41,7 +42,7 @@ const NavBarListTube = props => {
     <ul className='nav__list'>
       {props.items.map((tab, i) =>
 
-      <Fragment key={i + props.keyOffset}>
+      <React.Fragment key={i + props.keyOffset}>
         <li className='nav__item'>
           <Link className={'nav__link'} to={props.baseURL + tab} onClick={() => moveWaterToDest(props.navIndex * 2, i * 2)} draggable='false'>
             <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
@@ -59,7 +60,7 @@ const NavBarListTube = props => {
           </div>
         </li>
       }
-      </Fragment>
+      </React.Fragment>
       )}
     </ul>
   </nav>
