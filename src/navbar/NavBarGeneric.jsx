@@ -1,11 +1,11 @@
 import React from 'react'
-import {A}        from 'hookrouter'
+import {Link} from "@reach/router"
 
 import {ReactComponent as DuckHamburger} from '@/duck/svg/duck-hamburger.svg'
 
 const NavBarGeneric = props => {
   const onclick = i => {
-    props.setCurNavItemIndex(draft => {
+    props.setNavIndexs(draft => {
       draft[props.level] = i
     })
   }
@@ -18,9 +18,9 @@ const NavBarGeneric = props => {
       <li className='nav__item nav__item--button' aria-label="hamburger-menu"><DuckHamburger /></li>
       {props.items.map((tab, i) =>
         <li key={i} className='nav__item'>
-          <A className={'nav__link' + (i === props.curNodeIndex ? ' nav__link--active' : '')} href={props.baseURL + tab} onClick={() => onclick(i)}>
+          <Link className={'nav__link' + (i === props.navIndex ? ' nav__link--active' : '')} to={props.baseURL + tab} onClick={() => onclick(i)}>
             {tab[1].toUpperCase() + tab.slice(2)}
-          </A>
+          </Link>
         </li>
       )}
     </ul>

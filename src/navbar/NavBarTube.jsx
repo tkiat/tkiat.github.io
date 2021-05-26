@@ -1,5 +1,5 @@
 import React from 'react'
-import {A}                             from 'hookrouter'
+import {Link} from "@reach/router"
 import {Fragment}                      from 'react'
 
 import {ReactComponent as ValveBorder} from './valve/border.svg'
@@ -16,7 +16,7 @@ const NavBarListTube = props => {
     if(from === to) return
 
     if(skipAnimation) {
-      props.setCurNavItemIndex(draft => {
+      props.setNavIndexs(draft => {
         draft[props.level] = to / 2
       })
       return
@@ -29,7 +29,7 @@ const NavBarListTube = props => {
 
       window.setTimeout(function() {
         toggleElemsClassName(navLinkItems, 'waiting')
-        props.setCurNavItemIndex(draft => {
+        props.setNavIndexs(draft => {
           draft[props.level] = to / 2
         })
       }, (delayTotal + transitionSec) * 1000)
@@ -41,21 +41,21 @@ const NavBarListTube = props => {
     <ul className='nav__list'>
       {props.items.map((tab, i) =>
 
-      <Fragment key={i + props.offset}>
+      <Fragment key={i + props.keyOffset}>
         <li className='nav__item'>
-          <A className={'nav__link'} href={props.baseURL + tab} onClick={() => moveWaterToDest(props.curNodeIndex * 2, i * 2)} draggable='false'>
+          <Link className={'nav__link'} to={props.baseURL + tab} onClick={() => moveWaterToDest(props.navIndex * 2, i * 2)} draggable='false'>
             <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
             <div className="nav__highlighter-wrapper">
-              <div id={'nav__highlighter-item' + i*2} className={'nav__highlighter-item' + (i === props.curNodeIndex ? ' nav__highlighter-item--init' : '')}></div>
+              <div id={'nav__highlighter-item' + i*2} className={'nav__highlighter-item' + (i === props.navIndex ? ' nav__highlighter-item--init' : '')}></div>
             </div>
-          </A>
+          </Link>
         </li>
 
       {i < props.items.length - 1 &&
         <li className='nav__item'>
           <div className='valve'><ValveBorder /><ValveMask /></div>
           <div className="nav__highlighter-wrapper">
-            <div id={'nav__highlighter-item' + (i*2 + 1)} className={'nav__highlighter-item' + (i === props.curNodeIndex ? ' nav__highlighter-item--init' : '')}></div>
+            <div id={'nav__highlighter-item' + (i*2 + 1)} className={'nav__highlighter-item' + (i === props.navIndex ? ' nav__highlighter-item--init' : '')}></div>
           </div>
         </li>
       }

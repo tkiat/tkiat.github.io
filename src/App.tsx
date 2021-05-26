@@ -1,19 +1,13 @@
-import React, {Suspense, useEffect, useMemo, useRef, useState} from 'react'
-// import {useRoutes, useRedirect} from 'hookrouter'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useImmer} from 'use-immer'
-import {Route, useRoute} from "wouter"
+import {Redirect, Router} from "@reach/router"
 
-import Content          from '@/content/Content'
-import About          from '@/content/About'
-import Hobby          from '@/content/Hobby'
-import Resume          from '@/content/Resume'
+import Content       from '@/content/Content'
 
 import NavBar        from '@/navbar/NavBar'
 import Contact       from '@/content/Contact'
 import Title         from '@/content/Title'
 import Canvas        from '@/canvas/Canvas'
-import Loading       from '@/Loading'
-import NotFound      from '@/NotFound'
 import SafariWarning from '@/SafariWarning'
 import useDebounce   from '@/hook-custom/useDebounce'
 // import getMainRoutes from '@/router/getMainRoutes'
@@ -28,6 +22,8 @@ import {ReactComponent as Snow}   from '@/background/snow.svg'
 
 import './sass/main.scss'
 
+// TODO move nav on popstate
+// TODO Pc in mobile make capital
 // TODO try remove React above
 // TODO try to make readnme more visual and less verbose
 // TODO in projects show keyword tooltip instead
@@ -37,6 +33,20 @@ import './sass/main.scss'
 // TODO stop compute wave if height none
 // TODO typescript remove any
 
+const getBackground = (theme: string) => {
+  switch(theme) {
+    case 'ocean':
+      return <Ocean className='background' />
+    case 'desert':
+      return <Desert className='background' />
+    case 'sakura':
+      return <Sakura className='background' />
+    case 'snow':
+      return <Snow className='background' />
+    default:
+      return <></>
+  }
+}
 const getCustomStylesheet = () => {
   return `
   [theme-supplement='custom'] {
@@ -61,21 +71,6 @@ const toggleSidebar = () => {
 const userAgentString = navigator.userAgent
 const isSafariAgent = userAgentString.indexOf("Safari") > -1 && userAgentString.indexOf("Chrome") === -1
 let willShowSafariPrompt = isSafariAgent && (localStorage.getItem('will-skip-safari-prompt') !== "true")
-
-const routes = {
-  '/about*': () => () => 
-      <Suspense fallback={<Loading />}>
-        <About />
-      </Suspense>,
-  '/hobby*': () => () =>
-      <Suspense fallback={<Loading />}>
-        <Hobby />
-      </Suspense>,
-  '/resume': () => () =>
-      <Suspense fallback={<Loading />}>
-        <Resume />
-      </Suspense>,
-}
 
 function App() {
   const [, triggerReRender] = useState({})
@@ -142,6 +137,13 @@ function App() {
   }, [shouldMoveWave, debouncedDimension, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
 
   useEffect(() => {
+    window.addEventListener('popstate', function(event) {
+      console.log('pop state')
+      triggerReRender({})
+    })
+  },[])
+
+  useEffect(() => {
     const themeSupplementCustomElem = document.createElement('style')
     themeSupplementCustomElem.id = 'theme-custom-supplement'
     document.head.appendChild(themeSupplementCustomElem)
@@ -181,80 +183,17 @@ function App() {
     })
   },[theme.supplement, time])
 
+
   const tabIndexDefault = {
     0: parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
     1: parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
   }
   const navItemsAtIndex = {
-    0: ['/intro', '/whoiam', '/whatiuse', '/others'],
-    1: ['/web', '/pc', '/environment', '/others'],
-//     0: ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
-//     1: ['/Web', '/PC', '/Environment', '/Others'],
+    0: ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
+    1: ['/Web', '/PC', '/Environment', '/Others'],
   }
 
-  const getBackground = (theme: string) => {
-    switch(theme) {
-      case 'ocean':
-        return <Ocean className='background' />
-      case 'desert':
-        return <Desert className='background' />
-      case 'sakura':
-        return <Sakura className='background' />
-      case 'snow':
-        return <Snow className='background' />
-      default:
-        return <></>
-    }
-  }
-
-//   useRedirect('/', '/about')
-//   useRedirect('/about', '/about'       + navItemsAtIndex[0][tabIndexDefault[0]])
-//   useRedirect('/hobby', '/hobby' + navItemsAtIndex[1][tabIndexDefault[1]])
-
-  // const routeResult = useRoutes(routes)
-  console.log(5)
-//   const temp = {
-//     0: ['intro', 'whoiam', 'whatiuse', 'others'],
-//     1: ['web', 'pc', 'environment', 'others'],
-//   }
-
-  // const url = window.location.pathname
-  const urls = window.location.pathname.slice(1).split('/')
-  const urlMain = urls[0]
-  const urlSub  = urls[1]
-  console.log(urlMain, urlSub)
-
-  if(urlMain === '' && urlSub === undefined) {
-    history.pushState(null, null, '/about/intro')
-  } else if (urlMain === 'about' && urlSub === undefined) {
-    history.pushState(null, null, '/about' + navItemsAtIndex[0][tabIndexDefault[0]])
-  } else if (urlMain === 'hobby' && urlSub === undefined) {
-    history.pushState(null, null, '/hobby' + navItemsAtIndex[1][tabIndexDefault[1]])
-  }
-
-  // const [, params] = useRoute("/:main/:sub")
-  // console.log(params)
-
-//   return (
-//   <>
-//     <Route path="/about">about</Route>
-//     <Route path="/hobby">hobby</Route>
-//     <Route path="/about3">3</Route>
-// 
-//     <Link href="/about" onClick={() => triggerReRender({})}>
-//       <a className="link">about</a>
-//     </Link>
-// 
-//     <Link href="/hobby" onClick={() => triggerReRender({})}>
-//       <a className="link">hobby</a>
-//     </Link>
-// 
-//     <Link href="/about3" onClick={() => triggerReRender({})}>
-//       <a className="link">Profile 3</a>
-//     </Link>
-//     <Redirect to='/about/whoIAm' />
-//   </>
-//   )
+  const [navIndexs, setNavIndexs] = useImmer(tabIndexDefault)
 
   if(willShowSafariPrompt){
     return <SafariWarning onclick={() => {willShowSafariPrompt = false; localStorage.setItem('will-skip-safari-prompt', 'true'); triggerReRender({})}} />
@@ -262,17 +201,21 @@ function App() {
     return (
     <>
       <main id='main' className='main'>
+        <Router>
+          <Redirect from="/" to={'/about' + navItemsAtIndex[0][tabIndexDefault[0]]} noThrow />
+          <Redirect from="/about" to={'/about' + navItemsAtIndex[0][tabIndexDefault[0]]} noThrow />
+          <Redirect from="/hobby" to={'/hobby' + navItemsAtIndex[1][tabIndexDefault[1]]} noThrow />
+        </Router>
         {getBackground(theme.base)}
         <Canvas className='canvas' argumentCanvas={debouncedDimension} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' role='img' />
 
         {(currentIndex === 0 || currentIndex === 1) &&
-        <NavBar navItemIndexOffset={[0, navItemsAtIndex[0].length]} tabIndexDefault={tabIndexDefault} level={currentIndex} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} />
+        <NavBar navIndexs={navIndexs} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} level={currentIndex} keyOffset={[0, navItemsAtIndex[0].length]}/>
         }
+
         <Title index={currentIndex} />
         {currentIndex === 2 && <Contact />}
-        <Content main={urlMain} sub={urlSub} />
-        {/*{currentIndex < 2 && <Content test={navItemsAtIndex[currentIndex][tabIndexDefault[currentIndex]]} />}*/}
-        {/*{routeResult !== null ? routeResult({}) : <NotFound />}*/}
+        <Content isInsideWater={currentIndex === 2} />
 
         {['DuckAboutMe', 'DuckHobby', 'DuckResume'].map((duck, index) =>
         <Duck

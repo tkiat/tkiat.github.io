@@ -1,52 +1,54 @@
-import React, {Suspense}     from 'react'
-
-import { Link, Redirect, Route } from "wouter"
-
-import Intro        from '@/content/About/Intro'
-import WhatIUse     from '@/content/About/WhatIUse'
-import WhoIAm       from '@/content/About/WhoIAm'
-import Others       from '@/content/About/Others'
-
-import HobbyEnv     from '@/content/Hobby/Environment'
-import HobbyOthers      from '@/content/Hobby/Others'
-import HobbyPC          from '@/content/Hobby/PC'
-import HobbyWeb         from '@/content/Hobby/Web'
-
-import Resume       from '@/content/Resume'
+import React    from 'react'
+import {Router} from '@reach/router'
 
 import NotFound       from '@/NotFound'
-import Loading       from '@/Loading'
 
-const getPage = (main='about', sub='intro') => {
-  if(main === 'about') {
-    if(sub === 'intro') return <Intro />
-    else if(sub === 'whoiam') return <WhoIAm />
-    else if(sub === 'whatiuse') return <WhatIUse />
-    else if(sub === 'others') return <Others />
-  }
-  else if(main === 'hobby') {
-    if(sub === 'environment') return <HobbyEnv />
-    else if(sub === 'others') return <HobbyOthers />
-    else if(sub === 'pc') return <HobbyPC />
-    else if(sub === 'web') return <HobbyWeb />
-  }
-  else if(main === 'resume') {
-    return <Resume />
-  }
-  return <NotFound className='notfound--content' />
-}
+import Intro       from '@/content/about/Intro'
+import OthersA     from '@/content/about/Others'
+import WhatIUse    from '@/content/about/WhatIUse'
+import WhoIAm      from '@/content/about/WhoIAm'
+import Environment from '@/content/hobby/Environment'
+import OthersH     from '@/content/hobby/Others'
+import PC          from '@/content/hobby/PC'
+import Web         from '@/content/hobby/Web'
+import Resume      from '@/content/Resume'
 
 const Content = (props) => {
-  console.log(props)
   return (
     <>
-      <div className={'content ' + (props.main === 'resume' ? 'content--inside-water' : 'content--outside-water')}>
-        <Suspense fallback={<Loading />}>
-          {getPage(props.main, props.sub)}
-        </Suspense>
+      <div className={'content ' + (props.isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
+        <Router>
+          <NotFound className='notfound--content' default />
+
+          <Intro    path='/about/Intro' />
+          <WhatIUse path='/about/WhatIUse' />
+          <WhoIAm   path='/about/WhoIAm' />
+          <OthersA  path='/about/Others' />
+
+          <Environment path='/hobby/Environment' />
+          <OthersH     path='/hobby/Others' />
+          <PC          path='/hobby/PC' />
+          <Web         path='/hobby/Web' />
+
+          <Resume path='/resume' />
+        </Router>
       </div>
     </>
   )
 }
 
 export default Content
+
+// import Loading       from '@/Loading'
+
+// const Intro    = React.lazy(() => import('@/content/about/Intro'))
+// const WhoIAm   = React.lazy(() => import('@/content/about/WhoIAm'))
+// const WhatIUse = React.lazy(() => import('@/content/about/WhatIUse'))
+// const Others   = React.lazy(() => import('@/content/about/Others'))
+// const Web         = React.lazy(() => import('@/content/hobby/Web'))
+// const PC          = React.lazy(() => import('@/content/hobby/PC'))
+// const Environment = React.lazy(() => import('@/content/hobby/Environment'))
+// const OthersH     = React.lazy(() => import('@/content/hobby/Others'))
+// const Resume     = React.lazy(() => import('@/content/Resume'))
+{/*<React.Suspense fallback={<Loading />}>*/}
+
