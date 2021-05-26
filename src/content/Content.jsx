@@ -18,7 +18,7 @@ const Content = (props) => {
     <>
       <div className={'content ' + (props.isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
         <Router>
-          <NotFound className='notfound--content' default />
+          <NotFound className='notfound notfound--content' default />
 
           <Intro    path='/about/Intro' />
           <WhatIUse path='/about/WhatIUse' />

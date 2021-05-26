@@ -1,4 +1,4 @@
-export const moveDucksAlongWave = (ducks, wave, offset) => {
+export const moveDucksAlongWave = (ducks: any, wave: any, offset: number) => {
   if(ducks.length >= wave.points.length) return
   for (let i = 0; i < ducks.length; i++) {
     const midpoint = (wave.points[i].y + wave.points[i+1].y)/2

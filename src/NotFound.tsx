@@ -1,8 +1,8 @@
 import React from 'react'
 
-const NotFound = props => {
+const NotFound: React.FunctionComponent<{className: string}> = ({className}) => {
   return (
-    <div className={'notfound ' + props.className}>
+    <div className={className}>
       <div>Content not found but no worry we have <a href='/'>HOME</a></div>
     </div>
   )

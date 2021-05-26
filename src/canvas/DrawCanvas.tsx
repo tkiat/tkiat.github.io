@@ -4,6 +4,11 @@ import {drawWaves}          from './wave/drawWaves'
 import {moveDucksAlongWave} from './moveDucksAlongWave'
 import Wave                 from './wave/Wave'
 
+// type Props = {
+//   wavesConfig: any,
+//   waveColors: any
+// }
+
 const DrawCanvas = (argument: any) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -11,12 +16,11 @@ const DrawCanvas = (argument: any) => {
   const {wavesConfig, waveColors} = argument
 
   useEffect(() => {
-    if(canvasRef.current === null) return
+    if(!canvasRef.current) return
 
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
-    // const context = canvas.getContext('2d')
-    // const context: CanvasRenderingContext2D = canvasRef.current.getContext('2d')
+    if(!context) return
 
     const waves = [...Array(wavesConfig.num).keys()].map(i => {
       return new Wave(i, wavesConfig.totalPoints, wavesConfig.from, wavesConfig.to, wavesConfig.height, wavesConfig.speed, wavesConfig.shakiness)

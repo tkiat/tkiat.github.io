@@ -2,16 +2,16 @@ import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
 
-import Content       from '@/content/Content'
-import NavBar        from '@/navbar/NavBar'
-import Contact       from '@/content/Contact'
-import Title         from '@/content/Title'
-import Canvas        from '@/canvas/Canvas'
-import SafariWarning from '@/SafariWarning'
-import useDebounce   from '@/hook-custom/useDebounce'
-import Sidebar       from '@/content/Sidebar'
-import Duck          from '@/duck/Duck'
-import DuckSidebar   from '@/duck/DuckSidebar'
+import Content       from './content/Content'
+import NavBar        from './navbar/NavBar'
+import Contact       from './content/Contact'
+import Title         from './content/Title'
+import Canvas        from './canvas/Canvas'
+import SafariWarning from './SafariWarning'
+import useDebounce   from './hook-custom/useDebounce'
+import Sidebar       from './content/Sidebar'
+import Duck          from './duck/Duck'
+import DuckSidebar   from './duck/DuckSidebar'
 
 import {ReactComponent as Desert} from '@/background/desert.svg'
 import {ReactComponent as Ocean}  from '@/background/ocean.svg'
@@ -94,7 +94,8 @@ function App() {
   const levels = [0, 1, 2, 3]
   const urlAtIndex = ['/about', '/hobby', '/resume', '/settings']
 
-  const currentIndex = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level])) || levels[0]
+  const currentIndexNoFallback = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level]))
+  const currentIndex = currentIndexNoFallback || levels[0]
   const totalPoints = levels.length + 1
 
   const waveColors = useRef(['', '', ''])
@@ -133,13 +134,6 @@ function App() {
     }
   // eslint-disable-next-line
   }, [shouldMoveWave, debouncedDimension, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
-
-  useEffect(() => {
-    window.addEventListener('popstate', function(event) {
-      console.log('pop state')
-      triggerReRender({})
-    })
-  },[])
 
   useEffect(() => {
     const themeSupplementCustomElem = document.createElement('style')
@@ -182,16 +176,30 @@ function App() {
   },[theme.supplement, time])
 
 
-  const tabIndexDefault = {
-    0: parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
-    1: parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
+  const tabIndexDefault: {[level: string]: number}  = {
+    '0': parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
+    '1': parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
   }
-  const navItemsAtIndex = {
-    0: ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
-    1: ['/Web', '/PC', '/Environment', '/Others'],
+  const navItemsAtIndex: {[level: string]: string[]} = {
+    '0': ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
+    '1': ['/Web', '/PC', '/Environment', '/Others'],
   }
-
   const [navIndexs, setNavIndexs] = useImmer(tabIndexDefault)
+
+  useEffect(() => {
+    window.addEventListener('popstate', function() {
+      triggerReRender({})
+
+      const currentIndexNoFallback = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level]))
+      const currentIndex = currentIndexNoFallback || levels[0]
+      if(currentIndex === 2) return
+
+      const newNavIndex = navItemsAtIndex[currentIndex].findIndex(item => window.location.pathname.endsWith(item))
+      setNavIndexs(draft => {
+        draft[currentIndex] = newNavIndex
+      })
+    })
+  },[])
 
   if(willShowSafariPrompt){
     return <SafariWarning onclick={() => {willShowSafariPrompt = false; localStorage.setItem('will-skip-safari-prompt', 'true'); triggerReRender({})}} />
@@ -205,7 +213,7 @@ function App() {
           <Redirect from="/hobby" to={'/hobby' + navItemsAtIndex[1][tabIndexDefault[1]]} noThrow />
         </Router>
         {getBackground(theme.base)}
-        <Canvas className='canvas' argumentCanvas={debouncedDimension} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' role='img' />
+        <Canvas argumentCanvas={debouncedDimension} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' />
 
         {(currentIndex === 0 || currentIndex === 1) &&
         <NavBar navIndexs={navIndexs} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} level={currentIndex} keyOffset={[0, navItemsAtIndex[0].length]}/>
