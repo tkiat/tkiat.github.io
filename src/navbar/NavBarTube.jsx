@@ -1,7 +1,7 @@
 import React  from 'react'
 import {Link} from "@reach/router"
 
-import {moveWater}                     from './moveWater.js'
+import {moveWater}                     from './moveWater'
 
 import TubeText                        from './TubeText'
 

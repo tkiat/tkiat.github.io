@@ -1,4 +1,4 @@
-export const moveWater = (from, to, transitionSec) => {
+export const moveWater = (from: number, to: number, transitionSec: number) => {
   if(from === to) return
 
   const willMoveRight = to > from
@@ -19,56 +19,57 @@ export const moveWater = (from, to, transitionSec) => {
   return delayCur
 }
 
-const moveWaterToNextNode = (textIndex, mode, flowDir, totalTime, delay) => {
+const moveWaterToNextNode = (textIndex: number, mode: 'drain' | 'pass' | 'stuck', flowDir: 'left' | 'right', totalTime: number, delay: number) => {
        if(mode === 'drain' && flowDir === 'left')  return waterDrainToLeft(textIndex, totalTime, delay)
   else if(mode === 'drain' && flowDir === 'right') return waterDrainToRight(textIndex, totalTime, delay)
   else if(mode === 'pass'  && flowDir === 'left')  return waterPassToLeft(textIndex, totalTime, delay)
   else if(mode === 'pass'  && flowDir === 'right') return waterPassToRight(textIndex, totalTime, delay)
   else if(mode === 'stuck' && flowDir === 'left')  return waterStuckToLeft(textIndex, delay)
   else if(mode === 'stuck' && flowDir === 'right') return waterStuckToRight(textIndex, delay)
+  else return 0
 }
 
-const waterDrainToLeft = (textIndex, totalTime, delay) => {
+const waterDrainToLeft = (textIndex: number, totalTime: number, delay: number) => {
   triggerWaterFlow(textIndex, 'drain-to-left-text', delay)
   triggerWaterFlow(textIndex + 1, 'drain-to-left-valve', delay)
 
   const nextDelay = (totalTime * 1.16) * 20/116
   return nextDelay
 }
-const waterDrainToRight = (textIndex, totalTime, delay) => {
+const waterDrainToRight = (textIndex: number, totalTime: number, delay: number) => {
   triggerWaterFlow(textIndex, 'drain-to-right-text', delay)
   triggerWaterFlow(textIndex + 1, 'drain-to-right-valve', delay)
 
   const nextDelay = (totalTime * 1) * 4/100
   return nextDelay
 }
-const waterPassToLeft = (textIndex, totalTime, delay) => {
+const waterPassToLeft = (textIndex: number, totalTime: number, delay: number) => {
   triggerWaterFlow(textIndex, 'pass-to-left-text', delay)
   triggerWaterFlow(textIndex + 1, 'pass-to-left-valve', delay)
 
   const nextDelay = (totalTime * 2.16) * 120/216
   return nextDelay
 }
-const waterPassToRight = (textIndex, totalTime, delay) => {
+const waterPassToRight = (textIndex: number, totalTime: number, delay: number) => {
   triggerWaterFlow(textIndex, 'pass-to-right-text', delay)
   triggerWaterFlow(textIndex + 1, 'pass-to-right-valve', delay)
 
   const nextDelay = (totalTime * 2.16) * 120/216
   return nextDelay
 }
-const waterStuckToLeft = (textIndex, delay) => {
+const waterStuckToLeft = (textIndex: number, delay: number) => {
   triggerWaterFlow(textIndex, 'stuck-to-left-text', delay)
   triggerWaterFlow(textIndex + 1, 'stuck-to-left-valve', delay)
   return 0
 }
-const waterStuckToRight = (textIndex, delay) => {
+const waterStuckToRight = (textIndex: number, delay: number) => {
   triggerWaterFlow(textIndex, 'stuck-to-right-text', delay)
   triggerWaterFlow(textIndex + 1, 'stuck-to-right-valve', delay)
   return 0
 }
 
-const triggerWaterFlow = (highlighterNum, className, delaySec) => {
-  const highlighter = document.getElementById('nav__highlighter-item' + highlighterNum)
+const triggerWaterFlow = (highlighterNum: number, className: string, delaySec: number) => {
+  const highlighter = document.getElementById('nav__highlighter-item' + highlighterNum) as HTMLElement
   if (!highlighter) return
   highlighter.className = 'nav__highlighter-item'
   highlighter.classList.add(className)

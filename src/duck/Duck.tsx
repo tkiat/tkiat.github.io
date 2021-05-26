@@ -5,11 +5,17 @@ import {ReactComponent as DuckAboutMeSVG} from './svg/duck-aboutme.svg'
 import {ReactComponent as DuckHobbySVG}   from './svg/duck-hobby.svg'
 import {ReactComponent as DuckResumeSVG}  from './svg/duck-resume.svg'
 
-const DasDuck = props => {
-  switch(props.shape) {
-    case 'DuckAboutMe': return <DuckAboutMeSVG className={props.className} />
-    case 'DuckHobby': return <DuckHobbySVG className={props.className} />
-    default: return <DuckResumeSVG className={props.className} />
+// type Duck = React.FunctionComponent<React.SVGProps<SVGSVGElement>>
+type Duck = 'DuckAboutMe' | 'DuckHobby' | 'DuckResume'
+
+const DasDuck: React.FunctionComponent<{className: string, shape: Duck}> = ({className, shape}) => {
+  switch(shape) {
+    case 'DuckAboutMe': return <DuckAboutMeSVG className={className} />
+    case 'DuckHobby': return <DuckHobbySVG className={className} />
+    case 'DuckResume': return <DuckResumeSVG className={className} />
+    default:
+      const _exhaustiveCheck: never = shape;
+      return _exhaustiveCheck;
   }
 }
 

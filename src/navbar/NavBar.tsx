@@ -1,11 +1,19 @@
 import React from 'react'
-import {useImmer} from 'use-immer'
 
 import NavBarTube    from './NavBarTube'
 import NavBarGeneric from './NavBarGeneric'
 
-const NavBar = props => {
-  const {baseURL, items, keyOffset, level, navIndexs, setNavIndexs} = props
+type ComponentProps = {
+  baseURL: string,
+  items: string[],
+  keyOffset: number[],
+  level: number,
+  navIndexs: {[key: number]: number},
+  setNavIndexs: object
+  // navIndexs: {[level: string]: number},
+  // TODO change object to react function
+}
+const NavBar: React.FunctionComponent<ComponentProps> = ({baseURL, items, keyOffset, level, navIndexs, setNavIndexs}) => {
 
   localStorage.setItem('tabIndexLv' + level + 'Cur', navIndexs[level])
 
