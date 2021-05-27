@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {ReactComponent as UpperABorder} from './letters/_A-border.svg'
 import {ReactComponent as UpperAMask}   from './letters/_A-mask.svg'
 import {ReactComponent as UpperCBorder} from './letters/_C-border.svg'
@@ -65,7 +66,7 @@ import {ReactComponent as LowerUMask}   from './letters/u-mask.svg'
 import {ReactComponent as LowerVBorder} from './letters/v-border.svg'
 import {ReactComponent as LowerVMask}   from './letters/v-mask.svg'
 
-const mapping = {
+const mapping: {[index: string]: React.ReactFragment} = {
   'A': <><UpperABorder /><UpperAMask /></>,
   'C': <><UpperCBorder /><UpperCMask /></>,
   'D': <><UpperDBorder /><UpperDMask /></>,
@@ -101,11 +102,11 @@ const mapping = {
   'v': <><LowerVBorder /><LowerVMask /></>,
 }
 
-const TubeText = props => {
+const TubeText = ({word}: {word: string}): React.ReactElement => {
   return (
     <>
     {
-      props.word && Array.from(props.word).map((letter, i) => {
+      word && Array.from(word).map((letter, i) => {
         return <div key={i} className='letter'>{mapping[letter]}</div>
       })
     }

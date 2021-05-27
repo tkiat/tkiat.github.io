@@ -1,7 +1,7 @@
 import React    from 'react'
 import {Router} from '@reach/router'
 
-import NotFound       from '@/NotFound'
+import NotFound from '@/NotFound'
 
 import Intro       from '@/content/about/Intro'
 import OthersA     from '@/content/about/Others'

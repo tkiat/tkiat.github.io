@@ -1,6 +1,7 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react'
+import React from 'react'
 import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
+import {navIndexsType} from "my-nav-type"
 
 import Content       from './content/Content'
 import NavBar        from './navbar/NavBar'
@@ -20,9 +21,6 @@ import {ReactComponent as Snow}   from '@/background/snow.svg'
 
 import './sass/main.scss'
 
-// TODO move nav on popstate
-// TODO Pc in mobile make capital
-// TODO try remove React above
 // TODO try to make readnme more visual and less verbose
 // TODO in projects show keyword tooltip instead
 // TODO what if in project we add another navbar left sidebar and show project on the right
@@ -71,7 +69,7 @@ const isSafariAgent = userAgentString.indexOf("Safari") > -1 && userAgentString.
 let willShowSafariPrompt = isSafariAgent && (localStorage.getItem('will-skip-safari-prompt') !== "true")
 
 function App() {
-  const [, triggerReRender] = useState({})
+  const [, triggerReRender] = React.useState({})
 
   const [dimensions, setDimensions] = useImmer({
     height: document.documentElement.clientHeight,
@@ -80,7 +78,7 @@ function App() {
   const debouncedDimension = useDebounce(dimensions, 1000)
 
   const [time, setTime] = useImmer(localStorage.getItem('time') ?? timeFallback)
-  useEffect(() => {
+  React.useEffect(() => {
     document.documentElement.setAttribute('time', time)
     localStorage.setItem('time', time)
   },[time])
@@ -98,13 +96,13 @@ function App() {
   const currentIndex = currentIndexNoFallback || levels[0]
   const totalPoints = levels.length + 1
 
-  const waveColors = useRef(['', '', ''])
-  const duckColors = useRef({
+  const waveColors = React.useRef(['', '', ''])
+  const duckColors = React.useRef({
     'beak': '',
     'body': '',
     'wing': '',
   })
-  const tubeColors = useRef({
+  const tubeColors = React.useRef({
     'stroke': '',
     'water' : '',
   })
@@ -116,7 +114,7 @@ function App() {
 
 
   const shouldMoveWave = currentIndex === 0 || currentIndex === 1
-  const wavesConfig = useMemo(() => {
+  const wavesConfig = React.useMemo(() => {
     const {from, to} = (function(){
       switch(currentIndex) {
         case 0: case 1:
@@ -135,7 +133,7 @@ function App() {
   // eslint-disable-next-line
   }, [shouldMoveWave, debouncedDimension, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
 
-  useEffect(() => {
+  React.useEffect(() => {
     const themeSupplementCustomElem = document.createElement('style')
     themeSupplementCustomElem.id = 'theme-custom-supplement'
     document.head.appendChild(themeSupplementCustomElem)
@@ -153,11 +151,11 @@ function App() {
     }
   }, [setDimensions])
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.documentElement.setAttribute('theme-base', theme.base)
   },[theme.base])
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.documentElement.setAttribute('theme-supplement', theme.supplement)
 
     const computedRootStyle = getComputedStyle(document.documentElement)
@@ -184,9 +182,10 @@ function App() {
     '0': ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
     '1': ['/Web', '/PC', '/Environment', '/Others'],
   }
-  const [navIndexs, setNavIndexs] = useImmer(tabIndexDefault)
 
-  useEffect(() => {
+  const [navIndexs, setNavIndexs] = useImmer<navIndexsType>(tabIndexDefault)
+
+  React.useEffect(() => {
     window.addEventListener('popstate', function() {
       triggerReRender({})
 
@@ -216,7 +215,7 @@ function App() {
         <Canvas argumentCanvas={debouncedDimension} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' />
 
         {(currentIndex === 0 || currentIndex === 1) &&
-        <NavBar navIndexs={navIndexs} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} level={currentIndex} keyOffset={[0, navItemsAtIndex[0].length]}/>
+        <NavBar navIndex={navIndexs[currentIndex]} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} level={currentIndex} keyOffsets={[0, navItemsAtIndex[0].length]}/>
         }
 
         {currentIndex < 2 &&
