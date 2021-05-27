@@ -117,15 +117,14 @@ const opinion = `
 - **Tea**: Tea bag sucks. The quality is abysmal and also doesn't respect environment but it is still much less worse than sweetened green tea in a plastic bottle. Pu-erh tea is the best because it often comes with a natural package in a condensed space.
 `
 
-const WhoIAm = () => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem('tab-index-about-whoiam') ?? 0))
-  const click = index => {
-    localStorage.setItem('tab-index-about-whoiam', index)
-    setCur(index)
-  }
+const storage = 'tab-index-about-whoiam'
+
+const WhoIAm = (): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return(
     <>
-      <Nav items={['Personality', 'Goal & Purpose', 'Preferences', 'Opinion']} storage='tab-index-about-whoiam' cur={cur} onclick={click} />
+      <Nav items={['Personality', 'Goal & Purpose', 'Preferences', 'Opinion']} storage={storage} cur={cur} setCur={setCur} />
+
       <Cards           isActive={cur === 0} items={personality} />
       <Cards           isActive={cur === 1} items={goal_purpose} />
       <Cards           isActive={cur === 2} items={preferences} />

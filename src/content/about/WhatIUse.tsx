@@ -88,15 +88,14 @@ const drinks = `
 - **Herbal Tea**: Red Roibos, Chrysanthemum, Yerba Mate, and anything else adventurous
 `
 
-const FAQs = () => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem('tab-index-hobby-whatiuse') ?? 0))
-  const click = index => {
-    localStorage.setItem('tab-index-hobby-whatiuse', index)
-    setCur(index)
-  }
+const storage = 'tab-index-about-whatiuse'
+
+const WhatIUse = (): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Gadgets','Software','Hygiene','Drinks']} storage='tab-index-hobby-whatiuse' cur={cur} onclick={click} />
+      <Nav items={['Gadgets','Software','Hygiene','Drinks']} storage={storage} cur={cur} setCur={setCur} />
+
       <Cards isActive={cur === 0} items={gadgets} />
       <Cards isActive={cur === 1} items={software} />
       <MarkdownContent isActive={cur === 2} content={hygiene} />
@@ -105,4 +104,4 @@ const FAQs = () => {
   )
 }
 
-export default FAQs
+export default WhatIUse

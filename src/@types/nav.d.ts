@@ -20,4 +20,11 @@ declare module 'my-nav-type' {
   export type NavbarTubeProps = NavbarBaseProps & {
     keyOffset: number,
   }
+
+  export type NavbarContentProps = {
+    cur: number,
+    items: string[],
+    setCur: Updater<number>,
+    storage: string,
+  }
 }

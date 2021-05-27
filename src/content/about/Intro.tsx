@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Intro = () => {
+const Intro = (): React.ReactElement => {
   return (
     <>
     <h1 style={{width: 'min-content'}}><span role='img' aria-hidden='true'>{'\u{1F600}'}</span>Hi! I am Theerawat.</h1>

@@ -1,4 +1,4 @@
-import Wave                 from './wave/Wave'
+import Wave from './wave/Wave'
 
 export const moveDucksAlongWave = (ducks: HTMLCollectionOf<HTMLElement>, wave: Wave, offset: number) => {
   if(ducks.length >= wave.points.length) return
