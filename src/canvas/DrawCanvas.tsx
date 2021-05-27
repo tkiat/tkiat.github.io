@@ -1,32 +1,34 @@
 import {useEffect, useRef} from 'react'
+import {DrawCanvasProps, DrawCanvasOutput} from 'my-canvas-type'
 
 import {drawWaves}          from './wave/drawWaves'
 import {moveDucksAlongWave} from './moveDucksAlongWave'
 import Wave                 from './wave/Wave'
 
-// type Props = {
-//   wavesConfig: any,
-//   waveColors: any
-// }
-
-const DrawCanvas = (argument: any) => {
+const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasOutput => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  const {wavesConfig, waveColors} = argument
-
   useEffect(() => {
     if(!canvasRef.current) return
-
     const canvas = canvasRef.current
+
     const context = canvas.getContext('2d')
     if(!context) return
 
+    const config = {
+      from: wavesConfig.from,
+      to: wavesConfig.to,
+      totalPoints: wavesConfig.totalPoints,
+      height: wavesConfig.height,
+      speed: wavesConfig.speed,
+      shakiness: wavesConfig.shakiness,
+    }
     const waves = [...Array(wavesConfig.num).keys()].map(i => {
-      return new Wave(i, wavesConfig.totalPoints, wavesConfig.from, wavesConfig.to, wavesConfig.height, wavesConfig.speed, wavesConfig.shakiness)
+      return new Wave({index: i, ...config })
     })
 
-    const ducks = document.getElementsByClassName('duck')
+    const ducks = document.getElementsByClassName('duck') as HTMLCollectionOf<HTMLElement>
     const creatureOffset = 20
     let animationFrameId: number
 

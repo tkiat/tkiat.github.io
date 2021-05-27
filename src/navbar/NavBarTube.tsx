@@ -9,8 +9,8 @@ import TubeText                        from './TubeText'
 import {ReactComponent as ValveBorder} from './valve/border.svg'
 import {ReactComponent as ValveMask}   from './valve/mask.svg'
 
-const toggleElemsClassName = (elems: Element[], className: string) => {
-  elems.forEach(elem => elem.classList.toggle(className))
+const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
+  for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
 }
 
 const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: NavbarTubeProps): React.ReactElement => {
@@ -25,7 +25,7 @@ const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: 
       return
     } else {
       const navTube = document.getElementById('nav-tube')
-      const navLinkItems = navTube && Array.from(navTube.getElementsByClassName('nav__link'))
+      const navLinkItems = navTube && navTube.getElementsByClassName('nav__link')
       if(navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
 
       const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))

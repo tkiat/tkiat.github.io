@@ -1,12 +1,28 @@
+import {Coordinate, PointProps, WaveProps} from 'my-wave-type'
+
 import Point from './Point'
 
-export default class Wave {
-  constructor(index, totalPoints, from, to, height, speed, shakiness) {
+class Wave {
+  index: number
+
+  from: Coordinate
+  to: Coordinate
+
+  points: PointProps[]
+  totalPoints: number
+
+  height: number
+  speed: number
+  shakiness: number
+
+  constructor({index, totalPoints, from, to, height, speed, shakiness}: WaveProps) {
     this.index = index
-    this.points = []
-    this.totalPoints = totalPoints
+
     this.from = from
     this.to = to
+
+    this.points = []
+    this.totalPoints = totalPoints
 
     this.height = height
     this.speed = speed
@@ -18,7 +34,16 @@ export default class Wave {
   createPoints() {
     let coordinates = this.computeCoordinates()
     for (let i = 0; i < this.totalPoints; i++) {
-      this.points[i] = new Point(this.index + i, coordinates[i].x, coordinates[i].y, this.height, this.speed, this.shakiness)
+      this.points[i] = new Point({
+        index: this.index + i,
+
+        x: coordinates[i].x,
+        y: coordinates[i].y,
+
+        height: this.height,
+        speed: this.speed,
+        shakiness: this.shakiness
+      })
     }
   }
 
@@ -32,3 +57,5 @@ export default class Wave {
     return coordinates
   }
 }
+
+export default Wave

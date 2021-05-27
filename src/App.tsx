@@ -1,7 +1,9 @@
 import React from 'react'
 import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
-import {navIndexsType} from "my-nav-type"
+import {DuckShape} from 'my-duck-type'
+import {navIndexsType} from 'my-nav-type'
+import {WavesColors as WavesColorsType, WavesConfigs as WavesConfigsType, WavesPhysics as WavesPhysicsType} from 'my-wave-config-type'
 
 import Content       from './content/Content'
 import NavBar        from './navbar/NavBar'
@@ -96,7 +98,7 @@ function App() {
   const currentIndex = currentIndexNoFallback || levels[0]
   const totalPoints = levels.length + 1
 
-  const waveColors = React.useRef(['', '', ''])
+  const waveColors = React.useRef<WavesColorsType>(['', '', ''])
   const duckColors = React.useRef({
     'beak': '',
     'body': '',
@@ -106,7 +108,7 @@ function App() {
     'stroke': '',
     'water' : '',
   })
-  const [wavePhysics, setWavePhysics] = useImmer({
+  const [wavePhysics, setWavePhysics] = useImmer<WavesPhysicsType>({
     'height': 10,
     'speed': window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 0.05,
     'shakiness': 0,
@@ -114,7 +116,7 @@ function App() {
 
 
   const shouldMoveWave = currentIndex === 0 || currentIndex === 1
-  const wavesConfig = React.useMemo(() => {
+  const wavesConfig = React.useMemo<WavesConfigsType>(() => {
     const {from, to} = (function(){
       switch(currentIndex) {
         case 0: case 1:
@@ -233,16 +235,15 @@ function App() {
           index={index}
           href={urlAtIndex[index]}
           isActive={currentIndex === index}
-          shape={duck}
+          shape={duck as DuckShape}
           text={['About', 'Hobby', 'Resume'][index]}
           onclick={() => triggerReRender({})} />
         )}
         <DuckSidebar
           myId='duck-sidebar'
           index={3}
-          shape='DuckSidebar'
           text='Settings'
-          toggleSidebar={toggleSidebar} />
+          onclick={toggleSidebar} />
 
         <Sidebar
           wavePhysics={wavePhysics} setWavePhysics={setWavePhysics}

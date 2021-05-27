@@ -1,11 +1,22 @@
-export default class Point {
-  constructor(index, x, y, height, speed, shakiness) {
+import {PointProps} from 'my-wave-type'
+
+class Point {
+  index: number
+
+  x: number
+  y: number
+  initialY: number
+
+  height: number
+  speed: number
+  shakiness: number
+
+  constructor({height, index, speed, shakiness, x, y}: PointProps) {
+    this.index = index
+
     this.x = x
     this.y = y
-    this.fixedY = y
-    this.moveStep = 30
-    this.newY = y
-    this.cur = index
+    this.initialY = y
 
     this.height = height
     this.speed = speed
@@ -13,12 +24,9 @@ export default class Point {
   }
 
   oscillate() {
-    this.cur += this.speed
-    this.y = this.fixedY + Math.sin(this.cur) * this.height + Math.random() * this.shakiness
+    this.index += this.speed
+    this.y = this.initialY + Math.sin(this.index) * this.height + Math.random() * this.shakiness
   }
-//   move() {
-//     if(this.fixedY !== this.newY) {
-//       this.fixedY = (Math.abs(this.newY - this.fixedY) < this.moveStep) ? this.newY : this.fixedY + (this.fixedY < this.newY ? this.moveStep : -this.moveStep)
-//     }
-//   }
 }
+
+export default Point

@@ -1,12 +1,9 @@
 import React from 'react'
+import {CanvasProps} from 'my-canvas-type'
+
 import DrawCanvas from './DrawCanvas'
 
-type CanvasProps = {
-  argumentCanvas: {height: number, width: number},
-  argumentDrawCanvas: any
-}
-
-const Canvas: React.FunctionComponent<CanvasProps> = ({argumentCanvas, argumentDrawCanvas}) => {
+const Canvas = ({argumentCanvas, argumentDrawCanvas}: CanvasProps): React.ReactElement => {
   const canvasRef = DrawCanvas(argumentDrawCanvas)
   return <canvas className='canvas' ref={canvasRef} {...argumentCanvas} role='img' />
 }

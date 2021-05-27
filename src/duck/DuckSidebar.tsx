@@ -1,13 +1,14 @@
 import React from 'react'
+import {DuckSidebarProps} from 'my-duck-type'
+
 import {ReactComponent as DuckSidebarSVG} from './svg/duck-settings.svg'
 
-const DuckSidebar = props => {
+const DuckSidebar = ({index, myId, text, onclick}: DuckSidebarProps): React.ReactElement => {
   const xOffset = '20px'
-  // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
-  const left = `calc((100% - var(--sidebar-width)) * (2 * ${props.index} + 1) / 8 - ${xOffset})`
+  const left = `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
   return (
-    <button id={props.myId} className='duck duck--sidebar' aria-label={props.text} style={{left: left}} onClick={props.toggleSidebar}>
-      <div className='duck__text'>{props.text}</div>
+    <button id={myId} className='duck duck--sidebar' aria-label={text} style={{left: left}} onClick={onclick}>
+      <div className='duck__text'>{text}</div>
       <DuckSidebarSVG className='duck__svg' />
     </button>
   )

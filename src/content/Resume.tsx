@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Resume() {
+const Resume = (): React.ReactElement => {
   return (
     <>
       <h1>Work Experience</h1>
@@ -29,6 +29,6 @@ function Resume() {
     </>
   )
 }
-// - 2013 - **GRE** - Percentile - Verbal (28) - Quantitative (97) - Analytical (30)
-
 export default Resume
+
+// - 2013 - **GRE** - Percentile - Verbal (28) - Quantitative (97) - Analytical (30)

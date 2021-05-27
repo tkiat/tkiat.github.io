@@ -106,7 +106,7 @@ const TubeText = ({word}: {word: string}): React.ReactElement => {
   return (
     <>
     {
-      word && Array.from(word).map((letter, i) => {
+      Array.from(word).map((letter, i) => {
         return <div key={i} className='letter'>{mapping[letter]}</div>
       })
     }

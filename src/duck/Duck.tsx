@@ -1,14 +1,12 @@
 import React from 'react'
-import {Link} from "@reach/router"
+import {Link} from '@reach/router'
+import {DuckShape, DuckProps} from 'my-duck-type'
 
 import {ReactComponent as DuckAboutMeSVG} from './svg/duck-aboutme.svg'
 import {ReactComponent as DuckHobbySVG}   from './svg/duck-hobby.svg'
 import {ReactComponent as DuckResumeSVG}  from './svg/duck-resume.svg'
 
-// React.FunctionComponentElement<React.SVGProps<SVGSVGElement>>
-type Duck = 'DuckAboutMe' | 'DuckHobby' | 'DuckResume'
-
-const DuckSVG = ({className, shape}: {className: string, shape: Duck}): React.ReactElement => {
+const DuckSVG = ({className, shape}: {className: string, shape: DuckShape}): React.ReactElement => {
   switch(shape) {
     case 'DuckAboutMe': return <DuckAboutMeSVG className={className} />
     case 'DuckHobby': return <DuckHobbySVG className={className} />
@@ -19,13 +17,13 @@ const DuckSVG = ({className, shape}: {className: string, shape: Duck}): React.Re
   }
 }
 
-const Duck = (props) => {
+const Duck = ({href, index, isActive, onclick, shape, text}: DuckProps): React.ReactElement => {
   const xOffset = '20px'
-  const left = `calc((100% - var(--sidebar-width)) * (2 * ${props.index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
+  const left = `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
   return (
-    <Link className={'duck' + (props.isActive ? ' duck--active' : '')} to={props.href} aria-label={props.text} style={{left: left}} draggable='false' onClick={props.onclick}>
-      <div className='duck__text'>{props.text}</div>
-      <DuckSVG className='duck__svg' shape={props.shape} />
+    <Link className={'duck' + (isActive ? ' duck--active' : '')} to={href} aria-label={text} style={{left: left}} draggable='false' onClick={onclick}>
+      <div className='duck__text'>{text}</div>
+      <DuckSVG className='duck__svg' shape={shape} />
     </Link>
   )
 }

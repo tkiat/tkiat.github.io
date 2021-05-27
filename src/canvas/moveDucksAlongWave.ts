@@ -1,4 +1,6 @@
-export const moveDucksAlongWave = (ducks: any, wave: any, offset: number) => {
+import Wave                 from './wave/Wave'
+
+export const moveDucksAlongWave = (ducks: HTMLCollectionOf<HTMLElement>, wave: Wave, offset: number) => {
   if(ducks.length >= wave.points.length) return
   for (let i = 0; i < ducks.length; i++) {
     const midpoint = (wave.points[i].y + wave.points[i+1].y)/2
