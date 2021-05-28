@@ -14,15 +14,14 @@ I am planning to upload some of my gardening photos and simple vegan cooking rec
 // const gardening = `
 // `
 
-const FAQs = () => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem('tab-index-hobby-environment') ?? 0))
-  const click = index => {
-    localStorage.setItem('tab-index-hobby-environment', index)
-    setCur(index)
-  }
+const storage = 'tab-index-hobby-environment'
+
+const Environment = (): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['TODO']} storage='tab-index-hobby-environment' cur={cur} onclick={click} />
+      <Nav items={['TODO']} storage={storage} cur={cur} setCur={setCur} />
+
       <MarkdownContent isActive={cur === 0} content={todo} />
     {/*<MarkdownContent isActive={cur === 0} content={zeroWaste} />*/}
     {/*<MarkdownContent isActive={cur === 1} content={vegan} />*/}
@@ -31,4 +30,4 @@ const FAQs = () => {
   )
 }
 
-export default FAQs
+export default Environment

@@ -64,15 +64,14 @@ const experimental = [
   },
 ]
 
-const Web = () => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem('tab-index-hobby-web') ?? 0))
-  const click = index => {
-    localStorage.setItem('tab-index-hobby-web', index)
-    setCur(index)
-  }
+const storage = 'tab-index-hobby-web'
+
+const Web = (): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Projects', 'Tasks', 'Experimental']} storage='tab-index-hobby-web' cur={cur} onclick={click} />
+      <Nav items={['Projects', 'Tasks', 'Experimental']} storage={storage} cur={cur} setCur={setCur} />
+
       <CardsProject isActive={cur === 0} items={project} />
       <CardsProject isActive={cur === 1} items={tasks} />
       <CardsProject isActive={cur === 2} items={experimental} />

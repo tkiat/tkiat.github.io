@@ -35,15 +35,14 @@ const archive = `
 * **Collecting TCG Cards**. Inactive since high school.
 `
 
-const FAQs = () => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem('tab-index-hobby-others') ?? 0))
-  const click = index => {
-    localStorage.setItem('tab-index-hobby-others', index)
-    setCur(index)
-  }
+const storage = 'tab-index-hobby-others'
+
+const Others = (): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Content', 'Courses','Others','Archive']} storage='tab-index-hobby-others' cur={cur} onclick={click} />
+      <Nav items={['Content', 'Courses','Others','Archive']} storage='storage' cur={cur} setCur={setCur} />
+
       <MarkdownContent isActive={cur === 0} content={content} />
       <MarkdownContent isActive={cur === 1} content={courses} />
       <MarkdownContent isActive={cur === 2} content={others} />
@@ -52,4 +51,4 @@ const FAQs = () => {
   )
 }
 
-export default FAQs
+export default Others

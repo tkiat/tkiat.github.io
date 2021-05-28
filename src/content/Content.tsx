@@ -1,8 +1,6 @@
 import React    from 'react'
 import {Router} from '@reach/router'
 
-import NotFound from '@/NotFound'
-
 import Intro       from '@/content/about/Intro'
 import OthersA     from '@/content/about/Others'
 import WhatIUse    from '@/content/about/WhatIUse'
@@ -12,11 +10,12 @@ import OthersH     from '@/content/hobby/Others'
 import PC          from '@/content/hobby/PC'
 import Web         from '@/content/hobby/Web'
 import Resume      from '@/content/Resume'
+import NotFound    from '@/NotFound'
 
-const Content = (props) => {
+const Content = ({isInsideWater}: {isInsideWater: boolean}): React.ReactElement => {
   return (
     <>
-      <div className={'content ' + (props.isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
+      <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
         <Router>
           <NotFound className='notfound notfound--content' default />
 
@@ -40,7 +39,6 @@ const Content = (props) => {
 export default Content
 
 // import Loading       from '@/Loading'
-
 // const Intro    = React.lazy(() => import('@/content/about/Intro'))
 // const WhoIAm   = React.lazy(() => import('@/content/about/WhoIAm'))
 // const WhatIUse = React.lazy(() => import('@/content/about/WhatIUse'))
@@ -50,5 +48,4 @@ export default Content
 // const Environment = React.lazy(() => import('@/content/hobby/Environment'))
 // const OthersH     = React.lazy(() => import('@/content/hobby/Others'))
 // const Resume     = React.lazy(() => import('@/content/Resume'))
-{/*<React.Suspense fallback={<Loading />}>*/}
-
+// <React.Suspense fallback={<Loading />}>

@@ -1,10 +1,11 @@
 import React from 'react'
+import {CardProject, CardsProjectProps} from 'my-card-type'
 
-const CardsProject = props => {
+const CardsProject = ({isActive, items}: CardsProjectProps): React.ReactElement => {
   return (
-    <div className={'cards-project' + (props.isActive ? ' cards-project--active' : '')}>
+    <div className={'cards-project' + (isActive ? ' cards-project--active' : '')}>
       {
-        props.items.map((item, i) => {
+        items.map((item: CardProject, i: number) => {
           return (
             <div className={'cards-project__item' + (item.inactive ? ' cards-project__item--inactive' : '')} key={i}>
               <h1 className='cards-project__header'>{item.title}{item.inactive && ' (Inactive)'}</h1>

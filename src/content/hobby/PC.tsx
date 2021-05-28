@@ -1,4 +1,4 @@
-import React     from 'react'
+import React      from 'react'
 import {useImmer} from 'use-immer'
 
 import CardsProject    from '@/content/utils/CardsProject'
@@ -39,15 +39,14 @@ Will add more.
 - [2020-10-07](https://github.com/tldr-pages/tldr/pull/4525) - **tldr** - **Add Document**: lvremove entry
 `
 
-const Web = () => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem('tab-index-hobby-pc') ?? 0))
-  const click = index => {
-    localStorage.setItem('tab-index-hobby-pc', index)
-    setCur(index)
-  }
+const storage = 'tab-index-hobby-pc'
+
+const PC = (): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Projects', 'Tasks', 'Contributions', 'My Config']} storage='tab-index-hobby-pc' cur={cur} onclick={click} />
+      <Nav items={['Projects', 'Tasks', 'Contributions', 'My Config']} storage={storage} cur={cur} setCur={setCur} />
+
       <CardsProject isActive={cur === 0} items={projects} />
       <CardsProject isActive={cur === 1} items={tasks} />
       <MarkdownContent isActive={cur === 2} content={contributions} />
@@ -56,4 +55,4 @@ const Web = () => {
   )
 }
 
-export default Web
+export default PC

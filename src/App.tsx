@@ -3,18 +3,20 @@ import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
 import {DuckShape} from 'my-duck-type'
 import {navIndexsType} from 'my-nav-type'
+import {ThemeBase, ThemeSupplement, ThemeProps} from 'my-theme-type'
 import {WavesColors as WavesColorsType, WavesConfigs as WavesConfigsType, WavesPhysics as WavesPhysicsType} from 'my-wave-config-type'
 
-import Content       from './content/Content'
-import NavBar        from './navbar/NavBar'
-import Contact       from './content/Contact'
-import Title         from './content/Title'
-import Canvas        from './canvas/Canvas'
-import SafariWarning from './SafariWarning'
 import useDebounce   from './hook-custom/useDebounce'
-import Sidebar       from './content/Sidebar'
+
+import Canvas        from './canvas/Canvas'
+import Sidebar       from './content/settings/Sidebar'
+import Contact       from './content/Contact'
+import Content       from './content/Content'
+import Title         from './content/Title'
 import Duck          from './duck/Duck'
 import DuckSidebar   from './duck/DuckSidebar'
+import NavBar        from './navbar/NavBar'
+import SafariWarning from './SafariWarning'
 
 import {ReactComponent as Desert} from '@/background/desert.svg'
 import {ReactComponent as Ocean}  from '@/background/ocean.svg'
@@ -30,6 +32,17 @@ import './sass/main.scss'
 // TODO stop compute duck if speed none
 // TODO stop compute wave if height none
 // TODO typescript remove any
+
+const isBaseTheme = (theme: string | null): theme is ThemeBase => {
+  const themes: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
+  return theme !== null && theme in themes
+}
+const isSupplementTheme = (theme: string | null): theme is ThemeSupplement => {
+  const themes: ThemeSupplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
+  return theme !== null && theme in themes
+}
+const getInitialThemeBase       = (theme: string | null) => (isBaseTheme(theme) ? theme: themeFallback)
+const getInitialThemeSupplement = (theme: string | null) => (isSupplementTheme(theme) ? theme: themeFallback)
 
 const getBackground = (theme: string) => {
   switch(theme) {
@@ -59,7 +72,7 @@ const getCustomStylesheet = () => {
   }`
 }
 const timeFallback = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'day'
-const themeFallback = 'sakura'
+const themeFallback: ThemeBase = 'sakura'
 const toggleSidebar = () => {
   document.getElementById('root')!.classList.toggle('move')
   document.getElementById('sidebar-toggler')!.classList.toggle('sidebar-toggler--appear')
@@ -73,6 +86,7 @@ let willShowSafariPrompt = isSafariAgent && (localStorage.getItem('will-skip-saf
 function App() {
   const [, triggerReRender] = React.useState({})
 
+// TODO check useImmers
   const [dimensions, setDimensions] = useImmer({
     height: document.documentElement.clientHeight,
     width: document.documentElement.clientWidth
@@ -85,12 +99,13 @@ function App() {
     localStorage.setItem('time', time)
   },[time])
 
-  const [theme, setTheme] = useImmer({
-    'base': localStorage.getItem('theme-base') ?? themeFallback,
-    'supplement': localStorage.getItem('theme-supplement') ?? themeFallback,
-    'custom-base': localStorage.getItem('theme-custom-base') ?? themeFallback,
+  const [theme, setTheme] = useImmer<ThemeProps>({
+    'base': getInitialThemeBase(localStorage.getItem('theme-base')),
+    'supplement': getInitialThemeSupplement(localStorage.getItem('theme-supplement')),
+    'custom-base': getInitialThemeBase(localStorage.getItem('theme-custom-base')),
   })
 
+// TODO set type
   const levels = [0, 1, 2, 3]
   const urlAtIndex = ['/about', '/hobby', '/resume', '/settings']
 
