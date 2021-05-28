@@ -1,8 +1,10 @@
 import React from 'react'
 import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
-import {DuckShape} from 'my-duck-type'
+import {DucksColors, DuckShape} from 'my-duck-type'
 import {navIndexsType} from 'my-nav-type'
+import {Time} from 'my-time-type'
+import {TubesColors} from 'my-tube-type'
 import {ThemeBase, ThemeSupplement, ThemeProps} from 'my-theme-type'
 import {WavesColors as WavesColorsType, WavesConfigs as WavesConfigsType, WavesPhysics as WavesPhysicsType} from 'my-wave-config-type'
 
@@ -10,8 +12,8 @@ import useDebounce   from './hook-custom/useDebounce'
 
 import Canvas        from './canvas/Canvas'
 import Sidebar       from './content/settings/Sidebar'
-import Contact       from './content/Contact'
-import Content       from './content/Content'
+import Contact       from './content/resume/Contact'
+import Content       from './router/Content'
 import Title         from './content/Title'
 import Duck          from './duck/Duck'
 import DuckSidebar   from './duck/DuckSidebar'
@@ -25,13 +27,17 @@ import {ReactComponent as Snow}   from '@/background/snow.svg'
 
 import './sass/main.scss'
 
+// TODO make my types unified
+// TODO makes first duck disappear then move down
+// TODO changes favicon
 // TODO try to make readnme more visual and less verbose
 // TODO in projects show keyword tooltip instead
 // TODO what if in project we add another navbar left sidebar and show project on the right
 // TODO do anim project https://lihautan.com/blogs/
 // TODO stop compute duck if speed none
 // TODO stop compute wave if height none
-// TODO typescript remove any
+
+const themeFallback: ThemeBase = 'sakura'
 
 const isBaseTheme = (theme: string | null): theme is ThemeBase => {
   const themes: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
@@ -41,8 +47,16 @@ const isSupplementTheme = (theme: string | null): theme is ThemeSupplement => {
   const themes: ThemeSupplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
   return theme !== null && theme in themes
 }
-const getInitialThemeBase       = (theme: string | null) => (isBaseTheme(theme) ? theme: themeFallback)
-const getInitialThemeSupplement = (theme: string | null) => (isSupplementTheme(theme) ? theme: themeFallback)
+const getInitialThemeBase       = (theme: string | null) => (isBaseTheme(theme) ? theme : themeFallback)
+const getInitialThemeSupplement = (theme: string | null) => (isSupplementTheme(theme) ? theme : themeFallback)
+
+const timeFallback: Time = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'day'
+
+const isTime = (time: string | null): time is Time => {
+  const times: Time[] = ['day', 'dark']
+  return time !== null && time in times
+}
+const getInitialTime = (time: string | null) => (isTime(time) ? time : timeFallback)
 
 const getBackground = (theme: string) => {
   switch(theme) {
@@ -71,8 +85,6 @@ const getCustomStylesheet = () => {
     --wave-front2-color:${localStorage.getItem('--wave-front2-color') ?? 'rgb(0, 0, 0)'};
   }`
 }
-const timeFallback = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'day'
-const themeFallback: ThemeBase = 'sakura'
 const toggleSidebar = () => {
   document.getElementById('root')!.classList.toggle('move')
   document.getElementById('sidebar-toggler')!.classList.toggle('sidebar-toggler--appear')
@@ -80,8 +92,8 @@ const toggleSidebar = () => {
 }
 
 const userAgentString = navigator.userAgent
-const isSafariAgent = userAgentString.indexOf("Safari") > -1 && userAgentString.indexOf("Chrome") === -1
-let willShowSafariPrompt = isSafariAgent && (localStorage.getItem('will-skip-safari-prompt') !== "true")
+const isSafariAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
+let willShowSafariPrompt = isSafariAgent && (localStorage.getItem('will-skip-safari-prompt') !== 'true')
 
 function App() {
   const [, triggerReRender] = React.useState({})
@@ -93,7 +105,7 @@ function App() {
   })
   const debouncedDimension = useDebounce(dimensions, 1000)
 
-  const [time, setTime] = useImmer(localStorage.getItem('time') ?? timeFallback)
+  const [time, setTime] = useImmer<Time>(getInitialTime(localStorage.getItem('time')))
   React.useEffect(() => {
     document.documentElement.setAttribute('time', time)
     localStorage.setItem('time', time)
@@ -114,12 +126,12 @@ function App() {
   const totalPoints = levels.length + 1
 
   const waveColors = React.useRef<WavesColorsType>(['', '', ''])
-  const duckColors = React.useRef({
+  const duckColors = React.useRef<DucksColors>({
     'beak': '',
     'body': '',
     'wing': '',
   })
-  const tubeColors = React.useRef({
+  const tubeColors = React.useRef<TubesColors>({
     'stroke': '',
     'water' : '',
   })

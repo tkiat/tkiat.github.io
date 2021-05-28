@@ -9,7 +9,7 @@ import Environment from '@/content/hobby/Environment'
 import OthersH     from '@/content/hobby/Others'
 import PC          from '@/content/hobby/PC'
 import Web         from '@/content/hobby/Web'
-import Resume      from '@/content/Resume'
+import Resume      from '@/content/resume/Resume'
 import NotFound    from '@/NotFound'
 
 const Content = ({isInsideWater}: {isInsideWater: boolean}): React.ReactElement => {

@@ -14,4 +14,10 @@ declare module 'my-duck-type' {
   export type DuckSidebarProps = DuckBaseProps & {
     myId: string,
   }
+
+  export type DucksColors = {
+    'beak': string,
+    'body': string,
+    'wing': string,
+  }
 }

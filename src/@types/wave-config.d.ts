@@ -13,4 +13,5 @@ declare module 'my-wave-config-type' {
     'speed': number,
     'shakiness': number,
   }
+  export type WavesPhysicsKey = keyof WavesPhysics
 }
