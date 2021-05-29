@@ -1,38 +1,42 @@
 import React     from 'react'
 import {useImmer} from 'use-immer'
 
-import CardsProject  from '@/content/utils/CardsProject'
-import Nav           from '@/content/utils/Nav'
+import CardsProject  from 'src/content/utils/CardsProject'
+import Nav           from 'src/content/utils/Nav'
 
 const project = [
   {
     'title': 'This Website',
-    'src': 'https://github.com/tkiat/tkiat.github.io',
-    'image-src': 'https://via.placeholder.com/320x180',
     'description': 'A very customizable personal website.',
     'keyword': 'HTML/SCSS/JS, React.js, Inkscape, GitHub Pages',
+
+    'src': 'https://github.com/tkiat/tkiat.github.io',
+    'image-src': 'https://via.placeholder.com/320x180',
   },
   {
     'title': 'Interactive Vim Theme Generator',
+    'description': 'A simplified and interactive Vim custom theme customizer',
+    'keyword': 'HTML/SCSS/JS, React.js, GitHub Pages',
+
     'src': 'https://github.com/tkiat/vim-custom-theme',
     'live': 'https://tkiat.github.io/vim-custom-theme',
     'image-src': 'https://via.placeholder.com/320x180',
-    'description': 'A simplified and interactive Vim custom theme customizer',
-    'keyword': 'HTML/SCSS/JS, React.js, GitHub Pages',
   },
   {
     'title': 'Freedom Oriented Blog',
+    'description': 'My experimental blog using Pelican.',
+    'keyword': 'HTML/SCSS/JS, Pelican, Jinja, GitHub Pages',
+
     'src': 'https://github.com/tkiat/freedom-oriented-blog',
     'live': 'https://tkiat.github.io/freedom-oriented-blog',
     'image-src': 'https://via.placeholder.com/320x180',
-    'description': 'My experimental blog using Pelican.',
-    'keyword': 'HTML/SCSS/JS, Pelican, Jinja, GitHub Pages',
   },
   {
     'title': 'Previous Personal Website',
-    'src': 'https://github.com/tkiat/archive/tree/main/tkiatd.github.io',
     'description': 'I did everything from scratch including blog contents served from a backend service. I abandoned it for something simpler, i.e. this website.',
     'keyword': 'Vanilla HTML/CSS/JS, AWS (CodeCommit, S3, DynamoDB, Lambda), Terraform, GitHub Pages',
+
+    'src': 'https://github.com/tkiat/archive/tree/main/tkiatd.github.io',
     'inactive': true,
   },
 ]
@@ -40,27 +44,28 @@ const project = [
 const tasks = [
   {
     'title': 'Christmas Card',
+    'description': 'I studied how snow effects are used in one tutorial and applied it to my own card. I gave it to my Mother\'s new husband in Norway at Christmas 2019.',
+    'keyword': 'HTML/SCSS/JS',
     'src': 'https://codepen.io/tkiatd/details/MWYoboG',
     'live': 'https://christmas-mardon.herokuapp.com',
     'image-src': 'https://via.placeholder.com/320x180',
-    'description': 'I studied how snow effects are used in one tutorial and applied it to my own card. I gave it to my Mother\'s new husband in Norway at Christmas 2019.',
-    'keyword': 'HTML/SCSS/JS',
   }
 ]
 
 const experimental = [
   {
     'title': 'Simple RegEx Program Emulator',
-    'src': 'https://codepen.io/tkiatd/pen/bGBWvza',
-    'image-src': 'https://via.placeholder.com/320x180',
     'description': 'The trick is to calculate the RegEx match, and use this match to define the "highlight" layer on top of the input textbox.',
     'keyword': 'HTML/SCSS/JS',
+    'src': 'https://codepen.io/tkiatd/pen/bGBWvza',
+    'image-src': 'https://via.placeholder.com/320x180',
   },
   {
     'title': 'Typing Practice Emulator',
+    'description': '',
+    'keyword': 'HTML/SCSS/JS',
     'src': 'https://codepen.io/tkiatd/pen/oNYWdLz',
     'image-src': 'https://via.placeholder.com/320x180',
-    'keyword': 'HTML/SCSS/JS',
   },
 ]
 

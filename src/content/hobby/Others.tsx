@@ -1,8 +1,8 @@
 import React     from 'react'
 import {useImmer} from 'use-immer'
 
-import MarkdownContent from '@/content/utils/MarkdownContent'
-import Nav             from '@/content/utils/Nav'
+import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Nav             from 'src/content/utils/Nav'
 
 const content = `
 # Blog

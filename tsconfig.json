@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -17,5 +18,8 @@
     "types": ["vite/client"],
     "typeRoots": ["./node_modules/@types", "./src/@types"]
   },
-  "include": ["./src"]
+  "include": ["src/**/*"],
+  "paths": {
+    "src/*": ["./src/*"]
+  }
 }

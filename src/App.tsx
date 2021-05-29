@@ -8,30 +8,27 @@ import {TubesColors} from 'my-tube-type'
 import {ThemeBase, ThemeSupplement, ThemeProps} from 'my-theme-type'
 import {WavesColors as WavesColorsType, WavesConfigs as WavesConfigsType, WavesPhysics as WavesPhysicsType} from 'my-wave-config-type'
 
-import useDebounce   from './hook-custom/useDebounce'
+import useDebounce   from 'src/hook-custom/useDebounce'
 
-import Canvas        from './canvas/Canvas'
-import Sidebar       from './content/settings/Sidebar'
-import Contact       from './content/resume/Contact'
-import Content       from './router/Content'
-import Title         from './content/Title'
-import Duck          from './duck/Duck'
-import DuckSidebar   from './duck/DuckSidebar'
-import NavBar        from './navbar/NavBar'
-import SafariWarning from './SafariWarning'
+import Canvas        from 'src/canvas/Canvas'
+import Sidebar       from 'src/content/settings/Sidebar'
+import Contact       from 'src/content/resume/Contact'
+import Content       from 'src/router/Content'
+import Title         from 'src/content/Title'
+import Duck          from 'src/duck/Duck'
+import DuckSidebar   from 'src/duck/DuckSidebar'
+import NavBar        from 'src/navbar/NavBar'
+import SafariWarning from 'src/SafariWarning'
 
-import {ReactComponent as Desert} from '@/background/desert.svg'
-import {ReactComponent as Ocean}  from '@/background/ocean.svg'
-import {ReactComponent as Sakura} from '@/background/sakura.svg'
-import {ReactComponent as Snow}   from '@/background/snow.svg'
+import {ReactComponent as Desert} from 'src/background/desert.svg'
+import {ReactComponent as Ocean}  from 'src/background/ocean.svg'
+import {ReactComponent as Sakura} from 'src/background/sakura.svg'
+import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
-// TODO stop compute duck if speed none
-// TODO stop compute wave if height none
 // TODO make my types unified
 // TODO makes first duck disappear then move down
-// TODO changes favicon
 // TODO try to make readnme more visual and less verbose
 // TODO in projects show keyword tooltip instead
 // TODO what if in project we add another navbar left sidebar and show project on the right
@@ -54,7 +51,7 @@ const timeFallback: Time = window.matchMedia("(prefers-color-scheme: dark)").mat
 
 const isTime = (time: string | null): time is Time => {
   const times: Time[] = ['day', 'dark']
-  return time !== null && time in times
+  return times.includes(time as Time)
 }
 const getInitialTime = (time: string | null) => (isTime(time) ? time : timeFallback)
 
@@ -103,7 +100,7 @@ function App() {
     height: document.documentElement.clientHeight,
     width: document.documentElement.clientWidth
   })
-  const debouncedDimension = useDebounce(dimensions, 1000)
+  const debouncedDimension = useDebounce<{'height': number, 'width': number}>(dimensions, 1000)
 
   const [time, setTime] = useImmer<Time>(getInitialTime(localStorage.getItem('time')))
   React.useEffect(() => {

@@ -100,7 +100,7 @@ input[type=range] {
     -webkit-appearance: none;
     height: 20px;
     width: 20px;
-    background: url(@/duck/svg/duck.svg);
+    background: url(src/duck/svg/duck.svg);
     background-size: 100%;
   }
   &:disabled {
@@ -125,7 +125,7 @@ input[type=range] {
   &::-moz-range-thumb {
     height: 100%;
     width: 15px;
-    background: url(@/duck/svg/duck-barebone.svg);
+    background: url(src/duck/svg/duck.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;

@@ -1,41 +1,67 @@
 import React    from 'react'
-import {Router} from '@reach/router'
+import {Router, RouteComponentProps} from '@reach/router'
 
-import Intro       from '@/content/about/Intro'
-import OthersA     from '@/content/about/Others'
-import WhatIUse    from '@/content/about/WhatIUse'
-import WhoIAm      from '@/content/about/WhoIAm'
-import Environment from '@/content/hobby/Environment'
-import OthersH     from '@/content/hobby/Others'
-import PC          from '@/content/hobby/PC'
-import Web         from '@/content/hobby/Web'
-import Resume      from '@/content/resume/Resume'
-import NotFound    from '@/NotFound'
+import Intro       from 'src/content/about/Intro'
+import OthersA     from 'src/content/about/Others'
+import WhatIUse    from 'src/content/about/WhatIUse'
+import WhoIAm      from 'src/content/about/WhoIAm'
+import Environment from 'src/content/hobby/Environment'
+import OthersH     from 'src/content/hobby/Others'
+import PC          from 'src/content/hobby/PC'
+import Web         from 'src/content/hobby/Web'
+import Resume      from 'src/content/resume/Resume'
+import NotFound    from 'src/NotFound'
+
 
 const Content = ({isInsideWater}: {isInsideWater: boolean}): React.ReactElement => {
+let IntroRoute       = (props: RouteComponentProps) => <Intro />
+let WhoIAmRoute      = (props: RouteComponentProps) => <WhoIAm />
+let WhatIUseRoute    = (props: RouteComponentProps) => <WhatIUse />
+let OthersARoute     = (props: RouteComponentProps) => <OthersA />
+
+let WebRoute         = (props: RouteComponentProps) => <Web />
+let PCRoute          = (props: RouteComponentProps) => <PC />
+let EnvironmentRoute = (props: RouteComponentProps) => <Environment />
+let OthersHRoute     = (props: RouteComponentProps) => <OthersH />
+
+let ResumeRoute      = (props: RouteComponentProps) => <Resume />
+let NotFoundRoute    = (props: RouteComponentProps) => <NotFound className='notfound notfound--content' />
   return (
-    <>
-      <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
-        <Router>
-          <NotFound className='notfound notfound--content' default />
+    <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
+      <Router>
+        <NotFoundRoute default />
 
-          <Intro    path='/about/Intro' />
-          <WhatIUse path='/about/WhatIUse' />
-          <WhoIAm   path='/about/WhoIAm' />
-          <OthersA  path='/about/Others' />
+        <IntroRoute    path='/about/Intro' />
+        <WhatIUseRoute path='/about/WhatIUse' />
+        <WhoIAmRoute   path='/about/WhoIAm' />
+        <OthersARoute  path='/about/Others' />
 
-          <Environment path='/hobby/Environment' />
-          <OthersH     path='/hobby/Others' />
-          <PC          path='/hobby/PC' />
-          <Web         path='/hobby/Web' />
+        <WebRoute         path='/hobby/Web' />
+        <PCRoute          path='/hobby/PC' />
+        <EnvironmentRoute path='/hobby/Environment' />
+        <OthersHRoute     path='/hobby/Others' />
 
-          <Resume path='/resume' />
-        </Router>
-      </div>
-    </>
+        <ResumeRoute path='/resume' />
+      </Router>
+    </div>
   )
 }
 
+// /*{
+//           <NotFound default />
+// 
+//           <Intro    path='/about/Intro' />
+//           <WhatIUse path='/about/WhatIUse' />
+//           <WhoIAm   path='/about/WhoIAm' />
+//           <OthersA  path='/about/Others' />
+// 
+//           <Environment path='/hobby/Environment' />
+//           <OthersH     path='/hobby/Others' />
+//           <PC          path='/hobby/PC' />
+//           <Web         path='/hobby/Web' />
+// 
+//           <Resume path='/resume' />
+// }*/
 export default Content
 
 // import Loading       from '@/Loading'

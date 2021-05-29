@@ -1,9 +1,9 @@
 import React from 'react'
 import {useImmer} from 'use-immer'
 
-import Cards           from '@/content/utils/Cards'
-import MarkdownContent from '@/content/utils/MarkdownContent'
-import Nav             from '@/content/utils/Nav'
+import Cards           from 'src/content/utils/Cards'
+import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Nav             from 'src/content/utils/Nav'
 
 const goal_purpose = [`
 # Life Purpose

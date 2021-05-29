@@ -1,8 +1,8 @@
 import React from 'react'
 import {useImmer} from 'use-immer'
 
-import Cards from '@/content/utils/Cards'
-import Nav   from '@/content/utils/Nav'
+import Cards from 'src/content/utils/Cards'
+import Nav   from 'src/content/utils/Nav'
 
 const credits = [`
 # Google Fonts

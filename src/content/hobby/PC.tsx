@@ -1,28 +1,30 @@
 import React      from 'react'
 import {useImmer} from 'use-immer'
 
-import CardsProject    from '@/content/utils/CardsProject'
-import MarkdownContent from '@/content/utils/MarkdownContent'
-import Nav             from '@/content/utils/Nav'
+import CardsProject    from 'src/content/utils/CardsProject'
+import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Nav             from 'src/content/utils/Nav'
 
 const projects = [
   {
     'title': 'Terminal Game Client',
+    'description': 'A simple TUI game client with hh:mm:ss playtie record that supports any supplemental commands such as wine64.',
+    'keyword': 'Python3, ncurses',
+
     'src': 'https://github.com/tkiat/terminal-game-client',
     'live': '',
     'image-src': 'https://via.placeholder.com/320x180',
-    'description': 'A simple TUI game client with hh:mm:ss playtie record that supports any supplemental commands such as wine64.',
-    'keyword': 'Python3, ncurses',
   },
 ]
 
 const tasks = [
   {
     'title': 'Lazyman Pomodoro',
-    'src': 'https://github.com/tkiat/lazyman-pomodoro',
-    'image-src': 'https://via.placeholder.com/320x180',
     'description': 'I built this because I couldn\'t find a simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.',
     'keyword': 'Python3, ncurses',
+
+    'src': 'https://github.com/tkiat/lazyman-pomodoro',
+    'image-src': 'https://via.placeholder.com/320x180',
   },
 ]
 

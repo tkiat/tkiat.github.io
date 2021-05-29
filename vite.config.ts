@@ -5,13 +5,17 @@ import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
+  build: {
+    // minify: false,
+  },
   plugins: [
     reactRefresh(),
     svgr()
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      'src': path.resolve(__dirname, '/src'),
+      // '@': path.resolve(__dirname, './src'),
     },
   },
 })
