@@ -2,6 +2,7 @@
   $root: &;
   display: none;
   font-size: 1rem;
+  line-height: 1.5rem;
   &--active {
     display: flex;
     flex-wrap: wrap;
@@ -10,8 +11,10 @@
     position: relative;
     display: block;
     width: auto;
-    margin: 10px 0 5px 0;
+    margin: 6px 0;
     border: 2px solid var(--body-text-color);
+    /*padding-left: 5px;*/
+    /*padding-bottom: 10px;*/
     /*padding: 1px;*/
 
     box-shadow: 4px 4px #888888;
@@ -40,13 +43,16 @@
       }
     }
     #{$root}__description {
+      position: relative;
       padding: 0 5px;
     }
     #{$root}__type {
-      height: auto;
+      position: relative;
+      top: calc(-0.25em + 4px);
       background-color: var(--wave-front0-color);
       color: white;
-      padding: 1px 5px 1px 5px;
+      padding: 3px;
+      /*padding: 1px 5px 1px 5px;*/
       &--inactive {
         margin-left: 5px;
         background-color: red;
