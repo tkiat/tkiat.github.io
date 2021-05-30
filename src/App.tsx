@@ -27,8 +27,8 @@ import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
+// TODO fix font not download firefox
 // TODO make my types unified
-// TODO makes first duck disappear then move down
 // TODO try to make readnme more visual and less verbose
 // TODO in projects show keyword tooltip instead
 // TODO what if in project we add another navbar left sidebar and show project on the right
@@ -230,13 +230,13 @@ function App() {
         draft[currentIndex] = newNavIndex
       })
     })
+    document.getElementById('loading')!.style.display = 'none'
   },[])
 
   if(willShowSafariPrompt){
     return <SafariWarning onclick={() => {willShowSafariPrompt = false; localStorage.setItem('will-skip-safari-prompt', 'true'); triggerReRender({})}} />
   } else {
     return (
-    <>
       <main id='main' className='main'>
         <Router>
           <Redirect from="/" to={'/about' + navItemsAtIndex[0][tabIndexDefault[0]]} noThrow />
@@ -284,7 +284,6 @@ function App() {
           getCustomStylesheet={getCustomStylesheet}
           toggleSidebar={toggleSidebar} />
       </main>
-    </>
     )
   }
 }
