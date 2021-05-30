@@ -3,6 +3,7 @@ declare module 'my-card-type' {
     'title': string,
     'description': string,
     'keyword': string,
+    'type': string,
 
     'image-src'?: string,
     'inactive'?: boolean,

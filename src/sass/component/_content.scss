@@ -2,7 +2,7 @@
   position: absolute;
 
   font-size: 1rem;
-  padding: 10px;
+  padding: 0 10px;
   width: calc(100% - var(--sidebar-width));
 
   background-color: hsla(var(--body-bg-hsl), 0.7);
@@ -24,7 +24,7 @@
   &--inside-water {
     top: 220px;
     color: var(--body-text-color-underwater);
-    height: calc(100% - 220px);
+    height: calc(100% - 230px);
     background-color: unset;
     padding-top: 0;
     li::marker {
@@ -56,6 +56,6 @@
   }
   &--outside-water {
     top: calc(var(--nav-tube-height) + 20px);
-    height: calc(100% - var(--nav-tube-height) - 120px);
+    max-height: calc(100% - var(--nav-tube-height) - 130px);
   }
 }

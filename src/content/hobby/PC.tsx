@@ -5,19 +5,17 @@ import CardsProject    from 'src/content/utils/CardsProject'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Nav             from 'src/content/utils/Nav'
 
-const projects = [
+const work = [
   {
     'title': 'Terminal Game Client',
-    'description': 'A simple TUI game client with hh:mm:ss playtie record that supports any supplemental commands such as wine64.',
+    'description': 'A simple TUI game client with hh:mm:ss playtime record that supports any supplemental commands such as wine64.',
     'keyword': 'Python3, ncurses',
 
     'src': 'https://github.com/tkiat/terminal-game-client',
     'live': '',
     'image-src': 'https://via.placeholder.com/320x180',
+    'type': 'Project',
   },
-]
-
-const tasks = [
   {
     'title': 'Lazyman Pomodoro',
     'description': 'I built this because I couldn\'t find a simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.',
@@ -25,6 +23,7 @@ const tasks = [
 
     'src': 'https://github.com/tkiat/lazyman-pomodoro',
     'image-src': 'https://via.placeholder.com/320x180',
+    'type': 'Task',
   },
 ]
 
@@ -47,11 +46,10 @@ const PC = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Projects', 'Tasks', 'Contributions', 'My Config']} storage={storage} cur={cur} setCur={setCur} />
-      <CardsProject isActive={cur === 0} items={projects} />
-      <CardsProject isActive={cur === 1} items={tasks} />
-      <MarkdownContent isActive={cur === 2} content={contributions} />
-      <MarkdownContent isActive={cur === 3} content={myConfig} />
+      <Nav items={['Work', 'Contributions', 'My Config']} storage={storage} cur={cur} setCur={setCur} />
+      <CardsProject isActive={cur === 0} items={work} />
+      <MarkdownContent isActive={cur === 1} content={contributions} />
+      <MarkdownContent isActive={cur === 2} content={myConfig} />
     </>
   )
 }

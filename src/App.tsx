@@ -28,9 +28,7 @@ import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
-// TODO try to make readnme more visual and less verbose
-// TODO in projects show keyword tooltip instead
-// TODO what if in project we add another navbar left sidebar and show project on the right
+// TODO check Capital W
 // TODO do anim project https://lihautan.com/blogs/
 
 const themeFallback: ThemeBase = 'sakura'

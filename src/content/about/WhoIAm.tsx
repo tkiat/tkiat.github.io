@@ -63,8 +63,10 @@ const personality = [`
   - Intellect/Imagination: **46**
 `, `
 ### Others
-- Zodiac Sign - Cancer
 - Early Riser
+- Eat Simple Food
+- Quiet
+- Zodiac Sign - Cancer
 `
 ]
 

@@ -9,17 +9,15 @@
   &__item {
     position: relative;
     display: block;
-    width: min(280px, 100%);
+    width: auto;
+    margin: 10px 0 5px 0;
+    border: 2px solid var(--body-text-color);
+    /*padding: 1px;*/
 
-    box-sizing: border-box;
-    padding: 0 10px 10px 10px;
-    margin: 4px;
-    flex: 1 1 auto;
-
-    border: 1px dotted var(--body-text-color);
-
+    box-shadow: 4px 4px #888888;
     page-break-inside: avoid;
     break-inside: avoid;
+    transition: box-shadow 0.4s, transform 0.4s;
     &:before {
       content: "";
       position: absolute;
@@ -29,38 +27,64 @@
       filter: invert(10%);
       z-index: -1;
     }
+    &:hover {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px #888;
+    }
     &--inactive {
       & > *:not(.center){
-        opacity: 0.5;
+        opacity: 0.7;
       }
       & > h1 {
         padding-top: 1em;
       }
     }
-    #{$root}__footer {
-      position: absolute;
-      right: 0; bottom: 0;
-      text-align: center;
-
-      margin: 0;
-      padding: 2px;
-
-      background: none;
-      color: var(--body-bg-color);
-      font-size: 0.8em;
+    #{$root}__description {
+      padding: 0 5px;
+    }
+    #{$root}__type {
+      height: auto;
+      background-color: var(--wave-front0-color);
+      color: white;
+      padding: 1px 5px 1px 5px;
+      &--inactive {
+        margin-left: 5px;
+        background-color: red;
+      }
+      &--live, &--source {
+        margin-left: 5px;
+        background-color: var(--link-text-color);
+        & > a {
+          color: var(--body-bg-color);
+          &:after {
+            width: 0;
+          }
+        }
+        &:hover {
+          background-color: #888;
+          & > a {
+            /*color: var(--link-text-color);*/
+          }
+        }
+      }
     }
     #{$root}__header {
+      display: inline;
+
       margin: 0;
       padding: 0.33em 0;
-      text-align: center;
+      min-height: 3em;
     }
-    #{$root}__img {
-      display: block;
-      margin: 0 auto;
-      width: 320px;
-      height: 180px;
-      max-width: 100%;
-      background: gray;
-    }
+/*    #{$root}__img {*/
+/*      display: block;*/
+/*      margin: 0 auto;*/
+/*      width: 320px;*/
+/*      height: 180px;*/
+/*      max-width: 100%;*/
+/*      background: gray;*/
+/*    }*/
+/*    #{$root}__keyword {*/
+/*      margin: 0;*/
+/*    }*/
   }
 }
