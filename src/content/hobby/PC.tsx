@@ -48,7 +48,6 @@ const PC = (): React.ReactElement => {
   return (
     <>
       <Nav items={['Projects', 'Tasks', 'Contributions', 'My Config']} storage={storage} cur={cur} setCur={setCur} />
-
       <CardsProject isActive={cur === 0} items={projects} />
       <CardsProject isActive={cur === 1} items={tasks} />
       <MarkdownContent isActive={cur === 2} content={contributions} />
@@ -58,3 +57,4 @@ const PC = (): React.ReactElement => {
 }
 
 export default PC
+

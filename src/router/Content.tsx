@@ -14,15 +14,15 @@ import NotFound    from 'src/NotFound'
 
 
 const Content = ({isInsideWater}: {isInsideWater: boolean}): React.ReactElement => {
+let OthersARoute     = (props: RouteComponentProps) => <OthersA />
 let IntroRoute       = (props: RouteComponentProps) => <Intro />
 let WhoIAmRoute      = (props: RouteComponentProps) => <WhoIAm />
 let WhatIUseRoute    = (props: RouteComponentProps) => <WhatIUse />
-let OthersARoute     = (props: RouteComponentProps) => <OthersA />
 
+let OthersHRoute     = (props: RouteComponentProps) => <OthersH />
 let WebRoute         = (props: RouteComponentProps) => <Web />
 let PCRoute          = (props: RouteComponentProps) => <PC />
 let EnvironmentRoute = (props: RouteComponentProps) => <Environment />
-let OthersHRoute     = (props: RouteComponentProps) => <OthersH />
 
 let ResumeRoute      = (props: RouteComponentProps) => <Resume />
 let NotFoundRoute    = (props: RouteComponentProps) => <NotFound className='notfound notfound--content' />
@@ -31,21 +31,23 @@ let NotFoundRoute    = (props: RouteComponentProps) => <NotFound className='notf
       <Router>
         <NotFoundRoute default />
 
+        <OthersARoute  path='/about/Others' />
         <IntroRoute    path='/about/Intro' />
         <WhatIUseRoute path='/about/WhatIUse' />
         <WhoIAmRoute   path='/about/WhoIAm' />
-        <OthersARoute  path='/about/Others' />
 
+        <OthersHRoute     path='/hobby/Others' />
         <WebRoute         path='/hobby/Web' />
         <PCRoute          path='/hobby/PC' />
         <EnvironmentRoute path='/hobby/Environment' />
-        <OthersHRoute     path='/hobby/Others' />
 
         <ResumeRoute path='/resume' />
       </Router>
     </div>
   )
 }
+
+export default Content
 
 // /*{
 //           <NotFound default />
@@ -62,7 +64,6 @@ let NotFoundRoute    = (props: RouteComponentProps) => <NotFound className='notf
 // 
 //           <Resume path='/resume' />
 // }*/
-export default Content
 
 // import Loading       from '@/Loading'
 // const Intro    = React.lazy(() => import('@/content/about/Intro'))

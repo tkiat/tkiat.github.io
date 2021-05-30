@@ -7,6 +7,8 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
   build: {
     // minify: false,
+    rollupOptions: {
+    }
   },
   plugins: [
     reactRefresh(),
