@@ -1,23 +1,23 @@
 declare module 'my-duck-type' {
-  export type DuckShape = 'DuckAboutMe' | 'DuckHobby' | 'DuckResume'
-
-  type DuckBaseProps = {
+  type DuckSharedProps = {
     index: number,
     onclick: () => void,
     text: string,
-  }
-  export type DuckProps = DuckBaseProps & {
-    href: string,
-    isActive: boolean,
-    shape: DuckShape,
-  }
-  export type DuckSidebarProps = DuckBaseProps & {
-    myId: string,
   }
 
   export type DucksColors = {
     'beak': string,
     'body': string,
     'wing': string,
+  }
+  export type DuckShape = 'DuckAboutMe' | 'DuckHobby' | 'DuckResume'
+
+  export type DuckProps = DuckSharedProps & {
+    href: string,
+    isActive: boolean,
+    shape: DuckShape,
+  }
+  export type DuckSidebarProps = DuckSharedProps & {
+    myId: string,
   }
 }

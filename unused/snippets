@@ -1,0 +1,29 @@
+<!--    <div id='loading' class='loading'>-->
+<!--      <div class='loading loading--bottom'>-->
+<!--        <h1><span role='img' aria-hidden='true'>&#x1F600;</span>Hi! I am Theerawat.</h1>-->
+<!--        <h2>I have an engineering background who become interested in Information Technology particularly all things Web and Linux because they enables the freedom in presentation and computing.</h2>-->
+<!--        <h2>And transparency as well.</h2>-->
+<!--        <h2>I would rate my English skill as <i>Full Professional proficiency</i>. I communicate with non-Thais at ease while working abroad. I have limited German knowledge also.</h2>-->
+<!--        <h2>My hobby involves software and living with less impact. I like to read.</h2>-->
+<!--        <h3>I also love to sleep. <span role='img' aria-hidden='true'>&#x1F634;</span></h3>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--      .loading {-->
+<!--        position: absolute;-->
+<!--        top: 20px; left: 5px;-->
+<!--        width: calc(100% - 30px);-->
+<!--        font-family: Raleway, sans-serif;-->
+<!--        font-feature-settings: 'lnum';-->
+<!--        font-size: clamp(14px, 10vw, 18px);-->
+<!--        background-color: orange;-->
+<!--      }-->
+<!--      .loading > h1 {-->
+<!--        font-size: 1.563em;-->
+<!--      }-->
+<!--      .loading > h1:first-child {-->
+<!--        margin-top: 0;-->
+<!--        width: min-content;-->
+<!--      }-->
+<!--      .loading > h2 {-->
+<!--        font-size: 1.25em;-->
+<!--      }-->

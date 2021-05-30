@@ -22,36 +22,19 @@ The hsl color system I am using makes it very convenient to make themes and the 
   - The 'day' and 'dark' time differs in only lightness. The problem of hsl is that the l in hsl is not the same as [lightness perceived by human](https://lea.verou.me/2021/03/inverted-lightness-variables) so I rely on manual adjustment until I feel right.
 
 ### Navbar Water Flow (Desktop Only)
-This is perhaps the most time consuming part of making this website. The water flow represents the interconnection of (meaning of) each tab.
-
-#### Words and Valves
-Letters are grouped as a word, connected by a valve. A word and a valve (always located at the right of a word) form a node. A node represents a tab, i.e. an item in a navigation bar. A valve not only functions as a passageway from one node to another, but its expandability also enables all nodes to flexibly expand to the full width of the viewport. The last node contains only a word without a valve.
+This is perhaps the most time consuming part of making this website.
 
 #### Letters
-A letter consists of two SVGs: one for displaying border, another acts as a mask to hide water outside of a letter shape. I import a Raleway Font (taken from Google Font) into Inkscape and edit each letter one by one to become a water container.
-
-Two pipes are added to the top and bottom of each letter to ensure consistency across different letters. This conistency is the key to make water flow possible and more realistic. The width of each letter is minimal except the one having a vertical line at the edge (e.g. H, L, P) where 1px space is added to make them a little more separated from an adjacent letter.
+A letter consists of two SVGs: one for displaying border, another acts as a mask to hide water outside of a letter shape. I import a Raleway Font (taken from Google Font) into Inkscape and edit each letter one by one to become a water container. Two pipes are added to the top and bottom of each letter to ensure consistency across different letters. I add one 1px space to the width of a letter whose vertical line is at the edge (e.g. H, L, P) to give it a sense of separation.
 
 #### Water Flow Animation
-Upon clicking a node, water flow to it from the previous node. This takes many animations, one per node. For water to flow from left node to the right node, three steps are required:
-1. Water drains from the starting node, i.e. water drains downwards from the text, and at the same time, water drains upwards from the valve.
-2. Water then (optionally) pass each intermediary node, i.e. water passes downwards through the text, then water passes upwards through the valve.
-3. Water finally reachs the destination node, i.e. water pass downwards to fill the text and then upwards to fill the valve.
-
-A total of (3 steps above) * (2 separate steps for text and valve) * (2 directions: left and right) = 12 animations are required. I use a simple rectangular shape of any background color with lower z-index to make the water flow. It only move in y axis only for the sake of simplicity. [This document](doc/water-animation.md) describes the logical steps of how to animate water flow.
+A total of = 12 animations are required. Take a look at [this document](doc/water-animation.md) for details.
 
 ## Others
 ### Accessibility
-- Moving waves and containerized water are disabled when [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) is set. Alternatively, a user can turn off the movement in Settings.
+- Animations are disabled when [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) is set. Alternatively, a user can turn off the movement in Settings.
 - Dark theme is available in settings and becomes default if "prefers-color-scheme: dark" is set.
-
-### Performance
-<!--- 99 Lighthouse performance score (using production build in incognito mode)-->
-- Use more lightweight libraries
-  - Use hookrouter library for routing (much lighter than react-router)
-  - react-colorful (much lighter than react-color)
-- Parsed size is around 1.2MB (using webpack-bundle-analyzer)
 
 ### Potential Improvements
 - Wave speed is not consistent across devices since Window.requestAnimationFrame() API depends on the refresh rate of the screen.
-- It is more performant to render canvas not in the main thread to not distract the user. [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) + Web Worker already works fin ebut then I cannot trigger the Web Worker update when the wave colors (using useRef hook) change because that don't update the DOM. This will lead to much code change. I cannot find simple solution so I skip it. Anyway, OffscreenCanvas is experimental feature.
+- It is more performant to render canvas not in the main thread to not distract the user. [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas) + Web Worker already works fine but that should lead to much code change in order to give user ability to change themes. Anyway, OffscreenCanvas is currently an experimental feature.

@@ -1,11 +1,12 @@
 import React from 'react'
 import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
+
 import {DucksColors, DuckShape} from 'my-duck-type'
-import {navIndexsType} from 'my-nav-type'
+import {NavIndexsType} from 'my-nav-type'
+import {ThemeBase, ThemeSupplement, ThemeProps} from 'my-theme-type'
 import {Time} from 'my-time-type'
 import {TubesColors} from 'my-tube-type'
-import {ThemeBase, ThemeSupplement, ThemeProps} from 'my-theme-type'
 import {WavesColors as WavesColorsType, WavesConfigs as WavesConfigsType, WavesPhysics as WavesPhysicsType} from 'my-wave-config-type'
 
 import useDebounce   from 'src/hook-custom/useDebounce'
@@ -27,8 +28,6 @@ import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
-// TODO fix font not download firefox
-// TODO make my types unified
 // TODO try to make readnme more visual and less verbose
 // TODO in projects show keyword tooltip instead
 // TODO what if in project we add another navbar left sidebar and show project on the right
@@ -215,9 +214,10 @@ function App() {
     '1': ['/Web', '/PC', '/Environment', '/Others'],
   }
 
-  const [navIndexs, setNavIndexs] = useImmer<navIndexsType>(tabIndexDefault)
+  const [navIndexs, setNavIndexs] = useImmer<NavIndexsType>(tabIndexDefault)
 
   React.useEffect(() => {
+    document.getElementById('loading')!.style.display = 'none'
     window.addEventListener('popstate', function() {
       triggerReRender({})
 
@@ -230,7 +230,6 @@ function App() {
         draft[currentIndex] = newNavIndex
       })
     })
-    document.getElementById('loading')!.style.display = 'none'
   },[])
 
   if(willShowSafariPrompt){

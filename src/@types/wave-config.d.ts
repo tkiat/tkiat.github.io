@@ -5,13 +5,13 @@ declare module 'my-wave-config-type' {
   export type WavesConfigs = WavesPhysics & {
     'from': Coordinate,
     'to': Coordinate,
-    'totalPoints': number,
+
     'num': number,
+    'totalPoints': number,
   }
   export type WavesPhysics = {
     'height': number,
     'speed': number,
     'shakiness': number,
   }
-  export type WavesPhysicsKey = keyof WavesPhysics
 }

@@ -16,7 +16,6 @@ declare module 'my-wave-type' {
 
     from: Coordinate
     to: Coordinate
-
     totalPoints: number
 
     height: number

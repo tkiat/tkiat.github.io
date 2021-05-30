@@ -7,14 +7,13 @@
 }
 
 html {
-  /*@include mixins.fluid-type(font-size, 400px, 768px, 14px, 18px);*/
+  @include mixins.fluid-type(font-size, 400px, 768px, 14px, 18px);
   @include mixins.fluid-type(--duck-height, 400px, 768px, 45px, 60px);
   @include mixins.fluid-type(--duck-width,  400px, 768px, 30px, 40px);
   @include mixins.fluid-type(--nav-tube-height, 768px, 1024px, 60px, 90px);
   --anim-period: 0.5s;
   --sidebar-width: min(400px, 70vw);
 
-  font-size: clamp(14px, 10vw, 18px);
   width: 100%;
   height: 100%;
   box-sizing: border-box;
