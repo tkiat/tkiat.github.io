@@ -25,9 +25,9 @@ const CardsProject = ({isActive, items}: CardsProjectProps): React.ReactElement 
                 </span>
               }
               <span className='cards-project__description'>
-                <h3 className='cards-project__header'>{item.title}{item.inactive && ' (Inactive)'} &gt; </h3>
+                <h3 className='cards-project__header'>{item.title} &gt; </h3>
                 {item.description}
-                <h4 className='cards-project__header'> &gt; {item.keyword}</h4>
+                <h5 className='cards-project__header'> &gt; {item.keyword}</h5>
               </span>
             {/*{item.keyword && <div className='cards-project__keyword'><strong> - Keyword: </strong>{item.keyword}</div>}*/}
             </div>

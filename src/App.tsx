@@ -28,9 +28,6 @@ import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
-// TODO check Capital W
-// TODO do anim project https://lihautan.com/blogs/
-
 const themeFallback: ThemeBase = 'sakura'
 
 const isBaseTheme = (theme: string | null): theme is ThemeBase => {
@@ -201,7 +198,6 @@ function App() {
       'water' : computedRootStyle.getPropertyValue('--tube-water-color'),
     })
   },[theme.supplement, time])
-
 
   const tabIndexDefault: {[level: string]: number}  = {
     '0': parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
