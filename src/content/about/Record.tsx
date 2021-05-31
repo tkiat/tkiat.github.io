@@ -90,7 +90,7 @@ const drinks = `
 
 const storage = 'tab-index-about-whatiuse'
 
-const WhatIUse = (): React.ReactElement => {
+const Record = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
@@ -104,4 +104,4 @@ const WhatIUse = (): React.ReactElement => {
   )
 }
 
-export default WhatIUse
+export default Record

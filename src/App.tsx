@@ -204,7 +204,7 @@ function App() {
     '1': parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
   }
   const navItemsAtIndex: {[level: string]: string[]} = {
-    '0': ['/Intro', '/WhoIAm', '/WhatIUse', '/Others'],
+    '0': ['/Intro', '/Personality', '/Record', '/Credits'],
     '1': ['/Web', '/PC', '/Environment', '/Others'],
   }
 

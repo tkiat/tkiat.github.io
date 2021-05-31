@@ -27,10 +27,36 @@ const work = [
   },
 ]
 
-const myConfig = `
-- [tkiat Guix Channel](https://gitlab.com/tkiat/guix-channel). I fork suckless repositories and create a Guix channel for them.
-- [My personal Dotfiles and Configs](https://github.com/tkiat/dotfiles-and-configs).
-`
+const utility = [
+  {
+    'title': 'My Dotfiles and Configs',
+    'description': '',
+    'keyword': '',
+
+    'src': 'https://github.com/tkiat/dotfiles-and-configs',
+    'live': '',
+    'type': 'Config',
+  },
+  {
+    'title': 'tkiat Guix Channel',
+    'description': 'I fork suckless repositories and create a Guix channel for them',
+    'keyword': 'Python3',
+
+    'src': 'https://gitlab.com/tkiat/guix-channel',
+    'live': '',
+    'type': 'Repository',
+  },
+  {
+    'title': 'TODO',
+    'description': 'TODO',
+    'keyword': 'Python3',
+
+    'src': '',
+    'live': '',
+    'image-src': 'https://via.placeholder.com/320x180',
+    'type': 'Script',
+  },
+]
 
 const contributions = `
 ### Accepted Pull Requests
@@ -46,13 +72,12 @@ const PC = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Work', 'Contributions', 'My Config']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav items={['Work', 'Utility', 'Contributions']} storage={storage} cur={cur} setCur={setCur} />
       <CardsProject isActive={cur === 0} items={work} />
-      <MarkdownContent isActive={cur === 1} content={contributions} />
-      <MarkdownContent isActive={cur === 2} content={myConfig} />
+      <CardsProject isActive={cur === 1} items={utility} />
+      <MarkdownContent isActive={cur === 2} content={contributions} />
     </>
   )
 }
 
 export default PC
-

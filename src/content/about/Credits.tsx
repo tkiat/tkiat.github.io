@@ -2,7 +2,7 @@ import React from 'react'
 import {useImmer} from 'use-immer'
 
 import Cards from 'src/content/utils/Cards'
-import Nav   from 'src/content/utils/Nav'
+// import Nav   from 'src/content/utils/Nav'
 
 const credits = [`
 # Google Fonts
@@ -17,15 +17,15 @@ const credits = [`
 - [duck](https://freesvg.org/duck), [party hat](https://freesvg.org/green-party-hat), [necktie](https://freesvg.org/necktie), [balloon](https://freesvg.org/orange-balloon), [Stop Sign](https://freesvg.org/raemi-stop-sign), [Sunglasses](https://freesvg.org/sunglasses-black-silhouette), [Camera](https://freesvg.org/usb-video-camera-symbol-vector-drawing), [Cogwheel](https://freesvg.org/vector-drawing-of-cogwheel-gear), [Geek sign](https://freesvg.org/vector-clip-art-of-man-geek-warning-road-sign)
 `]
 
-const storage = 'tab-index-about-others'
+// const storage = 'tab-index-about-others'
 
 const Others = (): React.ReactElement => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
+  // const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Credits']} storage={storage} cur={cur} setCur={setCur} />
+      {/*<Nav items={['Credits']} storage={storage} cur={cur} setCur={setCur} />*/}
 
-      <Cards isActive={cur === 0} items={credits} />
+      <Cards isActive={true} items={credits} />
     </>
   )
 }

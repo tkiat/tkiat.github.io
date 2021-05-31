@@ -5,6 +5,31 @@ import Cards           from 'src/content/utils/Cards'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Nav             from 'src/content/utils/Nav'
 
+const overview = [`
+### MBTI Test
+##### 31 Mar 2021 on [16personalities.com](https://www.16personalities.com/)
+  - **I**ntroverted (79%) - **E**xtraverted
+  - I**N**tuitive (52%) - Ob**S**ervant
+  - **T**hinking (51%) - **F**eeling
+  - **J**udging (58%) - **P**rospecting
+  - **A**ssertive (65%) - **T**erbulent
+`, `
+### Big 5 Personalities Test
+##### 31 Mar 2021 on [openpsychometrics.org](https://openpsychometrics.org/)
+  - Extroversion: **11** (percentile)
+  - Emotional Stability: **57**
+  - Agreeableness: **7**
+  - Conscientiousness: **95**
+  - Intellect/Imagination: **46**
+`, `
+### Others
+- Early Riser
+- Eat Simple Food
+- Quiet
+- Zodiac Sign - Cancer
+`
+]
+
 const goal_purpose = [`
 # Life Purpose
 
@@ -44,31 +69,6 @@ Still, there are room for improvements.
 
 I'd like to become a gardener, with knowledge and space.
 `,]
-
-const personality = [`
-### MBTI Test
-##### 31 Mar 2021 on [16personalities.com](https://www.16personalities.com/)
-  - **I**ntroverted (79%) - **E**xtraverted
-  - I**N**tuitive (52%) - Ob**S**ervant
-  - **T**hinking (51%) - **F**eeling
-  - **J**udging (58%) - **P**rospecting
-  - **A**ssertive (65%) - **T**erbulent
-`, `
-### Big 5 Personalities Test
-##### 31 Mar 2021 on [openpsychometrics.org](https://openpsychometrics.org/)
-  - Extroversion: **11** (percentile)
-  - Emotional Stability: **57**
-  - Agreeableness: **7**
-  - Conscientiousness: **95**
-  - Intellect/Imagination: **46**
-`, `
-### Others
-- Early Riser
-- Eat Simple Food
-- Quiet
-- Zodiac Sign - Cancer
-`
-]
 
 const preferences = [`
 ### Food & Drink
@@ -121,13 +121,13 @@ const opinion = `
 
 const storage = 'tab-index-about-whoiam'
 
-const WhoIAm = (): React.ReactElement => {
+const Personality = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return(
     <>
-      <Nav items={['Personality', 'Goal & Purpose', 'Preferences', 'Opinion']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav items={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']} storage={storage} cur={cur} setCur={setCur} />
 
-      <Cards           isActive={cur === 0} items={personality} />
+      <Cards           isActive={cur === 0} items={overview} />
       <Cards           isActive={cur === 1} items={goal_purpose} />
       <Cards           isActive={cur === 2} items={preferences} />
       <MarkdownContent isActive={cur === 3} content={opinion} />
@@ -135,4 +135,4 @@ const WhoIAm = (): React.ReactElement => {
   )
 }
 
-export default WhoIAm
+export default Personality

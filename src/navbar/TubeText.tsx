@@ -12,12 +12,16 @@ import {ReactComponent as UpperFBorder} from './letters/_F-border.svg'
 import {ReactComponent as UpperFMask}   from './letters/_F-mask.svg'
 import {ReactComponent as UpperIBorder} from './letters/_I-border.svg'
 import {ReactComponent as UpperIMask}   from './letters/_I-mask.svg'
+import {ReactComponent as UpperMBorder} from './letters/_M-border.svg'
+import {ReactComponent as UpperMMask}   from './letters/_M-mask.svg'
 import {ReactComponent as UpperOBorder} from './letters/_O-border.svg'
 import {ReactComponent as UpperOMask}   from './letters/_O-mask.svg'
 import {ReactComponent as UpperPBorder} from './letters/_P-border.svg'
 import {ReactComponent as UpperPMask}   from './letters/_P-mask.svg'
 import {ReactComponent as UpperQBorder} from './letters/_Q-border.svg'
 import {ReactComponent as UpperQMask}   from './letters/_Q-mask.svg'
+import {ReactComponent as UpperRBorder} from './letters/_R-border.svg'
+import {ReactComponent as UpperRMask}   from './letters/_R-mask.svg'
 import {ReactComponent as UpperSBorder} from './letters/_S-border.svg'
 import {ReactComponent as UpperSMask}   from './letters/_S-mask.svg'
 import {ReactComponent as UpperUBorder} from './letters/_U-border.svg'
@@ -65,6 +69,8 @@ import {ReactComponent as LowerUBorder} from './letters/u-border.svg'
 import {ReactComponent as LowerUMask}   from './letters/u-mask.svg'
 import {ReactComponent as LowerVBorder} from './letters/v-border.svg'
 import {ReactComponent as LowerVMask}   from './letters/v-mask.svg'
+import {ReactComponent as LowerYBorder} from './letters/y-border.svg'
+import {ReactComponent as LowerYMask}   from './letters/y-mask.svg'
 
 const mapping: {[index: string]: React.ReactFragment} = {
   'A': <><UpperABorder /><UpperAMask /></>,
@@ -75,7 +81,9 @@ const mapping: {[index: string]: React.ReactFragment} = {
   'I': <><UpperIBorder /><UpperIMask /></>,
   'P': <><UpperPBorder /><UpperPMask /></>,
   'Q': <><UpperQBorder /><UpperQMask /></>,
+  'M': <><UpperMBorder /><UpperMMask /></>,
   'O': <><UpperOBorder /><UpperOMask /></>,
+  'R': <><UpperRBorder /><UpperRMask /></>,
   'S': <><UpperSBorder /><UpperSMask /></>,
   'U': <><UpperUBorder /><UpperUMask /></>,
   'V': <><UpperVBorder /><UpperVMask /></>,
@@ -100,6 +108,7 @@ const mapping: {[index: string]: React.ReactFragment} = {
   't': <><LowerTBorder /><LowerTMask /></>,
   'u': <><LowerUBorder /><LowerUMask /></>,
   'v': <><LowerVBorder /><LowerVMask /></>,
+  'y': <><LowerYBorder /><LowerYMask /></>,
 }
 
 const TubeText = ({word}: {word: string}): React.ReactElement => {

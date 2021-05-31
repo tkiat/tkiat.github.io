@@ -2,9 +2,9 @@ import React    from 'react'
 import {Router, RouteComponentProps} from '@reach/router'
 
 import Intro       from 'src/content/about/Intro'
-import OthersA     from 'src/content/about/Others'
-import WhatIUse    from 'src/content/about/WhatIUse'
-import WhoIAm      from 'src/content/about/WhoIAm'
+import Credits     from 'src/content/about/Credits'
+import Record      from 'src/content/about/Record'
+import Personality from 'src/content/about/Personality'
 import Environment from 'src/content/hobby/Environment'
 import OthersH     from 'src/content/hobby/Others'
 import PC          from 'src/content/hobby/PC'
@@ -14,10 +14,10 @@ import NotFound    from 'src/NotFound'
 
 
 const Content = ({isInsideWater}: {isInsideWater: boolean}): React.ReactElement => {
-let OthersARoute     = (props: RouteComponentProps) => <OthersA />
-let IntroRoute       = (props: RouteComponentProps) => <Intro />
-let WhoIAmRoute      = (props: RouteComponentProps) => <WhoIAm />
-let WhatIUseRoute    = (props: RouteComponentProps) => <WhatIUse />
+let IntroRoute   = (props: RouteComponentProps) => <Intro />
+let PersonalityRoute = (props: RouteComponentProps) => <Personality />
+let RecordRoute  = (props: RouteComponentProps) => <Record />
+let CreditsRoute = (props: RouteComponentProps) => <Credits />
 
 let OthersHRoute     = (props: RouteComponentProps) => <OthersH />
 let WebRoute         = (props: RouteComponentProps) => <Web />
@@ -31,10 +31,10 @@ let NotFoundRoute    = (props: RouteComponentProps) => <NotFound className='notf
       <Router>
         <NotFoundRoute default />
 
-        <OthersARoute  path='/about/Others' />
-        <IntroRoute    path='/about/Intro' />
-        <WhatIUseRoute path='/about/WhatIUse' />
-        <WhoIAmRoute   path='/about/WhoIAm' />
+        <IntroRoute       path='/about/Intro' />
+        <PersonalityRoute path='/about/Personality' />
+        <RecordRoute      path='/about/Record' />
+        <CreditsRoute     path='/about/Credits' />
 
         <OthersHRoute     path='/hobby/Others' />
         <WebRoute         path='/hobby/Web' />
@@ -53,9 +53,9 @@ export default Content
 //           <NotFound default />
 // 
 //           <Intro    path='/about/Intro' />
-//           <WhatIUse path='/about/WhatIUse' />
-//           <WhoIAm   path='/about/WhoIAm' />
-//           <OthersA  path='/about/Others' />
+//           <Record path='/about/Record' />
+//           <Personality   path='/about/Personality' />
+//           <Credits  path='/about/Others' />
 // 
 //           <Environment path='/hobby/Environment' />
 //           <OthersH     path='/hobby/Others' />
@@ -67,8 +67,8 @@ export default Content
 
 // import Loading       from '@/Loading'
 // const Intro    = React.lazy(() => import('@/content/about/Intro'))
-// const WhoIAm   = React.lazy(() => import('@/content/about/WhoIAm'))
-// const WhatIUse = React.lazy(() => import('@/content/about/WhatIUse'))
+// const Personality   = React.lazy(() => import('@/content/about/Personality'))
+// const Record = React.lazy(() => import('@/content/about/Record'))
 // const Others   = React.lazy(() => import('@/content/about/Others'))
 // const Web         = React.lazy(() => import('@/content/hobby/Web'))
 // const PC          = React.lazy(() => import('@/content/hobby/PC'))
