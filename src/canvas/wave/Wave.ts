@@ -1,60 +1,40 @@
-import {Coordinate, PointProps, WaveProps} from 'my-wave-type'
+import {PointOutputs, WaveInputs, WaveOutputs} from 'my-wave-type'
 
 import Point from './Point'
 
-class Wave {
-  index: number
+const Wave = (obj: WaveInputs): WaveOutputs => {
+  let points: PointOutputs[] = []
 
-  from: Coordinate
-  to: Coordinate
-
-  points: PointProps[]
-  totalPoints: number
-
-  height: number
-  speed: number
-  shakiness: number
-
-  constructor({index, totalPoints, from, to, height, speed, shakiness}: WaveProps) {
-    this.index = index
-
-    this.from = from
-    this.to = to
-
-    this.points = []
-    this.totalPoints = totalPoints
-
-    this.height = height
-    this.speed = speed
-    this.shakiness = shakiness
-
-    this.createPoints()
+  const computeCoordinates = () => {
+    const pointGapX = (obj.to.x - obj.from.x) / (obj.totalPoints - 1)
+    const pointGapY = (obj.to.y - obj.from.y) / (obj.totalPoints - 1)
+    let coordinates = []
+    for (let i = 0; i < obj.totalPoints; i++) {
+      coordinates[i] = {x: obj.from.x + pointGapX * i, y: obj.from.y + pointGapY * i}
+    }
+    return coordinates
   }
 
-  createPoints() {
-    let coordinates = this.computeCoordinates()
-    for (let i = 0; i < this.totalPoints; i++) {
-      this.points[i] = new Point({
-        index: this.index + i,
+  const createPoints = () => {
+    let coordinates = computeCoordinates()
+    for (let i = 0; i < obj.totalPoints; i++) {
+      points[i] = Point({
+        index: obj.index + i,
 
         x: coordinates[i].x,
         y: coordinates[i].y,
 
-        height: this.height,
-        speed: this.speed,
-        shakiness: this.shakiness
+        height: obj.height,
+        speed: obj.speed,
+        shakiness: obj.shakiness
       })
     }
   }
 
-  computeCoordinates() {
-    const pointGapX = (this.to.x - this.from.x) / (this.totalPoints - 1)
-    const pointGapY = (this.to.y - this.from.y) / (this.totalPoints - 1)
-    let coordinates = []
-    for (let i = 0; i < this.totalPoints; i++) {
-      coordinates[i] = {x: this.from.x + pointGapX * i, y: this.from.y + pointGapY * i}
-    }
-    return coordinates
+  createPoints()
+
+  return {
+    points,
   }
 }
 

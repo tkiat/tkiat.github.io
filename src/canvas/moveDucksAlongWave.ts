@@ -1,12 +1,11 @@
-import Wave from './wave/Wave'
+import {WaveOutputs} from 'my-wave-type'
 
-// HTMLCollectionOf<HTMLElement>
-export const moveDucksAlongWave = (ducks: NodeListOf<HTMLElement>, wave: Wave, offset: number) => {
+export const moveDucksAlongWave = (ducks: NodeListOf<HTMLElement>, wave: WaveOutputs, offset: number) => {
   if(ducks.length >= wave.points.length) return
   for (let i = 0; i < ducks.length; i++) {
-    const midpoint = (wave.points[i].y + wave.points[i+1].y)/2
+    const midpoint = (wave.points[i].getY() + wave.points[i+1].getY())/2
     const offsetY = (midpoint - ducks[i].clientHeight + offset) + 'px'
-    const offsetDeg = Math.atan2(wave.points[i+1].y - wave.points[i].y, wave.points[i+1].x - wave.points[i].x) * 180 / Math.PI
+    const offsetDeg = Math.atan2(wave.points[i+1].getY() - wave.points[i].getY(), wave.points[i+1].x - wave.points[i].x) * 180 / Math.PI
     ducks[i].style.transform = `translateY(${offsetY}) rotate(${offsetDeg}deg)`
   }
 }

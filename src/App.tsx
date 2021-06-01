@@ -28,6 +28,8 @@ import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
+//TODO check ts use props for component input and arguments for function inputs
+
 const getBackground = (theme: string) => {
   switch(theme) {
     case 'ocean':
