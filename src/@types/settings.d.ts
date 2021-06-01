@@ -1,7 +1,7 @@
 declare module 'my-settings-type' {
   import {Updater} from 'use-immer'
 
-  import {DucksColors} from 'my-duck-type'
+  import {DuckColors} from 'my-duck-type'
   import {ThemeBase, ThemeProps, ThemeSupplement} from 'my-theme-type'
   import {Time} from 'my-time-type'
   import {TubesColors} from 'my-tube-type'
@@ -24,7 +24,7 @@ declare module 'my-settings-type' {
   }
 
   export type SidebarProps = {
-    duckColors: React.MutableRefObject<DucksColors>,
+    duckColors: React.MutableRefObject<DuckColors>,
     getCustomStylesheet: () => string,
 
     theme: ThemeProps,

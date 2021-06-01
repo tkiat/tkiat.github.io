@@ -1,9 +1,9 @@
-import {PointOutputs, WaveInputs, WaveOutputs} from 'my-wave-type'
+import {PointReturn, WaveArguments, WaveReturn} from 'my-wave-type'
 
 import Point from './Point'
 
-const Wave = (obj: WaveInputs): WaveOutputs => {
-  let points: PointOutputs[] = []
+const Wave = (obj: WaveArguments): WaveReturn => {
+  let points: PointReturn[] = []
 
   const computeCoordinates = () => {
     const pointGapX = (obj.to.x - obj.from.x) / (obj.totalPoints - 1)

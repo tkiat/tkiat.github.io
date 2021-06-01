@@ -83,7 +83,6 @@ const Web = (): React.ReactElement => {
 
       <CardsProject isActive={cur === 0} items={personal} />
       <CardsProject isActive={cur === 1} items={experiment} />
-    {/*<CardsProject isActive={cur === 1} items={tasks} />*/}
     </>
   )
 }

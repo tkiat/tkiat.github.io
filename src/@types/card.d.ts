@@ -5,7 +5,6 @@ declare module 'my-card-type' {
     'keyword': string,
     'type': string,
 
-    'image-src'?: string,
     'inactive'?: boolean,
     'live'?: string,
     'src'?: string,

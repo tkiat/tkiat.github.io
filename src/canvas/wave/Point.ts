@@ -1,6 +1,6 @@
-import {PointInputs, PointOutputs} from 'my-wave-type'
+import {PointArguments, PointReturn} from 'my-wave-type'
 
-function Point(obj: PointInputs): PointOutputs {
+function Point(obj: PointArguments): PointReturn {
   let radian = obj.index
   let yCur = obj.y
 

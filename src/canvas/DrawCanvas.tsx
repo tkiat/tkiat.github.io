@@ -1,13 +1,13 @@
 import {useEffect, useRef} from 'react'
 
-import {DrawCanvasProps}   from 'my-canvas-type'
-
-import Wave                 from './wave/Wave'
+import {DrawCanvasProps, DrawCanvasReturn}   from 'my-canvas-type'
 
 import {moveDucksAlongWave} from './moveDucksAlongWave'
 import {drawWaves}          from './wave/drawWaves'
 
-const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): React.LegacyRef<HTMLCanvasElement> | undefined => {
+import Wave                 from './wave/Wave'
+
+const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasReturn => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 

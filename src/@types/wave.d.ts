@@ -1,7 +1,7 @@
 declare module 'my-wave-type' {
   export type Coordinate = {x: number, y: number}
 
-  export type PointInputs = {
+  export type PointArguments = {
     index: number,
 
     x: number,
@@ -11,13 +11,13 @@ declare module 'my-wave-type' {
     speed: number,
     shakiness: number,
   }
-  export type PointOutputs = {
+  export type PointReturn = {
     oscillate: () => void,
     x: number,
     getY: () => number,
   }
 
-  export type WaveInputs = {
+  export type WaveArguments = {
     index: number,
 
     from: Coordinate
@@ -28,7 +28,7 @@ declare module 'my-wave-type' {
     speed: number
     shakiness: number
   }
-  export type WaveOutputs = {
-    points: PointOutputs[]
+  export type WaveReturn = {
+    points: PointReturn[]
   }
 }

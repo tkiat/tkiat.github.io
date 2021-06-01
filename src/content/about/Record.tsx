@@ -88,7 +88,7 @@ const drinks = `
 - **Herbal Tea**: Red Roibos, Chrysanthemum, Yerba Mate, and anything else adventurous
 `
 
-const storage = 'tab-index-about-whatiuse'
+const storage = 'tab-index-about-record'
 
 const Record = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))

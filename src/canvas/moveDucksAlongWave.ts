@@ -1,6 +1,6 @@
-import {WaveOutputs} from 'my-wave-type'
+import {WaveReturn} from 'my-wave-type'
 
-export const moveDucksAlongWave = (ducks: NodeListOf<HTMLElement>, wave: WaveOutputs, offset: number) => {
+export const moveDucksAlongWave = (ducks: NodeListOf<HTMLElement>, wave: WaveReturn, offset: number) => {
   if(ducks.length >= wave.points.length) return
   for (let i = 0; i < ducks.length; i++) {
     const midpoint = (wave.points[i].getY() + wave.points[i+1].getY())/2

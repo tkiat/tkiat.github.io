@@ -119,7 +119,7 @@ const opinion = `
 - **Tea**: Tea bag sucks. The quality is abysmal and also doesn't respect environment but it is still much less worse than sweetened green tea in a plastic bottle. Pu-erh tea is the best because it often comes with a natural package in a condensed space.
 `
 
-const storage = 'tab-index-about-whoiam'
+const storage = 'tab-index-about-personality'
 
 const Personality = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))

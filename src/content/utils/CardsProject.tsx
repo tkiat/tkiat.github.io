@@ -1,11 +1,11 @@
 import React from 'react'
-import {CardProject, CardsProjectProps} from 'my-card-type'
+import {CardsProjectProps} from 'my-card-type'
 
 const CardsProject = ({isActive, items}: CardsProjectProps): React.ReactElement => {
   return (
     <div className={'cards-project' + (isActive ? ' cards-project--active' : '')}>
       {
-        items.map((item: CardProject, i: number) => {
+        items.map((item, i) => {
           return (
             <div className={'cards-project__item' + (item.inactive ? ' cards-project__item--inactive' : '')} key={i}>
             {/*{item['image-src'] && <img className='cards-project__img' src={item['image-src']} alt="Broken :(" aria-label={'image for ' + item.title} />}*/}

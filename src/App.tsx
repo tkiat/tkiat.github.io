@@ -2,7 +2,7 @@ import React from 'react'
 import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
 
-import {DucksColors, DuckShape} from 'my-duck-type'
+import {DuckColors, DuckShape} from 'my-duck-type'
 import {NavIndexsType} from 'my-nav-type'
 import {ThemeBase, ThemeSupplement, ThemeProps} from 'my-theme-type'
 import {Time} from 'my-time-type'
@@ -27,8 +27,6 @@ import {ReactComponent as Sakura} from 'src/background/sakura.svg'
 import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
-
-//TODO check ts use props for component input and arguments for function inputs
 
 const getBackground = (theme: string) => {
   switch(theme) {
@@ -130,7 +128,7 @@ function App(): React.ReactElement {
   const totalPoints = levels.length + 1
 
   const waveColors = React.useRef<WavesColorsType>(['', '', ''])
-  const duckColors = React.useRef<DucksColors>({
+  const duckColors = React.useRef<DuckColors>({
     'beak': '',
     'body': '',
     'wing': '',

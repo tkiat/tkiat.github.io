@@ -5,10 +5,10 @@ declare module 'my-duck-type' {
     text: string,
   }
 
-  export type DucksColors = {
-    'beak': string,
-    'body': string,
-    'wing': string,
+  export type DuckColors = {
+    beak: string,
+    body: string,
+    wing: string,
   }
   export type DuckShape = 'DuckAboutMe' | 'DuckHobby' | 'DuckResume'
 

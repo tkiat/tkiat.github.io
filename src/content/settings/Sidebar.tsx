@@ -5,14 +5,14 @@ import {RgbStringColorPicker, RgbaStringColorPicker} from 'react-colorful'
 import {SidebarProps} from 'my-settings-type'
 import {Time} from 'my-time-type'
 import {TubesColors} from 'my-tube-type'
-import {DucksColors} from 'my-duck-type'
+import {DuckColors} from 'my-duck-type'
 import {ThemeBase, ThemeSupplement} from 'my-theme-type'
 import {WavesPhysics} from 'my-wave-config-type'
 
 import BaseThemePicker from './BaseThemePicker'
 import ThemePicker     from './ThemePicker'
 
-const duckInputs: ({'type': (keyof DucksColors), 'text': string})[] = [
+const duckInputs: ({'type': (keyof DuckColors), 'text': string})[] = [
   {'type': 'body', 'text': 'Duck Body'},
   {'type': 'wing',  'text': 'Duck Wing'},
   {'type': 'beak', 'text': 'Duck Beak'}]
@@ -55,8 +55,8 @@ const Sidebar = ({duckColors, getCustomStylesheet, theme, setTheme, time, setTim
     }
   }
 
-  const changeDuckColors = (obj: Partial<DucksColors>) => {
-    const [part, rgb] = Object.entries(obj)[0] as [keyof DucksColors, DucksColors[keyof DucksColors]]
+  const changeDuckColors = (obj: Partial<DuckColors>) => {
+    const [part, rgb] = Object.entries(obj)[0] as [keyof DuckColors, DuckColors[keyof DuckColors]]
     changeCustomThemeVariable('--duck-' + part + '-color', rgb)
     duckColors.current[part] = rgb
   }
