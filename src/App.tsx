@@ -28,27 +28,6 @@ import {ReactComponent as Snow}   from 'src/background/snow.svg'
 
 import './sass/main.scss'
 
-const themeFallback: ThemeBase = 'sakura'
-
-const isBaseTheme = (theme: string | null): theme is ThemeBase => {
-  const themes: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
-  return themes.includes(theme as ThemeBase)
-}
-const isSupplementTheme = (theme: string | null): theme is ThemeSupplement => {
-  const themes: ThemeSupplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
-  return themes.includes(theme as ThemeSupplement)
-}
-const getInitialThemeBase       = (theme: string | null) => (isBaseTheme(theme) ? theme : themeFallback)
-const getInitialThemeSupplement = (theme: string | null) => (isSupplementTheme(theme) ? theme : themeFallback)
-
-const timeFallback: Time = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'day'
-
-const isTime = (time: string | null): time is Time => {
-  const times: Time[] = ['day', 'dark']
-  return times.includes(time as Time)
-}
-const getInitialTime = (time: string | null) => (isTime(time) ? time : timeFallback)
-
 const getBackground = (theme: string) => {
   switch(theme) {
     case 'ocean':
@@ -66,27 +45,63 @@ const getBackground = (theme: string) => {
 const getCustomStylesheet = () => {
   return `
   [theme-supplement='custom'] {
-    --duck-beak-color:${localStorage.getItem('--duck-beak-color') ?? 'rgb(0, 0, 0)'};
-    --duck-body-color:${localStorage.getItem('--duck-body-color') ?? 'rgb(0, 0, 0)'};
-    --duck-wing-color:${localStorage.getItem('--duck-wing-color') ?? 'rgb(0, 0, 0)'};
+    --duck-beak-color:  ${localStorage.getItem('--duck-beak-color')   ?? 'rgb(0, 0, 0)'};
+    --duck-body-color:  ${localStorage.getItem('--duck-body-color')   ?? 'rgb(0, 0, 0)'};
+    --duck-wing-color:  ${localStorage.getItem('--duck-wing-color')   ?? 'rgb(0, 0, 0)'};
     --tube-stroke-color:${localStorage.getItem('--tube-stroke-color') ?? 'rgb(0, 0, 0)'};
-    --tube-water-color:${localStorage.getItem('--tube-water-color') ?? 'rgb(0, 0, 0)'};
+    --tube-water-color: ${localStorage.getItem('--tube-water-color')  ?? 'rgb(0, 0, 0)'};
     --wave-front0-color:${localStorage.getItem('--wave-front0-color') ?? 'rgb(0, 0, 0)'};
     --wave-front1-color:${localStorage.getItem('--wave-front1-color') ?? 'rgb(0, 0, 0)'};
     --wave-front2-color:${localStorage.getItem('--wave-front2-color') ?? 'rgb(0, 0, 0)'};
   }`
 }
+
+const initialThemes = (() => {
+  const isBaseTheme = (theme: string | null): theme is ThemeBase => {
+    const themes: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
+    return themes.includes(theme as ThemeBase)
+  }
+  const isSupplementTheme = (theme: string | null): theme is ThemeSupplement => {
+    const themes: ThemeSupplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
+    return themes.includes(theme as ThemeSupplement)
+  }
+
+  const themeFallback: ThemeBase = 'sakura'
+
+  const localBase       = localStorage.getItem('theme-base')
+  const localSupplement = localStorage.getItem('theme-supplement')
+  const localCustomBase = localStorage.getItem('theme-custom-base')
+  return {
+    'base':        isBaseTheme(localBase)             ? localBase       : themeFallback,
+    'supplement':  isSupplementTheme(localSupplement) ? localSupplement : themeFallback,
+    'custom-base': isBaseTheme(localCustomBase)       ? localCustomBase : themeFallback,
+  }
+})()
+
+const initialTime = (() => {
+  const isTime = (time: string | null): time is Time => {
+    const times: Time[] = ['day', 'dark']
+    return times.includes(time as Time)
+  }
+
+  const timeFallback: Time = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'day'
+  const local = localStorage.getItem('time')
+  return isTime(local) ? local : timeFallback
+})()
+
+let willShowSafariPrompt = (() => {
+  const userAgentString = navigator.userAgent
+  const isSafariAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
+  return isSafariAgent && (localStorage.getItem('will-skip-safari-prompt') !== 'true')
+})()
+
 const toggleSidebar = () => {
   document.getElementById('root')!.classList.toggle('move')
   document.getElementById('sidebar-toggler')!.classList.toggle('sidebar-toggler--appear')
   document.getElementById('duck-sidebar')!.classList.toggle('duck--active')
 }
 
-const userAgentString = navigator.userAgent
-const isSafariAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
-let willShowSafariPrompt = isSafariAgent && (localStorage.getItem('will-skip-safari-prompt') !== 'true')
-
-function App() {
+function App(): React.ReactElement {
   const [, triggerReRender] = React.useState({})
 
 // TODO check useImmers
@@ -96,17 +111,13 @@ function App() {
   })
   const debouncedDimension = useDebounce<{'height': number, 'width': number}>(dimensions, 1000)
 
-  const [time, setTime] = useImmer<Time>(getInitialTime(localStorage.getItem('time')))
+  const [time, setTime] = useImmer<Time>(initialTime)
   React.useEffect(() => {
     document.documentElement.setAttribute('time', time)
     localStorage.setItem('time', time)
   },[time])
 
-  const [theme, setTheme] = useImmer<ThemeProps>({
-    'base': getInitialThemeBase(localStorage.getItem('theme-base')),
-    'supplement': getInitialThemeSupplement(localStorage.getItem('theme-supplement')),
-    'custom-base': getInitialThemeBase(localStorage.getItem('theme-custom-base')),
-  })
+  const [theme, setTheme] = useImmer<ThemeProps>(initialThemes)
 
 // TODO set type
   const levels = [0, 1, 2, 3]
@@ -154,11 +165,28 @@ function App() {
   }, [shouldMoveWave, debouncedDimension, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
 
   React.useEffect(() => {
+    document.getElementById('loading')!.style.display = 'none'
+
     const themeSupplementCustomElem = document.createElement('style')
     themeSupplementCustomElem.id = 'theme-custom-supplement'
     document.head.appendChild(themeSupplementCustomElem)
     themeSupplementCustomElem.sheet!.insertRule(getCustomStylesheet(), 0)
 
+    window.addEventListener('popstate', function() {
+      triggerReRender({})
+
+      const currentIndexNoFallback = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level]))
+      const currentIndex = currentIndexNoFallback || levels[0]
+      if(currentIndex === 2) return
+
+      const newNavIndex = navItemsAtIndex[currentIndex].findIndex(item => window.location.pathname.endsWith(item))
+      setNavIndexs(draft => {
+        draft[currentIndex] = newNavIndex
+      })
+    })
+  },[])
+
+  React.useEffect(() => {
     const debouncedHandleResize = () => {
       setDimensions(draft => {
         draft.height = document.documentElement.clientHeight
@@ -209,22 +237,6 @@ function App() {
   }
 
   const [navIndexs, setNavIndexs] = useImmer<NavIndexsType>(tabIndexDefault)
-
-  React.useEffect(() => {
-    document.getElementById('loading')!.style.display = 'none'
-    window.addEventListener('popstate', function() {
-      triggerReRender({})
-
-      const currentIndexNoFallback = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level]))
-      const currentIndex = currentIndexNoFallback || levels[0]
-      if(currentIndex === 2) return
-
-      const newNavIndex = navItemsAtIndex[currentIndex].findIndex(item => window.location.pathname.endsWith(item))
-      setNavIndexs(draft => {
-        draft[currentIndex] = newNavIndex
-      })
-    })
-  },[])
 
   if(willShowSafariPrompt){
     return <SafariWarning onclick={() => {willShowSafariPrompt = false; localStorage.setItem('will-skip-safari-prompt', 'true'); triggerReRender({})}} />

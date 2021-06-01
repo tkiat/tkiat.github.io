@@ -30,7 +30,8 @@ const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): React.LegacyRef
       return new Wave({index: i, ...config })
     })
 
-    const ducks = document.getElementsByClassName('duck') as HTMLCollectionOf<HTMLElement>
+    // const ducks = document.getElementsByClassName('duck') as HTMLCollectionOf<HTMLElement>
+    const ducks = document.querySelectorAll('.duck') as NodeListOf<HTMLElement>
     const creatureOffset = 20
     let animationFrameId: number
 
