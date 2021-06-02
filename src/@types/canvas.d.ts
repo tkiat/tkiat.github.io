@@ -10,5 +10,5 @@ declare module 'my-canvas-type' {
     waveColors: React.MutableRefObject<WavesColors>,
     wavesConfig: WavesConfigs,
   }
-  export type DrawCanvasReturn = React.LegacyRef<HTMLCanvasElement> | undefined
+  export type DrawCanvasRender = React.LegacyRef<HTMLCanvasElement> | undefined
 }

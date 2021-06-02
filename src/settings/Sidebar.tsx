@@ -28,7 +28,7 @@ const wavePhysicInputs: ({'name': (keyof WavesPhysics), 'min': number, 'max': nu
   {name: 'speed',     min: 0, max: 0.3, step: 0.05},
   {name: 'shakiness', min: 0, max: 6,   step: 1.5}]
 
-const Sidebar = ({duckColors, getCustomStylesheet, theme, setTheme, time, setTime, toggleSidebar, tubeColors, waveColors, wavePhysics, setWavePhysics}: SidebarProps): React.ReactElement => {
+const Sidebar = ({duckColors, injectCustomTheme, theme, setTheme, time, setTime, toggleSidebar, tubeColors, waveColors, wavePhysics, setWavePhysics}: SidebarProps): React.ReactElement => {
 
   const themeInputs: ({'base': ThemeBase, 'supplement': ThemeSupplement})[] = [
     {base: 'ocean', supplement: 'ocean'},
@@ -49,10 +49,7 @@ const Sidebar = ({duckColors, getCustomStylesheet, theme, setTheme, time, setTim
     localStorage.setItem(variable, value)
 
     const themeSupplementCustomElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement
-    if(themeSupplementCustomElem.sheet) {
-      themeSupplementCustomElem.sheet.deleteRule(0)
-      themeSupplementCustomElem.sheet.insertRule(getCustomStylesheet(), 0)
-    }
+    injectCustomTheme(themeSupplementCustomElem)
   }
 
   const changeDuckColors = (obj: Partial<DuckColors>) => {

@@ -1,13 +1,13 @@
 import {useEffect, useRef} from 'react'
 
-import {DrawCanvasProps, DrawCanvasReturn}   from 'my-canvas-type'
+import {DrawCanvasProps, DrawCanvasRender}   from 'my-canvas-type'
 
 import {moveDucksAlongWave} from './moveDucksAlongWave'
 import {drawWaves}          from './wave/drawWaves'
 
-import Wave                 from './wave/Wave'
+import wave                 from './wave/wave'
 
-const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasReturn => {
+const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasRender => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -27,7 +27,7 @@ const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasRetur
       shakiness: wavesConfig.shakiness,
     }
     const waves = [...Array(wavesConfig.num).keys()].map(i => {
-      return Wave({index: i, ...config })
+      return wave({index: i, ...config })
     })
 
     const ducks = document.querySelectorAll('.duck') as NodeListOf<HTMLElement>

@@ -25,7 +25,7 @@ declare module 'my-settings-type' {
 
   export type SidebarProps = {
     duckColors: React.MutableRefObject<DuckColors>,
-    getCustomStylesheet: () => string,
+    injectCustomTheme: (elem: HTMLStyleElement) => void,
 
     theme: ThemeProps,
     setTheme: Updater<ThemeProps>,
