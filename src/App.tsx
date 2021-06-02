@@ -11,7 +11,7 @@ import {WavesColors, WavesConfigs, WavesPhysics} from 'my-wave-config-type'
 
 import updateFavicon from 'src/assets/updateFavicon'
 import {initialThemes, initialTime, isSafariBrowser} from 'src/defaultValues'
-import useDebounce   from 'src/hook-custom/useDebounce'
+import useViewportDimensions from 'src/hook/useViewportDimensions'
 import injectCustomTheme from 'src/injectCustomTheme'
 import toggleSidebar from 'src/settings/toggleSidebar'
 
@@ -27,8 +27,6 @@ import Content       from 'src/router/Content'
 import SafariWarning from 'src/SafariWarning'
 import './sass/main.scss'
 
-let willShowSafariPrompt = isSafariBrowser
-
 const levels = [0, 1, 2, 3]
 const navItemsAtIndex: {[level: string]: string[]} = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],
@@ -38,6 +36,7 @@ const numWaves = 3
 const urlAtIndex = ['/about', '/hobby', '/resume', '/settings']
 
 const totalPoints = levels.length + 1
+let willShowSafariPrompt = isSafariBrowser
 
 function App(): React.ReactElement {
 
@@ -51,11 +50,7 @@ function App(): React.ReactElement {
 
   const [, triggerReRender] = React.useState({})
 
-  const [dimensions, setDimensions] = useImmer<{height: number, width: number}>({
-    height: document.documentElement.clientHeight,
-    width: document.documentElement.clientWidth
-  })
-  const debouncedDimension = useDebounce<{'height': number, 'width': number}>(dimensions, 1000)
+  const viewportDimensions = useViewportDimensions(500)
 
   const [navIndexs, setNavIndexs]     = useImmer<NavIndexsType>(tabIndexDefault)
   const [theme, setTheme]             = useImmer<ThemeProps>(initialThemes)
@@ -81,9 +76,9 @@ function App(): React.ReactElement {
     const {from, to} = (function(){
       switch(currentIndex) {
         case 0: case 1:
-          return {from: {x: 0, y: debouncedDimension.height - 30}, to: {x: debouncedDimension.width, y: debouncedDimension.height - 30}}
+          return {from: {x: 0, y: viewportDimensions.height - 30}, to: {x: viewportDimensions.width, y: viewportDimensions.height - 30}}
         default:
-          return {from: {x: 0, y: 120}, to: {x: debouncedDimension.width, y: 200}}
+          return {from: {x: 0, y: 120}, to: {x: viewportDimensions.width, y: 200}}
       }
     })()
     return {
@@ -94,7 +89,7 @@ function App(): React.ReactElement {
       'num': numWaves,
     }
   // eslint-disable-next-line
-  }, [shouldMoveWave, debouncedDimension, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
+  }, [shouldMoveWave, viewportDimensions, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
 
   React.useEffect(() => {
     document.getElementById('loading')!.style.display = 'none'
@@ -117,19 +112,6 @@ function App(): React.ReactElement {
       })
     })
   },[])
-
-  React.useEffect(() => {
-    const debouncedHandleResize = () => {
-      setDimensions(draft => {
-        draft.height = document.documentElement.clientHeight
-        draft.width = document.documentElement.clientWidth
-      })
-    }
-    window.addEventListener('resize', debouncedHandleResize)
-    return () => {
-      window.removeEventListener('resize', debouncedHandleResize)
-    }
-  }, [setDimensions])
 
   React.useEffect(() => {
     document.documentElement.setAttribute('theme-base', theme.base)
@@ -170,7 +152,7 @@ function App(): React.ReactElement {
           <Redirect from="/hobby" to={'/hobby' + navItemsAtIndex[1][tabIndexDefault[1]]} noThrow />
         </Router>
         <Background theme={theme.base} />
-        <Canvas argumentCanvas={debouncedDimension} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' />
+        <Canvas argumentCanvas={viewportDimensions} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' />
 
         {(currentIndex === 0 || currentIndex === 1) &&
         <NavBar navIndex={navIndexs[currentIndex]} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[currentIndex]} items={navItemsAtIndex[currentIndex]} level={currentIndex} keyOffsets={[0, navItemsAtIndex[0].length]}/>}
