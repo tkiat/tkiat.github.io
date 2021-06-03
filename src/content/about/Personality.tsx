@@ -1,11 +1,12 @@
 import React from 'react'
-import {useImmer} from 'use-immer'
+import { useImmer } from 'use-immer'
 
-import Cards           from 'src/content/utils/Cards'
+import Cards from 'src/content/utils/Cards'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav             from 'src/content/utils/Nav'
+import Nav from 'src/content/utils/Nav'
 
-const overview = [`
+const overview = [
+  `
 ### MBTI Test
 ##### 31 Mar 2021 on [16personalities.com](https://www.16personalities.com/)
   - **I**ntroverted (79%) - **E**xtraverted
@@ -13,7 +14,8 @@ const overview = [`
   - **T**hinking (51%) - **F**eeling
   - **J**udging (58%) - **P**rospecting
   - **A**ssertive (65%) - **T**erbulent
-`, `
+`,
+  `
 ### Big 5 Personalities Test
 ##### 31 Mar 2021 on [openpsychometrics.org](https://openpsychometrics.org/)
   - Extroversion: **11** (percentile)
@@ -21,16 +23,18 @@ const overview = [`
   - Agreeableness: **7**
   - Conscientiousness: **95**
   - Intellect/Imagination: **46**
-`, `
+`,
+  `
 ### Others
 - Early Riser
 - Eat Simple Food
 - Quiet
 - Zodiac Sign - Cancer
-`
+`,
 ]
 
-const goal_purpose = [`
+const goal_purpose = [
+  `
 # Life Purpose
 
 I'd like to become a person who respect freedom for himself and others.
@@ -42,7 +46,8 @@ Nothing makes sense to be born without ability to lead one's own life.
 Or to be exploited by somebody else.
 
 The life of least impact is the best life ever one can achieve.
-`, `
+`,
+  `
 ### Goal 1: Become a Web Artisan
 
 Web allows freedom of expression.
@@ -52,13 +57,15 @@ To convey what I care about.
 Without living a confined, strict life.
 
 With no way out.
-`, `
+`,
+  `
 ### Goal 2: Become a Competent User
 
 A user of everything: Linux, food, bags, appliance.
 
 An ignorant person cannot go far.
-`, `
+`,
+  `
 ### Goal 3: Eat Less Meat and Produce Less Wate
 
 Currently, I only eat meat when dining with others.
@@ -68,42 +75,49 @@ And I already use reusable containers.
 Still, there are room for improvements.
 
 I'd like to become a gardener, with knowledge and space.
-`,]
+`,
+]
 
-const preferences = [`
+const preferences = [
+  `
 ### Food & Drink
 - Simple > Tasty
 - Fruit & Veg > Meat
 - No packaging
 - From local > Overseas
-`, `
+`,
+  `
 ### Hardware
 - Old > New laptop
 - Laptop > Desktop
 - Thinkpoint > Mouse > Wacom > Touch bar
 - Any Libre OS > Linux > *BSD > Windows > macOS
 - Replicant > LinageOS > AOSP > Android > iOS
-`, `
+`,
+  `
 ### Software
   - FOSS for critical software installed on my devices
   - Open source for any software installed on my devices
   - The rest can be closed source
-`, `
+`,
+  `
 ### Service
 - Bicycle > Public Transport
 - Public Transport > Car
 - 5 Min Walk > Motorbike
-`, `
+`,
+  `
 ### Accommodation
 - Small home with large area > Tiny home in city
 - Ducks & Pigs (edible) > Cats & Dogs
 - Grow edible plant > Decorative plant
-`, `
+`,
+  `
 ### Others
 - **Prospective Job**: Driven by compassion.
 - **Prospective Wife**: Values freedom more than convenience.
 - **Superpower**: I want none. With great power comes great responsibilities.
-`
+`,
 ]
 const opinion = `
 - **Animal**: Carnivores suck.
@@ -123,13 +137,18 @@ const storage = 'tab-index-about-personality'
 
 const Personality = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
-  return(
+  return (
     <>
-      <Nav items={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav
+        items={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
+        storage={storage}
+        cur={cur}
+        setCur={setCur}
+      />
 
-      <Cards           isActive={cur === 0} items={overview} />
-      <Cards           isActive={cur === 1} items={goal_purpose} />
-      <Cards           isActive={cur === 2} items={preferences} />
+      <Cards isActive={cur === 0} items={overview} />
+      <Cards isActive={cur === 1} items={goal_purpose} />
+      <Cards isActive={cur === 2} items={preferences} />
       <MarkdownContent isActive={cur === 3} content={opinion} />
     </>
   )

@@ -1,22 +1,21 @@
-import {useEffect, useRef} from 'react'
+import { useEffect, useRef } from 'react'
 
-import {DrawCanvasProps, DrawCanvasRender}   from 'my-canvas-type'
+import { DrawCanvasProps, DrawCanvasRender } from 'my-canvas-type'
 
-import {moveDucksAlongWave} from './moveDucksAlongWave'
-import {drawWaves}          from './wave/drawWaves'
+import { moveItemsAlongWave } from './moveItemsAlongWave'
+import { drawWaves } from './wave/drawWaves'
 
-import wave                 from './wave/wave'
+import wave from './wave/wave'
 
-const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasRender => {
-
+const DrawCanvas = ({ wavesConfig, waveColors }: DrawCanvasProps): DrawCanvasRender => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    if(!canvasRef.current) return
+    if (!canvasRef.current) return
     const canvas = canvasRef.current
 
     const context = canvas.getContext('2d')
-    if(!context) return
+    if (!context) return
 
     const config = {
       from: wavesConfig.from,
@@ -26,17 +25,17 @@ const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasRende
       speed: wavesConfig.speed,
       shakiness: wavesConfig.shakiness,
     }
-    const waves = [...Array(wavesConfig.num).keys()].map(i => {
-      return wave({index: i, ...config })
+    const waves = [...Array(wavesConfig.num).keys()].map((i) => {
+      return wave({ index: i, ...config })
     })
 
-    const ducks = document.querySelectorAll('.nav-main') as NodeListOf<HTMLElement>
+    const navMainItems = document.querySelectorAll('.nav-main') as NodeListOf<HTMLElement>
     const creatureOffset = 20
     let animationFrameId: number
 
     const render = () => {
       drawWaves(context, waves, waveColors.current)
-      moveDucksAlongWave(ducks, waves[waves.length - 1], creatureOffset)
+      moveItemsAlongWave(navMainItems, waves[waves.length - 1], creatureOffset)
       animationFrameId = window.requestAnimationFrame(render)
     }
     window.requestAnimationFrame(render)
@@ -44,7 +43,7 @@ const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasRende
     return () => {
       window.cancelAnimationFrame(animationFrameId)
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [wavesConfig])
 
   return canvasRef

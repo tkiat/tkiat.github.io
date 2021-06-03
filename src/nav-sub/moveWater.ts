@@ -1,5 +1,7 @@
+import { flowDirection, flowMode } from 'my-nav-type'
+
 export const moveWater = (from: number, to: number, transitionSec: number): number => {
-  if(from === to) return 0
+  if (from === to) return 0
 
   const willMoveRight = to > from
   const flowDir = willMoveRight ? 'right' : 'left'
@@ -9,7 +11,7 @@ export const moveWater = (from: number, to: number, transitionSec: number): numb
   delayCur += moveWaterToNextNode(cur, 'drain', flowDir, transitionSec, delayCur)
   cur += willMoveRight ? 2 : -2
   // step 2 (optional): pass
-  while(cur !== to) {
+  while (cur !== to) {
     delayCur += moveWaterToNextNode(cur, 'pass', flowDir, transitionSec, delayCur)
     cur += willMoveRight ? 2 : -2
   }
@@ -19,13 +21,19 @@ export const moveWater = (from: number, to: number, transitionSec: number): numb
   return delayCur
 }
 
-const moveWaterToNextNode = (textIndex: number, mode: 'drain' | 'pass' | 'stuck', flowDir: 'left' | 'right', totalTime: number, delay: number): number => {
-       if(mode === 'drain' && flowDir === 'left')  return waterDrainToLeft(textIndex, totalTime, delay)
-  else if(mode === 'drain' && flowDir === 'right') return waterDrainToRight(textIndex, totalTime, delay)
-  else if(mode === 'pass'  && flowDir === 'left')  return waterPassToLeft(textIndex, totalTime, delay)
-  else if(mode === 'pass'  && flowDir === 'right') return waterPassToRight(textIndex, totalTime, delay)
-  else if(mode === 'stuck' && flowDir === 'left')  return waterStuckToLeft(textIndex, delay)
-  else if(mode === 'stuck' && flowDir === 'right') return waterStuckToRight(textIndex, delay)
+const moveWaterToNextNode = (
+  textIndex: number,
+  mode: flowMode,
+  flowDir: flowDirection,
+  totalTime: number,
+  delay: number
+): number => {
+  if (mode === 'drain' && flowDir === 'left') return waterDrainToLeft(textIndex, totalTime, delay)
+  else if (mode === 'drain' && flowDir === 'right') return waterDrainToRight(textIndex, totalTime, delay)
+  else if (mode === 'pass' && flowDir === 'left') return waterPassToLeft(textIndex, totalTime, delay)
+  else if (mode === 'pass' && flowDir === 'right') return waterPassToRight(textIndex, totalTime, delay)
+  else if (mode === 'stuck' && flowDir === 'left') return waterStuckToLeft(textIndex, delay)
+  else if (mode === 'stuck' && flowDir === 'right') return waterStuckToRight(textIndex, delay)
   else return 0
 }
 
@@ -33,28 +41,28 @@ const waterDrainToLeft = (textIndex: number, totalTime: number, delay: number): 
   triggerWaterFlow(textIndex, 'drain-to-left-text', delay)
   triggerWaterFlow(textIndex + 1, 'drain-to-left-valve', delay)
 
-  const nextDelay = (totalTime * 1.16) * 20/116
+  const nextDelay = (totalTime * 1.16 * 20) / 116
   return nextDelay
 }
 const waterDrainToRight = (textIndex: number, totalTime: number, delay: number): number => {
   triggerWaterFlow(textIndex, 'drain-to-right-text', delay)
   triggerWaterFlow(textIndex + 1, 'drain-to-right-valve', delay)
 
-  const nextDelay = (totalTime * 1) * 4/100
+  const nextDelay = (totalTime * 1 * 4) / 100
   return nextDelay
 }
 const waterPassToLeft = (textIndex: number, totalTime: number, delay: number): number => {
   triggerWaterFlow(textIndex, 'pass-to-left-text', delay)
   triggerWaterFlow(textIndex + 1, 'pass-to-left-valve', delay)
 
-  const nextDelay = (totalTime * 2.16) * 120/216
+  const nextDelay = (totalTime * 2.16 * 120) / 216
   return nextDelay
 }
 const waterPassToRight = (textIndex: number, totalTime: number, delay: number): number => {
   triggerWaterFlow(textIndex, 'pass-to-right-text', delay)
   triggerWaterFlow(textIndex + 1, 'pass-to-right-valve', delay)
 
-  const nextDelay = (totalTime * 2.16) * 120/216
+  const nextDelay = (totalTime * 2.16 * 120) / 216
   return nextDelay
 }
 const waterStuckToLeft = (textIndex: number, delay: number): number => {
@@ -75,10 +83,3 @@ const triggerWaterFlow = (highlighterNum: number, className: string, delaySec: n
   highlighter.classList.add(className)
   highlighter.style.animationDelay = delaySec + 's'
 }
-  // window.setTimeout(function() {
-  // }, 0)
-//   highlighter.onanimationend = () => {
-//     highlighter.classList.remove('nav__highlighter-item--init')
-//     highlighter.classList.remove(className)
-//     highlighter.style.animationDelay = '0'
-//   }

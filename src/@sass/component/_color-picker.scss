@@ -11,7 +11,9 @@
     margin: 0 auto;
     height: 80%;
     width: 96%;
-    &__hue-pointer, &__saturation-pointer, &__alpha-pointer {
+    &__hue-pointer,
+    &__saturation-pointer,
+    &__alpha-pointer {
       width: 1em;
       height: 1em;
     }

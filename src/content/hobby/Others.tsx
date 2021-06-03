@@ -1,8 +1,8 @@
-import React     from 'react'
-import {useImmer} from 'use-immer'
+import React from 'react'
+import { useImmer } from 'use-immer'
 
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav             from 'src/content/utils/Nav'
+import Nav from 'src/content/utils/Nav'
 
 const content = `
 # Blog
@@ -41,7 +41,7 @@ const Others = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Content', 'Courses','Others','Archive']} storage='storage' cur={cur} setCur={setCur} />
+      <Nav items={['Content', 'Courses', 'Others', 'Archive']} storage="storage" cur={cur} setCur={setCur} />
 
       <MarkdownContent isActive={cur === 0} content={content} />
       <MarkdownContent isActive={cur === 1} content={courses} />

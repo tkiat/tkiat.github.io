@@ -1,17 +1,20 @@
-import React  from 'react'
+import React from 'react'
 import marked from 'marked'
 import DOMPurify from 'dompurify'
 
 type MarkdownContentProps = {
-  content: string,
-  isActive: boolean,
+  content: string
+  isActive: boolean
 }
 
-const MarkdownContent = ({content, isActive}: MarkdownContentProps): React.ReactElement => {
+const MarkdownContent = ({ content, isActive }: MarkdownContentProps): React.ReactElement => {
   return (
-  <div className={'markdown-content' + (isActive ? ' markdown-content--active' : '')}>
-    <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(marked(content), {USE_PROFILES: {html: true}}),}}></div>
-  </div>
+    <div className={'markdown-content' + (isActive ? ' markdown-content--active' : '')}>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(marked(content), { USE_PROFILES: { html: true } }),
+        }}></div>
+    </div>
   )
 }
 

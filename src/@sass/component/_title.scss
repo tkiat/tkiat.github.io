@@ -13,7 +13,8 @@
 
   pointer-events: none;
   user-select: none;
-  &--0, &--1 {
+  &--0,
+  &--1 {
     top: 15px;
     right: calc(20px + var(--sidebar-width));
   }
@@ -21,7 +22,8 @@
 
 @media screen and (max-width: variables.$w-max-mobile) {
   .title {
-    &--0, &--1 {
+    &--0,
+    &--1 {
       display: block;
     }
   }

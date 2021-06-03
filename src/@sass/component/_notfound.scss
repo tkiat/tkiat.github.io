@@ -10,7 +10,8 @@
   width: 100vw;
 
   color: var(--tube-water-color);
-  text-shadow: -1px 0 var(--tube-stroke-color), 0 1px var(--tube-stroke-color), 1px 0 var(--tube-stroke-color), 0 -1px var(--tube-stroke-color);
+  text-shadow: -1px 0 var(--tube-stroke-color), 0 1px var(--tube-stroke-color), 1px 0 var(--tube-stroke-color),
+    0 -1px var(--tube-stroke-color);
   &--content {
     position: unset;
     height: unset;

@@ -1,5 +1,5 @@
-import {WaveReturn} from 'my-wave-type'
-import {WavesColors} from 'my-wave-config-type'
+import { WaveReturn } from 'my-wave-type'
+import { WavesColors } from 'my-wave-config-type'
 
 export const drawWaves = (ctx: CanvasRenderingContext2D, waves: WaveReturn[], colors: WavesColors) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)

@@ -1,8 +1,8 @@
 .drain-to-left-text {
-  animation: drain-to-left-text calc(var(--anim-period)*1.16) linear forwards;
+  animation: drain-to-left-text calc(var(--anim-period) * 1.16) linear forwards;
 }
 .drain-to-left-valve {
-  animation: drain-to-left-valve calc(var(--anim-period)*1.16) linear forwards;
+  animation: drain-to-left-valve calc(var(--anim-period) * 1.16) linear forwards;
 }
 .drain-to-right-text {
   animation: drain-to-right-text var(--anim-period) linear forwards;
@@ -12,16 +12,16 @@
 }
 
 .pass-to-left-text {
-  animation: pass-to-left-text calc(var(--anim-period)*2.16) linear forwards;
+  animation: pass-to-left-text calc(var(--anim-period) * 2.16) linear forwards;
 }
 .pass-to-left-valve {
-  animation: pass-to-left-valve calc(var(--anim-period)*2.16) linear forwards;
+  animation: pass-to-left-valve calc(var(--anim-period) * 2.16) linear forwards;
 }
 .pass-to-right-text {
-  animation: pass-to-right-text calc(var(--anim-period)*2.16) linear forwards;
+  animation: pass-to-right-text calc(var(--anim-period) * 2.16) linear forwards;
 }
 .pass-to-right-valve {
-  animation: pass-to-right-valve calc(var(--anim-period)*2.16) linear forwards;
+  animation: pass-to-right-valve calc(var(--anim-period) * 2.16) linear forwards;
 }
 
 .stuck-to-left-text {
@@ -39,69 +39,141 @@
 
 /*drain to left*/
 @keyframes drain-to-left-text {
-  0% { transform: translateY(20%); }
-  100% { transform: translateY(-100%); }
+  0% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 @keyframes drain-to-left-valve {
-  0% { transform: translateY(20%); }
-  13.79% { transform: translateY(100%); }
+  0% {
+    transform: translateY(20%);
+  }
+  13.79% {
+    transform: translateY(100%);
+  }
 }
 /*drain to right*/
 @keyframes drain-to-right-text {
-  0% { transform: translateY(20%); }
-  80% { transform: translateY(100%); }
+  0% {
+    transform: translateY(20%);
+  }
+  80% {
+    transform: translateY(100%);
+  }
 }
 @keyframes drain-to-right-valve {
-  0% { transform: translateY(20%); }
-  4% { transform: translateY(0); }
-  80% { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+  0% {
+    transform: translateY(20%);
+  }
+  4% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 /*stuck to left*/
 @keyframes stuck-to-left-text {
-  0% { transform: translateY(100%); }
-  20% { transform: translateY(100%); }
-  100% { transform: translateY(20%); }
+  0% {
+    transform: translateY(100%);
+  }
+  20% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(20%);
+  }
 }
 @keyframes stuck-to-left-valve {
-  0% { transform: translateY(-100%); }
-  20% { transform: translateY(0); }
-  96% { transform: translateY(0); }
-  100% { transform: translateY(20%); }
+  0% {
+    transform: translateY(-100%);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  96% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20%);
+  }
 }
 /*stuck to right*/
 @keyframes stuck-to-right-text {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(20%); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(20%);
+  }
 }
 @keyframes stuck-to-right-valve {
-  0% { transform: translateY(100%); }
-  82.76% { transform: translateY(100%); }
-  100% { transform: translateY(20%); }
+  0% {
+    transform: translateY(100%);
+  }
+  82.76% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(20%);
+  }
 }
 /*pass to left*/
 @keyframes pass-to-left-text {
-  0% { transform: translateY(100%); }
-  9.26% { transform: translateY(100%); }
-  100% { transform: translateY(-100%); }
+  0% {
+    transform: translateY(100%);
+  }
+  9.26% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
 @keyframes pass-to-left-valve {
-  0% { transform: translateY(-100%); }
-  9.26% { transform: translateY(0); }
-  44.44% { transform: translateY(0); }
-  53.7% { transform: translateY(100%); }
+  0% {
+    transform: translateY(-100%);
+  }
+  9.26% {
+    transform: translateY(0);
+  }
+  44.44% {
+    transform: translateY(0);
+  }
+  53.7% {
+    transform: translateY(100%);
+  }
 }
 /*pass to right*/
 @keyframes pass-to-right-text {
-  0% { transform: translateY(-100%); }
-  90.74% { transform: translateY(100%); }
+  0% {
+    transform: translateY(-100%);
+  }
+  90.74% {
+    transform: translateY(100%);
+  }
 }
 
 @keyframes pass-to-right-valve {
-  0% { transform: translateY(100%); }
-  46.3% { transform: translateY(100%); }
-  55.56% { transform: translateY(0); }
-  90.74% { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+  0% {
+    transform: translateY(100%);
+  }
+  46.3% {
+    transform: translateY(100%);
+  }
+  55.56% {
+    transform: translateY(0);
+  }
+  90.74% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }

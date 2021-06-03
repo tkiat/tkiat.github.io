@@ -1,17 +1,37 @@
 import React from 'react'
-import {NavSubProps} from "my-nav-type"
+import { NavSubProps } from 'my-nav-type'
 
-import NavSubTube    from './NavSubTube'
+import NavSubTube from './NavSubTube'
 import NavSubGeneric from './NavSubGeneric'
 
-const NavSub = ({baseURL, items, keyOffsets, navMainIndex, navSubIndex, setNavSubIndexs}: NavSubProps): React.ReactElement => {
-  if(navSubIndex === null || (navMainIndex !== 0 && navMainIndex !== 1)) return <></>
+const NavSub = ({
+  baseURL,
+  items,
+  keyOffsets,
+  navMainIndex,
+  navSubIndex,
+  setNavSubIndexs,
+}: NavSubProps): React.ReactElement => {
+  if (navSubIndex === null || (navMainIndex !== 0 && navMainIndex !== 1)) return <></>
   localStorage.setItem('tabIndexLv' + navMainIndex + 'Cur', navSubIndex.toString())
   return (
-  <>
-    <NavSubGeneric baseURL={baseURL} items={items} navMainIndex={navMainIndex} navSubIndex={navSubIndex} setNavSubIndexs={setNavSubIndexs} />
-    <NavSubTube    baseURL={baseURL} items={items} navMainIndex={navMainIndex} navSubIndex={navSubIndex} setNavSubIndexs={setNavSubIndexs} keyOffset={keyOffsets[navMainIndex]} />
-  </>
+    <>
+      <NavSubGeneric
+        baseURL={baseURL}
+        items={items}
+        navMainIndex={navMainIndex}
+        navSubIndex={navSubIndex}
+        setNavSubIndexs={setNavSubIndexs}
+      />
+      <NavSubTube
+        baseURL={baseURL}
+        items={items}
+        navMainIndex={navMainIndex}
+        navSubIndex={navSubIndex}
+        setNavSubIndexs={setNavSubIndexs}
+        keyOffset={keyOffsets[navMainIndex]}
+      />
+    </>
   )
 }
 

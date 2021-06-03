@@ -53,15 +53,15 @@
     width: var(--duck-width);
     height: 80%;
     filter: brightness(6%) drop-shadow(0px 0px 4px black);
-      .duck__beak {
-        fill: var(--duck-beak-color);
-      }
-      .duck__body {
-        fill: var(--duck-body-color);
-      }
-      .duck__wing {
-        fill: var(--duck-wing-color);
-      }
+    .duck__beak {
+      fill: var(--duck-beak-color);
+    }
+    .duck__body {
+      fill: var(--duck-body-color);
+    }
+    .duck__wing {
+      fill: var(--duck-wing-color);
+    }
   }
   &__text {
     position: relative;
@@ -82,4 +82,3 @@
     }
   }
 }
-

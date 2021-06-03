@@ -1,39 +1,49 @@
-import React  from 'react'
-import {Link} from "@reach/router"
-import {NavSubTubeProps} from "my-nav-type"
+import React from 'react'
+import { Link } from '@reach/router'
+import { NavSubTubeProps } from 'my-nav-type'
 
-import {moveWater}                     from './moveWater'
+import { moveWater } from './moveWater'
 
-import TubeText                        from './TubeText'
+import TubeText from './TubeText'
 
-import {ReactComponent as ValveBorder} from 'src/@global/asset/valve/border.svg'
-import {ReactComponent as ValveMask}   from 'src/@global/asset/valve/mask.svg'
+import { ReactComponent as ValveBorder } from 'src/@global/asset/valve/border.svg'
+import { ReactComponent as ValveMask } from 'src/@global/asset/valve/mask.svg'
 
 const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
   for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
 }
 
-const NavBarTube = ({baseURL, items, keyOffset, navMainIndex, navSubIndex, setNavSubIndexs}: NavSubTubeProps): React.ReactElement => {
+const NavBarTube = ({
+  baseURL,
+  items,
+  keyOffset,
+  navMainIndex,
+  navSubIndex,
+  setNavSubIndexs,
+}: NavSubTubeProps): React.ReactElement => {
+  const moveWaterToDest = (
+    from: number,
+    to: number,
+    skipAnimation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) => {
+    if (from === to) return
 
-  const moveWaterToDest = (from: number, to: number, skipAnimation = window.matchMedia("(prefers-reduced-motion: reduce)").matches) => {
-    if(from === to) return
-
-    if(skipAnimation) {
-      setNavSubIndexs(draft => {
+    if (skipAnimation) {
+      setNavSubIndexs((draft) => {
         draft[navMainIndex] = to / 2
       })
       return
     } else {
       const navTube = document.getElementById('nav-tube')
       const navLinkItems = navTube && navTube.getElementsByClassName('nav__link')
-      if(navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
+      if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
 
       const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
       const delayTotal = moveWater(from, to, transitionSec)
 
-      window.setTimeout(function() {
-        if(navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-        setNavSubIndexs(draft => {
+      window.setTimeout(function () {
+        if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
+        setNavSubIndexs((draft) => {
           draft[navMainIndex] = to / 2
         })
       }, (delayTotal + transitionSec) * 1000)
@@ -41,32 +51,46 @@ const NavBarTube = ({baseURL, items, keyOffset, navMainIndex, navSubIndex, setNa
   }
 
   return (
-  <nav className='nav nav--tube' id='nav-tube'>
-    <ul className='nav__list'>
-      {items.map((tab: string, i: number) =>
+    <nav className="nav nav--tube" id="nav-tube">
+      <ul className="nav__list">
+        {items.map((tab: string, i: number) => (
+          <React.Fragment key={i + keyOffset}>
+            <li className="nav__item">
+              <Link
+                className={'nav__link'}
+                to={baseURL + tab}
+                onClick={() => moveWaterToDest(navSubIndex * 2, i * 2)}
+                draggable="false">
+                <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
+                <div className="nav__highlighter-wrapper">
+                  <div
+                    id={'nav__highlighter-item' + i * 2}
+                    className={
+                      'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')
+                    }></div>
+                </div>
+              </Link>
+            </li>
 
-      <React.Fragment key={i + keyOffset}>
-        <li className='nav__item'>
-          <Link className={'nav__link'} to={baseURL + tab} onClick={() => moveWaterToDest(navSubIndex * 2, i * 2)} draggable='false'>
-            <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
-            <div className="nav__highlighter-wrapper">
-              <div id={'nav__highlighter-item' + i*2} className={'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')}></div>
-            </div>
-          </Link>
-        </li>
-
-      {i < items.length - 1 &&
-        <li className='nav__item'>
-          <div className='valve'><ValveBorder /><ValveMask /></div>
-          <div className="nav__highlighter-wrapper">
-            <div id={'nav__highlighter-item' + (i*2 + 1)} className={'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')}></div>
-          </div>
-        </li>
-      }
-      </React.Fragment>
-      )}
-    </ul>
-  </nav>
+            {i < items.length - 1 && (
+              <li className="nav__item">
+                <div className="valve">
+                  <ValveBorder />
+                  <ValveMask />
+                </div>
+                <div className="nav__highlighter-wrapper">
+                  <div
+                    id={'nav__highlighter-item' + (i * 2 + 1)}
+                    className={
+                      'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')
+                    }></div>
+                </div>
+              </li>
+            )}
+          </React.Fragment>
+        ))}
+      </ul>
+    </nav>
   )
 }
 

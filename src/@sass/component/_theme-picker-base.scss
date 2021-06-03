@@ -19,7 +19,8 @@
       color: var(--body-text-color);
       cursor: pointer;
       filter: brightness(30%);
-      &:hover, &--active {
+      &:hover,
+      &--active {
         filter: none;
         text-decoration: underline;
         text-decoration-color: var(--link-text-color);

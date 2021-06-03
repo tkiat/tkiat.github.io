@@ -22,7 +22,8 @@
         display: inline-block;
         height: 100%;
         cursor: pointer;
-        &, #{$root}__link {
+        &,
+        #{$root}__link {
           #{$root}__highlighter-wrapper {
             width: 100%;
             height: 100%;

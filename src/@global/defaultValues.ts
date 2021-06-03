@@ -1,5 +1,5 @@
-import {ThemeBase, ThemeSupplement} from 'my-theme-type'
-import {Time} from 'my-time-type'
+import { ThemeBase, ThemeSupplement } from 'my-theme-type'
+import { Time } from 'my-time-type'
 
 const initialThemes = (() => {
   const isBaseTheme = (theme: string | null): theme is ThemeBase => {
@@ -13,13 +13,13 @@ const initialThemes = (() => {
 
   const themeFallback: ThemeBase = 'sakura'
 
-  const localBase       = localStorage.getItem('theme-base')
+  const localBase = localStorage.getItem('theme-base')
   const localSupplement = localStorage.getItem('theme-supplement')
   const localCustomBase = localStorage.getItem('theme-custom-base')
   return {
-    'base':        isBaseTheme(localBase)             ? localBase       : themeFallback,
-    'supplement':  isSupplementTheme(localSupplement) ? localSupplement : themeFallback,
-    'custom-base': isBaseTheme(localCustomBase)       ? localCustomBase : themeFallback,
+    base: isBaseTheme(localBase) ? localBase : themeFallback,
+    supplement: isSupplementTheme(localSupplement) ? localSupplement : themeFallback,
+    'custom-base': isBaseTheme(localCustomBase) ? localCustomBase : themeFallback,
   }
 })()
 
@@ -29,7 +29,7 @@ const initialTime = (() => {
     return times.includes(time as Time)
   }
 
-  const timeFallback: Time = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'day'
+  const timeFallback: Time = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
   const local = localStorage.getItem('time')
   return isTime(local) ? local : timeFallback
 })()
@@ -37,7 +37,7 @@ const initialTime = (() => {
 const isSafariBrowser = (() => {
   const userAgentString = navigator.userAgent
   const isSafariBrowserAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
-  return isSafariBrowserAgent && (localStorage.getItem('will-skip-safari-prompt') !== 'true')
+  return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
 })()
 
-export {initialThemes, initialTime, isSafariBrowser}
+export { initialThemes, initialTime, isSafariBrowser }

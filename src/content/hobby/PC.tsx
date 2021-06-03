@@ -1,60 +1,62 @@
-import React      from 'react'
-import {useImmer} from 'use-immer'
+import React from 'react'
+import { useImmer } from 'use-immer'
 
-import CardsProject    from 'src/content/utils/CardsProject'
+import CardsProject from 'src/content/utils/CardsProject'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav             from 'src/content/utils/Nav'
+import Nav from 'src/content/utils/Nav'
 
 const work = [
   {
-    'title': 'Terminal Game Client',
-    'description': 'A simple TUI game client with hh:mm:ss playtime record that supports any supplemental commands such as wine64.',
-    'keyword': 'Python3, ncurses',
+    title: 'Terminal Game Client',
+    description:
+      'A simple TUI game client with hh:mm:ss playtime record that supports any supplemental commands such as wine64.',
+    keyword: 'Python3, ncurses',
 
-    'src': 'https://github.com/tkiat/terminal-game-client',
-    'live': '',
+    src: 'https://github.com/tkiat/terminal-game-client',
+    live: '',
     'image-src': 'https://via.placeholder.com/320x180',
-    'type': 'Project',
+    type: 'Project',
   },
   {
-    'title': 'Lazyman Pomodoro',
-    'description': 'I built this because I couldn\'t find a simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.',
-    'keyword': 'Python3, ncurses',
+    title: 'Lazyman Pomodoro',
+    description:
+      "I built this because I couldn't find a simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.",
+    keyword: 'Python3, ncurses',
 
-    'src': 'https://github.com/tkiat/lazyman-pomodoro',
+    src: 'https://github.com/tkiat/lazyman-pomodoro',
     'image-src': 'https://via.placeholder.com/320x180',
-    'type': 'Task',
+    type: 'Task',
   },
 ]
 
 const utility = [
   {
-    'title': 'My Dotfiles and Configs',
-    'description': '',
-    'keyword': '',
+    title: 'My Dotfiles and Configs',
+    description: '',
+    keyword: '',
 
-    'src': 'https://github.com/tkiat/dotfiles-and-configs',
-    'live': '',
-    'type': 'Config',
+    src: 'https://github.com/tkiat/dotfiles-and-configs',
+    live: '',
+    type: 'Config',
   },
   {
-    'title': 'tkiat Guix Channel',
-    'description': 'I fork suckless repositories and create a Guix channel for them',
-    'keyword': 'Python3',
+    title: 'tkiat Guix Channel',
+    description: 'I fork suckless repositories and create a Guix channel for them',
+    keyword: 'Python3',
 
-    'src': 'https://gitlab.com/tkiat/guix-channel',
-    'live': '',
-    'type': 'Repository',
+    src: 'https://gitlab.com/tkiat/guix-channel',
+    live: '',
+    type: 'Repository',
   },
   {
-    'title': 'TODO',
-    'description': 'TODO',
-    'keyword': 'Python3',
+    title: 'TODO',
+    description: 'TODO',
+    keyword: 'Python3',
 
-    'src': '',
-    'live': '',
+    src: '',
+    live: '',
     'image-src': 'https://via.placeholder.com/320x180',
-    'type': 'Script',
+    type: 'Script',
   },
 ]
 

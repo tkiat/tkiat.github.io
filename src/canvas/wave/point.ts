@@ -1,4 +1,4 @@
-import {PointArguments, PointReturn} from 'my-wave-type'
+import { PointArguments, PointReturn } from 'my-wave-type'
 
 const point = (obj: PointArguments): PointReturn => {
   let _radian = obj.index
@@ -7,7 +7,7 @@ const point = (obj: PointArguments): PointReturn => {
   return {
     oscillate: () => {
       _radian += obj.speed
-      _y = obj.y + (Math.sin(_radian) * obj.height) + (Math.random() * obj.shakiness)
+      _y = obj.y + Math.sin(_radian) * obj.height + Math.random() * obj.shakiness
     },
     x: obj.x,
     getY: () => {

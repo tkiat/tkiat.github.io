@@ -10,7 +10,8 @@
   background-color: var(--body-bg-color);
   cursor: pointer;
   filter: brightness(30%);
-  &:focus, &--active {
+  &:focus,
+  &--active {
     filter: none;
     outline: 2px dashed var(--body-bg-color);
     outline-offset: 2px;
@@ -20,8 +21,9 @@
   }
   &__nav {
     position: absolute;
-    top: 0; left: 50%;
-    display:inline-block;
+    top: 0;
+    left: 50%;
+    display: inline-block;
     transform: translateX(-50%);
 
     font-size: 1.8em;
@@ -34,7 +36,8 @@
       content: attr(overlaytext);
 
       position: absolute;
-      top: 0; left: 50%;
+      top: 0;
+      left: 50%;
       transform: translateX(-50%);
 
       height: 40%;
@@ -44,13 +47,15 @@
   }
   &__header {
     position: absolute;
-    left: 0; top: 30%;
+    left: 0;
+    top: 30%;
 
     color: var(--header-text-color);
   }
   &__text {
     position: absolute;
-    left: 0; top: 50%;
+    left: 0;
+    top: 50%;
     white-space: wrap;
 
     color: var(--body-text-color);
@@ -65,10 +70,14 @@
     border: 1px solid black;
     border-radius: 25%;
     background-color: var(--duck-body-color);
-    &--0 { left: 15%; }
-/*    &--1 { left: 36%; }*/
-/*    &--2 { left: 57%; }*/
-    &--3 { left: 79%; }
+    &--0 {
+      left: 15%;
+    }
+    /*    &--1 { left: 36%; }*/
+    /*    &--2 { left: 57%; }*/
+    &--3 {
+      left: 79%;
+    }
   }
   &__wave {
     position: absolute;

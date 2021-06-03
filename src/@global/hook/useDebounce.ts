@@ -2,19 +2,16 @@ import React from 'react'
 
 function useDebounce<T>(value: T, msDelay: number): T {
   const [debouncedValue, setDebouncedValue] = React.useState(value)
-  React.useEffect(
-    () => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value)
-      }, msDelay)
+  React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, msDelay)
 
-      // cleanup when value changes within the msDelay period
-      return () => {
-        clearTimeout(handler)
-      }
-    },
-    [value, msDelay]
-  )
+    // cleanup when value changes within the msDelay period
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [value, msDelay])
   return debouncedValue
 }
 

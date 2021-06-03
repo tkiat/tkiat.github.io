@@ -1,4 +1,5 @@
-import {Coordinate, PointReturn, WaveArguments, WaveReturn} from 'my-wave-type'
+import { PointReturn, WaveArguments, WaveReturn } from 'my-wave-type'
+import { Coordinate } from 'my-math-type'
 
 import point from './point'
 
@@ -7,7 +8,7 @@ const computeCoordinates = (to: Coordinate, from: Coordinate, totalPoints: numbe
   const pointGapY = (to.y - from.y) / (totalPoints - 1)
   let coordinates = []
   for (let i = 0; i < totalPoints; i++) {
-    coordinates[i] = {x: from.x + pointGapX * i, y: from.y + pointGapY * i}
+    coordinates[i] = { x: from.x + pointGapX * i, y: from.y + pointGapY * i }
   }
   return coordinates
 }
@@ -23,7 +24,7 @@ const createPoints = (index: number, coordinates: Coordinate[], height: number, 
 
       height: height,
       speed: speed,
-      shakiness: shakiness
+      shakiness: shakiness,
     })
   }
   return points
