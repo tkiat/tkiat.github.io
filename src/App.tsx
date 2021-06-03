@@ -26,6 +26,8 @@ import Sidebar       from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO change total level to 0, 1, 2 this will debug weird starting also
+
 const levels: Level[] = [0, 1, 2, 3]
 const navItemsAtIndex: {[k in Level]: string[]} = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],
@@ -38,7 +40,7 @@ const urlAtIndex: {[k in Level]: string} = {
   '0': '/about',
   '1': '/hobby',
   '2': '/resume',
-  '3': '',
+  '3': 'xxxxxxxxxxxxxxx', /*TODO*/
 }
 
 const totalPoints = levels.length + 1
@@ -56,6 +58,8 @@ function App(): React.ReactElement {
   const navMainIndex = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level])) || levels[0]
   const navItems = navItemsAtIndex[navMainIndex]
   const shouldMoveWave = navMainIndex === 0 || navMainIndex === 1
+
+  console.log(window.location.pathname, navMainIndex)
 
   const [, triggerReRender] = React.useState({})
 
