@@ -25,7 +25,6 @@ declare module 'my-settings-type' {
 
   export type SidebarProps = {
     duckColors: React.MutableRefObject<DuckColors>,
-    injectCustomTheme: (elem: HTMLStyleElement) => void,
 
     theme: ThemeProps,
     setTheme: Updater<ThemeProps>,
@@ -33,7 +32,6 @@ declare module 'my-settings-type' {
     time: Time,
     setTime: Updater<Time>,
 
-    toggleSidebar: () => void,
     tubeColors: React.MutableRefObject<TubesColors>,
     waveColors: React.MutableRefObject<WavesColors>,
     wavePhysics: WavesPhysics,

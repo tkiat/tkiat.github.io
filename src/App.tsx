@@ -9,21 +9,21 @@ import {Time} from 'my-time-type'
 import {TubesColors} from 'my-tube-type'
 import {WavesColors, WavesConfigs, WavesPhysics} from 'my-wave-config-type'
 
-import updateFavicon from 'src/@global/updateFavicon'
 import {initialThemes, initialTime, isSafariBrowser} from 'src/@global/defaultValues'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
 import injectCustomTheme from 'src/@global/injectCustomTheme'
-import toggleSidebar from 'src/@global/toggleSidebar'
+import updateFavicon from 'src/@global/updateFavicon'
 
+import Contact       from 'src/@global/Contact'
+import SafariWarning from 'src/@global/SafariWarning'
+import Title         from 'src/@global/Title'
 import Background    from 'src/background/Background'
 import Canvas        from 'src/canvas/Canvas'
-import Contact       from 'src/@global/Contact'
-import Title         from 'src/@global/Title'
+import Content       from 'src/content/Content'
 import NavMain       from 'src/nav-main/NavMain'
 import NavSub        from 'src/nav-sub/NavSub'
-import Content       from 'src/content/Content'
 import Sidebar       from 'src/sidebar/Sidebar'
-import SafariWarning from 'src/@global/SafariWarning'
+
 import 'src/@sass/main.scss'
 
 const levels = [0, 1, 2, 3]
@@ -152,23 +152,20 @@ function App(): React.ReactElement {
         </Router>
 
         <Contact navMainIndex={navMainIndex} />
-        <Title navMainIndex={navMainIndex} index={navIndexs[navMainIndex]} items={navItemsAtIndex[navMainIndex]} />
+        <Title index={navIndexs[navMainIndex]} items={navItemsAtIndex[navMainIndex]} navMainIndex={navMainIndex} />
 
         <Background theme={theme.base} />
         <Canvas argumentCanvas={viewportDimensions} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' />
         <Content isInsideWater={navMainIndex === 2} />
         <NavMain currentIndex={navMainIndex} onclick={() => triggerReRender({})} urlAtIndex={urlAtIndex} />
         <NavSub navIndex={navIndexs[navMainIndex]} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[navMainIndex]} items={navItemsAtIndex[navMainIndex]} level={navMainIndex} keyOffsets={[0, navItemsAtIndex[0].length]} />
-
         <Sidebar
           wavePhysics={wavePhysics} setWavePhysics={setWavePhysics}
           theme={theme}             setTheme={setTheme}
           time={time}               setTime={setTime}
           duckColors={duckColors}
           tubeColors={tubeColors}
-          waveColors={waveColors}
-          injectCustomTheme={injectCustomTheme}
-          toggleSidebar={toggleSidebar} />
+          waveColors={waveColors} />
       </main>
     )
   }
