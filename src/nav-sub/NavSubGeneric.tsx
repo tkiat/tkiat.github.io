@@ -1,10 +1,10 @@
 import React  from 'react'
 import {Link} from "@reach/router"
-import {NavbarGenericProps} from "my-nav-type"
+import {NavSubGenericProps} from "my-nav-type"
 
-import {ReactComponent as DuckHamburger} from 'src/duck/svg/duck-hamburger.svg'
+import {ReactComponent as DuckHamburger} from 'src/@global/asset/duck/duck-hamburger.svg'
 
-const NavBarGeneric = ({baseURL, items, level, navIndex, setNavIndexs}: NavbarGenericProps): React.ReactElement => {
+const NavBarGeneric = ({baseURL, items, level, navIndex, setNavIndexs}: NavSubGenericProps): React.ReactElement => {
   const onclick = (i: number) => {
     setNavIndexs(draft => {
       draft[level] = i

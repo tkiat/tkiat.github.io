@@ -2,9 +2,9 @@ import React from 'react'
 import {Link} from '@reach/router'
 import {DuckShape, DuckProps} from 'my-duck-type'
 
-import {ReactComponent as DuckAboutMeSVG} from './svg/duck-aboutme.svg'
-import {ReactComponent as DuckHobbySVG}   from './svg/duck-hobby.svg'
-import {ReactComponent as DuckResumeSVG}  from './svg/duck-resume.svg'
+import {ReactComponent as DuckAboutMeSVG} from 'src/@global/asset/duck/duck-aboutme.svg'
+import {ReactComponent as DuckHobbySVG}   from 'src/@global/asset/duck/duck-hobby.svg'
+import {ReactComponent as DuckResumeSVG}  from 'src/@global/asset/duck/duck-resume.svg'
 
 const DuckSVG = ({className, shape}: {className: string, shape: DuckShape}): React.ReactElement => {
   switch(shape) {

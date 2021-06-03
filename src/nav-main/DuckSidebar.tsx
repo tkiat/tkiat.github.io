@@ -1,7 +1,7 @@
 import React from 'react'
 import {DuckSidebarProps} from 'my-duck-type'
 
-import {ReactComponent as DuckSidebarSVG} from './svg/duck-settings.svg'
+import {ReactComponent as DuckSidebarSVG} from 'src/@global/asset/duck/duck-settings.svg'
 
 const DuckSidebar = ({index, myId, text, onclick}: DuckSidebarProps): React.ReactElement => {
   const xOffset = '20px'

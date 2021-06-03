@@ -1,19 +1,19 @@
 import React  from 'react'
 import {Link} from "@reach/router"
-import {NavbarTubeProps} from "my-nav-type"
+import {NavSubTubeProps} from "my-nav-type"
 
 import {moveWater}                     from './moveWater'
 
 import TubeText                        from './TubeText'
 
-import {ReactComponent as ValveBorder} from './valve/border.svg'
-import {ReactComponent as ValveMask}   from './valve/mask.svg'
+import {ReactComponent as ValveBorder} from 'src/@global/asset/valve/border.svg'
+import {ReactComponent as ValveMask}   from 'src/@global/asset/valve/mask.svg'
 
 const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
   for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
 }
 
-const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: NavbarTubeProps): React.ReactElement => {
+const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: NavSubTubeProps): React.ReactElement => {
 
   const moveWaterToDest = (from: number, to: number, skipAnimation = window.matchMedia("(prefers-reduced-motion: reduce)").matches) => {
     if(from === to) return

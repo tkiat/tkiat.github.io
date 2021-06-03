@@ -1,7 +1,7 @@
 declare module 'my-nav-type' {
   import {Updater} from 'use-immer'
 
-  type NavbarSharedProps = {
+  type NavSubSharedProps = {
     baseURL: string,
     items: string[],
     level: number,
@@ -13,11 +13,17 @@ declare module 'my-nav-type' {
     [level: number]: number
   }
 
-  export type NavbarProps = NavbarSharedProps & {
+  export type NavMainProps = {
+    currentIndex: number,
+    onclick: () => void,
+    urlAtIndex: string[]
+  }
+
+  export type NavSubProps = NavSubSharedProps & {
     keyOffsets: number[],
   }
-  export type NavbarGenericProps = NavbarSharedProps
-  export type NavbarTubeProps = NavbarSharedProps & {
+  export type NavSubGenericProps = NavSubSharedProps
+  export type NavSubTubeProps = NavSubSharedProps & {
     keyOffset: number,
   }
 

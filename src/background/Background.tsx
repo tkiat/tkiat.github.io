@@ -1,10 +1,10 @@
 import React from 'react'
 import {ThemeBase} from 'my-theme-type'
 
-import {ReactComponent as Desert} from './desert.svg'
-import {ReactComponent as Ocean}  from './ocean.svg'
-import {ReactComponent as Sakura} from './sakura.svg'
-import {ReactComponent as Snow}   from './snow.svg'
+import {ReactComponent as Desert} from 'src/@global/asset/background/desert.svg'
+import {ReactComponent as Ocean}  from 'src/@global/asset/background/ocean.svg'
+import {ReactComponent as Sakura} from 'src/@global/asset/background/sakura.svg'
+import {ReactComponent as Snow}   from 'src/@global/asset/background/snow.svg'
 
 const backgrounds = {
   'ocean': <Ocean className='background' />,
