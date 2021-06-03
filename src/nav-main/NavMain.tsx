@@ -1,30 +1,32 @@
 import React from 'react'
 
-import {DuckShape} from 'my-duck-type'
-import {NavMainProps} from 'my-nav-type'
+import {NavMainProps, NavMainItemContentShapes, NavMainItemSidebarShape} from 'my-nav-type'
 
-import toggleSidebar from 'src/@global/toggleSidebar'
-import Duck          from 'src/nav-main/Duck'
-import DuckSidebar   from 'src/nav-main/DuckSidebar'
+import NavMainItemContent from './NavMainItemContent'
+import NavMainItemSidebar from './NavMainItemSidebar'
+
+const shapesContent: NavMainItemContentShapes[] = ['DuckAbout', 'DuckHobby', 'DuckResume']
+const shapeSidebar: NavMainItemSidebarShape = 'DuckSidebar'
+const texts = ['About', 'Hobby', 'Resume', 'Settings']
 
 const NavMain = ({currentIndex, onclick, urlAtIndex}: NavMainProps): React.ReactElement => {
   return (
     <>
-      {['DuckAboutMe', 'DuckHobby', 'DuckResume'].map((duck, index) =>
-      <Duck
+      {shapesContent.map((shape, index) =>
+      <NavMainItemContent
         key={index}
-        index={index}
+
         href={urlAtIndex[index]}
+        index={index}
         isActive={currentIndex === index}
-        shape={duck as DuckShape}
-        text={['About', 'Hobby', 'Resume'][index]}
-        onclick={onclick} />
+        onclick={onclick}
+        shape={shape}
+        text={texts[index]} />
       )}
-      <DuckSidebar
-        myId='duck-sidebar'
+      <NavMainItemSidebar
         index={3}
-        text='Settings'
-        onclick={toggleSidebar} />
+        shape={shapeSidebar}
+        text={texts[3]} />
     </>
   )
 }

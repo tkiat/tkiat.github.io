@@ -18,6 +18,22 @@ declare module 'my-nav-type' {
     onclick: () => void,
     urlAtIndex: string[]
   }
+  export type NavMainItemContentProps = {
+    index: number,
+    onclick: () => void,
+    text: string,
+
+    href: string,
+    isActive: boolean,
+    shape: NavMainItemContentShapes,
+  }
+  export type NavMainItemContentShapes = 'DuckAbout' | 'DuckHobby' | 'DuckResume'
+  export type NavMainItemSidebarProps = {
+    index: number,
+    shape: NavMainItemSidebarShape,
+    text: string,
+  }
+  export type NavMainItemSidebarShape = 'DuckSidebar'
 
   export type NavSubProps = NavSubSharedProps & {
     keyOffsets: number[],
@@ -33,4 +49,5 @@ declare module 'my-nav-type' {
     setCur: Updater<number>,
     storage: string,
   }
+
 }

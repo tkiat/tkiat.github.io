@@ -68,19 +68,6 @@
             opacity: 0.5;
           }
         }
-        /*TODO*/
-        .valve {
-          width: auto;
-          &-border {
-            width: 100%;
-            &__rect {
-              fill: var(--tube-stroke-color);
-            }
-          }
-          &-mask {
-            width: 100%;
-          }
-        }
       }
     }
   }

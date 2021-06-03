@@ -1,12 +1,17 @@
 .valve {
-  display: inline-block;
   position: relative;
+  display: inline-block;
+
   height: 100%;
+  width: auto;
   &-border {
     height: 100%;
-    width: auto;
+    width: 100%;
     &__path {
       stroke: var(--tube-stroke-color);
+    }
+    &__rect {
+      fill: var(--tube-stroke-color);
     }
   }
   &-mask {
@@ -14,8 +19,7 @@
     left: 0;
 
     height: 100%;
-    width: auto;
-
+    width: 100%;
     fill: var(--body-bg-color);
   }
 }
