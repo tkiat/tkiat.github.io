@@ -30,7 +30,7 @@ const DrawCanvas = ({wavesConfig, waveColors}: DrawCanvasProps): DrawCanvasRende
       return wave({index: i, ...config })
     })
 
-    const ducks = document.querySelectorAll('.duck') as NodeListOf<HTMLElement>
+    const ducks = document.querySelectorAll('.nav-main') as NodeListOf<HTMLElement>
     const creatureOffset = 20
     let animationFrameId: number
 

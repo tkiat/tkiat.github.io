@@ -1,7 +1,7 @@
 import React from 'react'
-import {NavbarContentProps} from 'my-nav-type'
+import {NavContentProps} from 'my-nav-type'
 
-const Nav = ({cur, items, setCur, storage}: NavbarContentProps): React.ReactElement => {
+const Nav = ({cur, items, setCur, storage}: NavContentProps): React.ReactElement => {
   const click = (index: number) => {
     localStorage.setItem(storage, index.toString())
     setCur(index)

@@ -1,30 +1,39 @@
 import React from 'react'
 
-import {NavMainProps, NavMainItemContentShapes, NavMainItemSidebarShape} from 'my-nav-type'
+import {Level, NavMainProps, NavMainItemContentProps, NavMainItemSidebarProps} from 'my-nav-type'
 
 import NavMainItemContent from './NavMainItemContent'
 import NavMainItemSidebar from './NavMainItemSidebar'
 
-const shapesContent: NavMainItemContentShapes[] = ['DuckAbout', 'DuckHobby', 'DuckResume']
-const shapeSidebar: NavMainItemSidebarShape = 'DuckSidebar'
+const shapes: {[l in Extract<Level, 0 | 1 | 2>]: NavMainItemContentProps['shape']} = {
+  0: 'DuckAbout',
+  1: 'DuckHobby',
+  2: 'DuckResume',
+}
+const shapeSidebar: NavMainItemSidebarProps['shape'] = 'DuckSidebar'
+
+const contentLevels: Extract<Level, 0 | 1 | 2>[] = [0, 1, 2]
 const texts = ['About', 'Hobby', 'Resume', 'Settings']
 
-const NavMain = ({currentIndex, onclick, urlAtIndex}: NavMainProps): React.ReactElement => {
+const xOffset = '20px'
+const left = (index: number) => `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
+
+const NavMain = ({navMainIndex, onclick, urlAtIndex}: NavMainProps): React.ReactElement => {
   return (
     <>
-      {shapesContent.map((shape, index) =>
+      {contentLevels.map(level =>
       <NavMainItemContent
-        key={index}
+        key={level}
 
-        href={urlAtIndex[index]}
-        index={index}
-        isActive={currentIndex === index}
+        href={urlAtIndex[level]}
+        isActive={navMainIndex === level}
+        left={left(level)}
         onclick={onclick}
-        shape={shape}
-        text={texts[index]} />
+        shape={shapes[level]}
+        text={texts[level]} />
       )}
       <NavMainItemSidebar
-        index={3}
+        left={left(3)}
         shape={shapeSidebar}
         text={texts[3]} />
     </>

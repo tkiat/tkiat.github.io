@@ -3,7 +3,7 @@ import {useImmer} from 'use-immer'
 import {Redirect, Router} from "@reach/router"
 
 import {DuckColors} from 'my-duck-type'
-import {NavIndexsType} from 'my-nav-type'
+import {Level, NavIndexsType} from 'my-nav-type'
 import {ThemeProps} from 'my-theme-type'
 import {Time} from 'my-time-type'
 import {TubesColors} from 'my-tube-type'
@@ -26,32 +26,42 @@ import Sidebar       from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-const levels = [0, 1, 2, 3]
-const navItemsAtIndex: {[level: string]: string[]} = {
+const levels: Level[] = [0, 1, 2, 3]
+const navItemsAtIndex: {[k in Level]: string[]} = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],
   '1': ['/Web', '/PC', '/Environment', '/Others'],
+  '2': [],
+  '3': [],
 }
 const numWaves = 3
-const urlAtIndex = ['/about', '/hobby', '/resume', '/settings']
+const urlAtIndex: {[k in Level]: string} = {
+  '0': '/about',
+  '1': '/hobby',
+  '2': '/resume',
+  '3': '',
+}
 
 const totalPoints = levels.length + 1
 let willShowSafariPrompt = isSafariBrowser
 
 function App(): React.ReactElement {
 
-  const tabIndexDefault: {[level: string]: number}  = {
+  const tabIndexDefault  = {
     '0': parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
     '1': parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
+    '2': null,
+    '3': null,
   }
 
   const navMainIndex = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level])) || levels[0]
+  const navItems = navItemsAtIndex[navMainIndex]
   const shouldMoveWave = navMainIndex === 0 || navMainIndex === 1
 
   const [, triggerReRender] = React.useState({})
 
   const viewportDimensions = useViewportDimensions(500)
 
-  const [navIndexs, setNavIndexs]     = useImmer<NavIndexsType>(tabIndexDefault)
+  const [navSubIndexs, setNavSubIndexs]     = useImmer<NavIndexsType>(tabIndexDefault)
   const [theme, setTheme]             = useImmer<ThemeProps>(initialThemes)
   const [time, setTime]               = useImmer<Time>(initialTime)
   const [wavePhysics, setWavePhysics] = useImmer<WavesPhysics>({
@@ -101,14 +111,13 @@ function App(): React.ReactElement {
     window.addEventListener('popstate', function() {
       triggerReRender({})
 
-      const navMainIndexNoFallback = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level]))
-      const navMainIndex = navMainIndexNoFallback || levels[0]
-      if(navMainIndex === 2) return
-
-      const newNavIndex = navItemsAtIndex[navMainIndex].findIndex(item => window.location.pathname.endsWith(item))
-      setNavIndexs(draft => {
-        draft[navMainIndex] = newNavIndex
-      })
+      const navMainIndex = levels.find(level => window.location.pathname.startsWith(urlAtIndex[level])) || levels[0]
+      if(navMainIndex === 0 || navMainIndex === 1) {
+        const newNavIndex = navItems.findIndex(item => window.location.pathname.endsWith(item))
+        setNavSubIndexs(draft => {
+          draft[navMainIndex] = newNavIndex
+        })
+      }
     })
   },[])
 
@@ -152,13 +161,13 @@ function App(): React.ReactElement {
         </Router>
 
         <Contact navMainIndex={navMainIndex} />
-        <Title index={navIndexs[navMainIndex]} items={navItemsAtIndex[navMainIndex]} navMainIndex={navMainIndex} />
+        <Title index={navSubIndexs[navMainIndex]} items={navItems} navMainIndex={navMainIndex} />
 
         <Background theme={theme.base} />
         <Canvas argumentCanvas={viewportDimensions} argumentDrawCanvas={{wavesConfig, waveColors}} aria-label='Background Wave' />
         <Content isInsideWater={navMainIndex === 2} />
-        <NavMain currentIndex={navMainIndex} onclick={() => triggerReRender({})} urlAtIndex={urlAtIndex} />
-        <NavSub navIndex={navIndexs[navMainIndex]} setNavIndexs={setNavIndexs} baseURL={urlAtIndex[navMainIndex]} items={navItemsAtIndex[navMainIndex]} level={navMainIndex} keyOffsets={[0, navItemsAtIndex[0].length]} />
+        <NavMain navMainIndex={navMainIndex} onclick={() => triggerReRender({})} urlAtIndex={urlAtIndex} />
+        <NavSub navSubIndex={navSubIndexs[navMainIndex]} setNavSubIndexs={setNavSubIndexs} baseURL={urlAtIndex[navMainIndex]} items={navItems} navMainIndex={navMainIndex} keyOffsets={[0, navItemsAtIndex[0].length]} />
         <Sidebar
           wavePhysics={wavePhysics} setWavePhysics={setWavePhysics}
           theme={theme}             setTheme={setTheme}

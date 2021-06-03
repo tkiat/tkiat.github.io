@@ -13,14 +13,14 @@ const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
   for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
 }
 
-const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: NavSubTubeProps): React.ReactElement => {
+const NavBarTube = ({baseURL, items, keyOffset, navMainIndex, navSubIndex, setNavSubIndexs}: NavSubTubeProps): React.ReactElement => {
 
   const moveWaterToDest = (from: number, to: number, skipAnimation = window.matchMedia("(prefers-reduced-motion: reduce)").matches) => {
     if(from === to) return
 
     if(skipAnimation) {
-      setNavIndexs(draft => {
-        draft[level] = to / 2
+      setNavSubIndexs(draft => {
+        draft[navMainIndex] = to / 2
       })
       return
     } else {
@@ -33,8 +33,8 @@ const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: 
 
       window.setTimeout(function() {
         if(navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-        setNavIndexs(draft => {
-          draft[level] = to / 2
+        setNavSubIndexs(draft => {
+          draft[navMainIndex] = to / 2
         })
       }, (delayTotal + transitionSec) * 1000)
     }
@@ -47,10 +47,10 @@ const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: 
 
       <React.Fragment key={i + keyOffset}>
         <li className='nav__item'>
-          <Link className={'nav__link'} to={baseURL + tab} onClick={() => moveWaterToDest(navIndex * 2, i * 2)} draggable='false'>
+          <Link className={'nav__link'} to={baseURL + tab} onClick={() => moveWaterToDest(navSubIndex * 2, i * 2)} draggable='false'>
             <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
             <div className="nav__highlighter-wrapper">
-              <div id={'nav__highlighter-item' + i*2} className={'nav__highlighter-item' + (i === navIndex ? ' nav__highlighter-item--init' : '')}></div>
+              <div id={'nav__highlighter-item' + i*2} className={'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')}></div>
             </div>
           </Link>
         </li>
@@ -59,7 +59,7 @@ const NavBarTube = ({baseURL, items, keyOffset, level, navIndex, setNavIndexs}: 
         <li className='nav__item'>
           <div className='valve'><ValveBorder /><ValveMask /></div>
           <div className="nav__highlighter-wrapper">
-            <div id={'nav__highlighter-item' + (i*2 + 1)} className={'nav__highlighter-item' + (i === navIndex ? ' nav__highlighter-item--init' : '')}></div>
+            <div id={'nav__highlighter-item' + (i*2 + 1)} className={'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')}></div>
           </div>
         </li>
       }

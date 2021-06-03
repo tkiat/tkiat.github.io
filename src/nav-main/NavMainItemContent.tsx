@@ -6,17 +6,15 @@ import {ReactComponent as DuckAboutMeSVG} from 'src/@global/asset/duck/duck-abou
 import {ReactComponent as DuckHobbySVG}   from 'src/@global/asset/duck/duck-hobby.svg'
 import {ReactComponent as DuckResumeSVG}  from 'src/@global/asset/duck/duck-resume.svg'
 
-const NavMainItemContent = ({href, index, isActive, onclick, shape, text}: NavMainItemContentProps): React.ReactElement => {
-  const xOffset = '20px'
-  const left = `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
+const NavMainItemContent = ({href, isActive, left, onclick, shape, text}: NavMainItemContentProps): React.ReactElement => {
   return (
-    <Link className={'duck' + (isActive ? ' duck--active' : '')} to={href} aria-label={text} style={{left: left}} draggable='false' onClick={onclick}>
-      <div className='duck__text'>{text}</div>
+    <Link className={'nav-main' + (isActive ? ' nav-main--active' : '')} to={href} aria-label={text} style={{left: left}} draggable='false' onClick={onclick}>
+      <div className='nav-main__text'>{text}</div>
       {
         {
-          'DuckAbout': <DuckAboutMeSVG className='duck__svg' />,
-          'DuckHobby': <DuckHobbySVG className='duck__svg' />,
-          'DuckResume': <DuckResumeSVG className='duck__svg' />,
+          'DuckAbout': <DuckAboutMeSVG className='nav-main__svg' />,
+          'DuckHobby': <DuckHobbySVG className='nav-main__svg' />,
+          'DuckResume': <DuckResumeSVG className='nav-main__svg' />,
         }[shape]
       }
     </Link>

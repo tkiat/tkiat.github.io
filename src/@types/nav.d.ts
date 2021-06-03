@@ -1,53 +1,58 @@
 declare module 'my-nav-type' {
   import {Updater} from 'use-immer'
 
-  type NavSubSharedProps = {
-    baseURL: string,
-    items: string[],
-    level: number,
-    navIndex: number,
-    setNavIndexs: Updater<NavIndexsType>
-  }
-
   export type NavIndexsType = {
-    [level: number]: number
+    0: number,
+    1: number,
+    2: null,
+    3: null,
   }
 
-  export type NavMainProps = {
-    currentIndex: number,
-    onclick: () => void,
-    urlAtIndex: string[]
-  }
-  export type NavMainItemContentProps = {
-    index: number,
-    onclick: () => void,
-    text: string,
+  export type Level = keyof NavIndexsType
 
-    href: string,
-    isActive: boolean,
-    shape: NavMainItemContentShapes,
-  }
-  export type NavMainItemContentShapes = 'DuckAbout' | 'DuckHobby' | 'DuckResume'
-  export type NavMainItemSidebarProps = {
-    index: number,
-    shape: NavMainItemSidebarShape,
-    text: string,
-  }
-  export type NavMainItemSidebarShape = 'DuckSidebar'
-
-  export type NavSubProps = NavSubSharedProps & {
-    keyOffsets: number[],
-  }
-  export type NavSubGenericProps = NavSubSharedProps
-  export type NavSubTubeProps = NavSubSharedProps & {
-    keyOffset: number,
-  }
-
-  export type NavbarContentProps = {
+  export type NavContentProps = {
     cur: number,
     items: string[],
     setCur: Updater<number>,
     storage: string,
   }
 
+  export type NavMainProps = {
+    navMainIndex: Level,
+    onclick: () => void,
+    urlAtIndex: {[k in Level]: string}
+  }
+  export type NavMainItemContentProps = {
+    href: string,
+    isActive: boolean,
+    left: string,
+    onclick: () => void,
+    shape: 'DuckAbout' | 'DuckHobby' | 'DuckResume',
+    text: string,
+  }
+  export type NavMainItemSidebarProps = {
+    left: string,
+    shape: 'DuckSidebar',
+    text: string,
+  }
+
+  type NavSubSharedProps = {
+    baseURL: string,
+    items: string[],
+    setNavSubIndexs: Updater<NavIndexsType>
+  }
+  export type NavSubProps = NavSubSharedProps & {
+    keyOffsets: number[],
+    navSubIndex: number | null,
+    navMainIndex: Level,
+  }
+  export type NavSubGenericProps = NavSubSharedProps & {
+    navSubIndex: number,
+    navMainIndex: Extract<Level, 0 | 1>,
+  }
+  export type NavSubTubeProps = NavSubSharedProps & {
+    keyOffset: number,
+    navSubIndex: number,
+    navMainIndex: Extract<Level, 0 | 1>,
+  }
 }

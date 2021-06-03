@@ -1,5 +1,4 @@
-/*TODO changes to duck main menu*/
-.duck {
+.nav-main {
   $root: &;
 
   position: absolute;
@@ -16,9 +15,6 @@
   border: none;
   color: var(--body-text-color);
   will-change: transform;
-  &:after {
-    content: none;
-  }
   &--active {
     #{$root}__svg {
       filter: none;
@@ -34,6 +30,14 @@
     cursor: pointer;
     background: none;
   }
+  &:active {
+    #{$root}__svg {
+      filter: drop-shadow(0px 0px 12px var(--duck-body-color));
+    }
+  }
+  &:after {
+    content: none;
+  }
   &:hover {
     #{$root}__svg {
       filter: drop-shadow(0px 0px 2px var(--duck-body-color));
@@ -45,24 +49,19 @@
       width: 0;
     }
   }
-  &:active {
-    #{$root}__svg {
-      filter: drop-shadow(0px 0px 12px var(--duck-body-color));
-    }
-  }
   &__svg {
     width: var(--duck-width);
     height: 80%;
     filter: brightness(6%) drop-shadow(0px 0px 4px black);
-    #{$root}__beak {
-      fill: var(--duck-beak-color);
-    }
-    #{$root}__body {
-      fill: var(--duck-body-color);
-    }
-    #{$root}__wing {
-      fill: var(--duck-wing-color);
-    }
+      .duck__beak {
+        fill: var(--duck-beak-color);
+      }
+      .duck__body {
+        fill: var(--duck-body-color);
+      }
+      .duck__wing {
+        fill: var(--duck-wing-color);
+      }
   }
   &__text {
     position: relative;
@@ -83,3 +82,4 @@
     }
   }
 }
+

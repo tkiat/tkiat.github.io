@@ -12,7 +12,8 @@
   color: var(--tube-water-color);
   text-shadow: -1px 0 var(--tube-stroke-color), 0 1px var(--tube-stroke-color), 1px 0 var(--tube-stroke-color), 0 -1px var(--tube-stroke-color);
   &--content {
-    height: calc(100% - 20px);
-    width: calc(100% - 20px);
+    position: unset;
+    height: unset;
+    width: unset;
   }
 }
