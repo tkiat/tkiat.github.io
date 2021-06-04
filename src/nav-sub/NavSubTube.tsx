@@ -1,16 +1,47 @@
 import React from 'react'
 import { Link } from '@reach/router'
+
 import { NavSubTubeProps } from 'my-nav-type'
+import { Even } from 'my-math-type'
 
 import { moveWater } from './moveWater'
-
 import TubeText from './TubeText'
-
 import { ReactComponent as ValveBorder } from 'src/@global/asset/valve/border.svg'
 import { ReactComponent as ValveMask } from 'src/@global/asset/valve/mask.svg'
 
+const isEven = (num: number): num is Even => num % 2 == 0
+const checkEven = ({ from, to }: { from: number; to: number }): { from: Even | -1; to: Even | -1 } => {
+  return {
+    from: isEven(from) ? from : -1,
+    to: isEven(to) ? to : -1,
+  }
+}
 const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
   for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
+}
+const moveWaterToDest = (plan: { from: Even | -1; to: Even | -1 }, callback: (to: Even) => void) => {
+  const from = plan.from
+  const to = plan.to
+  if (from === to || from === -1 || to === -1) return
+
+  const skipAnimation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (skipAnimation) {
+    callback(to)
+    return
+  } else {
+    const navTube = document.getElementById('nav-tube')
+    const navLinkItems = navTube && navTube.getElementsByClassName('nav__link')
+    if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
+
+    const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
+
+    const delayTotal = moveWater(from, to, transitionSec)
+
+    window.setTimeout(function () {
+      if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
+      callback(to)
+    }, (delayTotal + transitionSec) * 1000)
+  }
 }
 
 const NavBarTube = ({
@@ -21,35 +52,10 @@ const NavBarTube = ({
   navSubIndex,
   setNavSubIndexs,
 }: NavSubTubeProps): React.ReactElement => {
-  const moveWaterToDest = (
-    from: number,
-    to: number,
-    skipAnimation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  ) => {
-    if (from === to) return
-
-    if (skipAnimation) {
-      setNavSubIndexs((draft) => {
-        draft[navMainIndex] = to / 2
-      })
-      return
-    } else {
-      const navTube = document.getElementById('nav-tube')
-      const navLinkItems = navTube && navTube.getElementsByClassName('nav__link')
-      if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-
-      const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
-      const delayTotal = moveWater(from, to, transitionSec)
-
-      window.setTimeout(function () {
-        if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-        setNavSubIndexs((draft) => {
-          draft[navMainIndex] = to / 2
-        })
-      }, (delayTotal + transitionSec) * 1000)
-    }
-  }
-
+  const callback = (to: Even) =>
+    setNavSubIndexs((draft) => {
+      draft[navMainIndex] = to / 2
+    })
   return (
     <nav className="nav nav--tube" id="nav-tube">
       <ul className="nav__list">
@@ -59,7 +65,7 @@ const NavBarTube = ({
               <Link
                 className={'nav__link'}
                 to={baseURL + tab}
-                onClick={() => moveWaterToDest(navSubIndex * 2, i * 2)}
+                onClick={() => moveWaterToDest(checkEven({ from: navSubIndex * 2, to: i * 2 }), callback)}
                 draggable="false">
                 <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
                 <div className="nav__highlighter-wrapper">

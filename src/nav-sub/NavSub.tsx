@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavSubProps } from 'my-nav-type'
 
-import NavSubTube from './NavSubTube'
 import NavSubGeneric from './NavSubGeneric'
+import NavSubTube from './NavSubTube'
 
 const NavSub = ({
   baseURL,

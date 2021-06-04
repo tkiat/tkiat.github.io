@@ -1,12 +1,13 @@
 import { flowDirection, flowMode } from 'my-nav-type'
+import { Even } from 'my-math-type'
 
-export const moveWater = (from: number, to: number, transitionSec: number): number => {
-  if (from === to) return 0
+export const moveWater = (from: Even, to: Even, transitionSec: number): number => {
+  if (from === to || from < 0 || to < 0) return 0
 
   const willMoveRight = to > from
   const flowDir = willMoveRight ? 'right' : 'left'
   let delayCur = 0
-  let cur = from
+  let cur: Even = from
   // step 1: drain
   delayCur += moveWaterToNextNode(cur, 'drain', flowDir, transitionSec, delayCur)
   cur += willMoveRight ? 2 : -2

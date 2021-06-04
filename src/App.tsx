@@ -27,6 +27,7 @@ import Sidebar from 'src/sidebar/Sidebar'
 import 'src/@sass/main.scss'
 
 // TODO change totalPoints to wabepoiint
+// TODO change class nav to nav-sub
 
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
