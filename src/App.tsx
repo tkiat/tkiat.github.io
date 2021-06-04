@@ -2,11 +2,8 @@ import React from 'react'
 import { useImmer } from 'use-immer'
 import { Redirect, Router } from '@reach/router'
 
-import { DuckColors } from 'my-duck-type'
 import { Level, NavIndexsType } from 'my-nav-type'
-import { ThemeProps } from 'my-theme-type'
-import { Time } from 'my-time-type'
-import { TubesColors } from 'my-tube-type'
+import { DuckColors, ThemeProps, Time, TubesColors } from 'my-theme-type'
 import { WavesColors, WavesConfigs, WavesPhysics } from 'my-wave-config-type'
 
 import { initialThemes, initialTime, isSafariBrowser } from 'src/@global/defaultValues'
@@ -28,6 +25,7 @@ import 'src/@sass/main.scss'
 
 // TODO change totalPoints to wabepoiint
 // TODO change class nav to nav-sub
+// TODO change wave-config.d.ts to theme
 
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {

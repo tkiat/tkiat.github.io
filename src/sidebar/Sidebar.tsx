@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react'
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful'
 
 import { SidebarProps } from 'my-settings-type'
-import { Time } from 'my-time-type'
-import { TubesColors } from 'my-tube-type'
-import { DuckColors } from 'my-duck-type'
+import { DuckColors, Time, TubesColors } from 'my-theme-type'
 import { WavesPhysics } from 'my-wave-config-type'
 
 import injectCustomTheme from 'src/@global/injectCustomTheme'

@@ -6,4 +6,16 @@ declare module 'my-theme-type' {
     supplement: ThemeSupplement
     'custom-base': ThemeBase
   }
+
+  export type Time = 'day' | 'dark'
+
+  export type DuckColors = {
+    beak: string
+    body: string
+    wing: string
+  }
+  export type TubesColors = {
+    stroke: string
+    water: string
+  }
 }

@@ -1,5 +1,4 @@
-import { ThemeBase, ThemeSupplement } from 'my-theme-type'
-import { Time } from 'my-time-type'
+import { ThemeBase, ThemeSupplement, Time } from 'my-theme-type'
 
 const initialThemes = (() => {
   const isBaseTheme = (theme: string | null): theme is ThemeBase => {
