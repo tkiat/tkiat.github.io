@@ -1,10 +1,12 @@
-import { moveWater } from 'src/nav-sub/moveWater'
-
 import { Even } from 'my-math-type'
+
+import { moveWater } from 'src/nav-sub/moveWater'
 
 const stripHTMLWhitespaces = (str: string) => str.replace(/>\s+</g, '><')
 
 const item = 'nav__highlighter-item'
+const transitionSec = 156600 // lcm(100, 116, 216)
+
 const initDocument = stripHTMLWhitespaces(`
   <div>
     <div id="${item}0" class="${item}"></div>
@@ -16,7 +18,6 @@ const initDocument = stripHTMLWhitespaces(`
     <div id="${item}6" class="${item}"></div>
   </div>
 `)
-const transitionSec = 156600 // lcm(100, 116, 216)
 
 test('with invalid inputs, do nothing and return zero', () => {
   expect(moveWater(2 as Even, 2 as Even, 0)).toBe(0)

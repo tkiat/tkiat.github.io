@@ -29,7 +29,7 @@ const DrawCanvas = ({ wavesConfig, waveColors }: DrawCanvasProps): DrawCanvasRen
       return wave({ index: i, ...config })
     })
 
-    const navMainItems = document.querySelectorAll('.nav-main') as NodeListOf<HTMLElement>
+    const navMainItems = document.body.querySelectorAll('.nav-main') as NodeListOf<HTMLElement>
     const creatureOffset = 20
     let animationFrameId: number
 
