@@ -2,8 +2,6 @@ import { moveWater } from 'src/nav-sub/moveWater'
 
 import { Even } from 'my-math-type'
 
-const expectElemToHaveClasses = (id: string, classes: string) =>
-  expect(document.getElementById(id)).toHaveClass(classes, { exact: true })
 const stripHTMLWhitespaces = (str: string) => str.replace(/>\s+</g, '><')
 
 const item = 'nav__highlighter-item'
@@ -33,13 +31,13 @@ test('water drains to the right, then pass two nodes, then stop at the final nod
 
   const finalDelay = moveWater(0 as Even, 6 as Even, transitionSec)
 
-  expectElemToHaveClasses(item + '0', item + ' drain-to-right-text')
-  expectElemToHaveClasses(item + '1', item + ' drain-to-right-valve')
-  expectElemToHaveClasses(item + '2', item + ' pass-to-right-text')
-  expectElemToHaveClasses(item + '3', item + ' pass-to-right-valve')
-  expectElemToHaveClasses(item + '4', item + ' pass-to-right-text')
-  expectElemToHaveClasses(item + '5', item + ' pass-to-right-valve')
-  expectElemToHaveClasses(item + '6', item + ' stuck-to-right-text')
+  expect(document.getElementById(item + '0')).toHaveClass(item + ' drain-to-right-text', { exact: true })
+  expect(document.getElementById(item + '1')).toHaveClass(item + ' drain-to-right-valve', { exact: true })
+  expect(document.getElementById(item + '2')).toHaveClass(item + ' pass-to-right-text', { exact: true })
+  expect(document.getElementById(item + '3')).toHaveClass(item + ' pass-to-right-valve', { exact: true })
+  expect(document.getElementById(item + '4')).toHaveClass(item + ' pass-to-right-text', { exact: true })
+  expect(document.getElementById(item + '5')).toHaveClass(item + ' pass-to-right-valve', { exact: true })
+  expect(document.getElementById(item + '6')).toHaveClass(item + ' stuck-to-right-text', { exact: true })
   expect(finalDelay).toBe(delayDrain + delayPass * 2)
 })
 
@@ -50,12 +48,12 @@ test('water drains to the left, then pass two nodes, then stop at the final node
 
   const finalDelay = moveWater(6 as Even, 0 as Even, transitionSec)
 
-  expectElemToHaveClasses(item + '6', item + ' drain-to-left-text')
-  expectElemToHaveClasses(item + '5', item + ' pass-to-left-valve')
-  expectElemToHaveClasses(item + '4', item + ' pass-to-left-text')
-  expectElemToHaveClasses(item + '3', item + ' pass-to-left-valve')
-  expectElemToHaveClasses(item + '2', item + ' pass-to-left-text')
-  expectElemToHaveClasses(item + '1', item + ' stuck-to-left-valve')
-  expectElemToHaveClasses(item + '0', item + ' stuck-to-left-text')
+  expect(document.getElementById(item + '6')).toHaveClass(item + ' drain-to-left-text', { exact: true })
+  expect(document.getElementById(item + '5')).toHaveClass(item + ' pass-to-left-valve', { exact: true })
+  expect(document.getElementById(item + '4')).toHaveClass(item + ' pass-to-left-text', { exact: true })
+  expect(document.getElementById(item + '3')).toHaveClass(item + ' pass-to-left-valve', { exact: true })
+  expect(document.getElementById(item + '2')).toHaveClass(item + ' pass-to-left-text', { exact: true })
+  expect(document.getElementById(item + '1')).toHaveClass(item + ' stuck-to-left-valve', { exact: true })
+  expect(document.getElementById(item + '0')).toHaveClass(item + ' stuck-to-left-text', { exact: true })
   expect(finalDelay).toBe(delayDrain + delayPass * 2)
 })

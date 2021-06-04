@@ -1,13 +1,13 @@
 import { WaveReturn } from 'my-wave-type'
 
-export const moveItemsAlongWave = (ducks: NodeListOf<HTMLElement>, wave: WaveReturn, offset: number) => {
-  if (ducks.length >= wave.points.length) return
-  for (let i = 0; i < ducks.length; i++) {
+export const moveItemsAlongWave = (items: NodeListOf<HTMLElement>, wave: WaveReturn, offset: number) => {
+  if (items.length >= wave.points.length) return
+  for (let i = 0; i < items.length; i++) {
     const midpoint = (wave.points[i].getY() + wave.points[i + 1].getY()) / 2
-    const offsetY = midpoint - ducks[i].clientHeight + offset + 'px'
+    const offsetY = midpoint - items[i].clientHeight + offset + 'px'
     const offsetDeg =
       (Math.atan2(wave.points[i + 1].getY() - wave.points[i].getY(), wave.points[i + 1].x - wave.points[i].x) * 180) /
       Math.PI
-    ducks[i].style.transform = `translateY(${offsetY}) rotate(${offsetDeg}deg)`
+    items[i].style.transform = `translateY(${offsetY}) rotate(${offsetDeg}deg)`
   }
 }

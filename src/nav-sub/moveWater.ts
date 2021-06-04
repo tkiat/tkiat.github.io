@@ -1,5 +1,5 @@
-import { flowDirection, flowMode } from 'my-nav-type'
 import { Even } from 'my-math-type'
+import { flowDirection, flowMode } from 'my-nav-type'
 
 export const moveWater = (from: Even, to: Even, transitionSec: number): number => {
   if (from === to || from < 0 || to < 0) return 0
