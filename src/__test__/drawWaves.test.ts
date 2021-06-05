@@ -26,7 +26,8 @@ describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color
 
   test('test y positions after oscillation', () => {
     for (let i = 0; i < waveMock.points.length; i++) {
-      const expectedVal = waveProps.from.y + Math.sin(i + waveProps.index + waveProps.speed) * waveProps.height
+      const expectedVal =
+        waveProps.from.y + Math.sin(i + waveProps.index + waveProps.speed) * waveProps.height + waveProps.shakiness
       expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
     }
   })
