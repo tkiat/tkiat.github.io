@@ -26,6 +26,7 @@ import 'src/@sass/main.scss'
 // TODO change totalPoints to wabepoiint
 // TODO change class nav to nav-sub
 // TODO change wave-config.d.ts to theme
+// TODO change pointreturn and others to point
 
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
