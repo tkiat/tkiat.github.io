@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1622863598852" clover="3.2.0">
-  <project timestamp="1622863598852" name="All files">
+<coverage generated="1622876661098" clover="3.2.0">
+  <project timestamp="1622876661098" name="All files">
     <metrics statements="111" coveredstatements="110" conditionals="39" coveredconditionals="38" methods="19" coveredmethods="19" elements="169" coveredelements="167" complexity="0" loc="111" ncloc="111" packages="2" files="5" classes="5"/>
     <package name="canvas.wave">
       <metrics statements="56" coveredstatements="56" conditionals="2" coveredconditionals="2" methods="10" coveredmethods="10"/>
@@ -43,34 +43,34 @@
       </file>
       <file name="point.ts" path="/home/tkiat/Sync/Local/Git/tkiat.github.io/src/canvas/wave/point.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="13" type="stmt"/>
-        <line num="5" count="13" type="stmt"/>
-        <line num="7" count="13" type="stmt"/>
-        <line num="9" count="8" type="stmt"/>
-        <line num="10" count="8" type="stmt"/>
-        <line num="14" count="60" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="24" type="stmt"/>
+        <line num="5" count="24" type="stmt"/>
+        <line num="7" count="24" type="stmt"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="10" count="9" type="stmt"/>
+        <line num="14" count="62" type="stmt"/>
+        <line num="19" count="4" type="stmt"/>
       </file>
       <file name="wave.ts" path="/home/tkiat/Sync/Local/Git/tkiat.github.io/src/canvas/wave/wave.ts">
         <metrics statements="17" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="11" count="13" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="19" count="13" type="stmt"/>
-        <line num="30" count="3" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="11" count="18" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="19" count="18" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
       </file>
     </package>
     <package name="nav-sub">
