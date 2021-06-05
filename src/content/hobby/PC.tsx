@@ -60,7 +60,7 @@ const utility = [
   },
 ]
 
-const contributions = `
+const contribution = `
 ### Accepted Pull Requests
 Will add more.
 - [2021-03-06](https://notabug.org/libreboot/libreboot/pulls/759) - **Libreboot** - **Add Document**: btrfs swapfile must be NOCOW and no compression
@@ -74,10 +74,10 @@ const PC = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Work', 'Utility', 'Contributions']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav items={['Work', 'Utility', 'Contribution']} storage={storage} cur={cur} setCur={setCur} />
       <CardsProject isActive={cur === 0} items={work} />
       <CardsProject isActive={cur === 1} items={utility} />
-      <MarkdownContent isActive={cur === 2} content={contributions} />
+      <MarkdownContent isActive={cur === 2} content={contribution} />
     </>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { useImmer } from 'use-immer'
 
 import CardsProject from 'src/content/utils/CardsProject'
+import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Nav from 'src/content/utils/Nav'
 
 const personal = [
@@ -57,8 +58,7 @@ const personal = [
 const experiment = [
   {
     title: 'Simple RegEx Program Emulator',
-    description:
-      'The trick is to calculate the RegEx match, and use this match to define the "highlight" layer on top of the input textbox',
+    description: 'The trick is to overlay the textbox with the "highlight" layer',
     keyword: 'HTML/SCSS/JS',
     src: 'https://codepen.io/tkiatd/pen/bGBWvza',
     'image-src': 'https://via.placeholder.com/320x180',
@@ -74,16 +74,24 @@ const experiment = [
   },
 ]
 
+const contribution = `
+### Accepted Pull Requests
+Will add more.
+- [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Typo** - Change 'Markdown' to 'markdown' otherwise it won't work.
+
+`
+
 const storage = 'tab-index-hobby-web'
 
 const Web = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Work', 'Experiment']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav items={['Work', 'Experiment', 'Contribution']} storage={storage} cur={cur} setCur={setCur} />
 
       <CardsProject isActive={cur === 0} items={personal} />
       <CardsProject isActive={cur === 1} items={experiment} />
+      <MarkdownContent isActive={cur === 2} content={contribution} />
     </>
   )
 }
