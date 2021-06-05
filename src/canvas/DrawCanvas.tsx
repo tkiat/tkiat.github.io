@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 
 import { DrawCanvasProps, DrawCanvasRender } from 'my-canvas-type'
 
-import { moveItemsAlongWave } from './moveItemsAlongWave'
 import { drawWaves } from './wave/drawWaves'
+import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 

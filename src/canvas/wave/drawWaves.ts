@@ -29,6 +29,8 @@ const drawWave = (ctx: CanvasRenderingContext2D, wave: WaveReturn, fillColor: st
   ctx.lineTo(prevX, prevY)
   ctx.lineTo(ctx.canvas.width, ctx.canvas.height)
   ctx.lineTo(wave.points[0].x, ctx.canvas.height)
+  ctx.lineTo(wave.points[0].x, wave.points[0].getY())
+
   ctx.fill()
   ctx.closePath()
 }

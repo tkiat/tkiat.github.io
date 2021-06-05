@@ -1,6 +1,7 @@
 import { WaveArguments } from 'my-wave-type'
 
-import { moveItemsAlongWave } from 'src/canvas/moveItemsAlongWave'
+import { moveItemsAlongWave } from 'src/canvas/wave/moveItemsAlongWave'
+
 import wave from 'src/canvas/wave/wave'
 
 const stripHTMLWhitespaces = (str: string) => str.replace(/>\s+</g, '><')
@@ -20,7 +21,7 @@ const waveProps: WaveArguments = {
 }
 const waveMock = wave(waveProps)
 
-describe('Test items length', function () {
+describe('test items length', function () {
   test('must get ERROR when items length >= number of points on the wave', function () {
     document.body.innerHTML = getDocWithItems(5)
     const items = document.body.querySelectorAll('.item') as NodeListOf<HTMLElement>
