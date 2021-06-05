@@ -21,14 +21,14 @@ const waveProps: WaveArguments = {
 }
 const waveMock = wave(waveProps)
 
-describe('test items length', function () {
-  test('must get ERROR when items length >= number of points on the wave', function () {
+describe('test items length', () => {
+  test('must get ERROR when items length >= number of points on the wave', () => {
     document.body.innerHTML = getDocWithItems(5)
     const items = document.body.querySelectorAll('.item') as NodeListOf<HTMLElement>
     expect(moveItemsAlongWave(items, waveMock, 0)).toBe(1)
   })
 
-  test('must get SUCCESS when items length < number of points on the wave', function () {
+  test('must get SUCCESS when items length < number of points on the wave', () => {
     document.body.innerHTML = getDocWithItems(4)
     const items = document.body.querySelectorAll('.item') as NodeListOf<HTMLElement>
     expect(moveItemsAlongWave(items, waveMock, 0)).toBe(0)

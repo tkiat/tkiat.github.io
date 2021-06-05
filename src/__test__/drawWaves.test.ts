@@ -1,44 +1,57 @@
-import { WaveArguments } from 'my-wave-type'
+import { WaveArguments, WaveReturn } from 'my-wave-type'
 
 import { drawWaves } from 'src/canvas/wave/drawWaves'
-
 import wave from 'src/canvas/wave/wave'
-
-const waveProps = {
-  from: { x: 0, y: 600 },
-  to: { x: 1280, y: 600 },
-
-  shakiness: 0,
-}
 
 const canvas = document.createElement('canvas')
 canvas.height = 800
 canvas.width = 1280
 const context = canvas.getContext('2d')
 
-test('test oscillated wave: index = 0 , totalPoints = 5, height = 10, speed = 1, red color', () => {
-  const props = { ...waveProps, index: 0, totalPoints: 5, height: 10, speed: 1 }
-  const waveMock = wave(props)
-  if (context) drawWaves(context, [waveMock], ['red'])
+const wavePropsBase = {
+  from: { x: 0, y: 600 },
+  to: { x: 1280, y: 600 },
+  shakiness: 0,
+}
+let waveProps: WaveArguments
+let waveMock: WaveReturn
 
-  for (let i = 0; i < waveMock.points.length; i++) {
-    const expectedVal = props.from.y + Math.sin(i + props.index + props.speed) * props.height
-    expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
-  }
-  const lowerRightCanvasRGBA = context?.getImageData(context.canvas.width - 1, context.canvas.height - 1, 1, 1).data
-  expect(Array.prototype.slice.call(lowerRightCanvasRGBA)).toStrictEqual([255, 0, 0, 255])
+describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color', () => {
+  beforeAll(() => {
+    waveProps = { ...wavePropsBase, index: 0, totalPoints: 5, height: 10, speed: 1 }
+    waveMock = wave(waveProps)
+
+    if (context) drawWaves(context, [waveMock], ['red'])
+  })
+
+  test('test y positions after oscillation', () => {
+    for (let i = 0; i < waveMock.points.length; i++) {
+      const expectedVal = waveProps.from.y + Math.sin(i + waveProps.index + waveProps.speed) * waveProps.height
+      expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
+    }
+  })
+  test('canvas fill color at lower-right corner should be red', () => {
+    const lowerRightCanvasRGBA = context?.getImageData(context.canvas.width - 1, context.canvas.height - 1, 1, 1).data
+    expect(Array.prototype.slice.call(lowerRightCanvasRGBA)).toStrictEqual([255, 0, 0, 255])
+  })
 })
 
-test('test oscillated wave: index = 1 , totalPoints = 3, height = 30, speed = 2, black color', () => {
-  const props = { ...waveProps, index: 1, totalPoints: 3, height: 30, speed: 2 }
-  const waveMock = wave(props)
+describe('test 2: index = 1 , totalPoints = 3, height = 30, speed = 2, black color', () => {
+  beforeAll(() => {
+    waveProps = { ...wavePropsBase, index: 1, totalPoints: 3, height: 30, speed: 2 }
+    waveMock = wave(waveProps)
 
-  if (context) drawWaves(context, [waveMock], ['black'])
+    if (context) drawWaves(context, [waveMock], ['black'])
+  })
 
-  for (let i = 0; i < waveMock.points.length; i++) {
-    const expectedVal = props.from.y + Math.sin(i + props.index + props.speed) * props.height
-    expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
-  }
-  const lowerRightCanvasRGBA = context?.getImageData(context.canvas.width - 1, context.canvas.height - 1, 1, 1).data
-  expect(Array.prototype.slice.call(lowerRightCanvasRGBA)).toStrictEqual([0, 0, 0, 255])
+  test('test y positions after oscillation', () => {
+    for (let i = 0; i < waveMock.points.length; i++) {
+      const expectedVal = waveProps.from.y + Math.sin(i + waveProps.index + waveProps.speed) * waveProps.height
+      expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
+    }
+  })
+  test('canvas fill color at lower-right corner should be black', () => {
+    const lowerRightCanvasRGBA = context?.getImageData(context.canvas.width - 1, context.canvas.height - 1, 1, 1).data
+    expect(Array.prototype.slice.call(lowerRightCanvasRGBA)).toStrictEqual([0, 0, 0, 255])
+  })
 })
