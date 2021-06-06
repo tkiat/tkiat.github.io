@@ -3,7 +3,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
@@ -19,6 +19,7 @@
     "typeRoots": ["./node_modules/@types", "./src/@types"]
   },
   "include": ["src/**/*", "./jest-setup.ts"],
+  "exclude": ["node_modules"],
   "paths": {
     "src/*": ["./src/*"]
   }

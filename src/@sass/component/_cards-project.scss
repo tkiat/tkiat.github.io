@@ -16,7 +16,7 @@
     margin: 6px 0;
     border: 2px solid hsl(var(--hue), 30%, 50%);
 
-    box-shadow: -10px 0px hsl(var(--hue), 100%, 50%);
+    box-shadow: -4px 2px hsl(var(--hue), 80%, 50%);
     transition: box-shadow 0.4s;
     &:before {
       content: '';

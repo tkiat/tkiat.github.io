@@ -7,8 +7,8 @@ const CardsProject = ({ isActive, items }: CardsProjectProps): React.ReactElemen
     <div className={'cards-project' + (isActive ? ' cards-project--active' : '')}>
       {items.map((item, i) => {
         return (
-          <div>
-            <div className={'cards-project__item' + (item.inactive ? ' cards-project__item--inactive' : '')} key={i}>
+          <div key={i}>
+            <div className={'cards-project__item' + (item.inactive ? ' cards-project__item--inactive' : '')}>
               <span className="cards-project__type">{item.type}</span>
               {item.inactive && <span className="cards-project__type cards-project__type--inactive">Inactive</span>}
               {item.src && (
@@ -31,8 +31,12 @@ const CardsProject = ({ isActive, items }: CardsProjectProps): React.ReactElemen
                 {item.description && <span> - {item.description}</span>}
               </span>
             </div>
-            {item.keyword.map((k) => {
-              return <div className="cards-project__item cards-project__item--keyword">{k}</div>
+            {item.keyword.map((k, i) => {
+              return (
+                <div key={i} className="cards-project__item cards-project__item--keyword">
+                  {k}
+                </div>
+              )
             })}
           </div>
         )

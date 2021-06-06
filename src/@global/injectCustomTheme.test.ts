@@ -1,6 +1,6 @@
 import injectCustomTheme from 'src/@global/injectCustomTheme'
 
-test('custom theme should contain all custom fields', () => {
+test('custom theme should contain all expected custom fields', () => {
   const style = document.createElement('style')
   document.head.appendChild(style)
   injectCustomTheme(style)

@@ -7,8 +7,7 @@
     "build no check": "vite build",
     "check": "tsc",
     "serve": "vite preview",
-    "test": "jest --env=jsdom",
-    "test-record": "jest --testNamePattern",
+    "test": "jest",
     "test-extended": "npm run jest -- --coverage"
   },
   "dependencies": {
@@ -16,13 +15,14 @@
     "dompurify": "^2.2.8",
     "immer": "^9.0.2",
     "marked": "^2.0.6",
-    "react": "^17.0.0",
+    "react": "^17.0.2",
     "react-colorful": "^5.2.0",
-    "react-dom": "^17.0.0",
+    "react-dom": "^17.0.2",
     "use-immer": "^0.5.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/react": "^11.2.7",
     "@types/dompurify": "^2.2.2",
     "@types/jest": "^26.0.23",
     "@types/marked": "^2.0.3",

@@ -76,8 +76,7 @@ const experiment = [
 
 const pullRequest = `
 Will add more.
-- [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Typo** - Change 'Markdown' to 'markdown' otherwise it won't work.
-
+- [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Bug** - Change 'Markdown' to 'markdown' otherwise it won't work.
 `
 
 const storage = 'tab-index-hobby-web'

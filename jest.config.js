@@ -8,4 +8,5 @@ module.exports = {
     '^src/(.*)': '<rootDir>/src/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
+  testEnvironment: 'jsdom',
 }
