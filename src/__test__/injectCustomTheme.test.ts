@@ -7,10 +7,11 @@ test('custom theme should contain all custom fields', () => {
 
   expect(style.sheet).toBeTruthy()
   if (!style.sheet) return
+
   expect(style.sheet.cssRules[0]).toBeInstanceOf(CSSStyleRule)
   if (!(style.sheet.cssRules[0] instanceof CSSStyleRule)) return
-  expect(style.sheet.cssRules[0].selectorText).toBe("[theme-supplement='custom']")
 
+  expect(style.sheet.cssRules[0].selectorText).toBe("[theme-supplement='custom']")
   const expectedProperty = [
     '--duck-beak-color',
     '--duck-body-color',
