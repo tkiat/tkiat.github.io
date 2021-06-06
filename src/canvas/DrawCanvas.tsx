@@ -7,7 +7,7 @@ import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 
-const DrawCanvas = ({ wavesConfig, waveColors }: DrawCanvasProps): DrawCanvasRender => {
+const DrawCanvas = ({ wavesConfig, waveColors, wavePhysics }: DrawCanvasProps): DrawCanvasRender => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -17,16 +17,18 @@ const DrawCanvas = ({ wavesConfig, waveColors }: DrawCanvasProps): DrawCanvasRen
     const context = canvas.getContext('2d')
     if (!context) return
 
-    const config = {
-      from: wavesConfig.from,
-      to: wavesConfig.to,
-      totalPoints: wavesConfig.totalPoints,
-      height: wavesConfig.height,
-      speed: wavesConfig.speed,
-      shakiness: wavesConfig.shakiness,
-    }
     const waves = [...Array(wavesConfig.num).keys()].map((i) => {
-      return wave({ index: i, ...config })
+      return wave({
+        index: i,
+
+        from: wavesConfig.from,
+        to: wavesConfig.to,
+        totalPoints: wavesConfig.totalPoints,
+
+        height: wavePhysics.height,
+        speed: wavePhysics.speed,
+        shakiness: wavePhysics.shakiness,
+      })
     })
 
     const navMainItems = document.body.querySelectorAll('.nav-main') as NodeListOf<HTMLElement>
@@ -44,7 +46,7 @@ const DrawCanvas = ({ wavesConfig, waveColors }: DrawCanvasProps): DrawCanvasRen
       window.cancelAnimationFrame(animationFrameId)
     }
     // eslint-disable-next-line
-  }, [wavesConfig])
+  }, [wavesConfig, wavePhysics])
 
   return canvasRef
 }

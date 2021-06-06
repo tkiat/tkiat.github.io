@@ -8,9 +8,8 @@ import Nav from 'src/content/utils/Nav'
 const work = [
   {
     title: 'Terminal Game Client',
-    description:
-      'A simple TUI game client with hh:mm:ss playtime record that supports any supplemental commands such as wine64.',
-    keyword: 'Python3, ncurses',
+    description: 'A simple TUI game client that supports any supplemental commands such as wine64.',
+    keyword: ['Python3', 'ncurses'],
 
     src: 'https://github.com/tkiat/terminal-game-client',
     live: '',
@@ -19,9 +18,8 @@ const work = [
   },
   {
     title: 'Lazyman Pomodoro',
-    description:
-      "I built this because I couldn't find a simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.",
-    keyword: 'Python3, ncurses',
+    description: 'A simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.',
+    keyword: ['Python3', 'ncurses'],
 
     src: 'https://github.com/tkiat/lazyman-pomodoro',
     'image-src': 'https://via.placeholder.com/320x180',
@@ -33,7 +31,7 @@ const utility = [
   {
     title: 'My Dotfiles and Configs',
     description: '',
-    keyword: '',
+    keyword: [],
 
     src: 'https://github.com/tkiat/dotfiles-and-configs',
     live: '',
@@ -42,7 +40,7 @@ const utility = [
   {
     title: 'tkiat Guix Channel',
     description: 'I fork suckless repositories and create a Guix channel for them',
-    keyword: 'Guile',
+    keyword: ['Guile'],
 
     src: 'https://gitlab.com/tkiat/guix-channel',
     live: '',
@@ -51,7 +49,7 @@ const utility = [
   {
     title: 'TODO',
     description: 'TODO',
-    keyword: 'Python3',
+    keyword: ['Python3'],
 
     src: '',
     live: '',

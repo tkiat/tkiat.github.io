@@ -9,7 +9,7 @@ const personal = [
   {
     title: 'This Website',
     description: 'A very customizable personal website',
-    keyword: 'HTML/SCSS/JS, React.js, Inkscape, Vite',
+    keyword: ['HTML/SCSS/JS', 'React.js', 'Inkscape', 'Vite'],
 
     src: 'https://github.com/tkiat/tkiat.github.io',
     'image-src': 'https://via.placeholder.com/320x180',
@@ -18,7 +18,7 @@ const personal = [
   {
     title: 'Interactive Vim Theme Generator',
     description: 'Oversimplified and interactive',
-    keyword: 'HTML/SCSS/JS, React.js',
+    keyword: ['HTML/SCSS/JS', 'React.js'],
 
     src: 'https://github.com/tkiat/vim-custom-theme',
     live: 'https://tkiat.github.io/vim-custom-theme',
@@ -28,7 +28,7 @@ const personal = [
   {
     title: 'Freedom Oriented Blog',
     description: 'My experimental blog using Pelican',
-    keyword: 'HTML/SCSS/JS, Pelican, Jinja',
+    keyword: ['HTML/SCSS/JS', 'Pelican', 'Jinja'],
 
     src: 'https://github.com/tkiat/freedom-oriented-blog',
     live: 'https://tkiat.github.io/freedom-oriented-blog',
@@ -38,7 +38,7 @@ const personal = [
   {
     title: 'Previous Personal Website',
     description: 'I did everything from scratch including backend',
-    keyword: 'Vanilla HTML/CSS/JS, AWS (CodeCommit, S3, DynamoDB, Lambda), Terraform',
+    keyword: ['Vanilla HTML/CSS/JS', 'AWS', 'Terraform'],
 
     src: 'https://github.com/tkiat/archive/tree/main/tkiatd.github.io',
     inactive: true,
@@ -47,7 +47,7 @@ const personal = [
   {
     title: 'Christmas Card',
     description: "I gave it to my Mother's new husband in Norway at Christmas 2019",
-    keyword: 'HTML/SCSS/JS',
+    keyword: ['HTML/SCSS/JS'],
     src: 'https://codepen.io/tkiatd/details/MWYoboG',
     live: 'https://christmas-mardon.herokuapp.com',
     'image-src': 'https://via.placeholder.com/320x180',
@@ -59,7 +59,7 @@ const experiment = [
   {
     title: 'Simple RegEx Program Emulator',
     description: 'The trick is to overlay the textbox with the "highlight" layer',
-    keyword: 'HTML/SCSS/JS',
+    keyword: ['HTML/SCSS/JS'],
     src: 'https://codepen.io/tkiatd/pen/bGBWvza',
     'image-src': 'https://via.placeholder.com/320x180',
     type: 'Experiment',
@@ -67,7 +67,7 @@ const experiment = [
   {
     title: 'Typing Practice Emulator',
     description: 'Just for fun',
-    keyword: 'HTML/SCSS/JS',
+    keyword: ['HTML/SCSS/JS'],
     src: 'https://codepen.io/tkiatd/pen/oNYWdLz',
     'image-src': 'https://via.placeholder.com/320x180',
     type: 'Experiment',

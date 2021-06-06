@@ -22,10 +22,9 @@ declare module 'my-theme-type' {
   }
 
   export type WavesColors = string[]
-  export type WavesConfigs = WavesPhysics & {
+  export type WavesConfigs = {
     from: Coordinate
     to: Coordinate
-
     num: number
     totalPoints: number
   }

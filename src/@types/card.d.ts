@@ -2,7 +2,7 @@ declare module 'my-card-type' {
   export type CardProject = {
     title: string
     description: string
-    keyword: string
+    keyword: string[]
     type: string
 
     inactive?: boolean

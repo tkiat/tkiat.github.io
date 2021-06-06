@@ -1,10 +1,10 @@
 import { Even } from 'my-util-type'
 
-import { moveWater } from 'src/nav-sub/moveWater'
+import { moveWater } from './moveWater'
 
 const stripHTMLWhitespaces = (str: string) => str.replace(/>\s+</g, '><')
 
-const item = 'nav__highlighter-item'
+const item = 'nav-sub__highlighter-item'
 const transitionSec = 156600 // lcm(100, 116, 216)
 
 const initDocument = stripHTMLWhitespaces(`

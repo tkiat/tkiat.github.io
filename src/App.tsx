@@ -22,10 +22,6 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO split waveconfig to wavephysics and config
-// TODO share media query in nav both css nad js
-// TODO css custom property name not make sense, try to instead of header shared among many coponents use another name
-
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],
@@ -99,20 +95,12 @@ function App(): React.ReactElement {
       }
     })()
     return {
-      ...wavePhysics,
       from: from,
       to: to,
       totalPoints: numPointsOnWave,
       num: numWaves,
     }
-  }, [
-    shouldMoveWave,
-    viewportDimensions,
-    wavePhysics.height,
-    wavePhysics.speed,
-    wavePhysics.shakiness,
-    numPointsOnWave,
-  ])
+  }, [shouldMoveWave, viewportDimensions, numPointsOnWave])
 
   React.useEffect(() => {
     document.getElementById('loading')!.style.display = 'none'
@@ -188,7 +176,7 @@ function App(): React.ReactElement {
         <Background theme={theme.base} />
         <Canvas
           argumentCanvas={viewportDimensions}
-          argumentDrawCanvas={{ wavesConfig, waveColors }}
+          argumentDrawCanvas={{ wavesConfig, waveColors, wavePhysics }}
           aria-label="Background Wave"
         />
         <Content isInsideWater={navMainIndex === 2} />
