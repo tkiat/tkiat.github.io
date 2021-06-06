@@ -1,13 +1,15 @@
 @use '../abstract/_variables.scss';
 
-.nav {
+.nav-sub {
   $root: &;
   &--tube {
     position: absolute;
+    display: block;
+    margin: 10px;
+
     font-size: 2.441rem;
     height: var(--nav-tube-height);
     width: calc(100% - 20px - var(--sidebar-width));
-    margin: 10px;
     #{$root}__list {
       display: flex;
 
@@ -73,9 +75,9 @@
     }
   }
 }
-
-@media screen and (max-width: variables.$w-max-mobile) {
-  .nav--tube {
-    display: none;
-  }
-}
+/**/
+/*@media screen and (max-width: variables.$w-max-mobile) {*/
+/*  .nav--tube {*/
+/*    display: none;*/
+/*  }*/
+/*}*/

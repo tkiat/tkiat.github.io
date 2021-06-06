@@ -1,5 +1,5 @@
-import { PointReturn, WaveArguments, WaveReturn } from 'my-wave-type'
-import { Coordinate } from 'my-math-type'
+import { Point, WaveArguments, Wave } from 'my-wave-type'
+import { Coordinate } from 'my-util-type'
 
 import point from './point'
 
@@ -13,7 +13,7 @@ const computeCoordinates = (to: Coordinate, from: Coordinate, totalPoints: numbe
   return coordinates
 }
 const createPoints = (index: number, coordinates: Coordinate[], height: number, speed: number, shakiness: number) => {
-  let points: PointReturn[] = []
+  let points: Point[] = []
 
   for (let i = 0; i < coordinates.length; i++) {
     points[i] = point({
@@ -30,7 +30,7 @@ const createPoints = (index: number, coordinates: Coordinate[], height: number, 
   return points
 }
 
-const wave = (obj: WaveArguments): WaveReturn => {
+const wave = (obj: WaveArguments): Wave => {
   let _coordinates = computeCoordinates(obj.to, obj.from, obj.totalPoints)
   return {
     points: createPoints(obj.index, _coordinates, obj.height, obj.speed, obj.shakiness),

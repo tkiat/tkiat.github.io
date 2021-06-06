@@ -1,8 +1,8 @@
-import { PointArguments, PointReturn } from 'my-wave-type'
+import { PointArguments, Point } from 'my-wave-type'
 
 import point from 'src/canvas/wave/point'
 
-let pointProps: PointArguments, pointMock: PointReturn
+let pointProps: PointArguments, pointMock: Point
 
 describe('test return values', () => {
   beforeAll(() => {

@@ -1,8 +1,16 @@
 declare module 'my-settings-type' {
   import { Updater } from 'use-immer'
 
-  import { DuckColors, ThemeBase, ThemeProps, ThemeSupplement, Time, TubesColors } from 'my-theme-type'
-  import { WavesColors, WavesPhysics } from 'my-wave-config-type'
+  import {
+    DuckColors,
+    ThemeBase,
+    ThemeProps,
+    ThemeSupplement,
+    Time,
+    TubesColors,
+    WavesColors,
+    WavesPhysics,
+  } from 'my-theme-type'
 
   export type BaseThemePickerProps = {
     current: ThemeBase

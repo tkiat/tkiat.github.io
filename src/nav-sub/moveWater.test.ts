@@ -1,4 +1,4 @@
-import { Even } from 'my-math-type'
+import { Even } from 'my-util-type'
 
 import { moveWater } from 'src/nav-sub/moveWater'
 

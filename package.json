@@ -8,7 +8,8 @@
     "check": "tsc",
     "serve": "vite preview",
     "test": "jest --env=jsdom",
-    "test-extended": "npm run test -- --coverage"
+    "test-record": "jest --testNamePattern",
+    "test-extended": "npm run jest -- --coverage"
   },
   "dependencies": {
     "@reach/router": "^1.3.4",

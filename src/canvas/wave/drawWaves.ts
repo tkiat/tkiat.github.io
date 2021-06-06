@@ -1,14 +1,14 @@
-import { WaveReturn } from 'my-wave-type'
-import { WavesColors } from 'my-wave-config-type'
+import { WavesColors } from 'my-theme-type'
+import { Wave } from 'my-wave-type'
 
-export const drawWaves = (ctx: CanvasRenderingContext2D, waves: WaveReturn[], colors: WavesColors) => {
+export const drawWaves = (ctx: CanvasRenderingContext2D, waves: Wave[], colors: WavesColors) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   waves.forEach((wave, i: number) => {
     drawWave(ctx, wave, colors[colors.length - 1 - i])
   })
 }
 
-const drawWave = (ctx: CanvasRenderingContext2D, wave: WaveReturn, fillColor: string) => {
+const drawWave = (ctx: CanvasRenderingContext2D, wave: Wave, fillColor: string) => {
   let prevX = wave.points[0].x
   let prevY = wave.points[0].getY()
 

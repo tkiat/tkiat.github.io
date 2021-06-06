@@ -74,8 +74,7 @@ const experiment = [
   },
 ]
 
-const contribution = `
-### Accepted Pull Requests
+const pullRequest = `
 Will add more.
 - [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Typo** - Change 'Markdown' to 'markdown' otherwise it won't work.
 
@@ -87,11 +86,11 @@ const Web = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Work', 'Experiment', 'Contribution']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav items={['Work', 'Experiment', 'Pull Request']} storage={storage} cur={cur} setCur={setCur} />
 
       <CardsProject isActive={cur === 0} items={personal} />
       <CardsProject isActive={cur === 1} items={experiment} />
-      <MarkdownContent isActive={cur === 2} content={contribution} />
+      <MarkdownContent isActive={cur === 2} content={pullRequest} />
     </>
   )
 }

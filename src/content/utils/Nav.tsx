@@ -7,12 +7,14 @@ const Nav = ({ cur, items, setCur, storage }: NavContentProps): React.ReactEleme
     setCur(index)
   }
   return (
-    <nav className="nav nav--content">
-      <ul className="nav__list">
+    <nav className="nav-content nav-content--content">
+      <ul className="nav-content__list">
         {items.map((item: string, i: number) => {
           return (
-            <li className="nav__item" key={i} onClick={() => click(i)}>
-              <button className={'nav__button' + (cur === i ? ' nav__button--active' : '')}>{item}</button>
+            <li className="nav-content__item" key={i} onClick={() => click(i)}>
+              <button className={'nav-content__button' + (cur === i ? ' nav-content__button--active' : '')}>
+                {item}
+              </button>
             </li>
           )
         })}

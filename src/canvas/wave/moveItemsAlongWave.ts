@@ -1,7 +1,7 @@
 import { Status } from 'my-util-type'
-import { WaveReturn } from 'my-wave-type'
+import { Wave } from 'my-wave-type'
 
-export const moveItemsAlongWave = (items: NodeListOf<HTMLElement>, wave: WaveReturn, offset: number): Status => {
+export const moveItemsAlongWave = (items: NodeListOf<HTMLElement>, wave: Wave, offset: number): Status => {
   if (items.length >= wave.points.length) return 1
   for (let i = 0; i < items.length; i++) {
     const midpoint = (wave.points[i].getY() + wave.points[i + 1].getY()) / 2

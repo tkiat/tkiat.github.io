@@ -9,10 +9,10 @@
 @use 'layout/_flex.scss';
 @use 'layout/_grid.scss';
 @use 'layout/_nav-content.scss';
-@use 'layout/_nav-generic.scss';
 @use 'layout/_nav-main.scss';
-@use 'layout/_nav-tube.scss';
-@use 'layout/_nav-tube-anim.scss';
+@use 'layout/_nav-sub-generic.scss';
+@use 'layout/_nav-sub-tube.scss';
+@use 'layout/_nav-sub-tube-anim.scss';
 @use 'layout/_sidebar.scss';
 
 @use 'component/_background.scss';
@@ -31,6 +31,6 @@
 @use 'component/_title.scss';
 @use 'component/_valve.scss';
 
-@use 'themes/_theme-shared.scss';
-@use 'themes/_theme-base.scss';
-@use 'themes/_theme-supplement.scss';
+@use 'theme/_theme-shared.scss';
+@use 'theme/_theme-base.scss';
+@use 'theme/_theme-supplement.scss';

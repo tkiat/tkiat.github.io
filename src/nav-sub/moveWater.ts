@@ -1,4 +1,4 @@
-import { Even } from 'my-math-type'
+import { Even } from 'my-util-type'
 import { flowDirection, flowMode } from 'my-nav-type'
 
 export const moveWater = (from: Even, to: Even, transitionSec: number): number => {
@@ -78,9 +78,9 @@ const waterStuckToRight = (textIndex: number, delay: number): number => {
 }
 
 const triggerWaterFlow = (highlighterNum: number, className: string, delaySec: number): void => {
-  const highlighter = document.getElementById('nav__highlighter-item' + highlighterNum) as HTMLElement
+  const highlighter = document.getElementById('nav-sub__highlighter-item' + highlighterNum) as HTMLElement
   if (!highlighter) return
-  highlighter.className = 'nav__highlighter-item'
+  highlighter.className = 'nav-sub__highlighter-item'
   highlighter.classList.add(className)
   highlighter.style.animationDelay = delaySec + 's'
 }

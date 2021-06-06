@@ -1,7 +1,7 @@
 import React from 'react'
 import { useImmer } from 'use-immer'
 
-import { Dimension } from 'my-math-type'
+import { Dimension } from 'my-util-type'
 
 import useDebounce from './useDebounce'
 

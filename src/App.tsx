@@ -3,17 +3,16 @@ import { useImmer } from 'use-immer'
 import { Redirect, Router } from '@reach/router'
 
 import { Level, NavIndexsType } from 'my-nav-type'
-import { DuckColors, ThemeProps, Time, TubesColors } from 'my-theme-type'
-import { WavesColors, WavesConfigs, WavesPhysics } from 'my-wave-config-type'
+import { DuckColors, ThemeProps, Time, TubesColors, WavesColors, WavesConfigs, WavesPhysics } from 'my-theme-type'
 
 import { initialThemes, initialTime, isSafariBrowser } from 'src/@global/defaultValues'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
 import injectCustomTheme from 'src/@global/injectCustomTheme'
 import updateFavicon from 'src/@global/updateFavicon'
 
-import Contact from 'src/@global/Contact'
-import SafariWarning from 'src/@global/SafariWarning'
-import Title from 'src/@global/Title'
+import Contact from 'src/@global/component/Contact'
+import SafariWarning from 'src/@global/component/SafariWarning'
+import Title from 'src/@global/component/Title'
 import Background from 'src/background/Background'
 import Canvas from 'src/canvas/Canvas'
 import Content from 'src/content/Content'
@@ -23,10 +22,9 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO change totalPoints to wabepoiint
-// TODO change class nav to nav-sub
-// TODO change wave-config.d.ts to theme
-// TODO change pointreturn and others to point
+// TODO split waveconfig to wavephysics and config
+// TODO share media query in nav both css nad js
+// TODO css custom property name not make sense, try to instead of header shared among many coponents use another name
 
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
@@ -42,7 +40,7 @@ const urlAtIndex: { [k in Level]: string } = {
 }
 
 const numSidebarButton = 1
-const totalPoints = levels.length + numSidebarButton + 1
+const numPointsOnWave = levels.length + numSidebarButton + 1
 let willShowSafariPrompt = isSafariBrowser
 
 function App(): React.ReactElement {
@@ -104,11 +102,17 @@ function App(): React.ReactElement {
       ...wavePhysics,
       from: from,
       to: to,
-      totalPoints,
+      totalPoints: numPointsOnWave,
       num: numWaves,
     }
-    // eslint-disable-next-line
-  }, [shouldMoveWave, viewportDimensions, wavePhysics.height, wavePhysics.speed, wavePhysics.shakiness, totalPoints])
+  }, [
+    shouldMoveWave,
+    viewportDimensions,
+    wavePhysics.height,
+    wavePhysics.speed,
+    wavePhysics.shakiness,
+    numPointsOnWave,
+  ])
 
   React.useEffect(() => {
     document.getElementById('loading')!.style.display = 'none'

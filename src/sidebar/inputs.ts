@@ -1,5 +1,4 @@
-import { DuckColors, ThemeBase, ThemeSupplement, Time, TubesColors } from 'my-theme-type'
-import { WavesPhysics } from 'my-wave-config-type'
+import { DuckColors, ThemeBase, ThemeSupplement, Time, TubesColors, WavesPhysics } from 'my-theme-type'
 
 const duckInputs: { type: keyof DuckColors; text: string }[] = [
   { type: 'body', text: 'Duck Body' },

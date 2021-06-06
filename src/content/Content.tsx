@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 
-import NotFound from 'src/@global/NotFound'
+import NotFound from 'src/@global/component/NotFound'
 import Intro from 'src/content/about/Intro'
 import Credits from 'src/content/about/Credits'
 import Record from 'src/content/about/Record'

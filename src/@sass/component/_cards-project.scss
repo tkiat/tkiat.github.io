@@ -48,8 +48,10 @@
       position: relative;
       /*top: calc(-0.25em + 6px);*/
       background-color: var(--wave-front0-color);
+      /*background-color: inherit;*/
       color: white;
-      padding: 3px 3px 1px 3px;
+      /*color: var(--wave-front0-color);*/
+      padding: 3px 3px 4px 3px;
       &--inactive {
         margin-left: 5px;
         background-color: red;

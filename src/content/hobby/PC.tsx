@@ -42,7 +42,7 @@ const utility = [
   {
     title: 'tkiat Guix Channel',
     description: 'I fork suckless repositories and create a Guix channel for them',
-    keyword: 'Python3',
+    keyword: 'Guile',
 
     src: 'https://gitlab.com/tkiat/guix-channel',
     live: '',
@@ -60,13 +60,14 @@ const utility = [
   },
 ]
 
-const contribution = `
-### Accepted Pull Requests
+const pullRequest = `
 Will add more.
-- [2021-03-06](https://notabug.org/libreboot/libreboot/pulls/759) - **Libreboot** - **Add Document**: btrfs swapfile must be NOCOW and no compression
-- [2020-10-15](https://github.com/void-linux/void-packages/pull/25365) - **void-packages** - **Update Package**: python3-pem to 20.1.0
-- [2020-10-07](https://github.com/tldr-pages/tldr/pull/4525) - **tldr** - **Add Document**: lvremove entry
+- [2021-03-06](https://notabug.org/libreboot/obsolete-repository-preserved-for-historical-purposes/commit/0f7c47997de052a9beae8c906b2f32c28bb5f7f8) - **Libreboot** - **Document** - **Improve** - btrfs swapfile must be NOCOW and no compression
+- [2020-10-15](https://github.com/void-linux/void-packages/pull/25365) - **void-packages** - **Package** - **Update** - python3-pem to 20.1.0
+- [2020-10-07](https://github.com/tldr-pages/tldr/pull/4525) - **tldr** - **Document** - **Add** - lvremove entry
 `
+
+// https://notabug.org/libreboot/libreboot/pulls/759
 
 const storage = 'tab-index-hobby-pc'
 
@@ -74,10 +75,10 @@ const PC = (): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <>
-      <Nav items={['Work', 'Utility', 'Contribution']} storage={storage} cur={cur} setCur={setCur} />
+      <Nav items={['Work', 'Utility', 'Pull Request']} storage={storage} cur={cur} setCur={setCur} />
       <CardsProject isActive={cur === 0} items={work} />
       <CardsProject isActive={cur === 1} items={utility} />
-      <MarkdownContent isActive={cur === 2} content={contribution} />
+      <MarkdownContent isActive={cur === 2} content={pullRequest} />
     </>
   )
 }

@@ -1,7 +1,7 @@
 declare module 'my-canvas-type' {
   import React from 'react'
 
-  import { WavesColors, WavesConfigs } from 'my-wave-config-type'
+  import { WavesColors, WavesConfigs } from 'my-theme-type'
 
   export type CanvasProps = {
     argumentCanvas: { height: number; width: number }

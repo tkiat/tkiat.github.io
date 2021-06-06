@@ -17,19 +17,19 @@ const NavBarGeneric = ({
     })
   }
   const navPress = () => {
-    const navGeneric = document.getElementById('nav-generic')
-    navGeneric && navGeneric.classList.toggle('nav--pressed')
+    const navGeneric = document.getElementById('nav-sub-generic')
+    navGeneric && navGeneric.classList.toggle('nav-sub--pressed')
   }
   return (
-    <nav className="nav nav--generic" id="nav-generic" onClick={navPress}>
-      <ul className="nav__list">
-        <li className="nav__item nav__item--button" aria-label="hamburger-menu">
+    <nav className="nav-sub nav-sub--generic" id="nav-sub-generic" onClick={navPress}>
+      <ul className="nav-sub__list">
+        <li className="nav-sub__item nav-sub__item--button" aria-label="hamburger-menu">
           <DuckHamburger />
         </li>
         {items.map((tab, i) => (
-          <li key={i} className="nav__item">
+          <li key={i} className="nav-sub__item">
             <Link
-              className={'nav__link' + (i === navSubIndex ? ' nav__link--active' : '')}
+              className={'nav-sub__link' + (i === navSubIndex ? ' nav-sub__link--active' : '')}
               to={baseURL + tab}
               onClick={() => onclick(i)}>
               {tab[1].toUpperCase() + tab.slice(2)}

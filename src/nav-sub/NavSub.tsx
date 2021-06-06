@@ -14,8 +14,10 @@ const NavSub = ({
 }: NavSubProps): React.ReactElement => {
   if (navSubIndex === null || (navMainIndex !== 0 && navMainIndex !== 1)) return <></>
   localStorage.setItem('tabIndexLv' + navMainIndex + 'Cur', navSubIndex.toString())
-  return (
-    <>
+
+  const isMobile = window.matchMedia('(max-width: 768px)')
+  if (isMobile.matches) {
+    return (
       <NavSubGeneric
         baseURL={baseURL}
         items={items}
@@ -23,6 +25,9 @@ const NavSub = ({
         navSubIndex={navSubIndex}
         setNavSubIndexs={setNavSubIndexs}
       />
+    )
+  } else {
+    return (
       <NavSubTube
         baseURL={baseURL}
         items={items}
@@ -31,8 +36,8 @@ const NavSub = ({
         setNavSubIndexs={setNavSubIndexs}
         keyOffset={keyOffsets[navMainIndex]}
       />
-    </>
-  )
+    )
+  }
 }
 
 export default NavSub

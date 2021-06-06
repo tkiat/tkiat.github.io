@@ -1,4 +1,4 @@
-import { WaveArguments, WaveReturn } from 'my-wave-type'
+import { WaveArguments, Wave } from 'my-wave-type'
 
 import { drawWaves } from 'src/canvas/wave/drawWaves'
 import wave from 'src/canvas/wave/wave'
@@ -14,7 +14,7 @@ const wavePropsBase = {
   shakiness: 0,
 }
 let waveProps: WaveArguments
-let waveMock: WaveReturn
+let waveMock: Wave
 
 describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color', () => {
   beforeAll(() => {

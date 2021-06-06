@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from '@reach/router'
 
 import { NavSubTubeProps } from 'my-nav-type'
-import { Even } from 'my-math-type'
+import { Even } from 'my-util-type'
 
 import { moveWater } from './moveWater'
 import TubeText from './TubeText'
@@ -29,8 +29,8 @@ const moveWaterToDest = (plan: { from: Even | -1; to: Even | -1 }, callback: (to
     callback(to)
     return
   } else {
-    const navTube = document.getElementById('nav-tube')
-    const navLinkItems = navTube && navTube.getElementsByClassName('nav__link')
+    const navTube = document.getElementById('nav-sub-tube')
+    const navLinkItems = navTube && navTube.getElementsByClassName('nav-sub__link')
     if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
 
     const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
@@ -57,38 +57,38 @@ const NavBarTube = ({
       draft[navMainIndex] = to / 2
     })
   return (
-    <nav className="nav nav--tube" id="nav-tube">
-      <ul className="nav__list">
+    <nav className="nav-sub nav-sub--tube" id="nav-sub-tube">
+      <ul className="nav-sub__list">
         {items.map((tab: string, i: number) => (
           <React.Fragment key={i + keyOffset}>
-            <li className="nav__item">
+            <li className="nav-sub__item">
               <Link
-                className={'nav__link'}
+                className={'nav-sub__link'}
                 to={baseURL + tab}
                 onClick={() => moveWaterToDest(checkEven({ from: navSubIndex * 2, to: i * 2 }), callback)}
                 draggable="false">
                 <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
-                <div className="nav__highlighter-wrapper">
+                <div className="nav-sub__highlighter-wrapper">
                   <div
-                    id={'nav__highlighter-item' + i * 2}
+                    id={'nav-sub__highlighter-item' + i * 2}
                     className={
-                      'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')
+                      'nav-sub__highlighter-item' + (i === navSubIndex ? ' nav-sub__highlighter-item--init' : '')
                     }></div>
                 </div>
               </Link>
             </li>
 
             {i < items.length - 1 && (
-              <li className="nav__item">
+              <li className="nav-sub__item">
                 <div className="valve">
                   <ValveBorder />
                   <ValveMask />
                 </div>
-                <div className="nav__highlighter-wrapper">
+                <div className="nav-sub__highlighter-wrapper">
                   <div
-                    id={'nav__highlighter-item' + (i * 2 + 1)}
+                    id={'nav-sub__highlighter-item' + (i * 2 + 1)}
                     className={
-                      'nav__highlighter-item' + (i === navSubIndex ? ' nav__highlighter-item--init' : '')
+                      'nav-sub__highlighter-item' + (i === navSubIndex ? ' nav-sub__highlighter-item--init' : '')
                     }></div>
                 </div>
               </li>
