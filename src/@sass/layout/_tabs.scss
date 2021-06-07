@@ -1,4 +1,4 @@
-.nav-content {
+.tabs {
   $root: &;
   &--content {
     position: initial;
@@ -14,7 +14,6 @@
       padding: 0;
 
       list-style-type: none;
-      /*#{$root}__item {*/
       #{$root}__button {
         margin: 3px 2px 2px 2px;
         font-size: 1em;
@@ -32,7 +31,6 @@
           background-color: hsl(var(--hue-p180), var(--saturation), calc(var(--luminance-base-content-nav) + 20%));
         }
       }
-      /*}*/
     }
   }
 }

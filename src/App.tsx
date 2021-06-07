@@ -22,6 +22,8 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO remove nav-content css
+
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],

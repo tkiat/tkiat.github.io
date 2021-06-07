@@ -1,9 +1,7 @@
 import React from 'react'
 
-const title = 'Hello React'
-
-function App() {
+function Noob({ title }: { title: string }) {
   return <div>{title}</div>
 }
 
-export default App
+export default Noob

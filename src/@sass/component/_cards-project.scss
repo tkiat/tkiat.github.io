@@ -16,7 +16,7 @@
     margin: 6px 0;
     border: 2px solid hsl(var(--hue), 30%, 50%);
 
-    box-shadow: -4px 2px hsl(var(--hue), 80%, 50%);
+    box-shadow: 1px 2px hsl(var(--hue), 80%, 50%);
     transition: box-shadow 0.4s;
     &:before {
       content: '';
@@ -31,7 +31,7 @@
     }
     &:hover {
       box-shadow: 0px 0px #888;
-      background-color: hsl(var(--hue), 100%, 90%);
+      background-color: hsl(var(--hue), 100%, 94%);
     }
     &--inactive {
       & > *:not(.center) {

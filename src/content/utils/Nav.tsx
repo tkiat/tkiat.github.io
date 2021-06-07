@@ -8,7 +8,7 @@ const Nav = ({ cur, items, setCur, storage }: NavContentProps): React.ReactEleme
   }
   return (
     <nav className="nav-content nav-content--content">
-      <ul className="nav-content__list">
+      <ul className="nav-content__list" role="tablist">
         {items.map((item: string, i: number) => {
           return (
             <li className="nav-content__item" key={i} onClick={() => click(i)}>
