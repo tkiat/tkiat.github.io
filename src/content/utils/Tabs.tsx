@@ -1,12 +1,14 @@
 import React from 'react'
 import { TabsProps } from 'my-tab-type'
+import { useImmer } from 'use-immer'
 
-const Tabs = ({ titles, contents, cur, setCur }: TabsProps): React.ReactElement => {
-  const click = (index: number) => {
+const Tabs = ({ titles, contents, storage }: TabsProps): React.ReactElement => {
+  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
+  const onclick = (index: number) => {
     localStorage.setItem(storage, index.toString())
-    // TODO move localstorage above
     setCur(index)
   }
+  console.log(cur)
   return (
     <>
       <div className="tabs tabs--content">
@@ -16,7 +18,7 @@ const Tabs = ({ titles, contents, cur, setCur }: TabsProps): React.ReactElement 
               <button
                 className={'tabs__button' + (cur === i ? ' tabs__button--active' : '')}
                 key={i}
-                onClick={() => click(i)}
+                onClick={() => onclick(i)}
                 aria-controls={'panel' + i}
                 aria-selected={cur === i ? 'true' : 'false'}
                 role="tab">
@@ -27,8 +29,9 @@ const Tabs = ({ titles, contents, cur, setCur }: TabsProps): React.ReactElement 
         </div>
       </div>
       {contents.map((content, i) => {
+        console.log(i)
         return (
-          <div id={'panel' + i} key={i}>
+          <div id={'panel' + i} key={i} style={{ display: cur === i ? 'block' : 'none' }}>
             {content}
           </div>
         )

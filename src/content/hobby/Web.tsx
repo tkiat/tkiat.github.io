@@ -1,9 +1,7 @@
 import React from 'react'
-import { useImmer } from 'use-immer'
 
 import CardsProject from 'src/content/utils/CardsProject'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav from 'src/content/utils/Nav'
 import Tabs from 'src/content/utils/Tabs'
 
 const personal = [
@@ -83,31 +81,17 @@ Will add more.
 const storage = 'tab-index-hobby-web'
 
 const Web = (): React.ReactElement => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
     <Tabs
-      cur={cur}
-      setCur={setCur}
+      storage={storage}
       titles={['Work', 'Experiment', 'Pull Request']}
       contents={[
-        <CardsProject isActive={cur === 0} items={personal} />,
-        <CardsProject isActive={cur === 1} items={experiment} />,
-        <MarkdownContent isActive={cur === 2} content={pullRequest} />,
+        <CardsProject isActive={true} items={personal} />,
+        <CardsProject isActive={true} items={experiment} />,
+        <MarkdownContent isActive={true} content={pullRequest} />,
       ]}
     />
   )
 }
 
 export default Web
-// const Web = (): React.ReactElement => {
-//   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
-//   return (
-//     <>
-//       <Nav items={['Work', 'Experiment', 'Pull Request']} storage={storage} cur={cur} setCur={setCur} />
-//
-//       <CardsProject isActive={cur === 0} items={personal} />
-//       <CardsProject isActive={cur === 1} items={experiment} />
-//       <MarkdownContent isActive={cur === 2} content={pullRequest} />
-//     </>
-//   )
-// }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { CardsProjectProps } from 'my-card-type'
 
-// {item['image-src'] && <img className='cards-project__img' src={item['image-src']} alt="Broken :(" aria-label={'image for ' + item.title} />}
 const CardsProject = ({ isActive, items }: CardsProjectProps): React.ReactElement => {
   return (
     <div className={'cards-project' + (isActive ? ' cards-project--active' : '')}>

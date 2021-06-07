@@ -1,9 +1,8 @@
 import React from 'react'
-import { useImmer } from 'use-immer'
 
 import CardsProject from 'src/content/utils/CardsProject'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav from 'src/content/utils/Nav'
+import Tabs from 'src/content/utils/Tabs'
 
 const work = [
   {
@@ -64,20 +63,19 @@ Will add more.
 - [2020-10-15](https://github.com/void-linux/void-packages/pull/25365) - **void-packages** - **Package** - **Update** - python3-pem to 20.1.0
 - [2020-10-07](https://github.com/tldr-pages/tldr/pull/4525) - **tldr** - **Document** - **Add** - lvremove entry
 `
-
 // https://notabug.org/libreboot/libreboot/pulls/759
 
-const storage = 'tab-index-hobby-pc'
-
 const PC = (): React.ReactElement => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
-    <>
-      <Nav items={['Work', 'Utility', 'Pull Request']} storage={storage} cur={cur} setCur={setCur} />
-      <CardsProject isActive={cur === 0} items={work} />
-      <CardsProject isActive={cur === 1} items={utility} />
-      <MarkdownContent isActive={cur === 2} content={pullRequest} />
-    </>
+    <Tabs
+      storage="tab-index-hobby-pc"
+      titles={['Work', 'Utility', 'Pull Request']}
+      contents={[
+        <CardsProject isActive={true} items={work} />,
+        <CardsProject isActive={true} items={utility} />,
+        <MarkdownContent isActive={true} content={pullRequest} />,
+      ]}
+    />
   )
 }
 

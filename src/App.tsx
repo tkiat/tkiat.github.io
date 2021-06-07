@@ -22,6 +22,9 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO remove isActive from content utils
+// TODO separate project source from description in project probabaly also remove box-shadow
+// TODO remove nav.tsx
 // TODO remove nav-content css
 
 const levels: Level[] = [0, 1, 2]
