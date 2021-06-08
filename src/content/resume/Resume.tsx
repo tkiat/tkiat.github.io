@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Resume = (): React.ReactElement => (
+export default (): React.ReactElement => (
   <>
     <h1>Work Experience</h1>
     <ul>
@@ -62,7 +62,4 @@ const Resume = (): React.ReactElement => (
     </ul>
   </>
 )
-
-export default Resume
-
 // - 2013 - **GRE** - Percentile - Verbal (28) - Quantitative (97) - Analytical (30)

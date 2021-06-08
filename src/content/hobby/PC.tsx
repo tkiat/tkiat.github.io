@@ -2,70 +2,24 @@ import React from 'react'
 
 import CardsProject from 'src/content/utils/CardsProject'
 import Markdown from 'src/content/utils/Markdown'
-import Tabs from 'src/content/utils/Tabs'
+import ContentWithTabs from 'src/content/utils/ContentWithTabs'
 
-export default (): React.ReactElement => (
-  <Tabs
-    storage="tab-index-hobby-pc"
-    titles={['Work', 'Utility', 'Pull Request']}
-    contents={[<CardsProject items={work} />, <CardsProject items={utility} />, <Markdown content={pullRequest} />]}
-  />
-)
+import data from './pcData'
 
-const work = [
+const storage = 'tab-index-hobby-pc'
+const items = [
   {
-    title: 'Terminal Game Client',
-    description: 'A simple TUI game client that supports any supplemental commands such as wine64.',
-    keyword: ['Python3', 'ncurses'],
-
-    src: 'https://github.com/tkiat/terminal-game-client',
-    live: '',
-    type: 'Project',
+    title: 'Work',
+    content: <CardsProject items={data.work} />,
   },
   {
-    title: 'Lazyman Pomodoro',
-    description: 'A simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.',
-    keyword: ['Python3', 'ncurses'],
-
-    src: 'https://github.com/tkiat/lazyman-pomodoro',
-    type: 'Task',
+    title: 'Utility',
+    content: <CardsProject items={data.utility} />,
+  },
+  {
+    title: 'Pull Request',
+    content: <Markdown content={data.pullRequest} />,
   },
 ]
 
-const utility = [
-  {
-    title: 'My Dotfiles and Configs',
-    description: '',
-    keyword: [],
-
-    src: 'https://github.com/tkiat/dotfiles-and-configs',
-    live: '',
-    type: 'Config',
-  },
-  {
-    title: 'tkiat Guix Channel',
-    description: 'I fork suckless repositories and create a Guix channel for them',
-    keyword: ['Guile'],
-
-    src: 'https://gitlab.com/tkiat/guix-channel',
-    live: '',
-    type: 'Repository',
-  },
-  {
-    title: 'TODO',
-    description: 'TODO',
-    keyword: ['Python3'],
-
-    src: '',
-    live: '',
-    type: 'Script',
-  },
-]
-
-const pullRequest = `
-Will add more.
-- [2021-03-06](https://notabug.org/libreboot/obsolete-repository-preserved-for-historical-purposes/commit/0f7c47997de052a9beae8c906b2f32c28bb5f7f8) - **Libreboot** - **Document** - **Improve** - btrfs swapfile must be NOCOW and no compression
-- [2020-10-15](https://github.com/void-linux/void-packages/pull/25365) - **void-packages** - **Package** - **Update** - python3-pem to 20.1.0
-- [2020-10-07](https://github.com/tldr-pages/tldr/pull/4525) - **tldr** - **Document** - **Add** - lvremove entry
-`
-// https://notabug.org/libreboot/libreboot/pulls/759
+export default (): React.ReactElement => <ContentWithTabs items={items} storage={storage} />

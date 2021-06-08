@@ -1,18 +1,16 @@
 import React from 'react'
 
-import Markdown from './Markdown'
-
 type CardsProps = {
-  items: string[]
+  items: React.ReactElement[]
 }
 
 const Cards = ({ items }: CardsProps): React.ReactElement => {
   return (
     <div className="cards">
-      {items.map((item: string, i: number) => {
+      {items.map((item, i) => {
         return (
           <div className="cards__item" key={i}>
-            <Markdown content={item} />
+            {item}
           </div>
         )
       })}
