@@ -1,8 +1,7 @@
 import React from 'react'
-import { useImmer } from 'use-immer'
 
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav from 'src/content/utils/Nav'
+import Tabs from 'src/content/utils/Tabs'
 
 const content = `
 # Blog
@@ -35,20 +34,17 @@ const archive = `
 * **Collecting TCG Cards**. Inactive since high school.
 `
 
-const storage = 'tab-index-hobby-others'
-
-const Others = (): React.ReactElement => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
-  return (
-    <>
-      <Nav items={['Content', 'Courses', 'Others', 'Archive']} storage="storage" cur={cur} setCur={setCur} />
-
-      <MarkdownContent isActive={cur === 0} content={content} />
-      <MarkdownContent isActive={cur === 1} content={courses} />
-      <MarkdownContent isActive={cur === 2} content={others} />
-      <MarkdownContent isActive={cur === 3} content={archive} />
-    </>
-  )
-}
+const Others = (): React.ReactElement => (
+  <Tabs
+    storage={'tab-index-hobby-others'}
+    titles={['Content', 'Courses', 'Others', 'Archive']}
+    contents={[
+      <MarkdownContent content={content} />,
+      <MarkdownContent content={courses} />,
+      <MarkdownContent content={others} />,
+      <MarkdownContent content={archive} />,
+    ]}
+  />
+)
 
 export default Others

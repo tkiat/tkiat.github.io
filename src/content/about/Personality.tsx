@@ -1,9 +1,8 @@
 import React from 'react'
-import { useImmer } from 'use-immer'
 
 import Cards from 'src/content/utils/Cards'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav from 'src/content/utils/Nav'
+import Tabs from 'src/content/utils/Tabs'
 
 const overview = [
   `
@@ -133,24 +132,18 @@ const opinion = `
 - **Tea**: Tea bag sucks. The quality is abysmal and also doesn't respect environment but it is still much less worse than sweetened green tea in a plastic bottle. Pu-erh tea is the best because it often comes with a natural package in a condensed space.
 `
 
-const storage = 'tab-index-about-personality'
-
 const Personality = (): React.ReactElement => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
-    <>
-      <Nav
-        items={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
-        storage={storage}
-        cur={cur}
-        setCur={setCur}
-      />
-
-      <Cards isActive={cur === 0} items={overview} />
-      <Cards isActive={cur === 1} items={goal_purpose} />
-      <Cards isActive={cur === 2} items={preferences} />
-      <MarkdownContent isActive={cur === 3} content={opinion} />
-    </>
+    <Tabs
+      storage={'tab-index-about-personality'}
+      titles={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
+      contents={[
+        <Cards items={overview} />,
+        <Cards items={goal_purpose} />,
+        <Cards items={preferences} />,
+        <MarkdownContent content={opinion} />,
+      ]}
+    />
   )
 }
 

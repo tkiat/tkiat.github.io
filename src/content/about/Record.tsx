@@ -1,9 +1,8 @@
 import React from 'react'
-import { useImmer } from 'use-immer'
 
 import Cards from 'src/content/utils/Cards'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
-import Nav from 'src/content/utils/Nav'
+import Tabs from 'src/content/utils/Tabs'
 
 const gadgets = [
   `
@@ -103,19 +102,18 @@ const drinks = `
 - **Herbal Tea**: Red Roibos, Chrysanthemum, Yerba Mate, and anything else adventurous
 `
 
-const storage = 'tab-index-about-record'
-
 const Record = (): React.ReactElement => {
-  const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
   return (
-    <>
-      <Nav items={['Gadgets', 'Software', 'Hygiene', 'Drinks']} storage={storage} cur={cur} setCur={setCur} />
-
-      <Cards isActive={cur === 0} items={gadgets} />
-      <Cards isActive={cur === 1} items={software} />
-      <MarkdownContent isActive={cur === 2} content={hygiene} />
-      <MarkdownContent isActive={cur === 3} content={drinks} />
-    </>
+    <Tabs
+      storage={'tab-index-about-record'}
+      titles={['Gadgets', 'Software', 'Hygiene', 'Drinks']}
+      contents={[
+        <Cards items={gadgets} />,
+        <Cards items={software} />,
+        <MarkdownContent content={hygiene} />,
+        <MarkdownContent content={drinks} />,
+      ]}
+    />
   )
 }
 

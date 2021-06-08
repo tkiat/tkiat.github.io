@@ -18,8 +18,6 @@ const credits = [
 `,
 ]
 
-const Others = (): React.ReactElement => {
-  return <Cards isActive={true} items={credits} />
-}
+const Others = (): React.ReactElement => <Cards items={credits} />
 
 export default Others

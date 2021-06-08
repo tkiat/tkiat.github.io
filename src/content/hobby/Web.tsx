@@ -11,7 +11,6 @@ const personal = [
     keyword: ['HTML/SCSS/JS', 'React.js', 'Inkscape', 'Vite'],
 
     src: 'https://github.com/tkiat/tkiat.github.io',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Project',
   },
   {
@@ -21,7 +20,6 @@ const personal = [
 
     src: 'https://github.com/tkiat/vim-custom-theme',
     live: 'https://tkiat.github.io/vim-custom-theme',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Project',
   },
   {
@@ -31,7 +29,6 @@ const personal = [
 
     src: 'https://github.com/tkiat/freedom-oriented-blog',
     live: 'https://tkiat.github.io/freedom-oriented-blog',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Project',
   },
   {
@@ -39,8 +36,8 @@ const personal = [
     description: 'I did everything from scratch including backend',
     keyword: ['Vanilla HTML/CSS/JS', 'AWS', 'Terraform'],
 
-    src: 'https://github.com/tkiat/archive/tree/main/tkiatd.github.io',
     inactive: true,
+    src: 'https://github.com/tkiat/archive/tree/main/tkiatd.github.io',
     type: 'Project',
   },
   {
@@ -49,7 +46,6 @@ const personal = [
     keyword: ['HTML/SCSS/JS'],
     src: 'https://codepen.io/tkiatd/details/MWYoboG',
     live: 'https://christmas-mardon.herokuapp.com',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Task',
   },
 ]
@@ -57,18 +53,16 @@ const personal = [
 const experiment = [
   {
     title: 'Simple RegEx Program Emulator',
-    description: 'The trick is to overlay the textbox with the "highlight" layer',
+    description: 'Just overlay the highlight layer on top of textbox',
     keyword: ['HTML/SCSS/JS'],
     src: 'https://codepen.io/tkiatd/pen/bGBWvza',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Experiment',
   },
   {
     title: 'Typing Practice Emulator',
-    description: 'Just for fun',
+    description: '',
     keyword: ['HTML/SCSS/JS'],
     src: 'https://codepen.io/tkiatd/pen/oNYWdLz',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Experiment',
   },
 ]
@@ -78,20 +72,16 @@ Will add more.
 - [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Bug** - Change 'Markdown' to 'markdown' otherwise it won't work.
 `
 
-const storage = 'tab-index-hobby-web'
-
-const Web = (): React.ReactElement => {
-  return (
-    <Tabs
-      storage={storage}
-      titles={['Work', 'Experiment', 'Pull Request']}
-      contents={[
-        <CardsProject isActive={true} items={personal} />,
-        <CardsProject isActive={true} items={experiment} />,
-        <MarkdownContent isActive={true} content={pullRequest} />,
-      ]}
-    />
-  )
-}
+const Web = (): React.ReactElement => (
+  <Tabs
+    storage={'tab-index-hobby-web'}
+    titles={['Work', 'Experiment', 'Pull Request']}
+    contents={[
+      <CardsProject items={personal} />,
+      <CardsProject items={experiment} />,
+      <MarkdownContent content={pullRequest} />,
+    ]}
+  />
+)
 
 export default Web

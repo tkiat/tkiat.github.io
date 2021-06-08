@@ -12,7 +12,6 @@ const work = [
 
     src: 'https://github.com/tkiat/terminal-game-client',
     live: '',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Project',
   },
   {
@@ -21,7 +20,6 @@ const work = [
     keyword: ['Python3', 'ncurses'],
 
     src: 'https://github.com/tkiat/lazyman-pomodoro',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Task',
   },
 ]
@@ -52,7 +50,6 @@ const utility = [
 
     src: '',
     live: '',
-    'image-src': 'https://via.placeholder.com/320x180',
     type: 'Script',
   },
 ]
@@ -65,18 +62,16 @@ Will add more.
 `
 // https://notabug.org/libreboot/libreboot/pulls/759
 
-const PC = (): React.ReactElement => {
-  return (
-    <Tabs
-      storage="tab-index-hobby-pc"
-      titles={['Work', 'Utility', 'Pull Request']}
-      contents={[
-        <CardsProject isActive={true} items={work} />,
-        <CardsProject isActive={true} items={utility} />,
-        <MarkdownContent isActive={true} content={pullRequest} />,
-      ]}
-    />
-  )
-}
+const PC = (): React.ReactElement => (
+  <Tabs
+    storage="tab-index-hobby-pc"
+    titles={['Work', 'Utility', 'Pull Request']}
+    contents={[
+      <CardsProject items={work} />,
+      <CardsProject items={utility} />,
+      <MarkdownContent content={pullRequest} />,
+    ]}
+  />
+)
 
 export default PC

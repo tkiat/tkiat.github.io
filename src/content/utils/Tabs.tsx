@@ -1,6 +1,7 @@
 import React from 'react'
-import { TabsProps } from 'my-tab-type'
 import { useImmer } from 'use-immer'
+
+import { TabsProps } from 'my-tab-type'
 
 const Tabs = ({ titles, contents, storage }: TabsProps): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))
@@ -8,7 +9,6 @@ const Tabs = ({ titles, contents, storage }: TabsProps): React.ReactElement => {
     localStorage.setItem(storage, index.toString())
     setCur(index)
   }
-  console.log(cur)
   return (
     <>
       <div className="tabs tabs--content">
@@ -29,7 +29,6 @@ const Tabs = ({ titles, contents, storage }: TabsProps): React.ReactElement => {
         </div>
       </div>
       {contents.map((content, i) => {
-        console.log(i)
         return (
           <div id={'panel' + i} key={i} style={{ display: cur === i ? 'block' : 'none' }}>
             {content}

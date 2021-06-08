@@ -1,11 +1,14 @@
 import React from 'react'
-import { CardsProps } from 'my-card-type'
 
 import Markdown from './Markdown'
 
-const Cards = ({ isActive, items }: CardsProps): React.ReactElement => {
+type CardsProps = {
+  items: string[]
+}
+
+const Cards = ({ items }: CardsProps): React.ReactElement => {
   return (
-    <div className={'cards' + (isActive ? ' cards--active' : '')}>
+    <div className="cards">
       {items.map((item: string, i: number) => {
         return (
           <div className="cards__item" key={i}>
