@@ -4,6 +4,18 @@ import CardsProject from 'src/content/utils/CardsProject'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Tabs from 'src/content/utils/Tabs'
 
+export default (): React.ReactElement => (
+  <Tabs
+    storage={'tab-index-hobby-web'}
+    titles={['Work', 'Trivial', 'Pull Request']}
+    contents={[
+      <CardsProject items={personal} />,
+      <CardsProject items={trivial} />,
+      <MarkdownContent content={pullRequest} />,
+    ]}
+  />
+)
+
 const personal = [
   {
     title: 'This Website',
@@ -24,7 +36,7 @@ const personal = [
   },
   {
     title: 'Freedom Oriented Blog',
-    description: 'My experimental blog using Pelican',
+    description: 'My trivialal blog using Pelican',
     keyword: ['HTML/SCSS/JS', 'Pelican', 'Jinja'],
 
     src: 'https://github.com/tkiat/freedom-oriented-blog',
@@ -50,7 +62,7 @@ const personal = [
   },
 ]
 
-const experiment = [
+const trivial = [
   {
     title: 'Simple RegEx Program Emulator',
     description: 'Just overlay the highlight layer on top of textbox',
@@ -71,17 +83,3 @@ const pullRequest = `
 Will add more.
 - [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Bug** - Change 'Markdown' to 'markdown' otherwise it won't work.
 `
-
-const Web = (): React.ReactElement => (
-  <Tabs
-    storage={'tab-index-hobby-web'}
-    titles={['Work', 'Experiment', 'Pull Request']}
-    contents={[
-      <CardsProject items={personal} />,
-      <CardsProject items={experiment} />,
-      <MarkdownContent content={pullRequest} />,
-    ]}
-  />
-)
-
-export default Web

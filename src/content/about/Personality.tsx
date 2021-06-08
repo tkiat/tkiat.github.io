@@ -4,6 +4,21 @@ import Cards from 'src/content/utils/Cards'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Tabs from 'src/content/utils/Tabs'
 
+export default (): React.ReactElement => {
+  return (
+    <Tabs
+      storage="tab-index-about-personality"
+      titles={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
+      contents={[
+        <Cards items={overview} />,
+        <Cards items={goal_purpose} />,
+        <Cards items={preferences} />,
+        <MarkdownContent content={opinion} />,
+      ]}
+    />
+  )
+}
+
 const overview = [
   `
 ### MBTI Test
@@ -131,20 +146,3 @@ const opinion = `
 - **Social Media**: Lack in essence and therefore suck. Of course, it can be good if you are selective enough.
 - **Tea**: Tea bag sucks. The quality is abysmal and also doesn't respect environment but it is still much less worse than sweetened green tea in a plastic bottle. Pu-erh tea is the best because it often comes with a natural package in a condensed space.
 `
-
-const Personality = (): React.ReactElement => {
-  return (
-    <Tabs
-      storage={'tab-index-about-personality'}
-      titles={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
-      contents={[
-        <Cards items={overview} />,
-        <Cards items={goal_purpose} />,
-        <Cards items={preferences} />,
-        <MarkdownContent content={opinion} />,
-      ]}
-    />
-  )
-}
-
-export default Personality

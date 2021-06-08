@@ -4,6 +4,21 @@ import Cards from 'src/content/utils/Cards'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Tabs from 'src/content/utils/Tabs'
 
+export default (): React.ReactElement => {
+  return (
+    <Tabs
+      storage="tab-index-about-record"
+      titles={['Gadgets', 'Software', 'Hygiene', 'Drinks']}
+      contents={[
+        <Cards items={gadgets} />,
+        <Cards items={software} />,
+        <MarkdownContent content={hygiene} />,
+        <MarkdownContent content={drinks} />,
+      ]}
+    />
+  )
+}
+
 const gadgets = [
   `
 ### Laptop
@@ -101,20 +116,3 @@ const drinks = `
 - **Tea**: Currently cheap green tea (with branches!) and cheap powder black tea
 - **Herbal Tea**: Red Roibos, Chrysanthemum, Yerba Mate, and anything else adventurous
 `
-
-const Record = (): React.ReactElement => {
-  return (
-    <Tabs
-      storage={'tab-index-about-record'}
-      titles={['Gadgets', 'Software', 'Hygiene', 'Drinks']}
-      contents={[
-        <Cards items={gadgets} />,
-        <Cards items={software} />,
-        <MarkdownContent content={hygiene} />,
-        <MarkdownContent content={drinks} />,
-      ]}
-    />
-  )
-}
-
-export default Record

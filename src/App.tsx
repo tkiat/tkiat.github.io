@@ -22,11 +22,6 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO separate project source from description in project probabaly also remove box-shadow
-// TODO remove nav.tsx
-// TODO remove nav-content css
-// TODO implement content-box multiline auto width
-
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],

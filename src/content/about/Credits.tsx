@@ -2,6 +2,8 @@ import React from 'react'
 
 import Cards from 'src/content/utils/Cards'
 
+export default (): React.ReactElement => <Cards items={credits} />
+
 const credits = [
   `
 # Google Fonts
@@ -17,7 +19,3 @@ const credits = [
 - [duck](https://freesvg.org/duck), [party hat](https://freesvg.org/green-party-hat), [necktie](https://freesvg.org/necktie), [balloon](https://freesvg.org/orange-balloon), [Stop Sign](https://freesvg.org/raemi-stop-sign), [Sunglasses](https://freesvg.org/sunglasses-black-silhouette), [Camera](https://freesvg.org/usb-video-camera-symbol-vector-drawing), [Cogwheel](https://freesvg.org/vector-drawing-of-cogwheel-gear), [Geek sign](https://freesvg.org/vector-clip-art-of-man-geek-warning-road-sign)
 `,
 ]
-
-const Others = (): React.ReactElement => <Cards items={credits} />
-
-export default Others

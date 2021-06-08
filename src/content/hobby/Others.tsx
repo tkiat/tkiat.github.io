@@ -3,6 +3,19 @@ import React from 'react'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Tabs from 'src/content/utils/Tabs'
 
+export default (): React.ReactElement => (
+  <Tabs
+    storage={'tab-index-hobby-others'}
+    titles={['Content', 'Courses', 'Others', 'Archive']}
+    contents={[
+      <MarkdownContent content={content} />,
+      <MarkdownContent content={courses} />,
+      <MarkdownContent content={others} />,
+      <MarkdownContent content={archive} />,
+    ]}
+  />
+)
+
 const content = `
 # Blog
 [**My personal blog**](https://tkiat.github.io/freedom-oriented-blog/) is hosted on a small, unknown GitHub pages. The theme of the blog is directed towards freedom with the following sections: **Environment**, **FOSS**, **Media**, **Personal**, **Web**. I am planning to separate each topic into a dedicate site, which should be super fun but also very ambitious.
@@ -33,18 +46,3 @@ const archive = `
 * **Travelling**. I currently don't have both time and money for that. I am currently busy in front of my computer.
 * **Collecting TCG Cards**. Inactive since high school.
 `
-
-const Others = (): React.ReactElement => (
-  <Tabs
-    storage={'tab-index-hobby-others'}
-    titles={['Content', 'Courses', 'Others', 'Archive']}
-    contents={[
-      <MarkdownContent content={content} />,
-      <MarkdownContent content={courses} />,
-      <MarkdownContent content={others} />,
-      <MarkdownContent content={archive} />,
-    ]}
-  />
-)
-
-export default Others

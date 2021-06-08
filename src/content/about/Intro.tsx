@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Intro = (): React.ReactElement => {
+export default (): React.ReactElement => {
   return (
     <>
       <h1 style={{ width: 'min-content' }}>
@@ -28,5 +28,3 @@ const Intro = (): React.ReactElement => {
     </>
   )
 }
-
-export default Intro

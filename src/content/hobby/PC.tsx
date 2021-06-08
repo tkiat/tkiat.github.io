@@ -4,6 +4,18 @@ import CardsProject from 'src/content/utils/CardsProject'
 import MarkdownContent from 'src/content/utils/MarkdownContent'
 import Tabs from 'src/content/utils/Tabs'
 
+export default (): React.ReactElement => (
+  <Tabs
+    storage="tab-index-hobby-pc"
+    titles={['Work', 'Utility', 'Pull Request']}
+    contents={[
+      <CardsProject items={work} />,
+      <CardsProject items={utility} />,
+      <MarkdownContent content={pullRequest} />,
+    ]}
+  />
+)
+
 const work = [
   {
     title: 'Terminal Game Client',
@@ -61,17 +73,3 @@ Will add more.
 - [2020-10-07](https://github.com/tldr-pages/tldr/pull/4525) - **tldr** - **Document** - **Add** - lvremove entry
 `
 // https://notabug.org/libreboot/libreboot/pulls/759
-
-const PC = (): React.ReactElement => (
-  <Tabs
-    storage="tab-index-hobby-pc"
-    titles={['Work', 'Utility', 'Pull Request']}
-    contents={[
-      <CardsProject items={work} />,
-      <CardsProject items={utility} />,
-      <MarkdownContent content={pullRequest} />,
-    ]}
-  />
-)
-
-export default PC
