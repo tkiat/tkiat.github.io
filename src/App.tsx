@@ -22,6 +22,8 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO merge navItemsAtIndex and urlAtIndex et al. to configsAtIndex
+
 const levels: Level[] = [0, 1, 2]
 const navItemsAtIndex: { [k in Level]: string[] } = {
   '0': ['/Intro', '/Personality', '/Record', '/Credits'],
@@ -39,7 +41,7 @@ const numSidebarButton = 1
 const numPointsOnWave = levels.length + numSidebarButton + 1
 let willShowSafariPrompt = isSafariBrowser
 
-function App(): React.ReactElement {
+const App = (): React.ReactElement => {
   const tabIndexDefault = {
     '0': parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
     '1': parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
@@ -171,7 +173,7 @@ function App(): React.ReactElement {
         </Router>
 
         <Contact navMainIndex={navMainIndex} />
-        <Title index={navSubIndexs[navMainIndex]} items={navItems} navMainIndex={navMainIndex} />
+        <Title navSubIndex={navSubIndexs[navMainIndex]} items={navItems} navMainIndex={navMainIndex} />
 
         <Background theme={theme.base} />
         <Canvas

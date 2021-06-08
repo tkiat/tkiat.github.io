@@ -7,8 +7,8 @@
     "build no check": "vite build",
     "check": "tsc",
     "serve": "vite preview",
-    "test": "jest",
-    "test-extended": "npm run jest -- --coverage"
+    "test": "jest 2>&1 | less -r",
+    "test-extended": "jest --coverage"
   },
   "dependencies": {
     "@reach/router": "^1.3.4",

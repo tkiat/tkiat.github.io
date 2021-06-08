@@ -9,7 +9,5 @@ describe('Noob', () => {
     // render(<div>Hello World</div>)
     render(<Noob title="Hello World" />)
     expect(screen.getByText('Hello World')).toBeInTheDocument()
-    // screen.debug()
-    // expect(screen.getByText('Hello World')).toBeInTheDocument()
   })
 })
