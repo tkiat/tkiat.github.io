@@ -1,9 +1,16 @@
-import injectCustomTheme from 'src/@global/injectCustomTheme'
+import injectCustomTheme from './injectCustomTheme'
+
+test('return ERROR if the argumen element is not a stylesheet', () => {
+  const invalidStyle = document.createElement('div') as unknown as HTMLStyleElement
+  document.head.appendChild(invalidStyle)
+  const status = injectCustomTheme(invalidStyle)
+  expect(status).toBe(1)
+})
 
 test('custom theme should contain all expected custom fields', () => {
   const style = document.createElement('style')
   document.head.appendChild(style)
-  injectCustomTheme(style)
+  const status = injectCustomTheme(style)
 
   expect(style.sheet).toBeTruthy()
   if (!style.sheet) return
@@ -23,4 +30,5 @@ test('custom theme should contain all expected custom fields', () => {
     '--wave-front2-color',
   ]
   expect(Object.values(style.sheet!.cssRules[0].style)).toEqual(expect.arrayContaining(expectedProperty))
+  expect(status).toBe(0)
 })

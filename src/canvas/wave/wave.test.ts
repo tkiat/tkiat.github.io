@@ -1,5 +1,5 @@
 import point from 'src/canvas/wave/point'
-import wave from 'src/canvas/wave/wave'
+import wave from './wave'
 
 test('check all points on wave after creation', () => {
   const waveProps = {

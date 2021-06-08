@@ -1,6 +1,6 @@
 import { WaveArguments } from 'my-wave-type'
 
-import { moveItemsAlongWave } from 'src/canvas/wave/moveItemsAlongWave'
+import { moveItemsAlongWave } from './moveItemsAlongWave'
 
 import wave from 'src/canvas/wave/wave'
 

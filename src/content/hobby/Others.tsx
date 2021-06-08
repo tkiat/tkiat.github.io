@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Markdown from 'src/content/utils/Markdown'
 import Tabs from 'src/content/utils/Tabs'
 
 export default (): React.ReactElement => (
@@ -8,10 +8,10 @@ export default (): React.ReactElement => (
     storage={'tab-index-hobby-others'}
     titles={['Content', 'Courses', 'Others', 'Archive']}
     contents={[
-      <MarkdownContent content={content} />,
-      <MarkdownContent content={courses} />,
-      <MarkdownContent content={others} />,
-      <MarkdownContent content={archive} />,
+      <Markdown content={content} />,
+      <Markdown content={courses} />,
+      <Markdown content={others} />,
+      <Markdown content={archive} />,
     ]}
   />
 )

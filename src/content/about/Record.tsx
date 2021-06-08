@@ -1,23 +1,21 @@
 import React from 'react'
 
 import Cards from 'src/content/utils/Cards'
-import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Markdown from 'src/content/utils/Markdown'
 import Tabs from 'src/content/utils/Tabs'
 
-export default (): React.ReactElement => {
-  return (
-    <Tabs
-      storage="tab-index-about-record"
-      titles={['Gadgets', 'Software', 'Hygiene', 'Drinks']}
-      contents={[
-        <Cards items={gadgets} />,
-        <Cards items={software} />,
-        <MarkdownContent content={hygiene} />,
-        <MarkdownContent content={drinks} />,
-      ]}
-    />
-  )
-}
+export default (): React.ReactElement => (
+  <Tabs
+    storage="tab-index-about-record"
+    titles={['Gadgets', 'Software', 'Hygiene', 'Drinks']}
+    contents={[
+      <Cards items={gadgets} />,
+      <Cards items={software} />,
+      <Markdown content={hygiene} />,
+      <Markdown content={drinks} />,
+    ]}
+  />
+)
 
 const gadgets = [
   `

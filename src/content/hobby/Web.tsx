@@ -1,18 +1,14 @@
 import React from 'react'
 
 import CardsProject from 'src/content/utils/CardsProject'
-import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Markdown from 'src/content/utils/Markdown'
 import Tabs from 'src/content/utils/Tabs'
 
 export default (): React.ReactElement => (
   <Tabs
     storage={'tab-index-hobby-web'}
     titles={['Work', 'Trivial', 'Pull Request']}
-    contents={[
-      <CardsProject items={personal} />,
-      <CardsProject items={trivial} />,
-      <MarkdownContent content={pullRequest} />,
-    ]}
+    contents={[<CardsProject items={personal} />, <CardsProject items={trivial} />, <Markdown content={pullRequest} />]}
   />
 )
 

@@ -13,7 +13,7 @@ test('disable prompt after agreeing to proceed', () => {
     />
   )
   fireEvent(
-    screen.getByText(/proceed anyway/),
+    screen.getByRole('button'),
     new MouseEvent('click', {
       bubbles: true,
     })

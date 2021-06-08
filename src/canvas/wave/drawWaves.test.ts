@@ -1,6 +1,6 @@
 import { WaveArguments, Wave } from 'my-wave-type'
 
-import { drawWaves } from 'src/canvas/wave/drawWaves'
+import { drawWaves } from './drawWaves'
 import wave from 'src/canvas/wave/wave'
 
 const canvas = document.createElement('canvas')

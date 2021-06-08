@@ -1,7 +1,11 @@
 import React from 'react'
 import { useImmer } from 'use-immer'
 
-import { TabsProps } from 'my-tab-type'
+type TabsProps = {
+  contents: React.ReactElement[]
+  storage: string
+  titles: string[]
+}
 
 const Tabs = ({ titles, contents, storage }: TabsProps): React.ReactElement => {
   const [cur, setCur] = useImmer(parseInt(localStorage.getItem(storage) ?? '0'))

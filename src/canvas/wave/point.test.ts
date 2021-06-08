@@ -1,6 +1,6 @@
 import { PointArguments, Point } from 'my-wave-type'
 
-import point from 'src/canvas/wave/point'
+import point from './point'
 
 let pointProps: PointArguments, pointMock: Point
 

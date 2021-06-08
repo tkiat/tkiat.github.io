@@ -1,23 +1,21 @@
 import React from 'react'
 
 import Cards from 'src/content/utils/Cards'
-import MarkdownContent from 'src/content/utils/MarkdownContent'
+import Markdown from 'src/content/utils/Markdown'
 import Tabs from 'src/content/utils/Tabs'
 
-export default (): React.ReactElement => {
-  return (
-    <Tabs
-      storage="tab-index-about-personality"
-      titles={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
-      contents={[
-        <Cards items={overview} />,
-        <Cards items={goal_purpose} />,
-        <Cards items={preferences} />,
-        <MarkdownContent content={opinion} />,
-      ]}
-    />
-  )
-}
+export default (): React.ReactElement => (
+  <Tabs
+    storage="tab-index-about-personality"
+    titles={['Overview', 'Goal & Purpose', 'Preferences', 'Opinion']}
+    contents={[
+      <Cards items={overview} />,
+      <Cards items={goal_purpose} />,
+      <Cards items={preferences} />,
+      <Markdown content={opinion} />,
+    ]}
+  />
+)
 
 const overview = [
   `
