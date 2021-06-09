@@ -9,12 +9,12 @@ type TabsProps = {
   initIndex: number
 
   cleanup: () => void
-  updateRef: (i: number) => void
+  update: (...args: any[]) => void
 
   items: TabItem[]
 }
 
-const Tabs = ({ initIndex, cleanup, updateRef, items }: TabsProps): React.ReactElement => {
+const Tabs = ({ initIndex, cleanup, update, items }: TabsProps): React.ReactElement => {
   const [cur, setCur] = useImmer(initIndex)
   React.useEffect(() => {
     window.addEventListener('beforeunload', cleanup)
@@ -36,7 +36,7 @@ const Tabs = ({ initIndex, cleanup, updateRef, items }: TabsProps): React.ReactE
                 key={i}
                 onClick={() => {
                   setCur(i)
-                  updateRef(i)
+                  update(i)
                 }}
                 aria-controls={'panel' + i}
                 aria-selected={cur === i ? 'true' : 'false'}>

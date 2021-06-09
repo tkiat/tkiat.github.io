@@ -1,6 +1,7 @@
+import { Level } from 'my-nav-type'
 import { ThemeBase, ThemeSupplement, Time } from 'my-theme-type'
 
-const initialThemes = (() => {
+export const initialThemes = (() => {
   const isBaseTheme = (theme: string | null): theme is ThemeBase => {
     const themes: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
     return themes.includes(theme as ThemeBase)
@@ -22,7 +23,7 @@ const initialThemes = (() => {
   }
 })()
 
-const initialTime = (() => {
+export const initialTime = (() => {
   const isTime = (time: string | null): time is Time => {
     const times: Time[] = ['day', 'dark']
     return times.includes(time as Time)
@@ -33,10 +34,27 @@ const initialTime = (() => {
   return isTime(local) ? local : timeFallback
 })()
 
-const isSafariBrowser = (() => {
+export const isSafariBrowser = (() => {
   const userAgentString = navigator.userAgent
   const isSafariBrowserAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
   return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
 })()
 
-export { initialThemes, initialTime, isSafariBrowser }
+type UrlMain = {
+  [k in Level]: string
+}
+type UrlSub = {
+  [k in Level]: string[]
+}
+export const urls: { main: UrlMain; sub: UrlSub } = {
+  main: {
+    0: '/about',
+    1: '/hobby',
+    2: '/resume',
+  },
+  sub: {
+    0: ['/Intro', '/Personality', '/Record', '/Credits'],
+    1: ['/Web', '/PC', '/Environment', '/Others'],
+    2: [],
+  },
+}

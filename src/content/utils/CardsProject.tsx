@@ -28,8 +28,32 @@ const CardsProject = ({ items }: CardsProjectProps): React.ReactElement => {
               <div className="cards-project__type">{item.type}</div>
               <h3>{item.title}</h3>
               {item.description && <span> - {item.description}</span>}
+
+              {item.src && (
+                <div className="cards-project__item cards-project__item--link">
+                  <a href={item.src} aria-label={'source code of ' + item.title}>
+                    Source
+                  </a>
+                </div>
+              )}
+
+              {item.live && (
+                <div className="cards-project__item cards-project__item--link">
+                  <a href={item.live} aria-label={'go to ' + item.title}>
+                    Live
+                  </a>
+                </div>
+              )}
+              {item.keyword.map((k, i) => {
+                return (
+                  <div key={i} className="cards-project__item cards-project__item--keyword">
+                    {k}
+                  </div>
+                )
+              })}
             </div>
 
+            {/*
             {item.src && (
               <div className="cards-project__item cards-project__item--link">
                 <a href={item.src} aria-label={'source code of ' + item.title}>
@@ -53,6 +77,7 @@ const CardsProject = ({ items }: CardsProjectProps): React.ReactElement => {
                 </div>
               )
             })}
+            */}
           </div>
         )
       })}

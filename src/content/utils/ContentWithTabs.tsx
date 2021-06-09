@@ -1,6 +1,6 @@
 import React from 'react'
 import Tabs from 'src/content/utils/Tabs'
-import { getInitTabIndex, setLocalStorage, updateRef } from 'src/@global/utils'
+import { getInitTabIndex, updateRef } from 'src/@global/utils'
 
 type item = {
   title: string
@@ -12,13 +12,13 @@ type LocalProps = {
 }
 
 export default ({ items, storage }: LocalProps): React.ReactElement => {
-  const curRef = React.useRef<number>(getInitTabIndex(storage))
+  const curTabRef = React.useRef<number>(getInitTabIndex(storage))
   return (
     <Tabs
       initIndex={getInitTabIndex(storage)}
       items={items}
-      cleanup={() => setLocalStorage(storage, curRef.current.toString())}
-      updateRef={(index: number) => updateRef(curRef, index)}
+      cleanup={() => localStorage.setItem(storage, curTabRef.current.toString())}
+      update={(index: number) => updateRef(curTabRef, index)}
     />
   )
 }

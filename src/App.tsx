@@ -5,7 +5,8 @@ import { Redirect, Router } from '@reach/router'
 import { Level, NavIndexsType } from 'my-nav-type'
 import { DuckColors, ThemeProps, Time, TubesColors, WavesColors, WavesConfigs, WavesPhysics } from 'my-theme-type'
 
-import { initialThemes, initialTime, isSafariBrowser } from 'src/@global/defaultValues'
+import * as data from 'src/@global/defaultValues'
+import getWaveLine from 'src/@global/getWaveLine'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
 import injectCustomTheme from 'src/@global/injectCustomTheme'
 import updateFavicon from 'src/@global/updateFavicon'
@@ -22,36 +23,25 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO waveConfig put dim in another file
-// TODO merge navItemsAtIndex and urlAtIndex et al. to configsAtIndex
+// TODO remove popstate and use proper reach router update LocationProvider https://stackoverflow.com/questions/57678103/reach-router-navigate-updates-url-but-not-component
+// TODO do work in cardsproject
+// TODO in nav setocalstorage only when cleanup
+
+let willShowSafariPrompt = data.isSafariBrowser
 
 const levels: Level[] = [0, 1, 2]
-const navItemsAtIndex: { [k in Level]: string[] } = {
-  '0': ['/Intro', '/Personality', '/Record', '/Credits'],
-  '1': ['/Web', '/PC', '/Environment', '/Others'],
-  '2': [],
-}
 const numWaves = 3
-const urlAtIndex: { [k in Level]: string } = {
-  '0': '/about',
-  '1': '/hobby',
-  '2': '/resume',
-}
-
 const numSidebarButton = 1
 const numPointsOnWave = levels.length + numSidebarButton + 1
-let willShowSafariPrompt = isSafariBrowser
 
 const App = (): React.ReactElement => {
   const tabIndexDefault = {
     '0': parseInt(localStorage.getItem('tabIndexLv0Cur') ?? '0'),
     '1': parseInt(localStorage.getItem('tabIndexLv1Cur') ?? '0'),
     '2': null,
-    '3': null,
   }
 
-  const navMainIndex = levels.find((level) => window.location.pathname.startsWith(urlAtIndex[level])) || levels[0]
-  const navItems = navItemsAtIndex[navMainIndex]
+  const navMainIndex = levels.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || levels[0]
   const shouldMoveWave = navMainIndex === 0 || navMainIndex === 1
 
   const [, triggerReRender] = React.useState({})
@@ -59,8 +49,8 @@ const App = (): React.ReactElement => {
   const viewportDimensions = useViewportDimensions(500)
 
   const [navSubIndexs, setNavSubIndexs] = useImmer<NavIndexsType>(tabIndexDefault)
-  const [theme, setTheme] = useImmer<ThemeProps>(initialThemes)
-  const [time, setTime] = useImmer<Time>(initialTime)
+  const [theme, setTheme] = useImmer<ThemeProps>(data.initialThemes)
+  const [time, setTime] = useImmer<Time>(data.initialTime)
   const [wavePhysics, setWavePhysics] = useImmer<WavesPhysics>({
     height: 10,
     speed: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.05,
@@ -79,24 +69,7 @@ const App = (): React.ReactElement => {
   const waveColors = React.useRef<WavesColors>(['', '', ''])
 
   const wavesConfig = React.useMemo<WavesConfigs>(() => {
-    const { from, to } = (function () {
-      switch (navMainIndex) {
-        case 0:
-        case 1:
-          return {
-            from: { x: 0, y: viewportDimensions.height - 30 },
-            to: {
-              x: viewportDimensions.width,
-              y: viewportDimensions.height - 30,
-            },
-          }
-        default:
-          return {
-            from: { x: 0, y: 120 },
-            to: { x: viewportDimensions.width, y: 200 },
-          }
-      }
-    })()
+    const { from, to } = getWaveLine(viewportDimensions)[navMainIndex]
     return {
       from: from,
       to: to,
@@ -116,9 +89,10 @@ const App = (): React.ReactElement => {
     window.addEventListener('popstate', function () {
       triggerReRender({})
 
-      const navMainIndex = levels.find((level) => window.location.pathname.startsWith(urlAtIndex[level])) || levels[0]
+      const navMainIndex =
+        levels.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || levels[0]
       if (navMainIndex === 0 || navMainIndex === 1) {
-        const newNavIndex = navItems.findIndex((item) => window.location.pathname.endsWith(item))
+        const newNavIndex = data.urls.sub[navMainIndex].findIndex((item) => window.location.pathname.endsWith(item))
         setNavSubIndexs((draft) => {
           draft[navMainIndex] = newNavIndex
         })
@@ -168,13 +142,17 @@ const App = (): React.ReactElement => {
     return (
       <main id="main" className="main">
         <Router>
-          <Redirect from="/" to={'/about' + navItemsAtIndex[0][tabIndexDefault[0]]} noThrow />
-          <Redirect from="/about" to={'/about' + navItemsAtIndex[0][tabIndexDefault[0]]} noThrow />
-          <Redirect from="/hobby" to={'/hobby' + navItemsAtIndex[1][tabIndexDefault[1]]} noThrow />
+          <Redirect from="/" to={'/about' + data.urls.sub[0][tabIndexDefault[0]]} noThrow />
+          <Redirect from="/about" to={'/about' + data.urls.sub[0][tabIndexDefault[0]]} noThrow />
+          <Redirect from="/hobby" to={'/hobby' + data.urls.sub[1][tabIndexDefault[1]]} noThrow />
         </Router>
 
         <Contact navMainIndex={navMainIndex} />
-        <Title navSubIndex={navSubIndexs[navMainIndex]} items={navItems} navMainIndex={navMainIndex} />
+        <Title
+          navSubIndex={navSubIndexs[navMainIndex]}
+          items={data.urls.sub[navMainIndex]}
+          navMainIndex={navMainIndex}
+        />
 
         <Background theme={theme.base} />
         <Canvas
@@ -183,14 +161,14 @@ const App = (): React.ReactElement => {
           aria-label="Background Wave"
         />
         <Content isInsideWater={navMainIndex === 2} />
-        <NavMain navMainIndex={navMainIndex} onclick={() => triggerReRender({})} urlAtIndex={urlAtIndex} />
+        <NavMain navMainIndex={navMainIndex} onclick={() => triggerReRender({})} urlAtIndex={data.urls.main} />
         <NavSub
           navSubIndex={navSubIndexs[navMainIndex]}
           setNavSubIndexs={setNavSubIndexs}
-          baseURL={urlAtIndex[navMainIndex]}
-          items={navItems}
+          baseURL={data.urls.main[navMainIndex]}
+          items={data.urls.sub[navMainIndex]}
           navMainIndex={navMainIndex}
-          keyOffsets={[0, navItemsAtIndex[0].length]}
+          keyOffsets={[0, data.urls.sub[0].length]}
         />
         <Sidebar
           wavePhysics={wavePhysics}

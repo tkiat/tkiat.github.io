@@ -12,19 +12,59 @@ import PC from 'src/content/hobby/PC'
 import Web from 'src/content/hobby/Web'
 import Resume from 'src/content/resume/Resume'
 
-let NotFoundRoute = (props: RouteComponentProps) => <NotFound className="notfound notfound--content" />
+let NotFoundRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-notfound">
+    <NotFound className="notfound notfound--content" />
+  </div>
+)
 
-let IntroRoute = (props: RouteComponentProps) => <Intro />
-let PersonalityRoute = (props: RouteComponentProps) => <Personality />
-let RecordRoute = (props: RouteComponentProps) => <Record />
-let CreditsRoute = (props: RouteComponentProps) => <Credits />
+let IntroRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-about-intro">
+    <Intro />
+  </div>
+)
+let PersonalityRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-about-personality">
+    <Personality />
+  </div>
+)
+let RecordRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-about-record">
+    <Record />
+  </div>
+)
+let CreditsRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-about-credits">
+    <Credits />
+  </div>
+)
 
-let OthersHRoute = (props: RouteComponentProps) => <OthersH />
-let WebRoute = (props: RouteComponentProps) => <Web />
-let PCRoute = (props: RouteComponentProps) => <PC />
-let EnvironmentRoute = (props: RouteComponentProps) => <Environment />
+let WebRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-hobby-web">
+    <Web />
+  </div>
+)
+let PCRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-hobby-pc">
+    <PC />
+  </div>
+)
+let EnvironmentRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-hobby-environment">
+    <Environment />
+  </div>
+)
+let OthersHRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-hobby-others">
+    <OthersH />
+  </div>
+)
 
-let ResumeRoute = (props: RouteComponentProps) => <Resume />
+let ResumeRoute = (props: RouteComponentProps) => (
+  <div data-testid="page-resume">
+    <Resume />
+  </div>
+)
 
 const Content = ({ isInsideWater }: { isInsideWater: boolean }): React.ReactElement => {
   return (
