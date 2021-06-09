@@ -4,7 +4,7 @@ import Cards from 'src/content/utils/Cards'
 import Markdown from 'src/content/utils/Markdown'
 import ContentWithTabs from 'src/content/utils/ContentWithTabs'
 
-import data from './recordData'
+import * as data from './recordData'
 
 const storage = 'tab-index-about-record'
 const items = [

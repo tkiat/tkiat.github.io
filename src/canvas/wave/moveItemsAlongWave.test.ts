@@ -1,10 +1,9 @@
 import { WaveArguments } from 'my-wave-type'
 
+import { stripHTMLWhitespaces } from 'src/@global/utils'
 import { moveItemsAlongWave } from './moveItemsAlongWave'
-
 import wave from 'src/canvas/wave/wave'
 
-const stripHTMLWhitespaces = (str: string) => str.replace(/>\s+</g, '><')
 const getDocWithItems = (numItems: number) => {
   return stripHTMLWhitespaces('<div>' + '<div class="item">Item</div>'.repeat(numItems) + '</div>')
 }

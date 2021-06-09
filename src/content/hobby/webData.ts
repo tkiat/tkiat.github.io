@@ -1,4 +1,4 @@
-const work = [
+export const work = [
   {
     title: 'This Website',
     description: 'A very customizable personal website',
@@ -44,7 +44,7 @@ const work = [
   },
 ]
 
-const trivial = [
+export const trivial = [
   {
     title: 'Simple RegEx Program Emulator',
     description: 'Just overlay the highlight layer on top of textbox',
@@ -61,9 +61,7 @@ const trivial = [
   },
 ]
 
-const pullRequest = `
+export const pullRequest = `
 Will add more.
 - [2021-05-05](https://github.com/prettier/prettier/pull/11009) - **Prettier** - **Document** - **Fix Bug** - Change 'Markdown' to 'markdown' otherwise it won't work.
 `
-
-export default { work, trivial, pullRequest }

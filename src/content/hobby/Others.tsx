@@ -3,7 +3,7 @@ import React from 'react'
 import Markdown from 'src/content/utils/Markdown'
 import ContentWithTabs from 'src/content/utils/ContentWithTabs'
 
-import data from './othersData'
+import * as data from './othersData'
 
 const storage = 'tab-index-hobby-others'
 const items = [

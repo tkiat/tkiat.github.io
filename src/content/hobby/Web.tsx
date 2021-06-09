@@ -4,7 +4,7 @@ import CardsProject from 'src/content/utils/CardsProject'
 import Markdown from 'src/content/utils/Markdown'
 import ContentWithTabs from 'src/content/utils/ContentWithTabs'
 
-import data from './webData'
+import * as data from './webData'
 
 const storage = 'tab-index-hobby-web'
 const items = [

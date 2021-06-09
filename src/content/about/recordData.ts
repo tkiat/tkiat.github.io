@@ -1,4 +1,4 @@
-const gadgets = [
+export const gadgets = [
   `
 ### Laptop
 - Lenovo T400
@@ -41,7 +41,7 @@ const gadgets = [
   - **Wireless USB Adapter**: Atheros AR9271 x 3
 `,
 ]
-const software = [
+export const software = [
   `
 ### OS
   - **Desktop (main)**: GNU Guix, Debian
@@ -83,17 +83,15 @@ const software = [
   - **Password Manager**: [password-store](https://www.passwordstore.org/)
 `,
 ]
-const hygiene = `
+export const hygiene = `
 - **Nose Hair Scissor**: Dove
 - **Razor**: 1$ safety razor and 3$ shavette
 - **Razor Blade**: mostly Dorco ST300, others include Feather DE blades
 - **Shaving Creme**: A cheap Barbasol can
 - **Soap**: I prefer bar soap, mostly Asepso
 `
-const drinks = `
+export const drinks = `
 - **Coffee**: NONE
 - **Tea**: Currently cheap green tea (with branches!) and cheap powder black tea
 - **Herbal Tea**: Red Roibos, Chrysanthemum, Yerba Mate, and anything else adventurous
 `
-
-export default { gadgets, software, hygiene, drinks }

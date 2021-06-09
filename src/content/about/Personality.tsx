@@ -4,7 +4,7 @@ import Cards from 'src/content/utils/Cards'
 import Markdown from 'src/content/utils/Markdown'
 import ContentWithTabs from 'src/content/utils/ContentWithTabs'
 
-import data from './personalityData'
+import * as data from './personalityData'
 
 const storage = 'tab-index-about-personality'
 const items = [

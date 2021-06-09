@@ -1,4 +1,4 @@
-const overview = [
+export const overview = [
   `
 ### MBTI Test
 ##### 31 Mar 2021 on [16personalities.com](https://www.16personalities.com/)
@@ -26,7 +26,7 @@ const overview = [
 `,
 ]
 
-const goal_purpose = [
+export const goal_purpose = [
   `
 # Life Purpose
 
@@ -71,7 +71,7 @@ I'd like to become a gardener, with knowledge and space.
 `,
 ]
 
-const preferences = [
+export const preferences = [
   `
 ### Food & Drink
 - Simple > Tasty
@@ -113,7 +113,7 @@ const preferences = [
 `,
 ]
 
-const opinion = `
+export const opinion = `
 - **Animal**: Carnivores suck.
 - **Anime**: No ugly women and not realistic. The voice is also annoying.
 - **Apple**: The hardware is good but their proprietary and closed-source ecosystem sucks. I bought around 30 movies (only finished half of them) from iTunes and then promptly deleted my account after realizing how suck it is.
@@ -126,5 +126,3 @@ const opinion = `
 - **Social Media**: Lack in essence and therefore suck. Of course, it can be good if you are selective enough.
 - **Tea**: Tea bag sucks. The quality is abysmal and also doesn't respect environment but it is still much less worse than sweetened green tea in a plastic bottle. Pu-erh tea is the best because it often comes with a natural package in a condensed space.
 `
-
-export default { overview, goal_purpose, preferences, opinion }

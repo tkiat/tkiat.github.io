@@ -1,6 +1,6 @@
 import injectCustomTheme from './injectCustomTheme'
 
-test('return ERROR if the argumen element is not a stylesheet', () => {
+test('return ERROR status if the argument element is not a stylesheet', () => {
   const invalidStyle = document.createElement('div') as unknown as HTMLStyleElement
   document.head.appendChild(invalidStyle)
   const status = injectCustomTheme(invalidStyle)
