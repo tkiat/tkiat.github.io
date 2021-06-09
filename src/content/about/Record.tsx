@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Cards from 'src/content/utils/Cards'
 import Markdown from 'src/content/utils/Markdown'
+import CardsMarkdown from 'src/content/utils/CardsMarkdown'
 import ContentWithTabs from 'src/content/utils/ContentWithTabs'
 
 import * as data from './recordData'
@@ -10,23 +10,11 @@ const storage = 'tab-index-about-record'
 const items = [
   {
     title: 'Gadgets',
-    content: (
-      <Cards
-        items={data.gadgets.map((x) => (
-          <Markdown content={x} />
-        ))}
-      />
-    ),
+    content: <CardsMarkdown mdArray={data.gadgets} />,
   },
   {
     title: 'Software',
-    content: (
-      <Cards
-        items={data.software.map((x) => (
-          <Markdown content={x} />
-        ))}
-      />
-    ),
+    content: <CardsMarkdown mdArray={data.software} />,
   },
   {
     title: 'Hygiene',
