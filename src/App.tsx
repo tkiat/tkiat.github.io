@@ -22,6 +22,7 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO waveConfig put dim in another file
 // TODO merge navItemsAtIndex and urlAtIndex et al. to configsAtIndex
 
 const levels: Level[] = [0, 1, 2]

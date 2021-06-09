@@ -12,6 +12,8 @@ import PC from 'src/content/hobby/PC'
 import Web from 'src/content/hobby/Web'
 import Resume from 'src/content/resume/Resume'
 
+let NotFoundRoute = (props: RouteComponentProps) => <NotFound className="notfound notfound--content" />
+
 let IntroRoute = (props: RouteComponentProps) => <Intro />
 let PersonalityRoute = (props: RouteComponentProps) => <Personality />
 let RecordRoute = (props: RouteComponentProps) => <Record />
@@ -23,7 +25,6 @@ let PCRoute = (props: RouteComponentProps) => <PC />
 let EnvironmentRoute = (props: RouteComponentProps) => <Environment />
 
 let ResumeRoute = (props: RouteComponentProps) => <Resume />
-let NotFoundRoute = (props: RouteComponentProps) => <NotFound className="notfound notfound--content" />
 
 const Content = ({ isInsideWater }: { isInsideWater: boolean }): React.ReactElement => {
   return (

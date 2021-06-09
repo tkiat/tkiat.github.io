@@ -9,12 +9,12 @@ type TabsProps = {
   initIndex: number
 
   cleanup: () => void
-  update: (i: number) => void
+  updateRef: (i: number) => void
 
   items: TabItem[]
 }
 
-const Tabs = ({ initIndex, cleanup, update, items }: TabsProps): React.ReactElement => {
+const Tabs = ({ initIndex, cleanup, updateRef, items }: TabsProps): React.ReactElement => {
   const [cur, setCur] = useImmer(initIndex)
   React.useEffect(() => {
     window.addEventListener('beforeunload', cleanup)
@@ -26,19 +26,20 @@ const Tabs = ({ initIndex, cleanup, update, items }: TabsProps): React.ReactElem
   return (
     <>
       <div className="tabs tabs--content">
-        <div className="tabs__list" role="tablist">
+        <div className="tabs__list" role="tablist" aria-label="content tabs">
           {items.map(({ title }, i) => {
             return (
               <button
                 className={'tabs__button' + (cur === i ? ' tabs__button--active' : '')}
+                role="tab"
+                id={'tab' + i}
                 key={i}
                 onClick={() => {
                   setCur(i)
-                  update(i)
+                  updateRef(i)
                 }}
                 aria-controls={'panel' + i}
-                aria-selected={cur === i ? 'true' : 'false'}
-                role="tab">
+                aria-selected={cur === i ? 'true' : 'false'}>
                 {title}
               </button>
             )
@@ -47,7 +48,12 @@ const Tabs = ({ initIndex, cleanup, update, items }: TabsProps): React.ReactElem
       </div>
       {items.map(({ content }, i) => {
         return (
-          <div id={'panel' + i} key={i} style={{ display: cur === i ? 'block' : 'none' }}>
+          <div
+            role="tabpanel"
+            aria-labelledby={'tab' + i}
+            id={'panel' + i}
+            key={i}
+            style={{ display: cur === i ? 'block' : 'none' }}>
             {content}
           </div>
         )

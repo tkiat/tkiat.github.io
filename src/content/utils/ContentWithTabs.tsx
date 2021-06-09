@@ -18,7 +18,7 @@ export default ({ items, storage }: LocalProps): React.ReactElement => {
       initIndex={getInitTabIndex(storage)}
       items={items}
       cleanup={() => setLocalStorage(storage, curRef.current.toString())}
-      update={(index: number) => updateRef(curRef, index)}
+      updateRef={(index: number) => updateRef(curRef, index)}
     />
   )
 }
