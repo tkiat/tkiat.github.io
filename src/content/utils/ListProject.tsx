@@ -1,6 +1,6 @@
 import React from 'react'
 
-type CardProject = {
+type Project = {
   title: string
   description: string
   keyword: string[]
@@ -10,50 +10,25 @@ type CardProject = {
   live?: string
   src?: string
 }
-type CardsProjectProps = {
-  items: CardProject[]
+type ListProjectProps = {
+  items: Project[]
 }
 
-const CardsProject = ({ items }: CardsProjectProps): React.ReactElement => {
+const CardsProject = ({ items }: ListProjectProps): React.ReactElement => {
   return (
     <div className="cards-projects">
       {items.map((item, i) => {
         return (
           <div className="cards-project" key={i}>
+            <div className="cards-project__item cards-project__item--type">{item.type}</div>
             <div
               className={
                 'cards-project__item cards-project__item--description' +
                 (item.inactive ? ' cards-project__item--description-inactive' : '')
               }>
-              <div className="cards-project__type">{item.type}</div>
               <h3>{item.title}</h3>
               {item.description && <span> - {item.description}</span>}
-
-              {item.src && (
-                <div className="cards-project__item cards-project__item--link">
-                  <a href={item.src} aria-label={'source code of ' + item.title}>
-                    Source
-                  </a>
-                </div>
-              )}
-
-              {item.live && (
-                <div className="cards-project__item cards-project__item--link">
-                  <a href={item.live} aria-label={'go to ' + item.title}>
-                    Live
-                  </a>
-                </div>
-              )}
-              {item.keyword.map((k, i) => {
-                return (
-                  <div key={i} className="cards-project__item cards-project__item--keyword">
-                    {k}
-                  </div>
-                )
-              })}
             </div>
-
-            {/*
             {item.src && (
               <div className="cards-project__item cards-project__item--link">
                 <a href={item.src} aria-label={'source code of ' + item.title}>
@@ -77,7 +52,6 @@ const CardsProject = ({ items }: CardsProjectProps): React.ReactElement => {
                 </div>
               )
             })}
-            */}
           </div>
         )
       })}

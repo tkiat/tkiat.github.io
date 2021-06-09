@@ -2,7 +2,7 @@ import React from 'react'
 
 import Markdown from 'src/content/utils/Markdown'
 import CardsMarkdown from 'src/content/utils/CardsMarkdown'
-import ContentWithTabs from 'src/content/utils/ContentWithTabs'
+import TabsContent from 'src/content/utils/TabsContent'
 
 import * as data from './recordData'
 
@@ -26,4 +26,4 @@ const items = [
   },
 ]
 
-export default (): React.ReactElement => <ContentWithTabs items={items} storage={storage} />
+export default (): React.ReactElement => <TabsContent items={items} storage={storage} />

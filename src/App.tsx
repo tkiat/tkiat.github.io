@@ -23,9 +23,9 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO remove popstate and use proper reach router update LocationProvider https://stackoverflow.com/questions/57678103/reach-router-navigate-updates-url-but-not-component
 // TODO do work in cardsproject
-// TODO in nav setocalstorage only when cleanup
+// TODO remove popstate and use proper reach router update LocationProvider https://stackoverflow.com/questions/57678103/reach-router-navigate-updates-url-but-not-component
+// TODO in nav setocalstorage only when cleanup, this can probably custom hook for curRef - put curRef inside setState hook
 
 let willShowSafariPrompt = data.isSafariBrowser
 
