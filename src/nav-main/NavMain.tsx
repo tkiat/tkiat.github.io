@@ -12,24 +12,27 @@ const shapes: { [l in NavMainIndex]: NavMainItemContentProps['shape'] } = {
 }
 const shapeSidebar: NavMainItemSidebarProps['shape'] = 'DuckSidebar'
 
-const contentLevels: NavMainIndex[] = [0, 1, 2]
+const navMainIndexes: NavMainIndex[] = [0, 1, 2]
 const texts = ['About', 'Hobby', 'Resume', 'Settings']
 
 const xOffset = '20px'
 const left = (index: number) => `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
 
-const NavMain = ({ navMainIndex, onclick, urlAtIndex }: NavMainProps): React.ReactElement => {
+const NavMain = ({ navMainIndex, rerender, urlAtIndex }: NavMainProps): React.ReactElement => {
   return (
     <>
-      {contentLevels.map((level) => (
+      {navMainIndexes.map((index) => (
         <NavMainItemContent
-          key={level}
-          href={urlAtIndex[level]}
-          isActive={navMainIndex === level}
-          left={left(level)}
-          onclick={onclick}
-          shape={shapes[level]}
-          text={texts[level]}
+          key={index}
+          href={urlAtIndex[index]}
+          isActive={navMainIndex.current === index}
+          left={left(index)}
+          onclick={() => {
+            navMainIndex.current = index
+            rerender()
+          }}
+          shape={shapes[index]}
+          text={texts[index]}
         />
       ))}
       <NavMainItemSidebar left={left(3)} shape={shapeSidebar} text={texts[3]} />

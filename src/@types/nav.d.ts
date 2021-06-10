@@ -12,8 +12,8 @@ declare module 'my-nav-type' {
   }
 
   export type NavMainProps = {
-    navMainIndex: NavMainIndex
-    onclick: () => void
+    navMainIndex: React.MutableRefObject<NavMainIndex>
+    rerender: () => void
     urlAtIndex: { [k in NavMainIndex]: string }
   }
   export type NavMainItemContentProps = {

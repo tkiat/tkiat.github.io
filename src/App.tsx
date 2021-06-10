@@ -23,6 +23,9 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO remove redundant useState and ref to only ref except wavephysics, probably use context ref with useCallback https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
+// TODO consider mving duckcolors and tubecolors to sidebar and rename them custom-
+
 let willShowSafariPrompt = data.isSafariBrowser
 
 const getNavMainIndex = () => {
@@ -34,21 +37,19 @@ const numPointsOnWave = numNavMainButton + 1
 const numWaves = 3
 
 const App = (): React.ReactElement => {
-  const navMainIndex = React.useRef<NavMainIndex>(data.navMainIndexInit)
-  navMainIndex.current = getNavMainIndex()
-
   const [, triggerReRender] = React.useState({})
 
   const viewportDimensions = useViewportDimensions(500)
 
   const [navSubIndexes, setNavSubIndexes] = useImmer<NavSubIndexes>(data.navSubIndexesInit)
-
-  const navSubIndexesRef = React.useRef<NavSubIndexes>(data.navSubIndexesInit)
-  navSubIndexesRef.current = navSubIndexes
-
   const [theme, setTheme] = useImmer<ThemeProps>(data.themeInit)
   const [time, setTime] = useImmer<Time>(data.timeInit)
   const [wavePhysics, setWavePhysics] = useImmer<WavesPhysics>(data.wavePhysicsInit)
+
+  const navMainIndex = React.useRef<NavMainIndex>(data.navMainIndexInit)
+
+  const navSubIndexesRef = React.useRef<NavSubIndexes>(data.navSubIndexesInit)
+  navSubIndexesRef.current = navSubIndexes
 
   const themeRef = React.useRef<ThemeProps>(data.themeInit)
   themeRef.current = theme
@@ -200,7 +201,7 @@ const App = (): React.ReactElement => {
           aria-label="Background Wave"
         />
         <Content isInsideWater={navMainIndex.current === 2} />
-        <NavMain navMainIndex={navMainIndex.current} onclick={() => triggerReRender({})} urlAtIndex={data.urls.main} />
+        <NavMain navMainIndex={navMainIndex} rerender={() => triggerReRender({})} urlAtIndex={data.urls.main} />
         <NavSub
           navSubIndex={navSubIndexes[navMainIndex.current]}
           setNavSubIndexes={setNavSubIndexes}
