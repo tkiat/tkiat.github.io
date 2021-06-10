@@ -1,18 +1,18 @@
 import React from 'react'
 
-import { Level, NavMainProps, NavMainItemContentProps, NavMainItemSidebarProps } from 'my-nav-type'
+import { NavMainIndex, NavMainProps, NavMainItemContentProps, NavMainItemSidebarProps } from 'my-nav-type'
 
 import NavMainItemContent from './NavMainItemContent'
 import NavMainItemSidebar from './NavMainItemSidebar'
 
-const shapes: { [l in Level]: NavMainItemContentProps['shape'] } = {
+const shapes: { [l in NavMainIndex]: NavMainItemContentProps['shape'] } = {
   0: 'DuckAbout',
   1: 'DuckHobby',
   2: 'DuckResume',
 }
 const shapeSidebar: NavMainItemSidebarProps['shape'] = 'DuckSidebar'
 
-const contentLevels: Level[] = [0, 1, 2]
+const contentLevels: NavMainIndex[] = [0, 1, 2]
 const texts = ['About', 'Hobby', 'Resume', 'Settings']
 
 const xOffset = '20px'

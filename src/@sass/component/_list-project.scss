@@ -10,9 +10,9 @@
     display: block;
     border: 2px solid var(--tube-stroke-color);
     border-collapse: collapse;
-    margin: 16px 0;
+    margin: 12px 0;
     padding: 0;
-    box-shadow: 4px 4px var(--tube-stroke-color);
+    box-shadow: 3px 3px var(--tube-stroke-color);
     transition: box-shadow 0.4s;
     &:hover {
       box-shadow: 0px 0px var(--tube-stroke-color);
@@ -23,6 +23,7 @@
       padding: 2px 5px;
       box-decoration-break: clone;
       &--description {
+        margin: 0;
         display: inline;
         h3 {
           display: inline;
@@ -49,7 +50,7 @@
       }
       &--keyword {
         position: relative;
-        margin: 0 0 0 5px;
+        margin: 0 0 0 3px;
         color: white;
         &:before {
           content: '';
@@ -64,6 +65,7 @@
         }
       }
       &--type {
+        margin: 0;
         background-color: var(--body-text-color);
         color: var(--body-bg-color);
       }

@@ -1,13 +1,8 @@
 declare module 'my-nav-type' {
   import { Updater } from 'use-immer'
 
-  export type NavIndexsType = {
-    0: number
-    1: number
-    2: null
-  }
-
-  export type Level = keyof NavIndexsType
+  export type NavMainIndex = 0 | 1 | 2
+  export type NavSubIndexes = { [k in Extract<NavMainIndex, 0 | 1>]: number } & { 2: null }
 
   export type NavContentProps = {
     cur: number
@@ -17,9 +12,9 @@ declare module 'my-nav-type' {
   }
 
   export type NavMainProps = {
-    navMainIndex: Level
+    navMainIndex: NavMainIndex
     onclick: () => void
-    urlAtIndex: { [k in Level]: string }
+    urlAtIndex: { [k in NavMainIndex]: string }
   }
   export type NavMainItemContentProps = {
     href: string
@@ -38,21 +33,21 @@ declare module 'my-nav-type' {
   type NavSubSharedProps = {
     baseURL: string
     items: string[]
-    setNavSubIndexs: Updater<NavIndexsType>
+    setNavSubIndexs: Updater<NavSubIndexes>
   }
   export type NavSubProps = NavSubSharedProps & {
     keyOffsets: number[]
     navSubIndex: number | null
-    navMainIndex: Level
+    navMainIndex: NavMainIndex
   }
   export type NavSubGenericProps = NavSubSharedProps & {
     navSubIndex: number
-    navMainIndex: Extract<Level, 0 | 1>
+    navMainIndex: Extract<NavMainIndex, 0 | 1>
   }
   export type NavSubTubeProps = NavSubSharedProps & {
     keyOffset: number
     navSubIndex: number
-    navMainIndex: Extract<Level, 0 | 1>
+    navMainIndex: Extract<NavMainIndex, 0 | 1>
   }
 
   export type flowDirection = 'left' | 'right'

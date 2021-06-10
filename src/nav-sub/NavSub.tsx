@@ -13,7 +13,7 @@ const NavSub = ({
   setNavSubIndexs,
 }: NavSubProps): React.ReactElement => {
   if (navSubIndex === null || (navMainIndex !== 0 && navMainIndex !== 1)) return <></>
-  localStorage.setItem('tabIndexLv' + navMainIndex + 'Cur', navSubIndex.toString())
+  // localStorage.setItem('tab-index-lv' + navMainIndex, navSubIndex.toString())
 
   const isMobile = window.matchMedia('(max-width: 768px)')
   if (isMobile.matches) {

@@ -18,7 +18,7 @@ export const work = [
   },
   {
     title: 'Freedom Oriented Blog',
-    description: 'My trivialal blog using Pelican',
+    description: 'My blog using Pelican',
     keyword: ['HTML', 'SCSS', 'JS', 'Pelican', 'Jinja'],
 
     src: 'https://github.com/tkiat/freedom-oriented-blog',

@@ -1,7 +1,7 @@
-import { Level } from 'my-nav-type'
+import { NavMainIndex } from 'my-nav-type'
 import { Dimension, Line } from 'my-util-type'
 
-export default (viewport: Dimension): { [k in Level]: Line } => ({
+export default (viewport: Dimension): { [k in NavMainIndex]: Line } => ({
   0: {
     from: {
       x: 0,
