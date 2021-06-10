@@ -13,6 +13,12 @@ export const navMainIndexInit = (() => {
   return ts.isType(index, indexes) ? index : fallback
 })()
 
+export const navSubIndexesInit: NavSubIndexes = {
+  '0': parseInt(localStorage.getItem('nav-main-index0-sub-index') ?? '0'),
+  '1': parseInt(localStorage.getItem('nav-main-index1-sub-index') ?? '0'),
+  '2': null,
+}
+
 export const themeInit = (() => {
   const fallback: Extract<ThemeBase, ThemeSupplement> = 'sakura'
 
@@ -36,12 +42,6 @@ export const timeInit = (() => {
   const timeLocal = localStorage.getItem('time')
   return ts.isType(timeLocal, times) ? timeLocal : fallbcak
 })()
-
-export const navSubIndexesInit: NavSubIndexes = {
-  '0': parseInt(localStorage.getItem('nav-main-index0-sub-index') ?? '0'),
-  '1': parseInt(localStorage.getItem('nav-main-index1-sub-index') ?? '0'),
-  '2': null,
-}
 
 export const wavePhysicsInit = (() => {
   const speedFallback = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? '0' : '0.05'

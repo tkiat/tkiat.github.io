@@ -41,5 +41,7 @@ declare module 'my-settings-type' {
     waveColors: React.MutableRefObject<WavesColors>
     wavePhysics: WavesPhysics
     setWavePhysics: Updater<WavesPhysics>
+
+    customThemeRef: React.MutableRefObject<{ [p: string]: string }>
   }
 }

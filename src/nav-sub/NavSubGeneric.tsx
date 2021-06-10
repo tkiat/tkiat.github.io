@@ -9,10 +9,10 @@ const NavBarGeneric = ({
   items,
   navMainIndex,
   navSubIndex,
-  setNavSubIndexs,
+  setNavSubIndexes,
 }: NavSubGenericProps): React.ReactElement => {
   const onclick = (i: number) => {
-    setNavSubIndexs((draft) => {
+    setNavSubIndexes((draft) => {
       draft[navMainIndex] = i
     })
   }

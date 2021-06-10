@@ -22,6 +22,7 @@ const Sidebar = ({
   waveColors,
   wavePhysics,
   setWavePhysics,
+  customThemeRef,
 }: SidebarProps): React.ReactElement => {
   const [, triggerReRender] = useState({})
   useEffect(() => {
@@ -33,24 +34,24 @@ const Sidebar = ({
       setTheme((draft) => {
         draft.supplement = 'custom'
       })
-    localStorage.setItem(variable, value)
+    customThemeRef.current[variable] = value
 
     const themeSupplementCustomElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement
-    injectCustomTheme(themeSupplementCustomElem)
+    injectCustomTheme(themeSupplementCustomElem, customThemeRef.current)
   }
 
   const changeDuckColors = (obj: Partial<DuckColors>) => {
     const [part, rgb] = Object.entries(obj)[0] as [keyof DuckColors, DuckColors[keyof DuckColors]]
-    changeCustomThemeVariable('--duck-' + part + '-color', rgb)
+    changeCustomThemeVariable('duck-' + part + '-color', rgb)
     duckColors.current[part] = rgb
   }
   const changeTubeColors = (obj: Partial<TubesColors>) => {
     const [part, rgb] = Object.entries(obj)[0] as [keyof TubesColors, TubesColors[keyof TubesColors]]
-    changeCustomThemeVariable('--tube-' + part + '-color', rgb)
+    changeCustomThemeVariable('tube-' + part + '-color', rgb)
     tubeColors.current[part] = rgb
   }
   const changeWaveColor = (waveIndex: number, rgba: string) => {
-    changeCustomThemeVariable('--wave-front' + waveIndex + '-color', rgba)
+    changeCustomThemeVariable('wave-front' + waveIndex + '-color', rgba)
     waveColors.current[waveIndex] = rgba
   }
   const changeWavePhysics = (obj: Partial<WavesPhysics>) => {

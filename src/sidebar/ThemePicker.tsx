@@ -8,8 +8,6 @@ const ThemePicker = ({ base, supplement, isActive, setTheme }: ThemePickerProps)
       draft.base = base
       draft.supplement = supplement
     })
-    localStorage.setItem('theme-base', base)
-    localStorage.setItem('theme-supplement', supplement)
   }
   const text = supplement[0].toUpperCase() + supplement.slice(1)
   return (

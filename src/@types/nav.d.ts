@@ -33,7 +33,7 @@ declare module 'my-nav-type' {
   type NavSubSharedProps = {
     baseURL: string
     items: string[]
-    setNavSubIndexs: Updater<NavSubIndexes>
+    setNavSubIndexes: Updater<NavSubIndexes>
   }
   export type NavSubProps = NavSubSharedProps & {
     keyOffsets: number[]

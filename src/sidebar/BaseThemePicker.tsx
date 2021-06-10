@@ -9,8 +9,6 @@ const BaseThemePickerItem = ({ base, current, setTheme }: BaseThemePickerItemPro
       draft.base = base
       draft['custom-base'] = base
     })
-    localStorage.setItem('theme-base', base)
-    localStorage.setItem('theme-custom-base', base)
   }
   const title = base[0].toUpperCase() + base.slice(1)
   return (

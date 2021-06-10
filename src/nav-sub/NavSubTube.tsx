@@ -50,10 +50,10 @@ const NavBarTube = ({
   keyOffset,
   navMainIndex,
   navSubIndex,
-  setNavSubIndexs,
+  setNavSubIndexes,
 }: NavSubTubeProps): React.ReactElement => {
   const callback = (to: Even) =>
-    setNavSubIndexs((draft) => {
+    setNavSubIndexes((draft) => {
       draft[navMainIndex] = to / 2
     })
   return (

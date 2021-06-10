@@ -23,10 +23,6 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO add wave height o localstorage and apply it at init
-// TODO save everyhing beforeunload to lcoalstorage in App.tsx
-// TODO in nav setocalstorage only when cleanup, this can probably custom hook for curRef - put curRef inside setState hook
-
 let willShowSafariPrompt = data.isSafariBrowser
 
 const getNavMainIndex = () => {
@@ -40,16 +36,28 @@ const numWaves = 3
 const App = (): React.ReactElement => {
   const navMainIndex = React.useRef<NavMainIndex>(data.navMainIndexInit)
   navMainIndex.current = getNavMainIndex()
-  const shouldMoveWave = navMainIndex.current === 0 || navMainIndex.current === 1
 
   const [, triggerReRender] = React.useState({})
 
   const viewportDimensions = useViewportDimensions(500)
 
-  const [navSubIndexs, setNavSubIndexs] = useImmer<NavSubIndexes>(data.navSubIndexesInit)
+  const [navSubIndexes, setNavSubIndexes] = useImmer<NavSubIndexes>(data.navSubIndexesInit)
+
+  const navSubIndexesRef = React.useRef<NavSubIndexes>(data.navSubIndexesInit)
+  navSubIndexesRef.current = navSubIndexes
+
   const [theme, setTheme] = useImmer<ThemeProps>(data.themeInit)
   const [time, setTime] = useImmer<Time>(data.timeInit)
   const [wavePhysics, setWavePhysics] = useImmer<WavesPhysics>(data.wavePhysicsInit)
+
+  const themeRef = React.useRef<ThemeProps>(data.themeInit)
+  themeRef.current = theme
+
+  const timeRef = React.useRef<Time>(data.timeInit)
+  timeRef.current = time
+
+  const wavePhysicsRef = React.useRef<WavesPhysics>(data.wavePhysicsInit)
+  wavePhysicsRef.current = wavePhysics
 
   const duckColors = React.useRef<DuckColors>({
     beak: '',
@@ -62,6 +70,19 @@ const App = (): React.ReactElement => {
   })
   const waveColors = React.useRef<WavesColors>(['', '', ''])
 
+  const getLocalColor = (item: string) => localStorage.getItem(item) ?? 'rgb(0, 0, 0)'
+  const customThemeRef = React.useRef<any>({
+    'duck-beak-color': getLocalColor('custom-duck-beak-color'),
+    'duck-body-color': getLocalColor('custom-duck-body-color'),
+    'duck-wing-color': getLocalColor('custom-duck-wing-color'),
+    'tube-stroke-color': getLocalColor('custom-tube-stroke-color'),
+    'tube-water-color': getLocalColor('custom-tube-water-color'),
+    'wave-front0-color': getLocalColor('custom-wave-front0-color'),
+    'wave-front1-color': getLocalColor('custom-wave-front1-color'),
+    'wave-front2-color': getLocalColor('custom-wave-front2-color'),
+  })
+
+  const shouldMoveWave = navMainIndex.current === 0 || navMainIndex.current === 1
   const wavesConfig = React.useMemo<WavesConfigs>(() => {
     const { from, to } = getWaveLine(viewportDimensions)[navMainIndex.current]
     return {
@@ -78,7 +99,7 @@ const App = (): React.ReactElement => {
     const themeSupplementCustomElem = document.createElement('style')
     themeSupplementCustomElem.id = 'theme-custom-supplement'
     document.head.appendChild(themeSupplementCustomElem)
-    injectCustomTheme(themeSupplementCustomElem)
+    injectCustomTheme(themeSupplementCustomElem, customThemeRef.current)
 
     window.addEventListener('popstate', function () {
       triggerReRender({})
@@ -88,24 +109,33 @@ const App = (): React.ReactElement => {
         const newNavSubIndex = data.urls.sub[navMainIndexNew].findIndex((item) =>
           window.location.pathname.endsWith(item)
         )
-        setNavSubIndexs((draft) => {
+        setNavSubIndexes((draft) => {
           draft[navMainIndexNew] = newNavSubIndex
         })
       }
     })
 
     const cleanup = () => {
-      const navSubIndex = navSubIndexs[navMainIndex.current]
-      // localStorage.setItem('noob', navSubIndex?.toString())
-      localStorage.setItem('noob', new Date().toString())
-      if (typeof navSubIndex === 'number')
-        localStorage.setItem('nav-main-index' + navMainIndex.current + '-sub-index', navSubIndex.toString())
-
       localStorage.setItem('nav-main-index', navMainIndex.current.toString())
+      localStorage.setItem('nav-main-index0-sub-index', navSubIndexesRef.current[0].toString())
+      localStorage.setItem('nav-main-index1-sub-index', navSubIndexesRef.current[1].toString())
+
+      localStorage.setItem('theme-base', themeRef.current.base)
+      localStorage.setItem('theme-supplement', themeRef.current.supplement)
+      localStorage.setItem('theme-custom-base', themeRef.current['custom-base'])
+
+      localStorage.setItem('time', timeRef.current)
+
+      localStorage.setItem('wave-height', wavePhysicsRef.current.height.toString())
+      localStorage.setItem('wave-speed', wavePhysicsRef.current.speed.toString())
+      localStorage.setItem('wave-shakiness', wavePhysicsRef.current.shakiness.toString())
+
+      Object.keys(customThemeRef.current).forEach((prop) => {
+        localStorage.setItem('custom-' + prop, customThemeRef.current[prop])
+      })
     }
     window.addEventListener('beforeunload', cleanup)
     return () => {
-      // cleanup()
       window.removeEventListener('beforeunload', cleanup)
     }
   }, [])
@@ -117,7 +147,6 @@ const App = (): React.ReactElement => {
 
   React.useEffect(() => {
     document.documentElement.setAttribute('time', time)
-    localStorage.setItem('time', time)
   }, [time])
 
   React.useEffect(() => {
@@ -159,7 +188,7 @@ const App = (): React.ReactElement => {
 
         <Contact navMainIndex={navMainIndex.current} />
         <Title
-          navSubIndex={navSubIndexs[navMainIndex.current]}
+          navSubIndex={navSubIndexes[navMainIndex.current]}
           items={data.urls.sub[navMainIndex.current]}
           navMainIndex={navMainIndex.current}
         />
@@ -173,14 +202,15 @@ const App = (): React.ReactElement => {
         <Content isInsideWater={navMainIndex.current === 2} />
         <NavMain navMainIndex={navMainIndex.current} onclick={() => triggerReRender({})} urlAtIndex={data.urls.main} />
         <NavSub
-          navSubIndex={navSubIndexs[navMainIndex.current]}
-          setNavSubIndexs={setNavSubIndexs}
+          navSubIndex={navSubIndexes[navMainIndex.current]}
+          setNavSubIndexes={setNavSubIndexes}
           baseURL={data.urls.main[navMainIndex.current]}
           items={data.urls.sub[navMainIndex.current]}
           navMainIndex={navMainIndex.current}
           keyOffsets={[0, data.urls.sub[0].length]}
         />
         <Sidebar
+          customThemeRef={customThemeRef}
           wavePhysics={wavePhysics}
           setWavePhysics={setWavePhysics}
           theme={theme}

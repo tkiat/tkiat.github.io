@@ -10,10 +10,9 @@ const NavSub = ({
   keyOffsets,
   navMainIndex,
   navSubIndex,
-  setNavSubIndexs,
+  setNavSubIndexes,
 }: NavSubProps): React.ReactElement => {
   if (navSubIndex === null || (navMainIndex !== 0 && navMainIndex !== 1)) return <></>
-  // localStorage.setItem('tab-index-lv' + navMainIndex, navSubIndex.toString())
 
   const isMobile = window.matchMedia('(max-width: 768px)')
   if (isMobile.matches) {
@@ -23,7 +22,7 @@ const NavSub = ({
         items={items}
         navMainIndex={navMainIndex}
         navSubIndex={navSubIndex}
-        setNavSubIndexs={setNavSubIndexs}
+        setNavSubIndexes={setNavSubIndexes}
       />
     )
   } else {
@@ -33,7 +32,7 @@ const NavSub = ({
         items={items}
         navMainIndex={navMainIndex}
         navSubIndex={navSubIndex}
-        setNavSubIndexs={setNavSubIndexs}
+        setNavSubIndexes={setNavSubIndexes}
         keyOffset={keyOffsets[navMainIndex]}
       />
     )
