@@ -5,7 +5,7 @@ const injectCustomTheme = (styleElem: HTMLStyleElement, customThemeObj: { [k: st
 
   const customStyle =
     Object.entries(customThemeObj).reduce(
-      (sofar, entry) => sofar + '--' + entry[0] + ':' + entry[1] + ';',
+      (sofar, entry) => sofar + '--' + entry[0] + '-color:' + entry[1] + ';',
       '[theme-supplement="custom"] {'
     ) + '}'
 

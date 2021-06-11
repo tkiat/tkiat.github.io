@@ -5,9 +5,9 @@ const point = (obj: PointArguments): Point => {
   let _y = obj.y
 
   return {
-    oscillate: () => {
-      _radian += obj.speed
-      _y = obj.y + Math.sin(_radian) * obj.height + Math.random() * obj.shakiness
+    oscillate: (height, speed, shakiness) => {
+      _radian += speed
+      _y = obj.y + Math.sin(_radian) * height + Math.random() * shakiness
     },
     x: obj.x,
     getY: () => {

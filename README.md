@@ -12,7 +12,7 @@ npm init @vitejs/app my-app -- --template react-ts
 
 ### Wave
 
-The wave represents my journey. This [Youtube video](https://www.youtube.com/watch?v=LLfhY4eVwDY) gave me inspiration. I modified it so that its properties are adjustable on the fly. Changing its physical property, unlike colors, will trigger a page re-rendering because any abrupt physical change should reflect a new location.
+The wave represents my journey. This [Youtube video](https://www.youtube.com/watch?v=LLfhY4eVwDY) gave me inspiration. I modified it so that its properties are adjustable on the fly. Changing its properties doesn't cause re-render of the wave.
 
 ### Settings
 

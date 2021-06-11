@@ -12,7 +12,7 @@ const computeCoordinates = (to: Coordinate, from: Coordinate, totalPoints: numbe
   }
   return coordinates
 }
-const createPoints = (index: number, coordinates: Coordinate[], height: number, speed: number, shakiness: number) => {
+const createPoints = (index: number, coordinates: Coordinate[]) => {
   let points: Point[] = []
 
   for (let i = 0; i < coordinates.length; i++) {
@@ -21,10 +21,6 @@ const createPoints = (index: number, coordinates: Coordinate[], height: number, 
 
       x: coordinates[i].x,
       y: coordinates[i].y,
-
-      height: height,
-      speed: speed,
-      shakiness: shakiness,
     })
   }
   return points
@@ -33,7 +29,7 @@ const createPoints = (index: number, coordinates: Coordinate[], height: number, 
 const wave = (obj: WaveArguments): Wave => {
   let _coordinates = computeCoordinates(obj.to, obj.from, obj.totalPoints)
   return {
-    points: createPoints(obj.index, _coordinates, obj.height, obj.speed, obj.shakiness),
+    points: createPoints(obj.index, _coordinates),
   }
 }
 

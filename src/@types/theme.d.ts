@@ -1,6 +1,17 @@
 declare module 'my-theme-type' {
   import { Coordinate } from 'my-util-type'
 
+  export type CustomColors = {
+    'duck-beak': string
+    'duck-body': string
+    'duck-wing': string
+    'tube-stroke': string
+    'tube-water': string
+    'wave-front0': string
+    'wave-front1': string
+    'wave-front2': string
+  }
+
   export type ThemeBase = 'ocean' | 'desert' | 'sakura' | 'snow'
   export type ThemeSupplement = ThemeBase | 'custom'
   export type ThemeProps = {
@@ -11,24 +22,17 @@ declare module 'my-theme-type' {
 
   export type Time = 'day' | 'dark'
 
-  export type DuckColors = {
-    beak: string
-    body: string
-    wing: string
-  }
-  export type TubesColors = {
-    stroke: string
-    water: string
-  }
+  export type WaveConfigs = {
+    num: number
 
-  export type WavesColors = string[]
-  export type WavesConfigs = {
     from: Coordinate
     to: Coordinate
-    num: number
     totalPoints: number
   }
-  export type WavesPhysics = {
+
+  export type WaveColors = string[]
+
+  export type WavePhysics = {
     height: number
     speed: number
     shakiness: number

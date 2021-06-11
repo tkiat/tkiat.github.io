@@ -1,66 +1,45 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful'
 
 import { SidebarProps } from 'my-settings-type'
-import { DuckColors, Time, TubesColors, WavesPhysics } from 'my-theme-type'
+import { CustomColors, Time } from 'my-theme-type'
 
 import injectCustomTheme from 'src/@global/injectCustomTheme'
 import toggleSidebar from 'src/@global/toggleSidebar'
-import { inputs } from './inputs'
+import { inputs } from './sidebarInputs'
+import * as ts from 'src/@global/utils-typescript'
 
 import BaseThemePicker from './BaseThemePicker'
 import ThemePicker from './ThemePicker'
 
+const changeCustomColor = (customColors: React.MutableRefObject<CustomColors>, variable: string, value: string) => {
+  const possibleCustomColors: (keyof CustomColors)[] = [
+    'duck-beak',
+    'duck-body',
+    'duck-wing',
+    'tube-stroke',
+    'tube-water',
+    'wave-front0',
+    'wave-front1',
+    'wave-front2',
+  ]
+  if (ts.isType(variable, possibleCustomColors)) {
+    customColors.current[variable] = value
+    const customThemeElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement // TODO move out
+    injectCustomTheme(customThemeElem, customColors.current)
+  }
+}
+
 const Sidebar = ({
-  duckColors,
   theme,
   setTheme,
   time,
   setTime,
-  tubeColors,
   waveColors,
   wavePhysics,
-  setWavePhysics,
-  customThemeRef,
+  customColors,
 }: SidebarProps): React.ReactElement => {
-  const [, triggerReRender] = useState({})
-  useEffect(() => {
-    triggerReRender({})
-  }, [theme.supplement])
-
-  const changeCustomThemeVariable = (variable: string, value: string) => {
-    theme.supplement !== 'custom' &&
-      setTheme((draft) => {
-        draft.supplement = 'custom'
-      })
-    customThemeRef.current[variable] = value
-
-    const themeSupplementCustomElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement
-    injectCustomTheme(themeSupplementCustomElem, customThemeRef.current)
-  }
-
-  const changeDuckColors = (obj: Partial<DuckColors>) => {
-    const [part, rgb] = Object.entries(obj)[0] as [keyof DuckColors, DuckColors[keyof DuckColors]]
-    changeCustomThemeVariable('duck-' + part + '-color', rgb)
-    duckColors.current[part] = rgb
-  }
-  const changeTubeColors = (obj: Partial<TubesColors>) => {
-    const [part, rgb] = Object.entries(obj)[0] as [keyof TubesColors, TubesColors[keyof TubesColors]]
-    changeCustomThemeVariable('tube-' + part + '-color', rgb)
-    tubeColors.current[part] = rgb
-  }
-  const changeWaveColor = (waveIndex: number, rgba: string) => {
-    changeCustomThemeVariable('wave-front' + waveIndex + '-color', rgba)
-    waveColors.current[waveIndex] = rgba
-  }
-  const changeWavePhysics = (obj: Partial<WavesPhysics>) => {
-    const [key, val] = Object.entries(obj)[0] as [keyof WavesPhysics, WavesPhysics[keyof WavesPhysics]]
-    setWavePhysics((draft) => {
-      draft[key] = val
-    })
-  }
-
+  const [, triggerReRender] = React.useState({})
   return (
     <>
       <button
@@ -84,9 +63,12 @@ const Sidebar = ({
                     type="range"
                     min={min}
                     max={max}
-                    value={wavePhysics[name]}
+                    value={wavePhysics.current[name]}
                     step={step}
-                    onChange={(e) => changeWavePhysics({ [name]: parseFloat(e.target.value) })}
+                    onChange={(e) => {
+                      wavePhysics.current[name] = parseFloat(e.target.value)
+                      triggerReRender({})
+                    }}
                     aria-label={'set wave ' + name}
                   />
                 </div>
@@ -103,7 +85,9 @@ const Sidebar = ({
           <div className="flex flex--sidebar-time">
             <div
               className="flex__item"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTime(e.target.value as Time)}>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setTime(e.target.value as Time)
+              }}>
               {inputs.time.map(({ type, id }, i) => {
                 return (
                   <div key={i}>
@@ -158,7 +142,10 @@ const Sidebar = ({
                         <div className="color-picker__header">{text}</div>
                         <RgbaStringColorPicker
                           color={waveColors.current[i]}
-                          onChange={(rgba) => changeWaveColor(i, rgba)}
+                          onChange={(rgba) => {
+                            changeCustomColor(customColors, 'wave-front' + i + '-color', rgba)
+                            waveColors.current[i] = rgba
+                          }}
                         />
                       </div>
                     </div>
@@ -171,8 +158,8 @@ const Sidebar = ({
                       <div className="color-picker">
                         <div className="color-picker__header">{text}</div>
                         <RgbStringColorPicker
-                          color={duckColors.current[type]}
-                          onChange={(rgb) => changeDuckColors({ [type]: rgb })}
+                          color={customColors.current[type]}
+                          onChange={(rgb) => changeCustomColor(customColors, type, rgb)}
                         />
                       </div>
                     </div>
@@ -185,8 +172,8 @@ const Sidebar = ({
                       <div className="color-picker">
                         <div className="color-picker__header">{text}</div>
                         <RgbStringColorPicker
-                          color={tubeColors.current[type]}
-                          onChange={(rgb) => changeTubeColors({ [type]: rgb })}
+                          color={customColors.current[type]}
+                          onChange={(rgb) => changeCustomColor(customColors, type, rgb)}
                         />
                       </div>
                     </div>

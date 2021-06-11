@@ -3,7 +3,7 @@ import { useImmer } from 'use-immer'
 import { Redirect, Router } from '@reach/router'
 
 import { NavMainIndex, NavSubIndexes } from 'my-nav-type'
-import { DuckColors, ThemeProps, Time, TubesColors, WavesColors, WavesConfigs, WavesPhysics } from 'my-theme-type'
+import { CustomColors, ThemeProps, Time, WaveColors, WaveConfigs, WavePhysics } from 'my-theme-type'
 
 import * as data from 'src/@global/defaultValues'
 import getWaveLine from 'src/@global/getWaveLine'
@@ -24,7 +24,6 @@ import Sidebar from 'src/sidebar/Sidebar'
 import 'src/@sass/main.scss'
 
 // TODO remove redundant useState and ref to only ref except wavephysics, probably use context ref with useCallback https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
-// TODO consider mving duckcolors and tubecolors to sidebar and rename them custom-
 
 let willShowSafariPrompt = data.isSafariBrowser
 
@@ -44,47 +43,31 @@ const App = (): React.ReactElement => {
   const [navSubIndexes, setNavSubIndexes] = useImmer<NavSubIndexes>(data.navSubIndexesInit)
   const [theme, setTheme] = useImmer<ThemeProps>(data.themeInit)
   const [time, setTime] = useImmer<Time>(data.timeInit)
-  const [wavePhysics, setWavePhysics] = useImmer<WavesPhysics>(data.wavePhysicsInit)
 
+  const customColors = React.useRef<CustomColors>({
+    'duck-beak': localStorage.getItem('custom-duck-beak-color') ?? 'rgb(0, 0, 0)',
+    'duck-body': localStorage.getItem('custom-duck-body-color') ?? 'rgb(0, 0, 0)',
+    'duck-wing': localStorage.getItem('custom-duck-wing-color') ?? 'rgb(0, 0, 0)',
+    'tube-stroke': localStorage.getItem('custom-tube-stroke-color') ?? 'rgb(0, 0, 0)',
+    'tube-water': localStorage.getItem('custom-tube-water-color') ?? 'rgb(0, 0, 0)',
+    'wave-front0': localStorage.getItem('custom-wave-front0-color') ?? 'rgb(0, 0, 0)',
+    'wave-front1': localStorage.getItem('custom-wave-front1-color') ?? 'rgb(0, 0, 0)',
+    'wave-front2': localStorage.getItem('custom-wave-front2-color') ?? 'rgb(0, 0, 0)',
+  })
   const navMainIndex = React.useRef<NavMainIndex>(data.navMainIndexInit)
+  const waveColors = React.useRef<WaveColors>(['', '', ''])
+  const wavePhysics = React.useRef<WavePhysics>(data.wavePhysicsInit)
 
-  const navSubIndexesRef = React.useRef<NavSubIndexes>(data.navSubIndexesInit)
-  navSubIndexesRef.current = navSubIndexes
-
-  const themeRef = React.useRef<ThemeProps>(data.themeInit)
-  themeRef.current = theme
-
-  const timeRef = React.useRef<Time>(data.timeInit)
-  timeRef.current = time
-
-  const wavePhysicsRef = React.useRef<WavesPhysics>(data.wavePhysicsInit)
-  wavePhysicsRef.current = wavePhysics
-
-  const duckColors = React.useRef<DuckColors>({
-    beak: '',
-    body: '',
-    wing: '',
-  })
-  const tubeColors = React.useRef<TubesColors>({
-    stroke: '',
-    water: '',
-  })
-  const waveColors = React.useRef<WavesColors>(['', '', ''])
-
-  const getLocalColor = (item: string) => localStorage.getItem(item) ?? 'rgb(0, 0, 0)'
-  const customThemeRef = React.useRef<any>({
-    'duck-beak-color': getLocalColor('custom-duck-beak-color'),
-    'duck-body-color': getLocalColor('custom-duck-body-color'),
-    'duck-wing-color': getLocalColor('custom-duck-wing-color'),
-    'tube-stroke-color': getLocalColor('custom-tube-stroke-color'),
-    'tube-water-color': getLocalColor('custom-tube-water-color'),
-    'wave-front0-color': getLocalColor('custom-wave-front0-color'),
-    'wave-front1-color': getLocalColor('custom-wave-front1-color'),
-    'wave-front2-color': getLocalColor('custom-wave-front2-color'),
-  })
+  const cleanupRef = React.useRef<any>(null)
+  cleanupRef.current = {
+    navSubIndexes: navSubIndexes,
+    theme: theme,
+    time: time,
+    // wavePhysics: wavePhysics,
+  }
 
   const shouldMoveWave = navMainIndex.current === 0 || navMainIndex.current === 1
-  const wavesConfig = React.useMemo<WavesConfigs>(() => {
+  const waveConfigs = React.useMemo<WaveConfigs>(() => {
     const { from, to } = getWaveLine(viewportDimensions)[navMainIndex.current]
     return {
       from: from,
@@ -100,7 +83,7 @@ const App = (): React.ReactElement => {
     const themeSupplementCustomElem = document.createElement('style')
     themeSupplementCustomElem.id = 'theme-custom-supplement'
     document.head.appendChild(themeSupplementCustomElem)
-    injectCustomTheme(themeSupplementCustomElem, customThemeRef.current)
+    injectCustomTheme(themeSupplementCustomElem, customColors.current)
 
     window.addEventListener('popstate', function () {
       triggerReRender({})
@@ -118,21 +101,25 @@ const App = (): React.ReactElement => {
 
     const cleanup = () => {
       localStorage.setItem('nav-main-index', navMainIndex.current.toString())
-      localStorage.setItem('nav-main-index0-sub-index', navSubIndexesRef.current[0].toString())
-      localStorage.setItem('nav-main-index1-sub-index', navSubIndexesRef.current[1].toString())
 
-      localStorage.setItem('theme-base', themeRef.current.base)
-      localStorage.setItem('theme-supplement', themeRef.current.supplement)
-      localStorage.setItem('theme-custom-base', themeRef.current['custom-base'])
+      localStorage.setItem('nav-main-index0-sub-index', cleanupRef.current.navSubIndexes[0].toString())
+      localStorage.setItem('nav-main-index1-sub-index', cleanupRef.current.navSubIndexes[1].toString())
 
-      localStorage.setItem('time', timeRef.current)
+      localStorage.setItem('theme-base', cleanupRef.current.theme.base)
+      localStorage.setItem('theme-supplement', cleanupRef.current.theme.supplement)
+      localStorage.setItem('theme-custom-base', cleanupRef.current.theme['custom-base'])
 
-      localStorage.setItem('wave-height', wavePhysicsRef.current.height.toString())
-      localStorage.setItem('wave-speed', wavePhysicsRef.current.speed.toString())
-      localStorage.setItem('wave-shakiness', wavePhysicsRef.current.shakiness.toString())
+      localStorage.setItem('time', cleanupRef.current.time)
 
-      Object.keys(customThemeRef.current).forEach((prop) => {
-        localStorage.setItem('custom-' + prop, customThemeRef.current[prop])
+      localStorage.setItem('wave-height', wavePhysics.current.height.toString())
+      localStorage.setItem('wave-speed', wavePhysics.current.speed.toString())
+      localStorage.setItem('wave-shakiness', wavePhysics.current.shakiness.toString())
+      //       localStorage.setItem('wave-height', cleanupRef.current.wavePhysics.height.toString())
+      //       localStorage.setItem('wave-speed', cleanupRef.current.wavePhysics.speed.toString())
+      //       localStorage.setItem('wave-shakiness', cleanupRef.current.wavePhysics.shakiness.toString())
+
+      Object.keys(customColors.current).forEach((prop) => {
+        localStorage.setItem('custom-' + prop + '-color', customColors.current[prop as keyof CustomColors])
       })
     }
     window.addEventListener('beforeunload', cleanup)
@@ -157,15 +144,6 @@ const App = (): React.ReactElement => {
     waveColors.current = [0, 1, 2].map((n) => {
       return computedRootStyle.getPropertyValue('--wave-front' + n + '-color')
     })
-    duckColors.current = {
-      beak: computedRootStyle.getPropertyValue('--duck-beak-color'),
-      body: computedRootStyle.getPropertyValue('--duck-body-color'),
-      wing: computedRootStyle.getPropertyValue('--duck-wing-color'),
-    }
-    tubeColors.current = {
-      stroke: computedRootStyle.getPropertyValue('--tube-stroke-color'),
-      water: computedRootStyle.getPropertyValue('--tube-water-color'),
-    }
   }, [theme.supplement, time])
 
   if (willShowSafariPrompt) {
@@ -197,7 +175,7 @@ const App = (): React.ReactElement => {
         <Background theme={theme.base} />
         <Canvas
           argumentCanvas={viewportDimensions}
-          argumentDrawCanvas={{ wavesConfig, waveColors, wavePhysics }}
+          argumentDrawCanvas={{ waveConfigs, waveColors, wavePhysics }}
           aria-label="Background Wave"
         />
         <Content isInsideWater={navMainIndex.current === 2} />
@@ -211,15 +189,12 @@ const App = (): React.ReactElement => {
           keyOffsets={[0, data.urls.sub[0].length]}
         />
         <Sidebar
-          customThemeRef={customThemeRef}
+          customColors={customColors}
           wavePhysics={wavePhysics}
-          setWavePhysics={setWavePhysics}
           theme={theme}
           setTheme={setTheme}
           time={time}
           setTime={setTime}
-          duckColors={duckColors}
-          tubeColors={tubeColors}
           waveColors={waveColors}
         />
       </main>

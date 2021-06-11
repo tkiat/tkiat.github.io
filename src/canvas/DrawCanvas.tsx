@@ -7,7 +7,7 @@ import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 
-const DrawCanvas = ({ wavesConfig, waveColors, wavePhysics }: DrawCanvasProps): DrawCanvasRender => {
+const DrawCanvas = ({ waveConfigs, waveColors, wavePhysics }: DrawCanvasProps): DrawCanvasRender => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -17,17 +17,13 @@ const DrawCanvas = ({ wavesConfig, waveColors, wavePhysics }: DrawCanvasProps): 
     const context = canvas.getContext('2d')
     if (!context) return
 
-    const waves = [...Array(wavesConfig.num).keys()].map((i) => {
+    const waves = [...Array(waveConfigs.num).keys()].map((i) => {
       return wave({
         index: i,
 
-        from: wavesConfig.from,
-        to: wavesConfig.to,
-        totalPoints: wavesConfig.totalPoints,
-
-        height: wavePhysics.height,
-        speed: wavePhysics.speed,
-        shakiness: wavePhysics.shakiness,
+        from: waveConfigs.from,
+        to: waveConfigs.to,
+        totalPoints: waveConfigs.totalPoints,
       })
     })
 
@@ -36,7 +32,7 @@ const DrawCanvas = ({ wavesConfig, waveColors, wavePhysics }: DrawCanvasProps): 
     let animationFrameId: number
 
     const render = () => {
-      drawWaves(context, waves, waveColors.current)
+      drawWaves(context, waves, waveColors.current, wavePhysics.current)
       moveItemsAlongWave(navMainItems, waves[waves.length - 1], creatureOffset)
       animationFrameId = window.requestAnimationFrame(render)
     }
@@ -46,7 +42,7 @@ const DrawCanvas = ({ wavesConfig, waveColors, wavePhysics }: DrawCanvasProps): 
       window.cancelAnimationFrame(animationFrameId)
     }
     // eslint-disable-next-line
-  }, [wavesConfig, wavePhysics])
+  }, [waveConfigs])
 
   return canvasRef
 }
