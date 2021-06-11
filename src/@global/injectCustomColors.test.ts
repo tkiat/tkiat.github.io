@@ -1,16 +1,27 @@
-import injectCustomTheme from './injectCustomTheme'
+import injectCustomColors from './injectCustomColors'
 
 test('return ERROR status if the argument element is not a stylesheet', () => {
   const invalidStyle = document.createElement('div') as unknown as HTMLStyleElement
   document.head.appendChild(invalidStyle)
-  const status = injectCustomTheme(invalidStyle)
+  const status = injectCustomColors(invalidStyle, {})
   expect(status).toBe(1)
 })
 
 test('custom theme should contain all expected custom fields', () => {
   const style = document.createElement('style')
   document.head.appendChild(style)
-  const status = injectCustomTheme(style)
+
+  const customColors = {
+    'duck-beak': 'rgb(0, 0, 0)',
+    'duck-body': 'rgb(0, 0, 0)',
+    'duck-wing': 'rgb(0, 0, 0)',
+    'tube-stroke': 'rgb(0, 0, 0)',
+    'tube-water': 'rgb(0, 0, 0)',
+    'wave-front0': 'rgb(0, 0, 0)',
+    'wave-front1': 'rgb(0, 0, 0)',
+    'wave-front2': 'rgb(0, 0, 0)',
+  }
+  const status = injectCustomColors(style, customColors)
 
   expect(style.sheet).toBeTruthy()
   if (!style.sheet) return
@@ -18,7 +29,7 @@ test('custom theme should contain all expected custom fields', () => {
   expect(style.sheet.cssRules[0]).toBeInstanceOf(CSSStyleRule)
   if (!(style.sheet.cssRules[0] instanceof CSSStyleRule)) return
 
-  expect(style.sheet.cssRules[0].selectorText).toBe("[theme-supplement='custom']")
+  expect(style.sheet.cssRules[0].selectorText).toBe('[theme-supplement="custom"]')
   const expectedProperty = [
     '--duck-beak-color',
     '--duck-body-color',

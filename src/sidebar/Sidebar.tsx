@@ -4,7 +4,7 @@ import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful'
 import { SidebarProps } from 'my-settings-type'
 import { CustomColors, Time } from 'my-theme-type'
 
-import injectCustomTheme from 'src/@global/injectCustomTheme'
+import injectCustomColors from 'src/@global/injectCustomColors'
 import toggleSidebar from 'src/@global/toggleSidebar'
 import { inputs } from './sidebarInputs'
 import * as ts from 'src/@global/utils-typescript'
@@ -26,7 +26,7 @@ const changeCustomColor = (customColors: React.MutableRefObject<CustomColors>, v
   if (ts.isType(variable, possibleCustomColors)) {
     customColors.current[variable] = value
     const customThemeElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement // TODO move out
-    injectCustomTheme(customThemeElem, customColors.current)
+    injectCustomColors(customThemeElem, customColors.current)
   }
 }
 

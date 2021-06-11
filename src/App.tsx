@@ -8,7 +8,7 @@ import { CustomColors, ThemeProps, Time, WaveColors, WaveConfigs, WavePhysics } 
 import * as data from 'src/@global/defaultValues'
 import getWaveLine from 'src/@global/getWaveLine'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
-import injectCustomTheme from 'src/@global/injectCustomTheme'
+import injectCustomColors from 'src/@global/injectCustomColors'
 import updateFavicon from 'src/@global/updateFavicon'
 
 import Contact from 'src/@global/component/Contact'
@@ -83,7 +83,7 @@ const App = (): React.ReactElement => {
     const themeSupplementCustomElem = document.createElement('style')
     themeSupplementCustomElem.id = 'theme-custom-supplement'
     document.head.appendChild(themeSupplementCustomElem)
-    injectCustomTheme(themeSupplementCustomElem, customColors.current)
+    injectCustomColors(themeSupplementCustomElem, customColors.current)
 
     window.addEventListener('popstate', function () {
       triggerReRender({})

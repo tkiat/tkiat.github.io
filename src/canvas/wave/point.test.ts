@@ -10,10 +10,6 @@ describe('test return values', () => {
       index: 0,
       x: 100,
       y: 200,
-
-      height: 10,
-      speed: 1,
-      shakiness: 0,
     }
     pointMock = point(pointProps)
   })
@@ -23,7 +19,7 @@ describe('test return values', () => {
     expect(pointMock.getY()).toBe(pointProps.y)
   })
   test('after oscillating once, only y position should not be the same', () => {
-    pointMock.oscillate()
+    pointMock.oscillate(10, 1, 0)
 
     expect(pointMock.x).toBe(pointProps.x)
     expect(pointMock.getY()).not.toBe(pointProps.y)

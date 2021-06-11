@@ -13,10 +13,6 @@ const waveProps: WaveArguments = {
   from: { x: 0, y: 738 },
   to: { x: 1280, y: 738 },
   totalPoints: 5,
-
-  height: 0,
-  speed: 0,
-  shakiness: 0,
 }
 const waveMock = wave(waveProps)
 

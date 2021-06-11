@@ -1,3 +1,4 @@
+import { WaveColors, WavePhysics } from 'my-theme-type'
 import { WaveArguments, Wave } from 'my-wave-type'
 
 import { drawWaves } from './drawWaves'
@@ -13,22 +14,28 @@ const wavePropsBase = {
   to: { x: 1280, y: 600 },
   shakiness: 0,
 }
+let waveColors: WaveColors
+let wavePhysics: WavePhysics
 let waveProps: WaveArguments
-let waveMock: Wave
+let wavesMock: Wave[]
 
 describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color', () => {
   beforeAll(() => {
-    waveProps = { ...wavePropsBase, index: 0, totalPoints: 5, height: 10, speed: 1 }
-    waveMock = wave(waveProps)
+    waveColors = ['red']
+    wavePhysics = { height: 10, speed: 1, shakiness: 0 }
+    waveProps = { ...wavePropsBase, index: 0, totalPoints: 5 }
+    wavesMock = [wave(waveProps)]
 
-    if (context) drawWaves(context, [waveMock], ['red'])
+    if (context) drawWaves(context, wavesMock, waveColors, wavePhysics)
   })
 
   test('test y positions after oscillation', () => {
-    for (let i = 0; i < waveMock.points.length; i++) {
+    for (let i = 0; i < wavesMock[0].points.length; i++) {
       const expectedVal =
-        waveProps.from.y + Math.sin(i + waveProps.index + waveProps.speed) * waveProps.height + waveProps.shakiness
-      expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
+        waveProps.from.y +
+        Math.sin(i + waveProps.index + wavePhysics.speed) * wavePhysics.height +
+        wavePhysics.shakiness
+      expect(wavesMock[0].points[i].getY()).toBeCloseTo(expectedVal, 3)
     }
   })
   test('canvas fill color at lower-right corner should be red', () => {
@@ -39,16 +46,21 @@ describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color
 
 describe('test 2: index = 1 , totalPoints = 3, height = 30, speed = 2, black color', () => {
   beforeAll(() => {
-    waveProps = { ...wavePropsBase, index: 1, totalPoints: 3, height: 30, speed: 2 }
-    waveMock = wave(waveProps)
+    waveColors = ['black']
+    wavePhysics = { height: 30, speed: 2, shakiness: 0 }
+    waveProps = { ...wavePropsBase, index: 1, totalPoints: 3, ...wavePhysics }
+    wavesMock = [wave(waveProps)]
 
-    if (context) drawWaves(context, [waveMock], ['black'])
+    if (context) drawWaves(context, wavesMock, waveColors, wavePhysics)
   })
 
   test('test y positions after oscillation', () => {
-    for (let i = 0; i < waveMock.points.length; i++) {
-      const expectedVal = waveProps.from.y + Math.sin(i + waveProps.index + waveProps.speed) * waveProps.height
-      expect(waveMock.points[i].getY()).toBeCloseTo(expectedVal, 3)
+    for (let i = 0; i < wavesMock[0].points.length; i++) {
+      const expectedVal =
+        waveProps.from.y +
+        Math.sin(i + waveProps.index + wavePhysics.speed) * wavePhysics.height +
+        wavePhysics.shakiness
+      expect(wavesMock[0].points[i].getY()).toBeCloseTo(expectedVal, 3)
     }
   })
   test('canvas fill color at lower-right corner should be black', () => {
