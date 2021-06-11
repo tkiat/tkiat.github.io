@@ -1,5 +1,5 @@
-declare module 'my-wave-type' {
-  import { Coordinate } from 'my-util-type'
+declare module 'ts-type-wave' {
+  import { Coordinate } from 'ts-type-util'
 
   export type PointArguments = {
     index: number

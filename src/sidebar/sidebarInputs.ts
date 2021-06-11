@@ -1,4 +1,4 @@
-import * as Theme from 'my-theme-type'
+import * as Theme from 'ts-type-theme'
 
 type CustomColorsDuck = keyof Pick<Theme.CustomColors, 'duck-beak' | 'duck-body' | 'duck-wing'>
 type CustomColorsTube = keyof Pick<Theme.CustomColors, 'tube-stroke' | 'tube-water'>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from '@reach/router'
 
-import { NavSubTubeProps } from 'my-nav-type'
-import { Even } from 'my-util-type'
+import { NavSubTubeProps } from 'ts-type-nav'
+import { Even } from 'ts-type-util'
 
 import { moveWater } from './moveWater'
 import TubeText from './TubeText'

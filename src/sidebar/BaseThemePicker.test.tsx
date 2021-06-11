@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import * as Theme from 'my-theme-type'
+import * as Theme from 'ts-type-theme'
 
 import BaseThemePicker from './BaseThemePicker'
 
@@ -15,7 +15,7 @@ test('test existence of important elements', () => {
     expect(buttons[i]).toMatch
   }
 
-  const themes: Theme.ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
+  const themes: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
   themes
     .map((theme) => theme[0].toUpperCase() + theme.slice(1))
     .forEach((theme) => {

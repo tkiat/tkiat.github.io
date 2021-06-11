@@ -1,8 +1,8 @@
-import { PointArguments, Point } from 'my-wave-type'
+import * as Wave from 'ts-type-wave'
 
 import point from './point'
 
-let pointProps: PointArguments, pointMock: Point
+let pointProps: Wave.PointArguments, pointMock: Wave.Point
 
 describe('test return values', () => {
   beforeAll(() => {

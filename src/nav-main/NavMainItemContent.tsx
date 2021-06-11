@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { NavMainItemContentProps } from 'my-nav-type'
+import { NavMainItemContentProps } from 'ts-type-nav'
 
 import { ReactComponent as DuckAboutMeSVG } from 'src/@global/asset/duck/duck-aboutme.svg'
 import { ReactComponent as DuckHobbySVG } from 'src/@global/asset/duck/duck-hobby.svg'

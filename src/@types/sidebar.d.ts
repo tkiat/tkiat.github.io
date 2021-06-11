@@ -1,7 +1,7 @@
-declare module 'my-settings-type' {
+declare module 'ts-type-sidebar' {
   import { Updater } from 'use-immer'
 
-  import * as Theme from 'my-theme-type'
+  import * as Theme from 'ts-type-theme'
 
   export type BaseThemePickerProps = {
     current: Theme.Base

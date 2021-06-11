@@ -1,8 +1,8 @@
 import React from 'react'
-import { BaseThemePickerProps, BaseThemePickerItemProps } from 'my-settings-type'
-import * as Theme from 'my-theme-type'
+import * as Sidebar from 'ts-type-sidebar'
+import * as Theme from 'ts-type-theme'
 
-const BaseThemePickerItem = ({ base, current, setTheme }: BaseThemePickerItemProps): React.ReactElement => {
+const BaseThemePickerItem = ({ base, current, setTheme }: Sidebar.BaseThemePickerItemProps): React.ReactElement => {
   const classname = 'theme-picker-base__picker' + (current === base ? ' theme-picker-base__picker--active' : '')
   const onclick = () => {
     setTheme((draft) => {
@@ -18,7 +18,7 @@ const BaseThemePickerItem = ({ base, current, setTheme }: BaseThemePickerItemPro
   )
 }
 
-const BaseThemePicker = ({ current, setTheme }: BaseThemePickerProps): React.ReactElement => {
+const BaseThemePicker = ({ current, setTheme }: Sidebar.BaseThemePickerProps): React.ReactElement => {
   const themes: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
 
   return (

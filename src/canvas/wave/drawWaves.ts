@@ -1,5 +1,5 @@
-import * as Theme from 'my-theme-type'
-import { Wave } from 'my-wave-type'
+import * as Theme from 'ts-type-theme'
+import { Wave } from 'ts-type-wave'
 
 export const drawWaves = (
   ctx: CanvasRenderingContext2D,

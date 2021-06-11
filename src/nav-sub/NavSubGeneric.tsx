@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { NavSubGenericProps } from 'my-nav-type'
+import { NavSubGenericProps } from 'ts-type-nav'
 
 import { ReactComponent as DuckHamburger } from 'src/@global/asset/duck/duck-hamburger.svg'
 

@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react'
 
-import { DrawCanvasProps, DrawCanvasRender } from 'my-canvas-type'
+import * as Canvas from 'ts-type-canvas'
 
 import { drawWaves } from './wave/drawWaves'
 import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 
-const DrawCanvas = ({ waveConfigs, waveColors, wavePhysics }: DrawCanvasProps): DrawCanvasRender => {
+const DrawCanvas = ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasProps): Canvas.DrawCanvas => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {

@@ -2,8 +2,8 @@ import React from 'react'
 import { useImmer } from 'use-immer'
 import { Redirect, Router } from '@reach/router'
 
-import { NavMainIndex, NavSubIndexes } from 'my-nav-type'
-import * as Theme from 'my-theme-type'
+import * as Nav from 'ts-type-nav'
+import * as Theme from 'ts-type-theme'
 
 import * as data from 'src/@global/defaultValues'
 import getWaveLine from 'src/@global/getWaveLine'
@@ -23,8 +23,6 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO change all my-theme-type to ts-type-
-
 let willShowSafariPrompt = data.isSafariBrowser
 
 const numNavMainButtons = 4
@@ -36,7 +34,7 @@ const App = (): React.ReactElement => {
 
   const viewportDimensions = useViewportDimensions(500)
 
-  const [navSubIndexes, setNavSubIndexes] = useImmer<NavSubIndexes>(data.navSubIndexesInit)
+  const [navSubIndexes, setNavSubIndexes] = useImmer<Nav.NavSubIndexes>(data.navSubIndexesInit)
   const [theme, setTheme] = useImmer<Theme.Props>(data.themeInit)
   const [time, setTime] = useImmer<Theme.Time>(data.timeInit)
 
@@ -50,7 +48,7 @@ const App = (): React.ReactElement => {
     'wave-front1': localStorage.getItem('custom-wave-front1-color') ?? 'rgb(0, 0, 0)',
     'wave-front2': localStorage.getItem('custom-wave-front2-color') ?? 'rgb(0, 0, 0)',
   })
-  const navMainIndex = React.useRef<NavMainIndex>(data.navMainIndexInit)
+  const navMainIndex = React.useRef<Nav.NavMainIndex>(data.navMainIndexInit)
   const waveColors = React.useRef<Theme.WaveColors>(['', '', ''])
   const wavePhysics = React.useRef<Theme.WavePhysics>(data.wavePhysicsInit)
 
@@ -84,7 +82,7 @@ const App = (): React.ReactElement => {
       triggerReRender({})
 
       const getNavMainIndex = () => {
-        const indexes: NavMainIndex[] = [0, 1, 2]
+        const indexes: Nav.NavMainIndex[] = [0, 1, 2]
         return indexes.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || indexes[0]
       }
       const navMainIndexNew = getNavMainIndex()

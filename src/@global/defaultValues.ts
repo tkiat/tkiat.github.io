@@ -1,11 +1,11 @@
-import { NavMainIndex, NavSubIndexes } from 'my-nav-type'
-import * as Theme from 'my-theme-type'
+import * as Nav from 'ts-type-nav'
+import * as Theme from 'ts-type-theme'
 
 import * as ts from 'src/@global/utils-typescript'
 
 export const navMainIndexInit = (() => {
-  const fallback: NavMainIndex = 0
-  const indexes: NavMainIndex[] = [0, 1, 2]
+  const fallback: Nav.NavMainIndex = 0
+  const indexes: Nav.NavMainIndex[] = [0, 1, 2]
 
   const indexLocal = localStorage.getItem('nav-main-index')
   if (indexLocal === null) return fallback
@@ -13,7 +13,7 @@ export const navMainIndexInit = (() => {
   return ts.isType(index, indexes) ? index : fallback
 })()
 
-export const navSubIndexesInit: NavSubIndexes = {
+export const navSubIndexesInit: Nav.NavSubIndexes = {
   '0': parseInt(localStorage.getItem('nav-main-index0-sub-index') ?? '0'),
   '1': parseInt(localStorage.getItem('nav-main-index1-sub-index') ?? '0'),
   '2': null,
@@ -63,10 +63,10 @@ export const isSafariBrowser = (() => {
 })()
 
 type UrlMain = {
-  [k in NavMainIndex]: string
+  [k in Nav.NavMainIndex]: string
 }
 type UrlSub = {
-  [k in NavMainIndex]: string[]
+  [k in Nav.NavMainIndex]: string[]
 }
 export const urls: { main: UrlMain; sub: UrlSub } = {
   main: {

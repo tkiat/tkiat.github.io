@@ -1,4 +1,4 @@
-import { Even } from 'my-util-type'
+import { Even } from 'ts-type-util'
 
 import { moveWater } from './moveWater'
 

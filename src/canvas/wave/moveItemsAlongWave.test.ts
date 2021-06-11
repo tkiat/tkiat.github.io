@@ -1,4 +1,4 @@
-import { WaveArguments } from 'my-wave-type'
+import { WaveArguments } from 'ts-type-wave'
 
 import { stripHTMLWhitespaces } from 'src/@global/utils'
 import { moveItemsAlongWave } from './moveItemsAlongWave'

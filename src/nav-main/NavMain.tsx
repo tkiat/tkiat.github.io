@@ -1,24 +1,24 @@
 import React from 'react'
 
-import { NavMainIndex, NavMainProps, NavMainItemContentProps, NavMainItemSidebarProps } from 'my-nav-type'
+import * as Nav from 'ts-type-nav'
 
 import NavMainItemContent from './NavMainItemContent'
 import NavMainItemSidebar from './NavMainItemSidebar'
 
-const shapes: { [l in NavMainIndex]: NavMainItemContentProps['shape'] } = {
+const shapes: { [l in Nav.NavMainIndex]: Nav.NavMainItemContentProps['shape'] } = {
   0: 'DuckAbout',
   1: 'DuckHobby',
   2: 'DuckResume',
 }
-const shapeSidebar: NavMainItemSidebarProps['shape'] = 'DuckSidebar'
+const shapeSidebar: Nav.NavMainItemSidebarProps['shape'] = 'DuckSidebar'
 
-const navMainIndexes: NavMainIndex[] = [0, 1, 2]
+const navMainIndexes: Nav.NavMainIndex[] = [0, 1, 2]
 const texts = ['About', 'Hobby', 'Resume', 'Settings']
 
 const xOffset = '20px'
 const left = (index: number) => `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
 
-const NavMain = ({ navMainIndex, rerender, urlAtIndex }: NavMainProps): React.ReactElement => {
+const NavMain = ({ navMainIndex, rerender, urlAtIndex }: Nav.NavMainProps): React.ReactElement => {
   return (
     <>
       {navMainIndexes.map((index) => (

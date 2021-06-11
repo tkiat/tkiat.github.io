@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavSubProps } from 'my-nav-type'
+import { NavSubProps } from 'ts-type-nav'
 
 import NavSubGeneric from './NavSubGeneric'
 import NavSubTube from './NavSubTube'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { NavMainItemSidebarProps } from 'my-nav-type'
+import { NavMainItemSidebarProps } from 'ts-type-nav'
 
 import toggleSidebar from 'src/@global/toggleSidebar'
 

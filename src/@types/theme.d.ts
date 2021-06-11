@@ -1,5 +1,5 @@
-declare module 'my-theme-type' {
-  import { Coordinate } from 'my-util-type'
+declare module 'ts-type-theme' {
+  import { Coordinate } from 'ts-type-util'
 
   export type CustomColors = {
     'duck-beak': string

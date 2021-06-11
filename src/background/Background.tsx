@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Theme from 'my-theme-type'
+import * as Theme from 'ts-type-theme'
 
 import { ReactComponent as Desert } from 'src/@global/asset/background/desert.svg'
 import { ReactComponent as Ocean } from 'src/@global/asset/background/ocean.svg'

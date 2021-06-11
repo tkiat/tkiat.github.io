@@ -1,5 +1,5 @@
-import * as Theme from 'my-theme-type'
-import { WaveArguments, Wave } from 'my-wave-type'
+import * as Theme from 'ts-type-theme'
+import * as Wave from 'ts-type-wave'
 
 import { drawWaves } from './drawWaves'
 import wave from 'src/canvas/wave/wave'
@@ -16,8 +16,8 @@ const wavePropsBase = {
 }
 let waveColors: Theme.WaveColors
 let wavePhysics: Theme.WavePhysics
-let waveProps: WaveArguments
-let wavesMock: Wave[]
+let waveProps: Wave.WaveArguments
+let wavesMock: Wave.Wave[]
 
 describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color', () => {
   beforeAll(() => {

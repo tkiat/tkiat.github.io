@@ -1,4 +1,4 @@
-import { Status } from 'my-util-type'
+import { Status } from 'ts-type-util'
 
 const injectCustomTheme = (styleElem: HTMLStyleElement, customThemeObj: { [k: string]: string }): Status => {
   if (!styleElem.sheet) return 1

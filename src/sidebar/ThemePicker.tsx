@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemePickerProps } from 'my-settings-type'
+import { ThemePickerProps } from 'ts-type-sidebar'
 
 const ThemePicker = ({ base, supplement, isActive, setTheme }: ThemePickerProps): React.ReactElement => {
   const classname = 'theme-picker' + (isActive ? ' theme-picker--active' : '')

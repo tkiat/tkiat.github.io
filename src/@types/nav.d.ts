@@ -1,4 +1,4 @@
-declare module 'my-nav-type' {
+declare module 'ts-type-nav' {
   import { Updater } from 'use-immer'
 
   export type NavMainIndex = 0 | 1 | 2

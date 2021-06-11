@@ -1,5 +1,5 @@
-import { NavMainIndex } from 'my-nav-type'
-import { Dimension, Line } from 'my-util-type'
+import { NavMainIndex } from 'ts-type-nav'
+import { Dimension, Line } from 'ts-type-util'
 
 export default (viewport: Dimension): { [k in NavMainIndex]: Line } => ({
   0: {

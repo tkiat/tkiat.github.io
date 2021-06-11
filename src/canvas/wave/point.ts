@@ -1,6 +1,6 @@
-import { PointArguments, Point } from 'my-wave-type'
+import * as Wave from 'ts-type-wave'
 
-const point = (obj: PointArguments): Point => {
+const point = (obj: Wave.PointArguments): Wave.Point => {
   let _radian = obj.index
   let _y = obj.y
 

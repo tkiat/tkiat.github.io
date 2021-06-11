@@ -1,4 +1,4 @@
-declare module 'my-util-type' {
+declare module 'ts-type-util' {
   export type Coordinate = { x: number; y: number }
   export type Line = { from: Coordinate; to: Coordinate }
 

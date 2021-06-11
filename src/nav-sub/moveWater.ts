@@ -1,5 +1,5 @@
-import { Even } from 'my-util-type'
-import { flowDirection, flowMode } from 'my-nav-type'
+import { Even } from 'ts-type-util'
+import Nav from 'ts-type-nav'
 
 export const moveWater = (from: Even, to: Even, transitionSec: number): number => {
   if (from === to || from < 0 || to < 0) return 0
@@ -24,8 +24,8 @@ export const moveWater = (from: Even, to: Even, transitionSec: number): number =
 
 const moveWaterToNextNode = (
   textIndex: number,
-  mode: flowMode,
-  flowDir: flowDirection,
+  mode: Nav.flowMode,
+  flowDir: Nav.flowDirection,
   totalTime: number,
   delay: number
 ): number => {

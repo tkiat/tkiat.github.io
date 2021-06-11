@@ -1,8 +1,8 @@
 import React from 'react'
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful'
 
-import { SidebarProps } from 'my-settings-type'
-import * as Theme from 'my-theme-type'
+import { SidebarProps } from 'ts-type-sidebar'
+import * as Theme from 'ts-type-theme'
 
 import injectCustomColors from 'src/@global/injectCustomColors'
 import toggleSidebar from 'src/@global/toggleSidebar'

@@ -1,5 +1,5 @@
-import { Status } from 'my-util-type'
-import { Wave } from 'my-wave-type'
+import { Status } from 'ts-type-util'
+import { Wave } from 'ts-type-wave'
 
 export const moveItemsAlongWave = (items: NodeListOf<HTMLElement>, wave: Wave, offset: number): Status => {
   if (items.length >= wave.points.length) return 1

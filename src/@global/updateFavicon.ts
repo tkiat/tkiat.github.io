@@ -1,4 +1,4 @@
-import { Status } from 'my-util-type'
+import { Status } from 'ts-type-util'
 
 const getProp = (text: string) => getComputedStyle(document.documentElement).getPropertyValue(text)
 

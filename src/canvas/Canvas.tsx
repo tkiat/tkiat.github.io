@@ -1,11 +1,11 @@
 import React from 'react'
-import { CanvasProps } from 'my-canvas-type'
+import * as Canvas from 'ts-type-canvas'
 
 import DrawCanvas from './DrawCanvas'
 
-const Canvas = ({ argumentCanvas, argumentDrawCanvas }: CanvasProps): React.ReactElement => {
+const CanvasComponent = ({ argumentCanvas, argumentDrawCanvas }: Canvas.CanvasProps): React.ReactElement => {
   const canvasRef = DrawCanvas(argumentDrawCanvas)
   return <canvas className="canvas" ref={canvasRef} {...argumentCanvas} role="img" />
 }
 
-export default Canvas
+export default CanvasComponent
