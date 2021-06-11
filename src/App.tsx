@@ -3,7 +3,7 @@ import { useImmer } from 'use-immer'
 import { Redirect, Router } from '@reach/router'
 
 import { NavMainIndex, NavSubIndexes } from 'my-nav-type'
-import { CustomColors, ThemeProps, Time, WaveColors, WaveConfigs, WavePhysics } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 
 import * as data from 'src/@global/defaultValues'
 import getWaveLine from 'src/@global/getWaveLine'
@@ -23,16 +23,12 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-// TODO remove redundant useState and ref to only ref except wavephysics, probably use context ref with useCallback https://reactjs.org/docs/hooks-faq.html#how-to-avoid-passing-callbacks-down
+// TODO change all my-theme-type to ts-type-
 
 let willShowSafariPrompt = data.isSafariBrowser
 
-const getNavMainIndex = () => {
-  const indexes: NavMainIndex[] = [0, 1, 2]
-  return indexes.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || indexes[0]
-}
-const numNavMainButton = 4
-const numPointsOnWave = numNavMainButton + 1
+const numNavMainButtons = 4
+const numPointsOnWave = numNavMainButtons + 1
 const numWaves = 3
 
 const App = (): React.ReactElement => {
@@ -41,10 +37,10 @@ const App = (): React.ReactElement => {
   const viewportDimensions = useViewportDimensions(500)
 
   const [navSubIndexes, setNavSubIndexes] = useImmer<NavSubIndexes>(data.navSubIndexesInit)
-  const [theme, setTheme] = useImmer<ThemeProps>(data.themeInit)
-  const [time, setTime] = useImmer<Time>(data.timeInit)
+  const [theme, setTheme] = useImmer<Theme.Props>(data.themeInit)
+  const [time, setTime] = useImmer<Theme.Time>(data.timeInit)
 
-  const customColors = React.useRef<CustomColors>({
+  const customColors = React.useRef<Theme.CustomColors>({
     'duck-beak': localStorage.getItem('custom-duck-beak-color') ?? 'rgb(0, 0, 0)',
     'duck-body': localStorage.getItem('custom-duck-body-color') ?? 'rgb(0, 0, 0)',
     'duck-wing': localStorage.getItem('custom-duck-wing-color') ?? 'rgb(0, 0, 0)',
@@ -55,19 +51,18 @@ const App = (): React.ReactElement => {
     'wave-front2': localStorage.getItem('custom-wave-front2-color') ?? 'rgb(0, 0, 0)',
   })
   const navMainIndex = React.useRef<NavMainIndex>(data.navMainIndexInit)
-  const waveColors = React.useRef<WaveColors>(['', '', ''])
-  const wavePhysics = React.useRef<WavePhysics>(data.wavePhysicsInit)
+  const waveColors = React.useRef<Theme.WaveColors>(['', '', ''])
+  const wavePhysics = React.useRef<Theme.WavePhysics>(data.wavePhysicsInit)
 
   const cleanupRef = React.useRef<any>(null)
   cleanupRef.current = {
     navSubIndexes: navSubIndexes,
     theme: theme,
     time: time,
-    // wavePhysics: wavePhysics,
   }
 
   const shouldMoveWave = navMainIndex.current === 0 || navMainIndex.current === 1
-  const waveConfigs = React.useMemo<WaveConfigs>(() => {
+  const waveConfigs = React.useMemo<Theme.WaveConfigs>(() => {
     const { from, to } = getWaveLine(viewportDimensions)[navMainIndex.current]
     return {
       from: from,
@@ -88,6 +83,10 @@ const App = (): React.ReactElement => {
     window.addEventListener('popstate', function () {
       triggerReRender({})
 
+      const getNavMainIndex = () => {
+        const indexes: NavMainIndex[] = [0, 1, 2]
+        return indexes.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || indexes[0]
+      }
       const navMainIndexNew = getNavMainIndex()
       if (navMainIndexNew === 0 || navMainIndexNew === 1) {
         const newNavSubIndex = data.urls.sub[navMainIndexNew].findIndex((item) =>
@@ -114,12 +113,9 @@ const App = (): React.ReactElement => {
       localStorage.setItem('wave-height', wavePhysics.current.height.toString())
       localStorage.setItem('wave-speed', wavePhysics.current.speed.toString())
       localStorage.setItem('wave-shakiness', wavePhysics.current.shakiness.toString())
-      //       localStorage.setItem('wave-height', cleanupRef.current.wavePhysics.height.toString())
-      //       localStorage.setItem('wave-speed', cleanupRef.current.wavePhysics.speed.toString())
-      //       localStorage.setItem('wave-shakiness', cleanupRef.current.wavePhysics.shakiness.toString())
 
       Object.keys(customColors.current).forEach((prop) => {
-        localStorage.setItem('custom-' + prop + '-color', customColors.current[prop as keyof CustomColors])
+        localStorage.setItem('custom-' + prop + '-color', customColors.current[prop as keyof Theme.CustomColors])
       })
     }
     window.addEventListener('beforeunload', cleanup)

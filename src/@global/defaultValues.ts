@@ -1,5 +1,5 @@
 import { NavMainIndex, NavSubIndexes } from 'my-nav-type'
-import { ThemeBase, ThemeSupplement, Time } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 
 import * as ts from 'src/@global/utils-typescript'
 
@@ -20,10 +20,10 @@ export const navSubIndexesInit: NavSubIndexes = {
 }
 
 export const themeInit = (() => {
-  const fallback: Extract<ThemeBase, ThemeSupplement> = 'sakura'
+  const fallback: Extract<Theme.Base, Theme.Supplement> = 'sakura'
 
-  const themesBase: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
-  const themesSupplement: ThemeSupplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
+  const themesBase: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
+  const themesSupplement: Theme.Supplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
 
   const themeBaseLocal = localStorage.getItem('theme-base')
   const themeSupplementLocal = localStorage.getItem('theme-supplement')
@@ -36,11 +36,11 @@ export const themeInit = (() => {
 })()
 
 export const timeInit = (() => {
-  const fallbcak: Time = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
-  const times: Time[] = ['day', 'dark']
+  const fallback: Theme.Time = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
+  const times: Theme.Time[] = ['day', 'dark']
 
   const timeLocal = localStorage.getItem('time')
-  return ts.isType(timeLocal, times) ? timeLocal : fallbcak
+  return ts.isType(timeLocal, times) ? timeLocal : fallback
 })()
 
 export const wavePhysicsInit = (() => {

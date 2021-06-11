@@ -19,7 +19,7 @@
   &:hover {
     filter: none;
   }
-  &__nav {
+  &__nav-sub {
     position: absolute;
     top: 0;
     left: 50%;
@@ -60,7 +60,7 @@
 
     color: var(--body-text-color);
   }
-  &__duck {
+  &__nav-main {
     position: absolute;
     bottom: 9px;
 

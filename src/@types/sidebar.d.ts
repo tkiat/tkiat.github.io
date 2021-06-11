@@ -1,34 +1,34 @@
 declare module 'my-settings-type' {
   import { Updater } from 'use-immer'
 
-  import { CustomColors, ThemeBase, ThemeProps, ThemeSupplement, Time, WaveColors, WavePhysics } from 'my-theme-type'
+  import * as Theme from 'my-theme-type'
 
   export type BaseThemePickerProps = {
-    current: ThemeBase
-    setTheme: Updater<ThemeProps>
+    current: Theme.Base
+    setTheme: Updater<Theme.Props>
   }
   export type BaseThemePickerItemProps = BaseThemePickerProps & {
-    base: ThemeBase
+    base: Theme.Base
   }
 
   export type ThemePickerProps = {
-    base: ThemeBase
-    supplement: ThemeSupplement
+    base: Theme.Base
+    supplement: Theme.Supplement
 
     isActive: boolean
-    setTheme: Updater<ThemeProps>
+    setTheme: Updater<Theme.Props>
   }
 
   export type SidebarProps = {
-    theme: ThemeProps
-    setTheme: Updater<ThemeProps>
+    theme: Theme.Props
+    setTheme: Updater<Theme.Props>
 
-    time: Time
-    setTime: Updater<Time>
+    time: Theme.Time
+    setTime: Updater<Theme.Time>
 
-    waveColors: React.MutableRefObject<WaveColors>
-    wavePhysics: React.MutableRefObject<WavePhysics>
+    waveColors: React.MutableRefObject<Theme.WaveColors>
+    wavePhysics: React.MutableRefObject<Theme.WavePhysics>
 
-    customColors: React.MutableRefObject<CustomColors>
+    customColors: React.MutableRefObject<Theme.CustomColors>
   }
 }

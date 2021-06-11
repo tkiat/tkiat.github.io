@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeBase } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 
 import { ReactComponent as Desert } from 'src/@global/asset/background/desert.svg'
 import { ReactComponent as Ocean } from 'src/@global/asset/background/ocean.svg'
@@ -13,7 +13,7 @@ const backgrounds = {
   snow: <Snow className="background" />,
 }
 
-const Background = ({ theme }: { theme: ThemeBase }): React.ReactElement => {
+const Background = ({ theme }: { theme: Theme.Base }): React.ReactElement => {
   return backgrounds[theme]
 }
 

@@ -14,14 +14,14 @@ const ThemePicker = ({ base, supplement, isActive, setTheme }: ThemePickerProps)
     <button className={classname} theme-base={base} theme-supplement={supplement} onClick={onclick}>
       {
         //@ts-ignore
-        <div className="theme-picker__nav" overlaytext={text}>
+        <div className="theme-picker__nav-sub" overlaytext={text}>
           {text}
         </div>
       }
       <div className="theme-picker__header">Header</div>
       <div className="theme-picker__text">This is sample text.</div>
-      <div className="theme-picker__duck theme-picker__duck--0"></div>
-      <div className="theme-picker__duck theme-picker__duck--3"></div>
+      <div className="theme-picker__nav-main theme-picker__nav-main--0"></div>
+      <div className="theme-picker__nav-main theme-picker__nav-main--3"></div>
       <div className="theme-picker__wave theme-picker__wave--0"></div>
       <div className="theme-picker__wave theme-picker__wave--1"></div>
       <div className="theme-picker__wave theme-picker__wave--2"></div>

@@ -1,14 +1,19 @@
-import { WaveColors, WavePhysics } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 import { Wave } from 'my-wave-type'
 
-export const drawWaves = (ctx: CanvasRenderingContext2D, waves: Wave[], colors: WaveColors, physics: WavePhysics) => {
+export const drawWaves = (
+  ctx: CanvasRenderingContext2D,
+  waves: Wave[],
+  colors: Theme.WaveColors,
+  physics: Theme.WavePhysics
+) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   waves.forEach((wave, i: number) => {
     drawWave(ctx, wave, colors[colors.length - 1 - i], physics)
   })
 }
 
-const drawWave = (ctx: CanvasRenderingContext2D, wave: Wave, fillColor: string, physics: WavePhysics) => {
+const drawWave = (ctx: CanvasRenderingContext2D, wave: Wave, fillColor: string, physics: Theme.WavePhysics) => {
   let prevX = wave.points[0].x
   let prevY = wave.points[0].getY()
 

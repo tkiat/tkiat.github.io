@@ -1,6 +1,6 @@
 import React from 'react'
 import { BaseThemePickerProps, BaseThemePickerItemProps } from 'my-settings-type'
-import { ThemeBase } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 
 const BaseThemePickerItem = ({ base, current, setTheme }: BaseThemePickerItemProps): React.ReactElement => {
   const classname = 'theme-picker-base__picker' + (current === base ? ' theme-picker-base__picker--active' : '')
@@ -19,7 +19,7 @@ const BaseThemePickerItem = ({ base, current, setTheme }: BaseThemePickerItemPro
 }
 
 const BaseThemePicker = ({ current, setTheme }: BaseThemePickerProps): React.ReactElement => {
-  const themes: ThemeBase[] = ['ocean', 'desert', 'sakura', 'snow']
+  const themes: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
 
   return (
     <div className="theme-picker-base">

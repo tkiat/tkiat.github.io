@@ -1,4 +1,4 @@
-import { WaveColors, WavePhysics } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 import { WaveArguments, Wave } from 'my-wave-type'
 
 import { drawWaves } from './drawWaves'
@@ -14,8 +14,8 @@ const wavePropsBase = {
   to: { x: 1280, y: 600 },
   shakiness: 0,
 }
-let waveColors: WaveColors
-let wavePhysics: WavePhysics
+let waveColors: Theme.WaveColors
+let wavePhysics: Theme.WavePhysics
 let waveProps: WaveArguments
 let wavesMock: Wave[]
 

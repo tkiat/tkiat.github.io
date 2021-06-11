@@ -2,18 +2,22 @@ import React from 'react'
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful'
 
 import { SidebarProps } from 'my-settings-type'
-import { CustomColors, Time } from 'my-theme-type'
+import * as Theme from 'my-theme-type'
 
 import injectCustomColors from 'src/@global/injectCustomColors'
 import toggleSidebar from 'src/@global/toggleSidebar'
-import { inputs } from './sidebarInputs'
+import * as inputs from './sidebarInputs'
 import * as ts from 'src/@global/utils-typescript'
 
 import BaseThemePicker from './BaseThemePicker'
 import ThemePicker from './ThemePicker'
 
-const changeCustomColor = (customColors: React.MutableRefObject<CustomColors>, variable: string, value: string) => {
-  const possibleCustomColors: (keyof CustomColors)[] = [
+const changeCustomColor = (
+  customColors: React.MutableRefObject<Theme.CustomColors>,
+  variable: string,
+  value: string
+) => {
+  const possibleCustomColors: (keyof Theme.CustomColors)[] = [
     'duck-beak',
     'duck-body',
     'duck-wing',
@@ -51,25 +55,25 @@ const Sidebar = ({
       <div className="sidebar">
         <section className="sidebar__section">
           <div className="sidebar__header">Wave</div>
-          {inputs['wave-physics'].map(({ name, min, max, step }, i) => {
+          {inputs.wavePhysic.map(({ prop, min, max, step }, i) => {
             return (
               <div className="flex flex--sidebar-wave" key={i}>
                 <div className="flex__item">
-                  <label htmlFor={name}>{name[0].toUpperCase() + name.slice(1)}</label>
+                  <label htmlFor={prop}>{prop[0].toUpperCase() + prop.slice(1)}</label>
                 </div>
                 <div className="flex__item">
                   <input
-                    name={name}
+                    name={prop}
                     type="range"
                     min={min}
                     max={max}
-                    value={wavePhysics.current[name]}
+                    value={wavePhysics.current[prop]}
                     step={step}
                     onChange={(e) => {
-                      wavePhysics.current[name] = parseFloat(e.target.value)
+                      wavePhysics.current[prop] = parseFloat(e.target.value)
                       triggerReRender({})
                     }}
-                    aria-label={'set wave ' + name}
+                    aria-label={'set wave ' + prop}
                   />
                 </div>
               </div>
@@ -86,7 +90,7 @@ const Sidebar = ({
             <div
               className="flex__item"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setTime(e.target.value as Time)
+                setTime(e.target.value as Theme.Time)
               }}>
               {inputs.time.map(({ type, id }, i) => {
                 return (
@@ -107,7 +111,7 @@ const Sidebar = ({
           <div className="sidebar__header">Theme</div>
 
           <div className="grid grid--sidebar">
-            {inputs['theme-base']
+            {inputs.themeDefault
               .concat({ base: theme['custom-base'], supplement: 'custom' })
               .map(({ base, supplement }, i) => {
                 return (
@@ -135,7 +139,7 @@ const Sidebar = ({
                   <BaseThemePicker current={theme.base} setTheme={setTheme} />
                 </div>
 
-                {inputs['wave-color'].map((text, i) => {
+                {inputs.waveColorTitle.map((text, i) => {
                   return (
                     <div className="grid__item" key={i}>
                       <div className="color-picker">

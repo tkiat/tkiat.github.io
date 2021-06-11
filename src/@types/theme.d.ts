@@ -12,12 +12,12 @@ declare module 'my-theme-type' {
     'wave-front2': string
   }
 
-  export type ThemeBase = 'ocean' | 'desert' | 'sakura' | 'snow'
-  export type ThemeSupplement = ThemeBase | 'custom'
-  export type ThemeProps = {
-    base: ThemeBase
-    supplement: ThemeSupplement
-    'custom-base': ThemeBase
+  export type Base = 'ocean' | 'desert' | 'sakura' | 'snow'
+  export type Supplement = Base | 'custom'
+  export type Props = {
+    base: Base
+    supplement: Supplement
+    'custom-base': Base
   }
 
   export type Time = 'day' | 'dark'
