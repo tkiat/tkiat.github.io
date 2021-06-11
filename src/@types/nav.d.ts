@@ -1,6 +1,14 @@
 declare module 'ts-type-nav' {
   import { Updater } from 'use-immer'
 
+  type UrlMain = {
+    [k in NavMainIndex]: string
+  }
+  type UrlSub = {
+    [k in NavMainIndex]: string[]
+  }
+  export type Url = { main: UrlMain; sub: UrlSub }
+
   export type NavMainIndex = 0 | 1 | 2
   export type NavSubIndexes = { [k in Extract<NavMainIndex, 0 | 1>]: number } & { 2: null }
 

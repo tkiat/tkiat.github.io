@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 
+import { Url } from 'ts-type-nav'
+
 import NotFound from 'src/@global/component/NotFound'
 import Intro from 'src/content/about/Intro'
 import Credits from 'src/content/about/Credits'
@@ -66,23 +68,28 @@ let ResumeRoute = (props: RouteComponentProps) => (
   </div>
 )
 
-const Content = ({ isInsideWater }: { isInsideWater: boolean }): React.ReactElement => {
+type ContentProps = {
+  isInsideWater: boolean
+  urls: Url
+}
+
+const Content = ({ isInsideWater, urls }: ContentProps): React.ReactElement => {
   return (
     <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
       <Router>
         <NotFoundRoute default />
 
-        <IntroRoute path="/about/Intro" />
-        <PersonalityRoute path="/about/Personality" />
-        <RecordRoute path="/about/Record" />
-        <CreditsRoute path="/about/Credits" />
+        <IntroRoute path={urls.main[0] + urls.sub[0][0]} />
+        <PersonalityRoute path={urls.main[0] + urls.sub[0][1]} />
+        <RecordRoute path={urls.main[0] + urls.sub[0][2]} />
+        <CreditsRoute path={urls.main[0] + urls.sub[0][3]} />
 
-        <OthersHRoute path="/hobby/Others" />
-        <WebRoute path="/hobby/Web" />
-        <PCRoute path="/hobby/PC" />
-        <EnvironmentRoute path="/hobby/Environment" />
+        <WebRoute path={urls.main[1] + urls.sub[1][0]} />
+        <PCRoute path={urls.main[1] + urls.sub[1][1]} />
+        <EnvironmentRoute path={urls.main[1] + urls.sub[1][2]} />
+        <OthersHRoute path={urls.main[1] + urls.sub[1][3]} />
 
-        <ResumeRoute path="/resume" />
+        <ResumeRoute path={urls.main[2]} />
       </Router>
     </div>
   )

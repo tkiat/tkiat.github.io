@@ -62,21 +62,15 @@ export const isSafariBrowser = (() => {
   return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
 })()
 
-type UrlMain = {
-  [k in Nav.NavMainIndex]: string
-}
-type UrlSub = {
-  [k in Nav.NavMainIndex]: string[]
-}
-export const urls: { main: UrlMain; sub: UrlSub } = {
+export const urls: Nav.Url = {
   main: {
     0: '/about',
     1: '/hobby',
-    2: '/resume',
+    2: '/work',
   },
   sub: {
     0: ['/Intro', '/Personality', '/Record', '/Credits'],
-    1: ['/Web', '/PC', '/Environment', '/Others'],
+    1: ['/Web', '/PC', '/TODO', '/Others'],
     2: [],
   },
 }

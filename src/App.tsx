@@ -5,7 +5,7 @@ import { Redirect, Router } from '@reach/router'
 import * as Nav from 'ts-type-nav'
 import * as Theme from 'ts-type-theme'
 
-import * as data from 'src/@global/defaultValues'
+import * as data from 'src/appInputs'
 import getWaveLine from 'src/@global/getWaveLine'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
 import injectCustomColors from 'src/@global/injectCustomColors'
@@ -172,7 +172,7 @@ const App = (): React.ReactElement => {
           argumentDrawCanvas={{ waveConfigs, waveColors, wavePhysics }}
           aria-label="Background Wave"
         />
-        <Content isInsideWater={navMainIndex.current === 2} />
+        <Content isInsideWater={navMainIndex.current === 2} urls={data.urls} />
         <NavMain navMainIndex={navMainIndex} rerender={() => triggerReRender({})} urlAtIndex={data.urls.main} />
         <NavSub
           navSubIndex={navSubIndexes[navMainIndex.current]}

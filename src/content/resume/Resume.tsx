@@ -45,7 +45,7 @@ export default (): React.ReactElement => (
     <h1>Skills</h1>
     <ul>
       <li>
-        <strong>Coding</strong> - General front-end/back-end dev, Python, Linux, Git, Vim
+        <strong>Coding</strong> - General front-end/back-end dev, Basic shell scripting, Linux, Git, Vim
       </li>
       <li>
         <strong>Language</strong> - English (good), Thai (native), German (basic)

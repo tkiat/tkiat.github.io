@@ -29,8 +29,10 @@ const changeCustomColor = (
   ]
   if (ts.isType(variable, possibleCustomColors)) {
     customColors.current[variable] = value
-    const customThemeElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement // TODO move out
+    const customThemeElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement
     injectCustomColors(customThemeElem, customColors.current)
+  } else {
+    console.error('custom color variable is not valid')
   }
 }
 
