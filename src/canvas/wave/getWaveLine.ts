@@ -5,21 +5,21 @@ export default (viewport: Dimension): { [k in NavMainIndex]: Line } => ({
   0: {
     from: {
       x: 0,
-      y: viewport.height - 30,
+      y: viewport.h - 30,
     },
     to: {
-      x: viewport.width,
-      y: viewport.height - 30,
+      x: viewport.w,
+      y: viewport.h - 30,
     },
   },
   1: {
     from: {
       x: 0,
-      y: viewport.height - 30,
+      y: viewport.h - 30,
     },
     to: {
-      x: viewport.width,
-      y: viewport.height - 30,
+      x: viewport.w,
+      y: viewport.h - 30,
     },
   },
   2: {
@@ -28,7 +28,7 @@ export default (viewport: Dimension): { [k in NavMainIndex]: Line } => ({
       y: 120,
     },
     to: {
-      x: viewport.width,
+      x: viewport.w,
       y: 200,
     },
   },

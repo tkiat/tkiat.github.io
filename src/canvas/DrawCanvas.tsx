@@ -41,7 +41,6 @@ const DrawCanvas = ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasP
     return () => {
       window.cancelAnimationFrame(animationFrameId)
     }
-    // eslint-disable-next-line
   }, [waveConfigs])
 
   return canvasRef

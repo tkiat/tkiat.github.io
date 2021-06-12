@@ -15,10 +15,6 @@ import PC from 'src/content/hobby/PC'
 import Web from 'src/content/hobby/Web'
 import Resume from 'src/content/resume/Resume'
 
-type ContentProps = {
-  isInsideWater: boolean
-}
-
 let NotFoundRoute = (props: RouteComponentProps) => (
   <div data-testid="page-notfound">
     <NotFound className="notfound notfound--content" />
@@ -37,6 +33,9 @@ const contents = [
   { path: paths[8], elem: <Resume /> },
 ]
 
+type ContentProps = {
+  isInsideWater: boolean
+}
 const Content = ({ isInsideWater }: ContentProps): React.ReactElement => {
   return (
     <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>

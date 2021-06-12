@@ -7,16 +7,16 @@ import useDebounce from './useDebounce'
 
 const useViewportDimensions = (msDelay: number): Dimension => {
   const [dimensions, setDimensions] = useImmer<Dimension>({
-    height: document.documentElement.clientHeight,
-    width: document.documentElement.clientWidth,
+    h: document.documentElement.clientHeight,
+    w: document.documentElement.clientWidth,
   })
   const debouncedDimension = useDebounce<Dimension>(dimensions, msDelay)
 
   React.useEffect(() => {
     const debouncedHandleResize = () => {
       setDimensions((draft) => {
-        draft.height = document.documentElement.clientHeight
-        draft.width = document.documentElement.clientWidth
+        draft.h = document.documentElement.clientHeight
+        draft.w = document.documentElement.clientWidth
       })
     }
     window.addEventListener('resize', debouncedHandleResize)

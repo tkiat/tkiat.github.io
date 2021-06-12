@@ -6,7 +6,7 @@ import * as Nav from 'ts-type-nav'
 import * as Theme from 'ts-type-theme'
 
 import * as data from 'src/appInputs'
-import getWaveLine from 'src/@global/getWaveLine'
+import getWaveLine from 'src/canvas/wave/getWaveLine'
 import * as ts from 'src/@global/utils-typescript'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
 import injectCustomColors from 'src/@global/injectCustomColors'
@@ -17,14 +17,12 @@ import SafariWarning from 'src/@global/component/SafariWarning'
 import Title from 'src/@global/component/Title'
 import Background from 'src/background/Background'
 import Canvas from 'src/canvas/Canvas'
-import { Content } from 'src/content/Content'
+import Content from 'src/content/Content'
 import NavMain from 'src/nav-main/NavMain'
 import NavSub from 'src/nav-sub/NavSub'
 import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
-
-// TODO explore immutable ts type https://templecoding.com/blog/real-immutable-types-with-typescript
 
 let willShowSafariPrompt = data.isSafariBrowser
 

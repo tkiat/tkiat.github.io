@@ -2,7 +2,7 @@ declare module 'ts-type-util' {
   export type Coordinate = { x: number; y: number }
   export type Line = { from: Coordinate; to: Coordinate }
 
-  export type Dimension = { height: number; width: number }
+  export type Dimension = { h: number; w: number }
 
   export type Even = 0
 

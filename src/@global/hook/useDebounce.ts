@@ -1,6 +1,6 @@
 import React from 'react'
 
-function useDebounce<T>(value: T, msDelay: number): T {
+const useDebounce = <T>(value: T, msDelay: number): T => {
   const [debouncedValue, setDebouncedValue] = React.useState(value)
   React.useEffect(() => {
     const handler = setTimeout(() => {

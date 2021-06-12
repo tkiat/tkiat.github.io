@@ -24,6 +24,8 @@ import { ReactComponent as UpperRBorder } from 'src/@global/asset/letters/_R-bor
 import { ReactComponent as UpperRMask }   from 'src/@global/asset/letters/_R-mask.svg'
 import { ReactComponent as UpperSBorder } from 'src/@global/asset/letters/_S-border.svg'
 import { ReactComponent as UpperSMask }   from 'src/@global/asset/letters/_S-mask.svg'
+import { ReactComponent as UpperTBorder } from 'src/@global/asset/letters/_T-border.svg'
+import { ReactComponent as UpperTMask }   from 'src/@global/asset/letters/_T-mask.svg'
 import { ReactComponent as UpperUBorder } from 'src/@global/asset/letters/_U-border.svg'
 import { ReactComponent as UpperUMask }   from 'src/@global/asset/letters/_U-mask.svg'
 import { ReactComponent as UpperVBorder } from 'src/@global/asset/letters/_V-border.svg'
@@ -85,6 +87,7 @@ const mapping: {[index: string]: React.ReactFragment} = {
   'O': <><UpperOBorder /><UpperOMask /></>,
   'R': <><UpperRBorder /><UpperRMask /></>,
   'S': <><UpperSBorder /><UpperSMask /></>,
+  'T': <><UpperTBorder /><UpperTMask /></>,
   'U': <><UpperUBorder /><UpperUMask /></>,
   'V': <><UpperVBorder /><UpperVMask /></>,
   'W': <><UpperWBorder /><UpperWMask /></>,
