@@ -17,7 +17,7 @@ import SafariWarning from 'src/@global/component/SafariWarning'
 import Title from 'src/@global/component/Title'
 import Background from 'src/background/Background'
 import Canvas from 'src/canvas/Canvas'
-import Content from 'src/content/Content'
+import { Content } from 'src/content/Content'
 import NavMain from 'src/nav-main/NavMain'
 import NavSub from 'src/nav-sub/NavSub'
 import Sidebar from 'src/sidebar/Sidebar'
@@ -187,7 +187,7 @@ const App = (): React.ReactElement => {
           argumentDrawCanvas={{ waveConfigs, waveColors, wavePhysics }}
           aria-label="Background Wave"
         />
-        <Content isInsideWater={navMainIndex === 2} urls={data.urls} />
+        <Content isInsideWater={navMainIndex === 2} />
         <NavMain navMainIndexRef={navMainIndexRef} rerender={() => triggerReRender({})} urlAtIndex={data.urls.main} />
         {navMainIndexSub !== null && navSubIndex !== null && navSubItems !== null && (
           <NavSub

@@ -1,35 +1,14 @@
+window.matchMedia = (whatever: string) => {
+  return { 'declare to solve "window not found" bug here': whatever } as unknown as MediaQueryList
+}
+
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { createHistory, createMemorySource, LocationProvider } from '@reach/router'
 
-// import { urls } from 'src/appInputs'
 import Content from './Content'
 import { pathToTestId } from 'src/@global/utils'
-
-export const urls: any = {
-  main: {
-    0: '/about',
-    1: '/hobby',
-    2: '/work',
-  },
-  sub: {
-    0: ['/Intro', '/Personality', '/Record', '/Credits'],
-    1: ['/Web', '/PC', '/TODO', '/Others'],
-  },
-}
-const paths = [
-  urls.main[0] + urls.sub[0][0],
-  urls.main[0] + urls.sub[0][1],
-  urls.main[0] + urls.sub[0][2],
-  urls.main[0] + urls.sub[0][3],
-
-  urls.main[1] + urls.sub[1][0],
-  urls.main[1] + urls.sub[1][1],
-  urls.main[1] + urls.sub[1][2],
-  urls.main[1] + urls.sub[1][3],
-
-  urls.main[2],
-]
+import { paths } from 'src/appInputs'
 
 const renderWithRouter = (
   ui: React.ReactElement,
@@ -44,7 +23,7 @@ const renderWithRouter = (
 test('initial page load, then navigate to all other valid routes', async () => {
   const {
     history: { navigate },
-  } = renderWithRouter(<Content isInsideWater={false} urls={urls} />)
+  } = renderWithRouter(<Content isInsideWater={false} />)
 
   expect(screen.getByTestId(pathToTestId(paths[0]))).toBeInTheDocument()
 
@@ -53,18 +32,8 @@ test('initial page load, then navigate to all other valid routes', async () => {
     expect(screen.getByTestId(pathToTestId(paths[i]))).toBeInTheDocument()
   }
 })
-//   const paths = [
-//     '/about/Personality',
-//     '/about/Record',
-//     '/about/Credits',
-//
-//     '/hobby/Web',
-//     '/hobby/PC',
-//     '/hobby/Environment',
-//     '/hobby/Others',
-// ]
 
 test('landing on a notfound page', () => {
-  renderWithRouter(<Content isInsideWater={false} urls={urls} />, { route: '/notfound-path' })
+  renderWithRouter(<Content isInsideWater={false} />, { route: '/notfound-path' })
   expect(screen.getByTestId('page-notfound')).toBeInTheDocument()
 })

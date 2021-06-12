@@ -35,7 +35,7 @@ export const themeInit = (() => {
 })()
 
 export const timeInit = (() => {
-  const fallback: Theme.Time = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
+  const fallback: Theme.Time = window && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
   const times: Theme.Time[] = ['day', 'dark']
 
   const timeLocal = localStorage.getItem('time')
@@ -43,7 +43,7 @@ export const timeInit = (() => {
 })()
 
 export const wavePhysicsInit = (() => {
-  const speedFallback = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? '0' : '0.05'
+  const speedFallback = window && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? '0' : '0.05'
 
   const heightInit = parseFloat(localStorage.getItem('wave-height') ?? '10')
   const speedInit = parseFloat(localStorage.getItem('wave-speed') ?? speedFallback)
@@ -72,3 +72,16 @@ export const urls: Nav.Url = {
     1: ['/Web', '/PC', '/TODO', '/Others'],
   },
 }
+export const paths = [
+  urls.main[0] + urls.sub[0][0],
+  urls.main[0] + urls.sub[0][1],
+  urls.main[0] + urls.sub[0][2],
+  urls.main[0] + urls.sub[0][3],
+
+  urls.main[1] + urls.sub[1][0],
+  urls.main[1] + urls.sub[1][1],
+  urls.main[1] + urls.sub[1][2],
+  urls.main[1] + urls.sub[1][3],
+
+  urls.main[2],
+]
