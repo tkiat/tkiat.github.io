@@ -45,8 +45,8 @@ const moveWaterToDest = (plan: { from: Even | -1; to: Even | -1 }, callback: (to
 }
 
 const NavBarTube = ({
-  baseURL,
-  items,
+  navMainItem,
+  navSubItems,
   keyOffset,
   navMainIndex,
   navSubIndex,
@@ -59,15 +59,15 @@ const NavBarTube = ({
   return (
     <nav className="nav-sub nav-sub--tube" id="nav-sub-tube">
       <ul className="nav-sub__list">
-        {items.map((tab: string, i: number) => (
+        {navSubItems.map((navSubItem: string, i: number) => (
           <React.Fragment key={i + keyOffset}>
             <li className="nav-sub__item">
               <Link
                 className={'nav-sub__link'}
-                to={baseURL + tab}
+                to={navMainItem + navSubItem}
                 onClick={() => moveWaterToDest(checkEven({ from: navSubIndex * 2, to: i * 2 }), callback)}
                 draggable="false">
-                <TubeText word={tab[1].toUpperCase() + tab.slice(2)} />
+                <TubeText word={navSubItem[1].toUpperCase() + navSubItem.slice(2)} />
                 <div className="nav-sub__highlighter-wrapper">
                   <div
                     id={'nav-sub__highlighter-item' + i * 2}
@@ -78,7 +78,7 @@ const NavBarTube = ({
               </Link>
             </li>
 
-            {i < items.length - 1 && (
+            {i < navSubItems.length - 1 && (
               <li className="nav-sub__item">
                 <div className="valve">
                   <ValveBorder />

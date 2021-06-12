@@ -16,7 +16,6 @@ export const navMainIndexInit = (() => {
 export const navSubIndexesInit: Nav.NavSubIndexes = {
   '0': parseInt(localStorage.getItem('nav-main-index0-sub-index') ?? '0'),
   '1': parseInt(localStorage.getItem('nav-main-index1-sub-index') ?? '0'),
-  '2': null,
 }
 
 export const themeInit = (() => {
@@ -62,7 +61,7 @@ export const isSafariBrowser = (() => {
   return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
 })()
 
-export const urls: Nav.Url = {
+export const urls: Immutable<Nav.Url> = {
   main: {
     0: '/about',
     1: '/hobby',

@@ -5,8 +5,8 @@ import { NavSubGenericProps } from 'ts-type-nav'
 import { ReactComponent as DuckHamburger } from 'src/@global/asset/duck/duck-hamburger.svg'
 
 const NavBarGeneric = ({
-  baseURL,
-  items,
+  navMainItem,
+  navSubItems,
   navMainIndex,
   navSubIndex,
   setNavSubIndexes,
@@ -26,11 +26,11 @@ const NavBarGeneric = ({
         <li className="nav-sub__item nav-sub__item--button" aria-label="hamburger-menu">
           <DuckHamburger />
         </li>
-        {items.map((tab, i) => (
+        {navSubItems.map((tab, i) => (
           <li key={i} className="nav-sub__item">
             <Link
               className={'nav-sub__link' + (i === navSubIndex ? ' nav-sub__link--active' : '')}
-              to={baseURL + tab}
+              to={navMainItem + tab}
               onClick={() => onclick(i)}>
               {tab[1].toUpperCase() + tab.slice(2)}
             </Link>

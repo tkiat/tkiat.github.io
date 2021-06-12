@@ -7,20 +7,12 @@ declare module 'ts-type-nav' {
   type UrlSub = {
     [k in NavMainIndex]: string[]
   }
-  export type Url = { main: UrlMain; sub: UrlSub }
+  export type Url = Immutable<{ main: UrlMain; sub: UrlSub }>
 
   export type NavMainIndex = 0 | 1 | 2
-  export type NavSubIndexes = { [k in Extract<NavMainIndex, 0 | 1>]: number } & { 2: null }
-
-  export type NavContentProps = {
-    cur: number
-    items: string[]
-    setCur: Updater<number>
-    storage: string
-  }
 
   export type NavMainProps = {
-    navMainIndex: React.MutableRefObject<NavMainIndex>
+    navMainIndexRef: React.MutableRefObject<NavMainIndex>
     rerender: () => void
     urlAtIndex: { [k in NavMainIndex]: string }
   }
@@ -38,24 +30,25 @@ declare module 'ts-type-nav' {
     text: string
   }
 
+  type NavMainIndexSub = Extract<NavMainIndex, 0 | 1>
+  export type NavSubIndexes = { [k in NavMainIndexSub]: number }
+
   type NavSubSharedProps = {
-    baseURL: string
-    items: string[]
+    navMainIndex: NavMainIndexSub
+    navMainItem: string
+    navSubItems: readonly string[]
     setNavSubIndexes: Updater<NavSubIndexes>
   }
   export type NavSubProps = NavSubSharedProps & {
     keyOffsets: number[]
-    navSubIndex: number | null
-    navMainIndex: NavMainIndex
+    navSubIndex: number
   }
   export type NavSubGenericProps = NavSubSharedProps & {
     navSubIndex: number
-    navMainIndex: Extract<NavMainIndex, 0 | 1>
   }
   export type NavSubTubeProps = NavSubSharedProps & {
     keyOffset: number
     navSubIndex: number
-    navMainIndex: Extract<NavMainIndex, 0 | 1>
   }
 
   export type flowDirection = 'left' | 'right'

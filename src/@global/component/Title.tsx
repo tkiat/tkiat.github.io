@@ -1,17 +1,10 @@
 import React from 'react'
 
 type TitleProps = {
-  items: string[]
-  navMainIndex: number
-  navSubIndex: number | null
+  className: string
+  title: string
 }
 
-const Title = ({ items, navMainIndex, navSubIndex }: TitleProps): React.ReactElement => {
-  if (navSubIndex === null || items[navSubIndex] === undefined) {
-    return <></>
-  } else {
-    return <h1 className={'title title--' + navMainIndex}>{items[navSubIndex].slice(1)}</h1>
-  }
+export default ({ className, title }: TitleProps): React.ReactElement => {
+  return <h1 className={className}>{title}</h1>
 }
-
-export default Title

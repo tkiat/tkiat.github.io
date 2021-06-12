@@ -18,17 +18,17 @@ const navMainIndexes: Nav.NavMainIndex[] = [0, 1, 2]
 const xOffset = '20px'
 const left = (index: number) => `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
 
-const NavMain = ({ navMainIndex, rerender, urlAtIndex }: Nav.NavMainProps): React.ReactElement => {
+const NavMain = ({ navMainIndexRef, rerender, urlAtIndex }: Nav.NavMainProps): React.ReactElement => {
   return (
     <>
       {navMainIndexes.map((index) => (
         <NavMainItemContent
           key={index}
           href={urlAtIndex[index]}
-          isActive={navMainIndex.current === index}
+          isActive={navMainIndexRef.current === index}
           left={left(index)}
           onclick={() => {
-            navMainIndex.current = index
+            navMainIndexRef.current = index
             rerender()
           }}
           shape={shapes[index]}

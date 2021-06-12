@@ -7,6 +7,7 @@ import * as Theme from 'ts-type-theme'
 
 import * as data from 'src/appInputs'
 import getWaveLine from 'src/@global/getWaveLine'
+import * as ts from 'src/@global/utils-typescript'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
 import injectCustomColors from 'src/@global/injectCustomColors'
 import updateFavicon from 'src/@global/updateFavicon'
@@ -22,6 +23,8 @@ import NavSub from 'src/nav-sub/NavSub'
 import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
+
+// TODO explore immutable ts type https://templecoding.com/blog/real-immutable-types-with-typescript
 
 let willShowSafariPrompt = data.isSafariBrowser
 
@@ -48,7 +51,7 @@ const App = (): React.ReactElement => {
     'wave-front1': localStorage.getItem('custom-wave-front1-color') ?? 'rgb(0, 0, 0)',
     'wave-front2': localStorage.getItem('custom-wave-front2-color') ?? 'rgb(0, 0, 0)',
   })
-  const navMainIndex = React.useRef<Nav.NavMainIndex>(data.navMainIndexInit)
+  const navMainIndexRef = React.useRef<Nav.NavMainIndex>(data.navMainIndexInit)
   const waveColors = React.useRef<Theme.WaveColors>(['', '', ''])
   const wavePhysics = React.useRef<Theme.WavePhysics>(data.wavePhysicsInit)
 
@@ -59,9 +62,10 @@ const App = (): React.ReactElement => {
     time: time,
   }
 
-  const shouldMoveWave = navMainIndex.current === 0 || navMainIndex.current === 1
+  const navMainIndex = navMainIndexRef.current
+  const shouldMoveWave = navMainIndex === 0 || navMainIndex === 1
   const waveConfigs = React.useMemo<Theme.WaveConfigs>(() => {
-    const { from, to } = getWaveLine(viewportDimensions)[navMainIndex.current]
+    const { from, to } = getWaveLine(viewportDimensions)[navMainIndex]
     return {
       from: from,
       to: to,
@@ -79,13 +83,14 @@ const App = (): React.ReactElement => {
     injectCustomColors(themeSupplementCustomElem, customColors.current)
 
     window.addEventListener('popstate', function () {
-      triggerReRender({})
-
       const getNavMainIndex = () => {
         const indexes: Nav.NavMainIndex[] = [0, 1, 2]
         return indexes.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || indexes[0]
       }
       const navMainIndexNew = getNavMainIndex()
+
+      navMainIndexRef.current = navMainIndexNew
+
       if (navMainIndexNew === 0 || navMainIndexNew === 1) {
         const newNavSubIndex = data.urls.sub[navMainIndexNew].findIndex((item) =>
           window.location.pathname.endsWith(item)
@@ -94,10 +99,11 @@ const App = (): React.ReactElement => {
           draft[navMainIndexNew] = newNavSubIndex
         })
       }
+      triggerReRender({})
     })
 
     const cleanup = () => {
-      localStorage.setItem('nav-main-index', navMainIndex.current.toString())
+      localStorage.setItem('nav-main-index', navMainIndexRef.current.toString())
 
       localStorage.setItem('nav-main-index0-sub-index', cleanupRef.current.navSubIndexes[0].toString())
       localStorage.setItem('nav-main-index1-sub-index', cleanupRef.current.navSubIndexes[1].toString())
@@ -140,6 +146,19 @@ const App = (): React.ReactElement => {
     })
   }, [theme.supplement, time])
 
+  const navMainItem = data.urls.main[navMainIndex]
+  const navMainItemLv0 = data.urls.main[0]
+  const navMainItemLv1 = data.urls.main[1]
+
+  const navSubIndexesPossible: Extract<Nav.NavMainIndex, 0 | 1>[] = [0, 1]
+  const navMainIndexSub = ts.isType(navMainIndex, navSubIndexesPossible) ? navMainIndex : null
+
+  const navSubIndex = navMainIndexSub !== null ? navSubIndexes[navMainIndexSub] : null
+  const navSubItems = navMainIndexSub !== null ? data.urls.sub[navMainIndexSub] : null
+  const navSubItem = navSubItems !== null && navSubIndex !== null ? navSubItems[navSubIndex] : null
+  const navSubItemLv0 = data.urls.sub[0][navSubIndexes[0]]
+  const navSubItemLv1 = data.urls.sub[1][navSubIndexes[1]]
+
   if (willShowSafariPrompt) {
     return (
       <SafariWarning
@@ -154,17 +173,13 @@ const App = (): React.ReactElement => {
     return (
       <main id="main" className="main">
         <Router>
-          <Redirect from="/" to={'/about' + data.urls.sub[0][data.navSubIndexesInit[0]]} noThrow />
-          <Redirect from="/about" to={'/about' + data.urls.sub[0][data.navSubIndexesInit[0]]} noThrow />
-          <Redirect from="/hobby" to={'/hobby' + data.urls.sub[1][data.navSubIndexesInit[1]]} noThrow />
+          <Redirect from="/" to={navMainItem} noThrow />
+          <Redirect from={navMainItemLv0} to={navMainItemLv0 + navSubItemLv0} noThrow />
+          <Redirect from={navMainItemLv1} to={navMainItemLv1 + navSubItemLv1} noThrow />
         </Router>
 
-        <Contact navMainIndex={navMainIndex.current} />
-        <Title
-          navSubIndex={navSubIndexes[navMainIndex.current]}
-          items={data.urls.sub[navMainIndex.current]}
-          navMainIndex={navMainIndex.current}
-        />
+        <Contact navMainIndex={navMainIndex} />
+        <Title className={'title title--' + navMainIndex} title={navSubItem !== null ? navSubItem.slice(1) : ''} />
 
         <Background theme={theme.base} />
         <Canvas
@@ -172,16 +187,18 @@ const App = (): React.ReactElement => {
           argumentDrawCanvas={{ waveConfigs, waveColors, wavePhysics }}
           aria-label="Background Wave"
         />
-        <Content isInsideWater={navMainIndex.current === 2} urls={data.urls} />
-        <NavMain navMainIndex={navMainIndex} rerender={() => triggerReRender({})} urlAtIndex={data.urls.main} />
-        <NavSub
-          navSubIndex={navSubIndexes[navMainIndex.current]}
-          setNavSubIndexes={setNavSubIndexes}
-          baseURL={data.urls.main[navMainIndex.current]}
-          items={data.urls.sub[navMainIndex.current]}
-          navMainIndex={navMainIndex.current}
-          keyOffsets={[0, data.urls.sub[0].length]}
-        />
+        <Content isInsideWater={navMainIndex === 2} urls={data.urls} />
+        <NavMain navMainIndexRef={navMainIndexRef} rerender={() => triggerReRender({})} urlAtIndex={data.urls.main} />
+        {navMainIndexSub !== null && navSubIndex !== null && navSubItems !== null && (
+          <NavSub
+            navSubIndex={navSubIndex}
+            setNavSubIndexes={setNavSubIndexes}
+            navMainItem={navMainItem}
+            navSubItems={navSubItems}
+            navMainIndex={navMainIndexSub}
+            keyOffsets={[0, data.urls.sub[0].length]}
+          />
+        )}
         <Sidebar
           customColors={customColors}
           wavePhysics={wavePhysics}

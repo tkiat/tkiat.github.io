@@ -5,21 +5,19 @@ import NavSubGeneric from './NavSubGeneric'
 import NavSubTube from './NavSubTube'
 
 const NavSub = ({
-  baseURL,
-  items,
+  navMainItem,
+  navSubItems,
   keyOffsets,
   navMainIndex,
   navSubIndex,
   setNavSubIndexes,
 }: NavSubProps): React.ReactElement => {
-  if (navSubIndex === null || (navMainIndex !== 0 && navMainIndex !== 1)) return <></>
-
   const isMobile = window.matchMedia('(max-width: 768px)')
   if (isMobile.matches) {
     return (
       <NavSubGeneric
-        baseURL={baseURL}
-        items={items}
+        navMainItem={navMainItem}
+        navSubItems={navSubItems}
         navMainIndex={navMainIndex}
         navSubIndex={navSubIndex}
         setNavSubIndexes={setNavSubIndexes}
@@ -28,8 +26,8 @@ const NavSub = ({
   } else {
     return (
       <NavSubTube
-        baseURL={baseURL}
-        items={items}
+        navMainItem={navMainItem}
+        navSubItems={navSubItems}
         navMainIndex={navMainIndex}
         navSubIndex={navSubIndex}
         setNavSubIndexes={setNavSubIndexes}

@@ -22,7 +22,7 @@ export const tube: { type: CustomColorsTube; text: string }[] = [
   { type: 'tube-stroke', text: 'Tube' },
   { type: 'tube-water', text: 'Tube Water' },
 ]
-export const waveColorTitle = ['Front Wave', '2nd Wave', '3rd Wave']
+export const waveColorTitle: string[] = ['Front Wave', '2nd Wave', '3rd Wave']
 export const wavePhysic: { prop: keyof Theme.WavePhysics; min: number; max: number; step: number }[] = [
   { prop: 'height', min: 0, max: 70, step: 10 },
   { prop: 'speed', min: 0, max: 0.3, step: 0.05 },
