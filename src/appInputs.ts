@@ -61,7 +61,7 @@ export const isSafariBrowser = (() => {
   return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
 })()
 
-export const urls: Immutable<Nav.Url> = {
+export const urls: Nav.Url = {
   main: {
     0: '/about',
     1: '/hobby',
@@ -70,6 +70,5 @@ export const urls: Immutable<Nav.Url> = {
   sub: {
     0: ['/Intro', '/Personality', '/Record', '/Credits'],
     1: ['/Web', '/PC', '/TODO', '/Others'],
-    2: [],
   },
 }

@@ -3,24 +3,7 @@ import { render } from '@testing-library/react'
 
 import Title from './Title'
 
-describe('render nothing with invalid props', () => {
-  test('case #1', () => {
-    const { container } = render(<Title items={['']} navSubIndex={null} navMainIndex={0} />)
-    expect(container).toBeEmptyDOMElement()
-  })
-  test('case #2', () => {
-    const { container } = render(<Title items={['/item1', '/item2']} navSubIndex={2} navMainIndex={0} />)
-    expect(container).toBeEmptyDOMElement()
-  })
-})
-
 test('render something with valid props', () => {
-  const { container } = render(<Title items={['/item1', '/item2']} navSubIndex={1} navMainIndex={0} />)
+  const { container } = render(<Title className="test" title="/title1" />)
   expect(container).not.toBeEmptyDOMElement()
-})
-
-test('must strip first letter (/) in rendered text', () => {
-  const { getByText, queryByText } = render(<Title items={['/item1', '/item2']} navSubIndex={1} navMainIndex={0} />)
-  expect(getByText('item2')).toBeInTheDocument()
-  expect(queryByText('/item2')).not.toBeInTheDocument()
 })

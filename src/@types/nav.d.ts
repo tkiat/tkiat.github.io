@@ -5,7 +5,7 @@ declare module 'ts-type-nav' {
     [k in NavMainIndex]: string
   }
   type UrlSub = {
-    [k in NavMainIndex]: string[]
+    [k in NavMainIndexSub]: string[]
   }
   export type Url = Immutable<{ main: UrlMain; sub: UrlSub }>
 

@@ -12,15 +12,15 @@ declare module 'ts-type-theme' {
     'wave-front2': string
   }
 
-  export type Base = 'ocean' | 'desert' | 'sakura' | 'snow'
-  export type Supplement = Base | 'custom'
-  export type Props = {
+  export type Base = Immutable<'ocean' | 'desert' | 'sakura' | 'snow'>
+  export type Supplement = Immutable<Base | 'custom'>
+  export type Props = Immutable<{
     base: Base
     supplement: Supplement
     'custom-base': Base
-  }
+  }>
 
-  export type Time = 'day' | 'dark'
+  export type Time = Immutable<'day' | 'dark'>
 
   export type WaveConfigs = {
     num: number
