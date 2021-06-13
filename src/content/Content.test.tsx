@@ -8,11 +8,11 @@ import { createHistory, createMemorySource, LocationProvider } from '@reach/rout
 
 import Content from './Content'
 import { pathToTestId } from 'src/@global/utils'
-import { paths } from 'src/appInputs'
+import initData from 'src/appInputs'
 
 const renderWithRouter = (
   ui: React.ReactElement,
-  { route = paths[0], history = createHistory(createMemorySource(route)) } = {}
+  { route = initData.paths[0], history = createHistory(createMemorySource(route)) } = {}
 ) => {
   return {
     ...render(<LocationProvider history={history}>{ui}</LocationProvider>),
@@ -25,11 +25,11 @@ test('initial page load, then navigate to all other valid routes', async () => {
     history: { navigate },
   } = renderWithRouter(<Content isInsideWater={false} />)
 
-  expect(screen.getByTestId(pathToTestId(paths[0]))).toBeInTheDocument()
+  expect(screen.getByTestId(pathToTestId(initData.paths[0]))).toBeInTheDocument()
 
-  for (let i = 1; i < paths.length; i++) {
-    await navigate(paths[i])
-    expect(screen.getByTestId(pathToTestId(paths[i]))).toBeInTheDocument()
+  for (let i = 1; i < initData.paths.length; i++) {
+    await navigate(initData.paths[i])
+    expect(screen.getByTestId(pathToTestId(initData.paths[i]))).toBeInTheDocument()
   }
 })
 

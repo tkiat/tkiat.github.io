@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 
 import { pathToTestId } from 'src/@global/utils'
-import { paths } from 'src/appInputs'
+import initData from 'src/appInputs'
 
 import NotFound from 'src/@global/component/NotFound'
 import Intro from 'src/content/about/Intro'
@@ -22,15 +22,15 @@ let NotFoundRoute = (props: RouteComponentProps) => (
 )
 
 const contents = [
-  { path: paths[0], elem: <Intro /> },
-  { path: paths[1], elem: <Personality /> },
-  { path: paths[2], elem: <Record /> },
-  { path: paths[3], elem: <Credits /> },
-  { path: paths[4], elem: <Web /> },
-  { path: paths[5], elem: <PC /> },
-  { path: paths[6], elem: <Environment /> },
-  { path: paths[7], elem: <Others /> },
-  { path: paths[8], elem: <Resume /> },
+  { path: initData.paths[0], elem: <Intro /> },
+  { path: initData.paths[1], elem: <Personality /> },
+  { path: initData.paths[2], elem: <Record /> },
+  { path: initData.paths[3], elem: <Credits /> },
+  { path: initData.paths[4], elem: <Web /> },
+  { path: initData.paths[5], elem: <PC /> },
+  { path: initData.paths[6], elem: <Environment /> },
+  { path: initData.paths[7], elem: <Others /> },
+  { path: initData.paths[8], elem: <Resume /> },
 ]
 
 type ContentProps = {

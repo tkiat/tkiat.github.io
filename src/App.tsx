@@ -5,7 +5,7 @@ import { Redirect, Router } from '@reach/router'
 import * as Nav from 'ts-type-nav'
 import * as Theme from 'ts-type-theme'
 
-import * as data from 'src/appInputs'
+import initData from 'src/appInputs'
 import getWaveLine from 'src/canvas/wave/getWaveLine'
 import * as ts from 'src/@global/utils-typescript'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
@@ -24,7 +24,7 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
-let willShowSafariPrompt = data.isSafariBrowser
+let willShowSafariPrompt = initData.isSafariBrowser
 
 const numNavMainButtons = 4
 const numPointsOnWave = numNavMainButtons + 1
@@ -35,9 +35,9 @@ const App = (): React.ReactElement => {
 
   const viewportDimensions = useViewportDimensions(500)
 
-  const [navSubIndexes, setNavSubIndexes] = useImmer<Nav.NavSubIndexes>(data.navSubIndexesInit)
-  const [theme, setTheme] = useImmer<Theme.Props>(data.themeInit)
-  const [time, setTime] = useImmer<Theme.Time>(data.timeInit)
+  const [navSubIndexes, setNavSubIndexes] = useImmer<Nav.NavSubIndexes>(initData.navSubIndexesInit)
+  const [theme, setTheme] = useImmer<Theme.Props>(initData.themeInit)
+  const [time, setTime] = useImmer<Theme.Time>(initData.timeInit)
 
   const customColors = React.useRef<Theme.CustomColors>({
     'duck-beak': localStorage.getItem('custom-duck-beak-color') ?? 'rgb(0, 0, 0)',
@@ -49,9 +49,9 @@ const App = (): React.ReactElement => {
     'wave-front1': localStorage.getItem('custom-wave-front1-color') ?? 'rgb(0, 0, 0)',
     'wave-front2': localStorage.getItem('custom-wave-front2-color') ?? 'rgb(0, 0, 0)',
   })
-  const navMainIndexRef = React.useRef<Nav.NavMainIndex>(data.navMainIndexInit)
+  const navMainIndexRef = React.useRef<Nav.NavMainIndex>(initData.navMainIndexInit)
   const waveColors = React.useRef<Theme.WaveColors>(['', '', ''])
-  const wavePhysics = React.useRef<Theme.WavePhysics>(data.wavePhysicsInit)
+  const wavePhysics = React.useRef<Theme.WavePhysics>(initData.wavePhysicsInit)
 
   const cleanupRef = React.useRef<any>(null)
   cleanupRef.current = {
@@ -83,14 +83,14 @@ const App = (): React.ReactElement => {
     window.addEventListener('popstate', function () {
       const getNavMainIndex = () => {
         const indexes: Nav.NavMainIndex[] = [0, 1, 2]
-        return indexes.find((level) => window.location.pathname.startsWith(data.urls.main[level])) || indexes[0]
+        return indexes.find((level) => window.location.pathname.startsWith(initData.urls.main[level])) || indexes[0]
       }
       const navMainIndexNew = getNavMainIndex()
 
       navMainIndexRef.current = navMainIndexNew
 
       if (navMainIndexNew === 0 || navMainIndexNew === 1) {
-        const newNavSubIndex = data.urls.sub[navMainIndexNew].findIndex((item) =>
+        const newNavSubIndex = initData.urls.sub[navMainIndexNew].findIndex((item) =>
           window.location.pathname.endsWith(item)
         )
         setNavSubIndexes((draft) => {
@@ -144,18 +144,18 @@ const App = (): React.ReactElement => {
     })
   }, [theme.supplement, time])
 
-  const navMainItem = data.urls.main[navMainIndex]
-  const navMainItemLv0 = data.urls.main[0]
-  const navMainItemLv1 = data.urls.main[1]
+  const navMainItem = initData.urls.main[navMainIndex]
+  const navMainItemLv0 = initData.urls.main[0]
+  const navMainItemLv1 = initData.urls.main[1]
 
   const navSubIndexesPossible: Extract<Nav.NavMainIndex, 0 | 1>[] = [0, 1]
   const navMainIndexSub = ts.isType(navMainIndex, navSubIndexesPossible) ? navMainIndex : null
 
   const navSubIndex = navMainIndexSub !== null ? navSubIndexes[navMainIndexSub] : null
-  const navSubItems = navMainIndexSub !== null ? data.urls.sub[navMainIndexSub] : null
+  const navSubItems = navMainIndexSub !== null ? initData.urls.sub[navMainIndexSub] : null
   const navSubItem = navSubItems !== null && navSubIndex !== null ? navSubItems[navSubIndex] : null
-  const navSubItemLv0 = data.urls.sub[0][navSubIndexes[0]]
-  const navSubItemLv1 = data.urls.sub[1][navSubIndexes[1]]
+  const navSubItemLv0 = initData.urls.sub[0][navSubIndexes[0]]
+  const navSubItemLv1 = initData.urls.sub[1][navSubIndexes[1]]
 
   if (willShowSafariPrompt) {
     return (
@@ -186,7 +186,11 @@ const App = (): React.ReactElement => {
           aria-label="Background Wave"
         />
         <Content isInsideWater={navMainIndex === 2} />
-        <NavMain navMainIndexRef={navMainIndexRef} rerender={() => triggerReRender({})} urlAtIndex={data.urls.main} />
+        <NavMain
+          navMainIndexRef={navMainIndexRef}
+          rerender={() => triggerReRender({})}
+          urlAtIndex={initData.urls.main}
+        />
         {navMainIndexSub !== null && navSubIndex !== null && navSubItems !== null && (
           <NavSub
             navSubIndex={navSubIndex}
@@ -194,7 +198,7 @@ const App = (): React.ReactElement => {
             navMainItem={navMainItem}
             navSubItems={navSubItems}
             navMainIndex={navMainIndexSub}
-            keyOffsets={[0, data.urls.sub[0].length]}
+            keyOffsets={[0, initData.urls.sub[0].length]}
           />
         )}
         <Sidebar

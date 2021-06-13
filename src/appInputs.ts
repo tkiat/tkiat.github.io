@@ -3,7 +3,13 @@ import * as Theme from 'ts-type-theme'
 
 import * as ts from 'src/@global/utils-typescript'
 
-export const navMainIndexInit = (() => {
+const getIsSafariBrowser = () => {
+  const userAgentString = navigator.userAgent
+  const isSafariBrowserAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
+  return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
+}
+
+const getNavMainIndexInit = () => {
   const fallback: Nav.NavMainIndex = 0
   const indexes: Nav.NavMainIndex[] = [0, 1, 2]
 
@@ -11,14 +17,9 @@ export const navMainIndexInit = (() => {
   if (indexLocal === null) return fallback
   const index = parseInt(indexLocal)
   return ts.isType(index, indexes) ? index : fallback
-})()
-
-export const navSubIndexesInit: Nav.NavSubIndexes = {
-  '0': parseInt(localStorage.getItem('nav-main-index0-sub-index') ?? '0'),
-  '1': parseInt(localStorage.getItem('nav-main-index1-sub-index') ?? '0'),
 }
 
-export const themeInit = (() => {
+const getThemeInit = () => {
   const fallback: Extract<Theme.Base, Theme.Supplement> = 'sakura'
 
   const themesBase: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
@@ -32,17 +33,17 @@ export const themeInit = (() => {
     supplement: ts.isType(themeSupplementLocal, themesSupplement) ? themeSupplementLocal : fallback,
     'custom-base': ts.isType(themeCustomBaseLocal, themesBase) ? themeCustomBaseLocal : fallback,
   }
-})()
+}
 
-export const timeInit = (() => {
+const getTimeInit = () => {
   const fallback: Theme.Time = window && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
   const times: Theme.Time[] = ['day', 'dark']
 
   const timeLocal = localStorage.getItem('time')
   return ts.isType(timeLocal, times) ? timeLocal : fallback
-})()
+}
 
-export const wavePhysicsInit = (() => {
+const getWavePhysicsInit = () => {
   const speedFallback = window && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? '0' : '0.05'
 
   const heightInit = parseFloat(localStorage.getItem('wave-height') ?? '10')
@@ -53,15 +54,9 @@ export const wavePhysicsInit = (() => {
     speed: speedInit,
     shakiness: shakinessInit,
   }
-})()
+}
 
-export const isSafariBrowser = (() => {
-  const userAgentString = navigator.userAgent
-  const isSafariBrowserAgent = userAgentString.indexOf('Safari') > -1 && userAgentString.indexOf('Chrome') === -1
-  return isSafariBrowserAgent && localStorage.getItem('will-skip-safari-prompt') !== 'true'
-})()
-
-export const urls: Nav.Url = {
+const urls = {
   main: {
     0: '/about',
     1: '/hobby',
@@ -72,7 +67,7 @@ export const urls: Nav.Url = {
     1: ['/Web', '/PC', '/TODO', '/Others'],
   },
 }
-export const paths = [
+const paths = [
   urls.main[0] + urls.sub[0][0],
   urls.main[0] + urls.sub[0][1],
   urls.main[0] + urls.sub[0][2],
@@ -85,3 +80,45 @@ export const paths = [
 
   urls.main[2],
 ]
+
+type Model = {
+  isSafariBrowser: boolean
+  navMainIndexInit: Nav.NavMainIndex
+  navSubIndexesInit: Nav.NavSubIndexes
+  paths: string[]
+  themeInit: {
+    base: any
+    supplement: any
+    'custom-base': any
+  }
+  timeInit: any
+  urls: {
+    main: {
+      [k in Nav.NavMainIndex]: string
+    }
+    sub: {
+      [k in Nav.NavMainIndexSub]: string[]
+    }
+  }
+  wavePhysicsInit: {
+    height: any
+    speed: any
+    shakiness: any
+  }
+}
+
+const initData: Model = {
+  isSafariBrowser: getIsSafariBrowser(),
+  navMainIndexInit: getNavMainIndexInit(),
+  navSubIndexesInit: {
+    '0': parseInt(localStorage.getitem('nav-main-index0-sub-index') ?? '0'),
+    '1': parseInt(localStorage.getitem('nav-main-index1-sub-index') ?? '0'),
+  },
+  paths: paths,
+  themeInit: getThemeInit(),
+  timeInit: getTimeInit(),
+  urls: urls,
+  wavePhysicsInit: getWavePhysicsInit(),
+}
+
+export default initData
