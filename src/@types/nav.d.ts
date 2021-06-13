@@ -14,7 +14,7 @@ declare module 'ts-type-nav' {
   export type NavMainProps = {
     navMainIndexRef: React.MutableRefObject<NavMainIndex>
     rerender: () => void
-    urlAtIndex: { [k in NavMainIndex]: string }
+    navMainItems: { [k in NavMainIndex]: string }
   }
   export type NavMainItemContentProps = {
     href: string

@@ -39,16 +39,11 @@ const App = (): React.ReactElement => {
   const [theme, setTheme] = useImmer<Theme.Props>(initData.themeInit)
   const [time, setTime] = useImmer<Theme.Time>(initData.timeInit)
 
-  const customColors = React.useRef<Theme.CustomColors>({
-    'duck-beak': localStorage.getItem('custom-duck-beak-color') ?? 'rgb(0, 0, 0)',
-    'duck-body': localStorage.getItem('custom-duck-body-color') ?? 'rgb(0, 0, 0)',
-    'duck-wing': localStorage.getItem('custom-duck-wing-color') ?? 'rgb(0, 0, 0)',
-    'tube-stroke': localStorage.getItem('custom-tube-stroke-color') ?? 'rgb(0, 0, 0)',
-    'tube-water': localStorage.getItem('custom-tube-water-color') ?? 'rgb(0, 0, 0)',
-    'wave-front0': localStorage.getItem('custom-wave-front0-color') ?? 'rgb(0, 0, 0)',
-    'wave-front1': localStorage.getItem('custom-wave-front1-color') ?? 'rgb(0, 0, 0)',
-    'wave-front2': localStorage.getItem('custom-wave-front2-color') ?? 'rgb(0, 0, 0)',
-  })
+  const customColors = React.useRef<Theme.CustomColors>(
+    Object.fromEntries(
+      ts.possible.customColors.map((x) => [x, localStorage.getItem('custom-' + x + '-color') ?? 'rgb(0, 0, 0)'])
+    ) as Theme.CustomColors
+  )
   const navMainIndexRef = React.useRef<Nav.NavMainIndex>(initData.navMainIndexInit)
   const waveColors = React.useRef<Theme.WaveColors>(['', '', ''])
   const wavePhysics = React.useRef<Theme.WavePhysics>(initData.wavePhysicsInit)
@@ -202,7 +197,7 @@ const App = (): React.ReactElement => {
         <NavMain
           navMainIndexRef={navMainIndexRef}
           rerender={() => triggerReRender({})}
-          urlAtIndex={initData.urls.main}
+          navMainItems={initData.urls.main}
         />
         {navMainIndexSub !== null && navSubIndex !== null && navSubItems !== null && (
           <NavSub
