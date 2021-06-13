@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Sidebar from 'ts-type-sidebar'
-import * as Theme from 'ts-type-theme'
+import { possible } from 'src/@global/utils-typescript'
 
 const BaseThemePickerItem = ({ base, current, setTheme }: Sidebar.BaseThemePickerItemProps): React.ReactElement => {
   const classname = 'theme-picker-base__picker' + (current === base ? ' theme-picker-base__picker--active' : '')
@@ -19,13 +19,11 @@ const BaseThemePickerItem = ({ base, current, setTheme }: Sidebar.BaseThemePicke
 }
 
 const BaseThemePicker = ({ current, setTheme }: Sidebar.BaseThemePickerProps): React.ReactElement => {
-  const themes: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
-
   return (
     <div className="theme-picker-base">
       <div className="theme-picker-base__header">Base</div>
       <div className="theme-picker-base__content">
-        {themes.map((base, i) => (
+        {possible.themesBase.map((base, i) => (
           <BaseThemePickerItem key={i} base={base} current={current} setTheme={setTheme} />
         ))}
       </div>

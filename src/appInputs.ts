@@ -10,37 +10,28 @@ const getIsSafariBrowser = () => {
 }
 
 const getNavMainIndexInit = () => {
-  const fallback: Nav.NavMainIndex = 0
-  const indexes: Nav.NavMainIndex[] = [0, 1, 2]
-
-  const indexLocal = localStorage.getItem('nav-main-index')
-  if (indexLocal === null) return fallback
-  const index = parseInt(indexLocal)
-  return ts.isType(index, indexes) ? index : fallback
+  const fallback = 0
+  const index = parseInt(localStorage.getItem('nav-main-index') ?? fallback.toString())
+  return ts.isType(index, ts.possible.navMainIndexes) ? index : fallback
 }
 
 const getThemeInit = () => {
   const fallback: Extract<Theme.Base, Theme.Supplement> = 'sakura'
 
-  const themesBase: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
-  const themesSupplement: Theme.Supplement[] = ['ocean', 'desert', 'sakura', 'snow', 'custom']
-
   const themeBaseLocal = localStorage.getItem('theme-base')
   const themeSupplementLocal = localStorage.getItem('theme-supplement')
   const themeCustomBaseLocal = localStorage.getItem('theme-custom-base')
   return {
-    base: ts.isType(themeBaseLocal, themesBase) ? themeBaseLocal : fallback,
-    supplement: ts.isType(themeSupplementLocal, themesSupplement) ? themeSupplementLocal : fallback,
-    'custom-base': ts.isType(themeCustomBaseLocal, themesBase) ? themeCustomBaseLocal : fallback,
+    base: ts.isType(themeBaseLocal, ts.possible.themesBase) ? themeBaseLocal : fallback,
+    supplement: ts.isType(themeSupplementLocal, ts.possible.themesSupplement) ? themeSupplementLocal : fallback,
+    'custom-base': ts.isType(themeCustomBaseLocal, ts.possible.themesBase) ? themeCustomBaseLocal : fallback,
   }
 }
 
 const getTimeInit = () => {
   const fallback: Theme.Time = window && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'day'
-  const times: Theme.Time[] = ['day', 'dark']
-
   const timeLocal = localStorage.getItem('time')
-  return ts.isType(timeLocal, times) ? timeLocal : fallback
+  return ts.isType(timeLocal, ts.possible.times) ? timeLocal : fallback
 }
 
 const getWavePhysicsInit = () => {
@@ -86,33 +77,18 @@ type Model = {
   navMainIndexInit: Nav.NavMainIndex
   navSubIndexesInit: Nav.NavSubIndexes
   paths: string[]
-  themeInit: {
-    base: any
-    supplement: any
-    'custom-base': any
-  }
-  timeInit: any
-  urls: {
-    main: {
-      [k in Nav.NavMainIndex]: string
-    }
-    sub: {
-      [k in Nav.NavMainIndexSub]: string[]
-    }
-  }
-  wavePhysicsInit: {
-    height: any
-    speed: any
-    shakiness: any
-  }
+  themeInit: Theme.Props
+  timeInit: Theme.Time
+  urls: Nav.Url
+  wavePhysicsInit: Theme.WavePhysics
 }
 
 const initData: Model = {
   isSafariBrowser: getIsSafariBrowser(),
   navMainIndexInit: getNavMainIndexInit(),
   navSubIndexesInit: {
-    '0': parseInt(localStorage.getitem('nav-main-index0-sub-index') ?? '0'),
-    '1': parseInt(localStorage.getitem('nav-main-index1-sub-index') ?? '0'),
+    '0': parseInt(localStorage.getItem('nav-main-index0-sub-index') ?? '0'),
+    '1': parseInt(localStorage.getItem('nav-main-index1-sub-index') ?? '0'),
   },
   paths: paths,
   themeInit: getThemeInit(),

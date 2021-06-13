@@ -53,7 +53,16 @@ const App = (): React.ReactElement => {
   const waveColors = React.useRef<Theme.WaveColors>(['', '', ''])
   const wavePhysics = React.useRef<Theme.WavePhysics>(initData.wavePhysicsInit)
 
-  const cleanupRef = React.useRef<any>(null)
+  type Cleanup = {
+    navSubIndexes: Nav.NavSubIndexes
+    theme: Theme.Props
+    time: Theme.Time
+  }
+  const cleanupRef = React.useRef<Cleanup>({
+    navSubIndexes: navSubIndexes,
+    theme: theme,
+    time: time,
+  })
   cleanupRef.current = {
     navSubIndexes: navSubIndexes,
     theme: theme,
@@ -82,21 +91,26 @@ const App = (): React.ReactElement => {
 
     window.addEventListener('popstate', function () {
       const getNavMainIndex = () => {
-        const indexes: Nav.NavMainIndex[] = [0, 1, 2]
-        return indexes.find((level) => window.location.pathname.startsWith(initData.urls.main[level])) || indexes[0]
+        return ts.possible.navMainIndexes.find((level) =>
+          window.location.pathname.startsWith(initData.urls.main[level])
+        )
+      }
+      const getNavSubIndex = (mainIndex: Nav.NavMainIndexSub) => {
+        const navSubIndexNew = initData.urls.sub[mainIndex].findIndex((item) => window.location.pathname.endsWith(item))
+        return navSubIndexNew
       }
       const navMainIndexNew = getNavMainIndex()
-
-      navMainIndexRef.current = navMainIndexNew
+      if (navMainIndexNew !== undefined) navMainIndexRef.current = navMainIndexNew
 
       if (navMainIndexNew === 0 || navMainIndexNew === 1) {
-        const newNavSubIndex = initData.urls.sub[navMainIndexNew].findIndex((item) =>
-          window.location.pathname.endsWith(item)
-        )
-        setNavSubIndexes((draft) => {
-          draft[navMainIndexNew] = newNavSubIndex
-        })
+        const navSubIndexNew = getNavSubIndex(navMainIndexNew)
+        if (navSubIndexNew !== -1) {
+          setNavSubIndexes((draft) => {
+            draft[navMainIndexNew] = navSubIndexNew
+          })
+        }
       }
+
       triggerReRender({})
     })
 
@@ -148,8 +162,7 @@ const App = (): React.ReactElement => {
   const navMainItemLv0 = initData.urls.main[0]
   const navMainItemLv1 = initData.urls.main[1]
 
-  const navSubIndexesPossible: Extract<Nav.NavMainIndex, 0 | 1>[] = [0, 1]
-  const navMainIndexSub = ts.isType(navMainIndex, navSubIndexesPossible) ? navMainIndex : null
+  const navMainIndexSub = ts.isType(navMainIndex, ts.possible.navSubIndexes) ? navMainIndex : null
 
   const navSubIndex = navMainIndexSub !== null ? navSubIndexes[navMainIndexSub] : null
   const navSubItems = navMainIndexSub !== null ? initData.urls.sub[navMainIndexSub] : null

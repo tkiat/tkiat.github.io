@@ -5,6 +5,7 @@ import * as Nav from 'ts-type-nav'
 import NavMainItemContent from './NavMainItemContent'
 import NavMainItemSidebar from './NavMainItemSidebar'
 import { capitalize } from 'src/@global/utils'
+import { possible } from 'src/@global/utils-typescript'
 
 const shapes: { [l in Nav.NavMainIndex]: Nav.NavMainItemContentProps['shape'] } = {
   0: 'DuckAbout',
@@ -13,15 +14,13 @@ const shapes: { [l in Nav.NavMainIndex]: Nav.NavMainItemContentProps['shape'] } 
 }
 const shapeSidebar: Nav.NavMainItemSidebarProps['shape'] = 'DuckSidebar'
 
-const navMainIndexes: Nav.NavMainIndex[] = [0, 1, 2]
-
 const xOffset = '20px'
 const left = (index: number) => `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
 
 const NavMain = ({ navMainIndexRef, rerender, urlAtIndex }: Nav.NavMainProps): React.ReactElement => {
   return (
     <>
-      {navMainIndexes.map((index) => (
+      {possible.navMainIndexes.map((index) => (
         <NavMainItemContent
           key={index}
           href={urlAtIndex[index]}

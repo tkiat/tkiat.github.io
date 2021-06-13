@@ -17,17 +17,7 @@ const changeCustomColor = (
   variable: string,
   value: string
 ) => {
-  const possibleCustomColors: (keyof Theme.CustomColors)[] = [
-    'duck-beak',
-    'duck-body',
-    'duck-wing',
-    'tube-stroke',
-    'tube-water',
-    'wave-front0',
-    'wave-front1',
-    'wave-front2',
-  ]
-  if (ts.isType(variable, possibleCustomColors)) {
+  if (ts.isType(variable, ts.possible.customColors)) {
     customColors.current[variable] = value
     const customThemeElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement
     injectCustomColors(customThemeElem, customColors.current)

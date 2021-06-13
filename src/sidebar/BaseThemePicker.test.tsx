@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import * as Theme from 'ts-type-theme'
 
+import { possible } from 'src/@global/utils-typescript'
 import BaseThemePicker from './BaseThemePicker'
 
 test('test existence of important elements', () => {
@@ -15,8 +15,7 @@ test('test existence of important elements', () => {
     expect(buttons[i]).toMatch
   }
 
-  const themes: Theme.Base[] = ['ocean', 'desert', 'sakura', 'snow']
-  themes
+  possible.themesBase
     .map((theme) => theme[0].toUpperCase() + theme.slice(1))
     .forEach((theme) => {
       expect(screen.getByText(theme)).toBeInTheDocument
