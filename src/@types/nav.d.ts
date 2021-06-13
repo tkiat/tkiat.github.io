@@ -1,10 +1,10 @@
 declare module 'ts-type-nav' {
   import { Updater } from 'use-immer'
 
-  type UrlMain = {
+  export type UrlMain = {
     [k in NavMainIndex]: string
   }
-  type UrlSub = {
+  export type UrlSub = {
     [k in NavMainIndexSub]: string[]
   }
   export type Url = Immutable<{ main: UrlMain; sub: UrlSub }>

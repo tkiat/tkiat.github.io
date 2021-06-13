@@ -85,27 +85,25 @@ const App = (): React.ReactElement => {
     injectCustomColors(themeSupplementCustomElem, customColors.current)
 
     window.addEventListener('popstate', function () {
-      const getNavMainIndex = () => {
-        return ts.possible.navMainIndexes.find((level) =>
-          window.location.pathname.startsWith(initData.urls.main[level])
-        )
+      const getNavMainIndexFromUrl = (indexes: Nav.NavMainIndex[], urls: Nav.UrlMain) => {
+        return indexes.find((index) => window.location.pathname.startsWith(urls[index]))
       }
-      const getNavSubIndex = (mainIndex: Nav.NavMainIndexSub) => {
-        const navSubIndexNew = initData.urls.sub[mainIndex].findIndex((item) => window.location.pathname.endsWith(item))
-        return navSubIndexNew
+      const getNavSubIndexFromUrl = (urls: readonly string[]) => {
+        return urls.findIndex((item) => window.location.pathname.endsWith(item))
       }
-      const navMainIndexNew = getNavMainIndex()
-      if (navMainIndexNew !== undefined) navMainIndexRef.current = navMainIndexNew
 
-      if (navMainIndexNew === 0 || navMainIndexNew === 1) {
-        const navSubIndexNew = getNavSubIndex(navMainIndexNew)
-        if (navSubIndexNew !== -1) {
-          setNavSubIndexes((draft) => {
-            draft[navMainIndexNew] = navSubIndexNew
-          })
+      const main = getNavMainIndexFromUrl(ts.possible.navMainIndexes, initData.urls.main)
+      if (main !== undefined) {
+        navMainIndexRef.current = main
+        if (main === 0 || main === 1) {
+          const sub = getNavSubIndexFromUrl(initData.urls.sub[main])
+          if (sub !== -1) {
+            setNavSubIndexes((draft) => {
+              draft[main] = sub
+            })
+          }
         }
       }
-
       triggerReRender({})
     })
 
