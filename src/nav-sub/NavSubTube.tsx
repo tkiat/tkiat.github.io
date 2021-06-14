@@ -3,48 +3,11 @@ import { Link } from '@reach/router'
 import { Updater } from 'use-immer'
 import * as Nav from 'ts-type-nav'
 
-import { Even } from 'ts-type-util'
-
 import { moveWater } from './moveWater'
 import TubeText from './TubeText'
+
 import { ReactComponent as ValveBorder } from 'src/@global/asset/valve/border.svg'
 import { ReactComponent as ValveMask } from 'src/@global/asset/valve/mask.svg'
-
-const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
-  for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
-}
-
-const isEven = (num: number): num is Even => num % 2 == 0
-const checkEven = ({ from, to }: { from: number; to: number }): { from: Even | -1; to: Even | -1 } => {
-  return {
-    from: isEven(from) ? from : -1,
-    to: isEven(to) ? to : -1,
-  }
-}
-const moveWaterToDest = (plan: { from: Even | -1; to: Even | -1 }, callback: (to: Even) => void) => {
-  const from = plan.from
-  const to = plan.to
-  if (from === to || from === -1 || to === -1) return
-
-  const skipAnimation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (skipAnimation) {
-    callback(to)
-    return
-  } else {
-    const navTube = document.getElementById('nav-sub-tube')
-    const navLinkItems = navTube && navTube.getElementsByClassName('nav-sub__link')
-    if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-
-    const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
-
-    const delayTotal = moveWater(from, to, transitionSec)
-
-    window.setTimeout(function () {
-      if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-      callback(to)
-    }, (delayTotal + transitionSec) * 1000)
-  }
-}
 
 type Props = {
   keyOffset: number
@@ -71,7 +34,7 @@ export default ({
               className={'nav-sub__link'}
               to={navMainItem + navSubItem}
               onClick={() =>
-                moveWaterToDest(checkEven({ from: navSubIndex * 2, to: i * 2 }), (to: Even) =>
+                moveWater({ from: navSubIndex * 2, to: i * 2 }, (to: number) =>
                   setNavSubIndexes((draft) => {
                     draft[navMainIndex] = to / 2
                   })

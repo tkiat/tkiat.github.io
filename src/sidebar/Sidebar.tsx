@@ -1,32 +1,29 @@
 import React from 'react'
 import { RgbStringColorPicker, RgbaStringColorPicker } from 'react-colorful'
 
-import { SidebarProps } from 'ts-type-sidebar'
+import { Updater } from 'use-immer'
 import * as Theme from 'ts-type-theme'
 
-import injectCustomColors from 'src/@global/injectCustomColors'
 import toggleSidebar from 'src/@global/toggleSidebar'
 import * as inputs from './sidebarInputs'
-import * as ts from 'src/@global/utils-typescript'
 
+import changeCustomColor from './changeCustomColor'
 import BaseThemePicker from './BaseThemePicker'
 import ThemePicker from './ThemePicker'
 
-const changeCustomColor = (
-  customColors: React.MutableRefObject<Theme.CustomColors>,
-  variable: string,
-  value: string
-) => {
-  if (ts.isType(variable, ts.possible.customColors)) {
-    customColors.current[variable] = value
-    const customThemeElem = document.getElementById('theme-custom-supplement') as HTMLStyleElement
-    injectCustomColors(customThemeElem, customColors.current)
-  } else {
-    console.error('custom color variable is not valid')
-  }
-}
+type Props = {
+  theme: Theme.Props
+  setTheme: Updater<Theme.Props>
 
-const Sidebar = ({
+  time: Theme.Time
+  setTime: Updater<Theme.Time>
+
+  waveColors: React.MutableRefObject<Theme.WaveColors>
+  wavePhysics: React.MutableRefObject<Theme.WavePhysics>
+
+  customColors: React.MutableRefObject<Theme.CustomColors>
+}
+export default ({
   theme,
   setTheme,
   time,
@@ -34,7 +31,7 @@ const Sidebar = ({
   waveColors,
   wavePhysics,
   customColors,
-}: SidebarProps): React.ReactElement => {
+}: Props): React.ReactElement => {
   const [, triggerReRender] = React.useState({})
   return (
     <>
@@ -183,5 +180,3 @@ const Sidebar = ({
     </>
   )
 }
-
-export default Sidebar

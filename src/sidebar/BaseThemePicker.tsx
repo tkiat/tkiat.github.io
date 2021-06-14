@@ -1,8 +1,28 @@
 import React from 'react'
-import * as Sidebar from 'ts-type-sidebar'
+import { Updater } from 'use-immer'
+import * as Theme from 'ts-type-theme'
+
 import { possible } from 'src/@global/utils-typescript'
 
-const BaseThemePickerItem = ({ base, current, setTheme }: Sidebar.BaseThemePickerItemProps): React.ReactElement => {
+type Props = {
+  current: Theme.Base
+  setTheme: Updater<Theme.Props>
+}
+export default ({ current, setTheme }: Props): React.ReactElement => (
+  <div className="theme-picker-base">
+    <div className="theme-picker-base__header">Base</div>
+    <div className="theme-picker-base__content">
+      {possible.themesBase.map((base, i) => (
+        <Item key={i} base={base} current={current} setTheme={setTheme} />
+      ))}
+    </div>
+  </div>
+)
+
+type ItemProps = Props & {
+  base: Theme.Base
+}
+const Item = ({ base, current, setTheme }: ItemProps): React.ReactElement => {
   const classname = 'theme-picker-base__picker' + (current === base ? ' theme-picker-base__picker--active' : '')
   const onclick = () => {
     setTheme((draft) => {
@@ -17,18 +37,3 @@ const BaseThemePickerItem = ({ base, current, setTheme }: Sidebar.BaseThemePicke
     </button>
   )
 }
-
-const BaseThemePicker = ({ current, setTheme }: Sidebar.BaseThemePickerProps): React.ReactElement => {
-  return (
-    <div className="theme-picker-base">
-      <div className="theme-picker-base__header">Base</div>
-      <div className="theme-picker-base__content">
-        {possible.themesBase.map((base, i) => (
-          <BaseThemePickerItem key={i} base={base} current={current} setTheme={setTheme} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-export default BaseThemePicker

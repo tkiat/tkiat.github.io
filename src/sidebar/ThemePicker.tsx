@@ -1,7 +1,16 @@
 import React from 'react'
-import { ThemePickerProps } from 'ts-type-sidebar'
+import { Updater } from 'use-immer'
 
-const ThemePicker = ({ base, supplement, isActive, setTheme }: ThemePickerProps): React.ReactElement => {
+import * as Theme from 'ts-type-theme'
+
+type Props = {
+  base: Theme.Base
+  supplement: Theme.Supplement
+
+  isActive: boolean
+  setTheme: Updater<Theme.Props>
+}
+export default ({ base, supplement, isActive, setTheme }: Props): React.ReactElement => {
   const classname = 'theme-picker' + (isActive ? ' theme-picker--active' : '')
   const onclick = () => {
     setTheme((draft) => {
@@ -28,5 +37,3 @@ const ThemePicker = ({ base, supplement, isActive, setTheme }: ThemePickerProps)
     </button>
   )
 }
-
-export default ThemePicker

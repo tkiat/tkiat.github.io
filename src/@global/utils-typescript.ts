@@ -1,10 +1,11 @@
 import * as Nav from 'ts-type-nav'
 import * as Theme from 'ts-type-theme'
+import * as Util from 'ts-type-util'
 
+export const isEven = (num: number): num is Util.Even => num % 2 == 0
 export const isType = <T>(subject: unknown, possibleValues: T[]): subject is T => {
   return possibleValues.includes(subject as T)
 }
-
 // possible values of each type
 const customColors: (keyof Theme.CustomColors)[] = [
   'duck-beak',

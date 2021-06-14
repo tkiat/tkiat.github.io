@@ -1,86 +1,46 @@
 import { Even } from 'ts-type-util'
-import Nav from 'ts-type-nav'
+import * as ts from 'src/@global/utils-typescript'
 
-export const moveWater = (from: Even, to: Even, transitionSec: number): number => {
-  if (from === to || from < 0 || to < 0) return 0
+import { moveWaterToNextNode } from './moveWaterToNextNode'
 
-  const willMoveRight = to > from
-  const flowDir = willMoveRight ? 'right' : 'left'
-  let delayCur = 0
-  let cur: Even = from
-  // step 1: drain
-  delayCur += moveWaterToNextNode(cur, 'drain', flowDir, transitionSec, delayCur)
-  cur += willMoveRight ? 2 : -2
-  // step 2 (optional): pass
-  while (cur !== to) {
-    delayCur += moveWaterToNextNode(cur, 'pass', flowDir, transitionSec, delayCur)
+const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
+  for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
+}
+
+export const moveWater = ({ from, to }: { from: number; to: number }, callback: (to: number) => void): number => {
+  if (from === to || from < 0 || to < 0 || !ts.isEven(from) || !ts.isEven(to)) return 1
+
+  const skipAnimation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (skipAnimation) {
+    callback(to)
+    return 0
+  } else {
+    const navLinkItems = document.getElementsByClassName('nav-sub__link')
+    if (!navLinkItems) return 1
+    toggleElemsClassName(navLinkItems, 'waiting')
+
+    const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
+
+    const willMoveRight = to > from
+    const flowDir = willMoveRight ? 'right' : 'left'
+    let delayCur = 0
+    let cur: Even = from
+    // step 1: drain
+    delayCur += moveWaterToNextNode(cur, 'drain', flowDir, transitionSec, delayCur)
     cur += willMoveRight ? 2 : -2
+    // step 2 (optional): pass
+    while (cur !== to) {
+      delayCur += moveWaterToNextNode(cur, 'pass', flowDir, transitionSec, delayCur)
+      cur += willMoveRight ? 2 : -2
+    }
+    // step 3: stuck
+    moveWaterToNextNode(cur, 'stuck', flowDir, transitionSec, delayCur)
+
+    window.setTimeout(function () {
+      if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
+      callback(to)
+    }, (delayCur + transitionSec) * 1000)
   }
-  // step 3: stuck
-  moveWaterToNextNode(cur, 'stuck', flowDir, transitionSec, delayCur)
 
-  return delayCur
-}
-
-const moveWaterToNextNode = (
-  textIndex: number,
-  mode: Nav.flowMode,
-  flowDir: Nav.flowDirection,
-  totalTime: number,
-  delay: number
-): number => {
-  if (mode === 'drain' && flowDir === 'left') return waterDrainToLeft(textIndex, totalTime, delay)
-  else if (mode === 'drain' && flowDir === 'right') return waterDrainToRight(textIndex, totalTime, delay)
-  else if (mode === 'pass' && flowDir === 'left') return waterPassToLeft(textIndex, totalTime, delay)
-  else if (mode === 'pass' && flowDir === 'right') return waterPassToRight(textIndex, totalTime, delay)
-  else if (mode === 'stuck' && flowDir === 'left') return waterStuckToLeft(textIndex, delay)
-  else if (mode === 'stuck' && flowDir === 'right') return waterStuckToRight(textIndex, delay)
-  else return 0
-}
-
-const waterDrainToLeft = (textIndex: number, totalTime: number, delay: number): number => {
-  triggerWaterFlow(textIndex, 'drain-to-left-text', delay)
-  triggerWaterFlow(textIndex + 1, 'drain-to-left-valve', delay)
-
-  const nextDelay = (totalTime * 1.16 * 20) / 116
-  return nextDelay
-}
-const waterDrainToRight = (textIndex: number, totalTime: number, delay: number): number => {
-  triggerWaterFlow(textIndex, 'drain-to-right-text', delay)
-  triggerWaterFlow(textIndex + 1, 'drain-to-right-valve', delay)
-
-  const nextDelay = (totalTime * 1 * 4) / 100
-  return nextDelay
-}
-const waterPassToLeft = (textIndex: number, totalTime: number, delay: number): number => {
-  triggerWaterFlow(textIndex, 'pass-to-left-text', delay)
-  triggerWaterFlow(textIndex + 1, 'pass-to-left-valve', delay)
-
-  const nextDelay = (totalTime * 2.16 * 120) / 216
-  return nextDelay
-}
-const waterPassToRight = (textIndex: number, totalTime: number, delay: number): number => {
-  triggerWaterFlow(textIndex, 'pass-to-right-text', delay)
-  triggerWaterFlow(textIndex + 1, 'pass-to-right-valve', delay)
-
-  const nextDelay = (totalTime * 2.16 * 120) / 216
-  return nextDelay
-}
-const waterStuckToLeft = (textIndex: number, delay: number): number => {
-  triggerWaterFlow(textIndex, 'stuck-to-left-text', delay)
-  triggerWaterFlow(textIndex + 1, 'stuck-to-left-valve', delay)
   return 0
-}
-const waterStuckToRight = (textIndex: number, delay: number): number => {
-  triggerWaterFlow(textIndex, 'stuck-to-right-text', delay)
-  triggerWaterFlow(textIndex + 1, 'stuck-to-right-valve', delay)
-  return 0
-}
-
-const triggerWaterFlow = (highlighterNum: number, className: string, delaySec: number): void => {
-  const highlighter = document.getElementById('nav-sub__highlighter-item' + highlighterNum) as HTMLElement
-  if (!highlighter) return
-  highlighter.className = 'nav-sub__highlighter-item'
-  highlighter.classList.add(className)
-  highlighter.style.animationDelay = delaySec + 's'
 }
