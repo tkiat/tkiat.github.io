@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React from 'react'
 
 import * as Canvas from 'ts-type-canvas'
 
@@ -8,9 +8,9 @@ import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 import wave from './wave/wave'
 
 export default ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasProps): Canvas.DrawCanvas => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = React.useRef<HTMLCanvasElement>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!canvasRef.current) return
     const canvas = canvasRef.current
 

@@ -1,4 +1,3 @@
-import { Even } from 'ts-type-util'
 import * as ts from 'src/@global/utils-typescript'
 
 import { moveWaterToNextNode } from './moveWaterToNextNode'
@@ -24,10 +23,11 @@ export const moveWater = (
   if (!navLinkItems) return 1
   toggleElemsClassName(navLinkItems, 'waiting')
 
+  console.log(transitionSec)
   const willMoveRight = to > from
   const flowDir = willMoveRight ? 'right' : 'left'
   let delayCur = 0
-  let cur: Even = from
+  let cur = from
   // step 1: drain
   delayCur += moveWaterToNextNode(cur, 'drain', flowDir, transitionSec, delayCur)
   cur += willMoveRight ? 2 : -2

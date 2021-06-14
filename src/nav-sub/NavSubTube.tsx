@@ -9,8 +9,6 @@ import TubeText from './TubeText'
 import { ReactComponent as ValveBorder } from 'src/@global/asset/valve/border.svg'
 import { ReactComponent as ValveMask } from 'src/@global/asset/valve/mask.svg'
 
-const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
-
 type Props = {
   keyOffset: number
   navMainIndex: Nav.NavMainIndexSub
@@ -27,6 +25,7 @@ export default ({
   navSubIndex,
   setNavSubIndexes,
 }: Props): React.ReactElement => {
+  const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
   return (
     <nav className="nav-sub nav-sub--tube" id="nav-sub-tube">
       <ul className="nav-sub__list">
