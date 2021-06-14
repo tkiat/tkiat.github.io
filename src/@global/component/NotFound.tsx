@@ -1,6 +1,7 @@
 import React from 'react'
 
-const NotFound = ({ className }: { className: string }): React.ReactElement => {
+type Props = { className: string }
+export default ({ className }: Props): React.ReactElement => {
   return (
     <div className={className}>
       <div>
@@ -9,4 +10,3 @@ const NotFound = ({ className }: { className: string }): React.ReactElement => {
     </div>
   )
 }
-export default NotFound

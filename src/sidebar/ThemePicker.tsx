@@ -2,6 +2,7 @@ import React from 'react'
 import { Updater } from 'use-immer'
 
 import * as Theme from 'ts-type-theme'
+import { capitalize } from 'src/@global/utils'
 
 type Props = {
   base: Theme.Base
@@ -18,7 +19,7 @@ export default ({ base, supplement, isActive, setTheme }: Props): React.ReactEle
       draft.supplement = supplement
     })
   }
-  const text = supplement[0].toUpperCase() + supplement.slice(1)
+  const text = capitalize(supplement)
   return (
     <button className={classname} theme-base={base} theme-supplement={supplement} onClick={onclick}>
       {

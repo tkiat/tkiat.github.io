@@ -1,10 +1,9 @@
 import React from 'react'
 
-type Prop = {
+type Props = {
   navMainIndex: number
 }
-
-const Contact = ({ navMainIndex }: Prop): React.ReactElement => {
+export default ({ navMainIndex }: Props): React.ReactElement => {
   if (navMainIndex !== 2) return <></>
   return (
     <div className="contact">
@@ -28,5 +27,3 @@ const Contact = ({ navMainIndex }: Prop): React.ReactElement => {
     </div>
   )
 }
-
-export default Contact

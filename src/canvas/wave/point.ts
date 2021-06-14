@@ -1,6 +1,6 @@
 import * as Wave from 'ts-type-wave'
 
-const point = (obj: Wave.PointArguments): Wave.Point => {
+export default (obj: Wave.PointArguments): Wave.Point => {
   let _radian = obj.index
   let _y = obj.y
 
@@ -15,5 +15,3 @@ const point = (obj: Wave.PointArguments): Wave.Point => {
     },
   }
 }
-
-export default point

@@ -24,6 +24,8 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// TODO write test for navmain
+
 let willShowSafariPrompt = initData.isSafariBrowser
 
 const numNavMainButtons = 4

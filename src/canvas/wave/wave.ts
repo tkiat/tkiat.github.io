@@ -3,6 +3,13 @@ import { Coordinate } from 'ts-type-util'
 
 import point from './point'
 
+export default (obj: Wave.WaveArguments): Wave.Wave => {
+  let _coordinates = computeCoordinates(obj.to, obj.from, obj.totalPoints)
+  return {
+    points: createPoints(obj.index, _coordinates),
+  }
+}
+
 const computeCoordinates = (to: Coordinate, from: Coordinate, totalPoints: number) => {
   const pointGapX = (to.x - from.x) / (totalPoints - 1)
   const pointGapY = (to.y - from.y) / (totalPoints - 1)
@@ -25,12 +32,3 @@ const createPoints = (index: number, coordinates: Coordinate[]) => {
   }
   return points
 }
-
-const wave = (obj: Wave.WaveArguments): Wave.Wave => {
-  let _coordinates = computeCoordinates(obj.to, obj.from, obj.totalPoints)
-  return {
-    points: createPoints(obj.index, _coordinates),
-  }
-}
-
-export default wave

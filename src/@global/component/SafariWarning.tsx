@@ -1,6 +1,7 @@
 import React from 'react'
 
-const SafariWarning = ({ onclick }: { onclick: () => void }): React.ReactElement => {
+type Props = { onclick: () => void }
+export default ({ onclick }: Props): React.ReactElement => {
   return (
     <>
       <p>
@@ -16,4 +17,3 @@ const SafariWarning = ({ onclick }: { onclick: () => void }): React.ReactElement
     </>
   )
 }
-export default SafariWarning

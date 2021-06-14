@@ -114,16 +114,14 @@ const mapping: {[index: string]: React.ReactFragment} = {
   'y': <><LowerYBorder /><LowerYMask /></>,
 }
 
-const TubeText = ({word}: {word: string}): React.ReactElement => {
-  return (
-    <>
-    {
-      Array.from(word).map((letter, i) => {
-        return <div key={i} className='letter'>{mapping[letter]}</div>
-      })
-    }
-    </>
-  )
-}
-
-export default TubeText
+export default ({ word }: { word: string }): React.ReactElement => (
+  <>
+    {Array.from(word).map((letter, i) => {
+      return (
+        <div key={i} className="letter">
+          {mapping[letter]}
+        </div>
+      )
+    })}
+  </>
+)
