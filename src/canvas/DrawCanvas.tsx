@@ -7,7 +7,7 @@ import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 
-const DrawCanvas = ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasProps): Canvas.DrawCanvas => {
+export default ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasProps): Canvas.DrawCanvas => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -45,5 +45,3 @@ const DrawCanvas = ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasP
 
   return canvasRef
 }
-
-export default DrawCanvas

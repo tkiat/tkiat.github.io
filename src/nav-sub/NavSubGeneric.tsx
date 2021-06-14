@@ -1,16 +1,24 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { NavSubGenericProps } from 'ts-type-nav'
+import { Updater } from 'use-immer'
+import * as Nav from 'ts-type-nav'
 
 import { ReactComponent as DuckHamburger } from 'src/@global/asset/duck/duck-hamburger.svg'
 
-const NavBarGeneric = ({
+type Props = {
+  navMainIndex: Nav.NavMainIndexSub
+  navMainItem: string
+  navSubIndex: number
+  navSubItems: readonly string[]
+  setNavSubIndexes: Updater<Nav.NavSubIndexes>
+}
+export default ({
   navMainItem,
   navSubItems,
   navMainIndex,
   navSubIndex,
   setNavSubIndexes,
-}: NavSubGenericProps): React.ReactElement => {
+}: Props): React.ReactElement => {
   const onclick = (i: number) => {
     setNavSubIndexes((draft) => {
       draft[navMainIndex] = i
@@ -40,5 +48,3 @@ const NavBarGeneric = ({
     </nav>
   )
 }
-
-export default NavBarGeneric

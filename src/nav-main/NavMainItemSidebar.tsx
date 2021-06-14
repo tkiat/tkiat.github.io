@@ -1,12 +1,16 @@
 import React from 'react'
-
-import { NavMainItemSidebarProps } from 'ts-type-nav'
+import { NavMainItemSidebarShape } from 'ts-type-nav'
 
 import toggleSidebar from 'src/@global/toggleSidebar'
-
 import { ReactComponent as DuckSidebarSVG } from 'src/@global/asset/duck/duck-settings.svg'
 
-const DuckSidebar = ({ left, text }: NavMainItemSidebarProps): React.ReactElement => {
+type Props = {
+  left: string
+  shape: NavMainItemSidebarShape
+  text: string
+}
+
+export default ({ left, text }: Props): React.ReactElement => {
   return (
     <button
       id="nav-main-sidebar"
@@ -19,5 +23,3 @@ const DuckSidebar = ({ left, text }: NavMainItemSidebarProps): React.ReactElemen
     </button>
   )
 }
-
-export default DuckSidebar

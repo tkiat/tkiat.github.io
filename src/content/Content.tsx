@@ -15,12 +15,6 @@ import PC from 'src/content/hobby/PC'
 import Web from 'src/content/hobby/Web'
 import Resume from 'src/content/resume/Resume'
 
-let NotFoundRoute = (props: RouteComponentProps) => (
-  <div data-testid="page-notfound">
-    <NotFound className="notfound notfound--content" />
-  </div>
-)
-
 const contents = [
   { path: initData.paths[0], elem: <Intro /> },
   { path: initData.paths[1], elem: <Personality /> },
@@ -33,21 +27,24 @@ const contents = [
   { path: initData.paths[8], elem: <Resume /> },
 ]
 
-type ContentProps = {
+type Props = {
   isInsideWater: boolean
 }
-const Content = ({ isInsideWater }: ContentProps): React.ReactElement => {
-  return (
-    <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
-      <Router>
-        <NotFoundRoute default />
-        {contents.map(({ path, elem }, i) => {
-          let Route = (props: RouteComponentProps) => <div data-testid={pathToTestId(path)}>{elem}</div>
-          return <Route key={i} path={path} />
-        })}
-      </Router>
-    </div>
-  )
-}
-
-export default Content
+export default ({ isInsideWater }: Props): React.ReactElement => (
+  <div className={'content ' + (isInsideWater ? 'content--inside-water' : 'content--outside-water')}>
+    <Router>
+      {(() => {
+        let NotFoundRoute = (props: RouteComponentProps) => (
+          <div data-testid="page-notfound">
+            <NotFound className="notfound notfound--content" />
+          </div>
+        )
+        return <NotFoundRoute default />
+      })()}
+      {contents.map(({ path, elem }, i) => {
+        let Route = (props: RouteComponentProps) => <div data-testid={pathToTestId(path)}>{elem}</div>
+        return <Route key={i} path={path} />
+      })}
+    </Router>
+  </div>
+)

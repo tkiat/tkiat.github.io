@@ -2,15 +2,13 @@ import React from 'react'
 import marked from 'marked'
 import DOMPurify from 'dompurify'
 
-type MarkdownProps = {
+type Props = {
   content: string
 }
 
-const Markdown = ({ content }: MarkdownProps): React.ReactElement => (
+export default ({ content }: Props): React.ReactElement => (
   <div
     dangerouslySetInnerHTML={{
       __html: DOMPurify.sanitize(marked(content), { USE_PROFILES: { html: true } }),
     }}></div>
 )
-
-export default Markdown

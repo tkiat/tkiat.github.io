@@ -1,17 +1,26 @@
 import React from 'react'
-import { NavSubProps } from 'ts-type-nav'
+import { Updater } from 'use-immer'
+import * as Nav from 'ts-type-nav'
 
 import NavSubGeneric from './NavSubGeneric'
 import NavSubTube from './NavSubTube'
 
-const NavSub = ({
-  navMainItem,
-  navSubItems,
+type Props = {
+  keyOffsets: number[]
+  navMainIndex: Nav.NavMainIndexSub
+  navMainItem: string
+  navSubIndex: number
+  navSubItems: readonly string[]
+  setNavSubIndexes: Updater<Nav.NavSubIndexes>
+}
+export default ({
   keyOffsets,
   navMainIndex,
+  navMainItem,
   navSubIndex,
+  navSubItems,
   setNavSubIndexes,
-}: NavSubProps): React.ReactElement => {
+}: Props): React.ReactElement => {
   const isMobile = window.matchMedia('(max-width: 768px)')
   if (isMobile.matches) {
     return (
@@ -36,5 +45,3 @@ const NavSub = ({
     )
   }
 }
-
-export default NavSub

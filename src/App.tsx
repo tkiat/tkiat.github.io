@@ -84,7 +84,7 @@ const App = (): React.ReactElement => {
     document.head.appendChild(themeSupplementCustomElem)
     injectCustomColors(themeSupplementCustomElem, customColors.current)
 
-    window.addEventListener('popstate', function () {
+    const adjustNavIndexesFromUrl = () => {
       const getNavMainIndexFromUrl = (indexes: Nav.NavMainIndex[], urls: Nav.UrlMain) => {
         return indexes.find((index) => window.location.pathname.startsWith(urls[index]))
       }
@@ -95,7 +95,7 @@ const App = (): React.ReactElement => {
       const main = getNavMainIndexFromUrl(ts.possible.navMainIndexes, initData.urls.main)
       if (main !== undefined) {
         navMainIndexRef.current = main
-        if (main === 0 || main === 1) {
+        if (ts.isType(main, ts.possible.navSubIndexes)) {
           const sub = getNavSubIndexFromUrl(initData.urls.sub[main])
           if (sub !== -1) {
             setNavSubIndexes((draft) => {
@@ -105,7 +105,8 @@ const App = (): React.ReactElement => {
         }
       }
       triggerReRender({})
-    })
+    }
+    window.addEventListener('popstate', adjustNavIndexesFromUrl)
 
     const cleanup = () => {
       localStorage.setItem('nav-main-index', navMainIndexRef.current.toString())
@@ -130,6 +131,7 @@ const App = (): React.ReactElement => {
     window.addEventListener('beforeunload', cleanup)
     return () => {
       window.removeEventListener('beforeunload', cleanup)
+      window.removeEventListener('popstate', adjustNavIndexesFromUrl)
     }
   }, [])
 

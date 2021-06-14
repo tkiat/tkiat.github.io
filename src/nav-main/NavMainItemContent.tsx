@@ -1,27 +1,28 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { NavMainItemContentProps } from 'ts-type-nav'
+import * as Nav from 'ts-type-nav'
 
 import { ReactComponent as DuckAboutMeSVG } from 'src/@global/asset/duck/duck-aboutme.svg'
 import { ReactComponent as DuckHobbySVG } from 'src/@global/asset/duck/duck-hobby.svg'
 import { ReactComponent as DuckResumeSVG } from 'src/@global/asset/duck/duck-resume.svg'
 
-const NavMainItemContent = ({
-  href,
-  isActive,
-  left,
-  onclick,
-  shape,
-  text,
-}: NavMainItemContentProps): React.ReactElement => {
+export type Props = {
+  href: string
+  isActive: boolean
+  left: string
+  onclick: () => void
+  shape: Nav.NavMainItemContentShape
+  text: string
+}
+export default ({ href, isActive, left, onclick, shape, text }: Props): React.ReactElement => {
   return (
     <Link
       className={'nav-main' + (isActive ? ' nav-main--active' : '')}
       to={href}
       aria-label={text}
       style={{ left: left }}
-      draggable="false"
-      onClick={onclick}>
+      onClick={onclick}
+      draggable="false">
       <div className="nav-main__text">{text}</div>
       {
         {
@@ -33,5 +34,3 @@ const NavMainItemContent = ({
     </Link>
   )
 }
-
-export default NavMainItemContent

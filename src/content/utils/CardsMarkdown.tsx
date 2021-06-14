@@ -3,14 +3,13 @@ import React from 'react'
 import Markdown from 'src/content/utils/Markdown'
 import Cards from 'src/content/utils/Cards'
 
-const CardsMarkdown = ({ mdArray }: { mdArray: string[] }): React.ReactElement => {
-  return (
-    <Cards
-      items={mdArray.map((x) => (
-        <Markdown content={x} />
-      ))}
-    />
-  )
+type Props = {
+  mdArray: string[]
 }
-
-export default CardsMarkdown
+export default ({ mdArray }: Props): React.ReactElement => (
+  <Cards
+    items={mdArray.map((x) => (
+      <Markdown content={x} />
+    ))}
+  />
+)

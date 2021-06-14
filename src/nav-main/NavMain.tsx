@@ -7,17 +7,26 @@ import NavMainItemSidebar from './NavMainItemSidebar'
 import { capitalize } from 'src/@global/utils'
 import { possible } from 'src/@global/utils-typescript'
 
-const shapes: { [l in Nav.NavMainIndex]: Nav.NavMainItemContentProps['shape'] } = {
+type Shape = {
+  [l in Nav.NavMainIndex]: Nav.NavMainItemContentShape
+}
+const shapesContent: Shape = {
   0: 'DuckAbout',
   1: 'DuckHobby',
   2: 'DuckResume',
 }
-const shapeSidebar: Nav.NavMainItemSidebarProps['shape'] = 'DuckSidebar'
+
+const shapeSidebar: Nav.NavMainItemSidebarShape = 'DuckSidebar'
 
 const xOffset = '20px'
 const left = (index: number) => `calc((100% - var(--sidebar-width)) * (2 * ${index} + 1) / 8 - ${xOffset})` // totalWidth * (2 * index + 1)/((totalPoints - 1) * 2)
 
-const NavMain = ({ navMainIndexRef, rerender, navMainItems }: Nav.NavMainProps): React.ReactElement => {
+export type Props = {
+  navMainIndexRef: React.MutableRefObject<Nav.NavMainIndex>
+  rerender: () => void
+  navMainItems: { [k in Nav.NavMainIndex]: string }
+}
+export default ({ navMainIndexRef, rerender, navMainItems }: Props): React.ReactElement => {
   return (
     <>
       {possible.navMainIndexes.map((index) => (
@@ -30,7 +39,7 @@ const NavMain = ({ navMainIndexRef, rerender, navMainItems }: Nav.NavMainProps):
             navMainIndexRef.current = index
             rerender()
           }}
-          shape={shapes[index]}
+          shape={shapesContent[index]}
           text={capitalize(navMainItems[index].slice(1))}
         />
       ))}
@@ -38,5 +47,3 @@ const NavMain = ({ navMainIndexRef, rerender, navMainItems }: Nav.NavMainProps):
     </>
   )
 }
-
-export default NavMain

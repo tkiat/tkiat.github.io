@@ -1,18 +1,17 @@
 import React from 'react'
 import Tabs from 'src/content/utils/Tabs'
 
+const getInitTabIndex = (storage: string) => parseInt(localStorage.getItem(storage) ?? '0')
+
 type item = {
   title: string
   content: React.ReactElement
 }
-type LocalProps = {
+type Props = {
   items: item[]
   storage: string
 }
-
-const getInitTabIndex = (storage: string) => parseInt(localStorage.getItem(storage) ?? '0')
-
-export default ({ items, storage }: LocalProps): React.ReactElement => {
+export default ({ items, storage }: Props): React.ReactElement => {
   const curTabRef = React.useRef<number>(getInitTabIndex(storage))
   return (
     <Tabs

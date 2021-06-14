@@ -1,21 +1,14 @@
 import React from 'react'
 
-type CardsProps = {
+type Props = {
   items: React.ReactElement[]
 }
-
-const Cards = ({ items }: CardsProps): React.ReactElement => {
-  return (
-    <div className="cards">
-      {items.map((item, i) => {
-        return (
-          <div className="cards__item" key={i}>
-            {item}
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-export default Cards
+export default ({ items }: Props): React.ReactElement => (
+  <div className="cards">
+    {items.map((item, i) => (
+      <div key={i} className="cards__item">
+        {item}
+      </div>
+    ))}
+  </div>
+)

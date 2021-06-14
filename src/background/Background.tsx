@@ -13,8 +13,9 @@ const backgrounds = {
   snow: <Snow className="background" />,
 }
 
-const Background = ({ theme }: { theme: Theme.Base }): React.ReactElement => {
+type Props = {
+  theme: Theme.Base
+}
+export default ({ theme }: Props): React.ReactElement => {
   return backgrounds[theme]
 }
-
-export default Background
