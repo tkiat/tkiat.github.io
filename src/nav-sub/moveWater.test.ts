@@ -1,4 +1,6 @@
-import { Even } from 'ts-type-util'
+window.matchMedia = (whatever: string) => {
+  return { 'declare to solve "window not found" bug here': whatever } as unknown as MediaQueryList
+}
 
 import { moveWater } from './moveWater'
 
@@ -19,10 +21,12 @@ const initDocument = stripHTMLWhitespaces(`
   </div>
 `)
 
+const dummyCallback = () => {}
+
 test('with invalid inputs, do nothing and return zero', () => {
-  expect(moveWater(2 as Even, 2 as Even, 0)).toBe(0)
-  expect(moveWater(-1 as Even, 2 as Even, 0)).toBe(0)
-  expect(moveWater(2 as Even, -1 as Even, 0)).toBe(0)
+  expect(moveWater({ from: 2, to: 2 }, transitionSec, dummyCallback)).toBe(0)
+  expect(moveWater({ from: -1, to: 2 }, transitionSec, dummyCallback)).toBe(0)
+  expect(moveWater({ from: 2, to: -1 }, transitionSec, dummyCallback)).toBe(0)
 })
 
 test('water drains to the right, then pass two nodes, then stop at the final node', () => {
@@ -30,7 +34,7 @@ test('water drains to the right, then pass two nodes, then stop at the final nod
   const delayDrain = (transitionSec * 4) / 100
   const delayPass = (transitionSec * 2.16 * 120) / 216
 
-  const finalDelay = moveWater(0 as Even, 6 as Even, transitionSec)
+  const finalDelay = moveWater({ from: 0, to: 6 }, transitionSec, dummyCallback)
 
   expect(document.getElementById(item + '0')).toHaveClass(item + ' drain-to-right-text', { exact: true })
   expect(document.getElementById(item + '1')).toHaveClass(item + ' drain-to-right-valve', { exact: true })
@@ -47,7 +51,7 @@ test('water drains to the left, then pass two nodes, then stop at the final node
   const delayDrain = (transitionSec * 1.16 * 20) / 116
   const delayPass = (transitionSec * 2.16 * 120) / 216
 
-  const finalDelay = moveWater(6 as Even, 0 as Even, transitionSec)
+  const finalDelay = moveWater({ from: 6, to: 0 }, transitionSec, dummyCallback)
 
   expect(document.getElementById(item + '6')).toHaveClass(item + ' drain-to-left-text', { exact: true })
   expect(document.getElementById(item + '5')).toHaveClass(item + ' pass-to-left-valve', { exact: true })
