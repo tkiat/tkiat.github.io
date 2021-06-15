@@ -26,6 +26,7 @@ import 'src/@sass/main.scss'
 
 // TODO write test for navmain
 // TODO delete obvius tests like toggler, i think write general test is better
+// TODO reaplce status with status.error
 
 let willShowSafariPrompt = initData.isSafariBrowser
 

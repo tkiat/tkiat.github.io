@@ -18,8 +18,8 @@ test('check all points on wave after creation', () => {
         y: 600,
       })
     )
-  for (let i = 0; i < waveMock.points.length; i++) {
+  waveMock.points.map((point, i) => {
     // Jest cannot compare functions directly, need to convert to string
-    expect(JSON.stringify(waveMock.points[i])).toStrictEqual(expectedPoint([0, 320, 640, 960, 1280][i]))
-  }
+    expect(JSON.stringify(point)).toStrictEqual(expectedPoint([0, 320, 640, 960, 1280][i]))
+  })
 })

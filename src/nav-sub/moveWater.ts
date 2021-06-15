@@ -3,7 +3,7 @@ import * as ts from 'src/@global/utils-typescript'
 import { moveWaterToNextNode } from './moveWaterToNextNode'
 
 const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
-  for (let i = 0; i < elems.length; i++) elems[i].classList.toggle(className)
+  Array.prototype.map.call(elems, (elem) => elem.classList.toggle(className))
 }
 
 export const moveWater = (
@@ -23,7 +23,6 @@ export const moveWater = (
   if (!navLinkItems) return 1
   toggleElemsClassName(navLinkItems, 'waiting')
 
-  console.log(transitionSec)
   const willMoveRight = to > from
   const flowDir = willMoveRight ? 'right' : 'left'
   let delayCur = 0
