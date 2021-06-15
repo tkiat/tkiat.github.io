@@ -1,15 +1,21 @@
 import { Status } from 'ts-type-util'
-import { Wave } from 'ts-type-wave'
+import { Point, Wave } from 'ts-type-wave'
 
-export const moveItemsAlongWave = (items: NodeListOf<HTMLElement>, wave: Wave, offset: number): Status => {
+const getMidpointY = (p1: Point, p2: Point) => (p1.getY() + p2.getY()) / 2
+const getMidpointDeg = (left: Point, right: Point) =>
+  (Math.atan2(right.getY() - left.getY(), right.x - left.x) * 180) / Math.PI
+
+export default (items: NodeListOf<HTMLElement>, wave: Wave, offset: number): Status => {
   if (items.length >= wave.points.length) return 1
-  for (let i = 0; i < items.length; i++) {
-    const midpoint = (wave.points[i].getY() + wave.points[i + 1].getY()) / 2
-    const offsetY = midpoint - items[i].clientHeight + offset + 'px'
-    const offsetDeg =
-      (Math.atan2(wave.points[i + 1].getY() - wave.points[i].getY(), wave.points[i + 1].x - wave.points[i].x) * 180) /
-      Math.PI
-    items[i].style.transform = `translateY(${offsetY}) rotate(${offsetDeg}deg)`
-  }
+  const points = wave.points.slice(0, items.length + 1)
+
+  const offsetY = points.flatMap((_, i, arr) => (i < items.length ? getMidpointY(arr[i], arr[i + 1]) : []))
+  const offsetYadjust = offsetY.map((x, i) => x - items[i].clientHeight + offset + 'px')
+  const offsetDeg = points.flatMap((_, i, arr) => (i < items.length ? getMidpointDeg(arr[i], arr[i + 1]) : []))
+
+  Array.prototype.map.call(items, (item, i) => {
+    item.style.transform = `translateY(${offsetYadjust[i]}) rotate(${offsetDeg[i]}deg)`
+    return item
+  })
   return 0
 }

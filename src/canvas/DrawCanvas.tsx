@@ -3,7 +3,7 @@ import React from 'react'
 import * as Theme from 'ts-type-theme'
 
 import { drawWaves } from './wave/drawWaves'
-import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
+import moveItemsAlongWave from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 

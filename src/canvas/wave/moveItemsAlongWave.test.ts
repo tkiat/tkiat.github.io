@@ -1,7 +1,7 @@
 import { WaveProps } from 'ts-type-wave'
 
 import { stripHTMLWhitespaces } from 'src/@global/utils'
-import { moveItemsAlongWave } from './moveItemsAlongWave'
+import moveItemsAlongWave from './moveItemsAlongWave'
 import wave from 'src/canvas/wave/wave'
 
 const getDocWithDupeItems = (numItems: number) => {
