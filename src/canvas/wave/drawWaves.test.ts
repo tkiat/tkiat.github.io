@@ -16,7 +16,7 @@ const wavePropsBase = {
 }
 let waveColors: Theme.WaveColors
 let wavePhysics: Theme.WavePhysics
-let waveProps: Wave.WaveArguments
+let waveProps: Wave.WaveProps
 let wavesMock: Wave.Wave[]
 
 describe('test 1: index = 0 , totalPoints = 5, height = 10, speed = 1, red color', () => {

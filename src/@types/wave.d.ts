@@ -13,7 +13,7 @@ declare module 'ts-type-wave' {
     getY: () => number
   }
 
-  export type WaveArguments = {
+  export type WaveProps = {
     index: number
 
     from: Coordinate

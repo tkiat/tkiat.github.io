@@ -1,4 +1,4 @@
-import { WaveArguments } from 'ts-type-wave'
+import { WaveProps } from 'ts-type-wave'
 
 import { stripHTMLWhitespaces } from 'src/@global/utils'
 import { moveItemsAlongWave } from './moveItemsAlongWave'
@@ -8,7 +8,7 @@ const getDocWithDupeItems = (numItems: number) => {
   return stripHTMLWhitespaces('<div>' + '<div class="item">Item</div>'.repeat(numItems) + '</div>')
 }
 
-const waveProps: WaveArguments = {
+const waveProps: WaveProps = {
   index: 0,
   from: { x: 0, y: 738 },
   to: { x: 1280, y: 738 },

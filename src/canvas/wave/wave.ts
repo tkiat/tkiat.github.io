@@ -3,7 +3,7 @@ import { Coordinate } from 'ts-type-util'
 
 import point from './point'
 
-export default (obj: Wave.WaveArguments): Wave.Wave => {
+export default (obj: Wave.WaveProps): Wave.Wave => {
   let _coordinates = computeCoordinates(obj.to, obj.from, obj.totalPoints)
   return {
     points: createPoints(obj.index, _coordinates),

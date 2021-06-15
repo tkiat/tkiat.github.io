@@ -1,9 +1,19 @@
 import React from 'react'
-import * as Canvas from 'ts-type-canvas'
+import * as Theme from 'ts-type-theme'
+import { Dimension } from 'ts-type-util'
 
 import DrawCanvas from './DrawCanvas'
 
-export default ({ argumentCanvas, argumentDrawCanvas }: Canvas.CanvasProps): React.ReactElement => {
+type Props = {
+  argumentCanvas: Dimension
+  argumentDrawCanvas: {
+    waveColors: React.MutableRefObject<Theme.WaveColors>
+    waveConfigs: Theme.WaveConfigs
+    wavePhysics: React.MutableRefObject<Theme.WavePhysics>
+  }
+}
+
+export default ({ argumentCanvas, argumentDrawCanvas }: Props): React.ReactElement => {
   const { w, h } = argumentCanvas
   const canvasRef = DrawCanvas(argumentDrawCanvas)
   return <canvas className="canvas" ref={canvasRef} width={w} height={h} role="img" />

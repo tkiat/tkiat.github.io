@@ -1,13 +1,20 @@
 import React from 'react'
 
-import * as Canvas from 'ts-type-canvas'
+import * as Theme from 'ts-type-theme'
 
 import { drawWaves } from './wave/drawWaves'
 import { moveItemsAlongWave } from './wave/moveItemsAlongWave'
 
 import wave from './wave/wave'
 
-export default ({ waveConfigs, waveColors, wavePhysics }: Canvas.DrawCanvasProps): Canvas.DrawCanvas => {
+type Props = {
+  waveColors: React.MutableRefObject<Theme.WaveColors>
+  waveConfigs: Theme.WaveConfigs
+  wavePhysics: React.MutableRefObject<Theme.WavePhysics>
+}
+type Return = React.Ref<HTMLCanvasElement> | undefined
+
+export default ({ waveConfigs, waveColors, wavePhysics }: Props): Return => {
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
 
   React.useEffect(() => {
