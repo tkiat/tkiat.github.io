@@ -27,25 +27,13 @@ export const moveWater = (
   const flowDir = willMoveRight ? 'right' : 'left'
   const step = willMoveRight ? 2 : -2
   let delayCur = 0
-  let cur = from
-  {
-    // step 1: drain
-    const method = getWaterMoveMethod(flowDir, 'drain')
-    delayCur += method(cur, delayCur, transitionSec)
-    cur += step
-  }
-  // step 2 (optional): pass
-  const transitions = Array.from(new Array((to - cur) / step), (_, i) => cur + i * step)
+
+  const transitions = Array.from(new Array((to - from) / step + 1), (_, i) => from + i * step)
   transitions.map((x) => {
-    const method = getWaterMoveMethod(flowDir, 'pass')
+    const mode = x === from ? 'drain' : x === to ? 'stuck' : 'pass'
+    const method = getWaterMoveMethod(flowDir, mode)
     delayCur += method(x, delayCur, transitionSec)
-    cur += step
   })
-  // step 3: stuck
-  {
-    const method = getWaterMoveMethod(flowDir, 'stuck')
-    method(cur, delayCur, transitionSec)
-  }
 
   window.setTimeout(function () {
     if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')

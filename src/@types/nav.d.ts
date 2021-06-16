@@ -6,8 +6,8 @@ declare module 'ts-type-nav' {
   type NavMainIndexSub = Extract<NavMainIndex, 0 | 1>
   export type NavSubIndexes = { [k in NavMainIndexSub]: number }
 
-  export type flowDirection = 'left' | 'right'
-  export type flowMode = 'drain' | 'pass' | 'stuck'
+  export type FlowDirection = 'left' | 'right'
+  export type FlowMode = 'drain' | 'pass' | 'stuck'
 
   export type UrlMain = {
     [k in NavMainIndex]: string

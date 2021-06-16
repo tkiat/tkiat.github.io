@@ -1,7 +1,7 @@
 import Nav from 'ts-type-nav'
 
 type Return = (...args: number[]) => number
-export const getWaterMoveMethod = (flowDir: Nav.flowDirection, mode: Nav.flowMode): Return => {
+export const getWaterMoveMethod = (flowDir: Nav.FlowDirection, mode: Nav.FlowMode): Return => {
   if (mode === 'drain' && flowDir === 'left') return waterDrainToLeft
   else if (mode === 'drain' && flowDir === 'right') return waterDrainToRight
   else if (mode === 'pass' && flowDir === 'left') return waterPassToLeft
