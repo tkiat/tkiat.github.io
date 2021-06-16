@@ -20,12 +20,16 @@ html {
   overflow: hidden;
 }
 
+::selection {
+  background-color: var(--header-text-color);
+  color: var(--body-bg-color);
+}
 body {
   margin: 0;
   height: 100%;
   overflow: hidden;
   font-family: Lato, sans-serif;
-  background: var(--body-bg-color);
+  background-color: var(--body-bg-color);
   color: var(--body-text-color);
 }
 

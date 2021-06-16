@@ -9,12 +9,20 @@
   height: 100vh;
   width: 100vw;
 
-  color: var(--tube-water-color);
-  text-shadow: -1px 0 var(--tube-stroke-color), 0 1px var(--tube-stroke-color), 1px 0 var(--tube-stroke-color),
-    0 -1px var(--tube-stroke-color);
+  font-weight: bold;
+
+  color: var(--body-bg-color);
+  text-shadow: -1px 1px var(--body-text-color), 1px 1px var(--body-text-color), 1px -1px var(--body-text-color),
+    -2px -2px var(--body-text-color);
   &--content {
     position: unset;
     height: unset;
     width: unset;
+  }
+  & > div > a {
+    color: inherit;
+    &:hover {
+      color: var(--link-text-color);
+    }
   }
 }

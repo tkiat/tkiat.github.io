@@ -1,6 +1,6 @@
 import * as ts from 'src/@global/utils-typescript'
 
-import { moveWaterToNextNode } from './moveWaterToNextNode'
+import { getWaterMoveMethod } from './getWaterMoveMethod'
 
 const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
   Array.prototype.map.call(elems, (elem) => elem.classList.toggle(className))
@@ -25,18 +25,27 @@ export const moveWater = (
 
   const willMoveRight = to > from
   const flowDir = willMoveRight ? 'right' : 'left'
+  const step = willMoveRight ? 2 : -2
   let delayCur = 0
   let cur = from
-  // step 1: drain
-  delayCur += moveWaterToNextNode(cur, 'drain', flowDir, transitionSec, delayCur)
-  cur += willMoveRight ? 2 : -2
-  // step 2 (optional): pass
-  while (cur !== to) {
-    delayCur += moveWaterToNextNode(cur, 'pass', flowDir, transitionSec, delayCur)
-    cur += willMoveRight ? 2 : -2
+  {
+    // step 1: drain
+    const method = getWaterMoveMethod(flowDir, 'drain')
+    delayCur += method(cur, delayCur, transitionSec)
+    cur += step
   }
+  // step 2 (optional): pass
+  const transitions = Array.from(new Array((to - cur) / step), (_, i) => cur + i * step)
+  transitions.map((x) => {
+    const method = getWaterMoveMethod(flowDir, 'pass')
+    delayCur += method(x, delayCur, transitionSec)
+    cur += step
+  })
   // step 3: stuck
-  moveWaterToNextNode(cur, 'stuck', flowDir, transitionSec, delayCur)
+  {
+    const method = getWaterMoveMethod(flowDir, 'stuck')
+    method(cur, delayCur, transitionSec)
+  }
 
   window.setTimeout(function () {
     if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')

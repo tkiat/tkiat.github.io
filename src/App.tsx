@@ -25,7 +25,10 @@ import Sidebar from 'src/sidebar/Sidebar'
 import 'src/@sass/main.scss'
 
 // TODO write test for navmain
+// TODO change body-text-color to more semantic like content-text-color
+// TODO maybe in mavsub split text and valvue in diff component
 // TODO delete obvius tests like toggler, i think write general test is better
+// TODO use currying in moveWater
 
 let willShowSafariPrompt = initData.isSafariBrowser
 
@@ -127,7 +130,7 @@ const App = (): React.ReactElement => {
       localStorage.setItem('wave-speed', wavePhysics.current.speed.toString())
       localStorage.setItem('wave-shakiness', wavePhysics.current.shakiness.toString())
 
-      Object.keys(customColors.current).forEach((prop) => {
+      Object.keys(customColors.current).map((prop) => {
         localStorage.setItem('custom-' + prop + '-color', customColors.current[prop as keyof Theme.CustomColors])
       })
     }
