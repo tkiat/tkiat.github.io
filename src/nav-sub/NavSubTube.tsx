@@ -35,10 +35,14 @@ export default ({
     const navLinkItems = document.getElementsByClassName('nav-sub__link')
     beginMoveWaterSequence()
       ?.checkValidInputs(from, to)
-      ?.willSkipAnimation(callback)
+      ?.checkIfSkipAnimation(callback)
       ?.toggleNavItemsWaiting(navLinkItems)
       ?.moveWater(from, to, transitionSec)
-      .setCleanupTimer(navLinkItems, callback)
+      .waitUntilWaterStops()
+      .then((toggleNavItemsWaiting: Function) => {
+        toggleNavItemsWaiting(navLinkItems)
+        callback()
+      })
   }
   return (
     <nav className="nav-sub nav-sub--tube" id="nav-sub-tube">

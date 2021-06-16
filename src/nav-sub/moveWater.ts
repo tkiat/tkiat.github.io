@@ -17,14 +17,14 @@ const checkValidInputs = (from: number, to: number): NextStepOrStop => {
     return undefined
   }
   return {
-    willSkipAnimation,
+    checkIfSkipAnimation,
   }
 }
 
-const willSkipAnimation = (callback: Function): NextStepOrStop => {
+const checkIfSkipAnimation = (callback: Function): NextStepOrStop => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     callback()
-    console.log('moveWater.willSkipAnimation(): skip animation due to (prefers-reduced-motion: reduce)')
+    console.log('moveWater.checkIfSkipAnimation(): skip animation due to (prefers-reduced-motion: reduce)')
     return undefined
   }
   return { toggleNavItemsWaiting }
@@ -39,7 +39,7 @@ const toggleNavItemsWaiting = (items: HTMLCollection): NextStepOrStop => {
   return { moveWater }
 }
 
-const moveWater = (from: number, to: number, transitionSec: number): NextStep => {
+const moveWater = (from: number, to: number, transitionSec: number) => {
   const flowDir = to > from ? 'right' : 'left'
   const step = to > from ? 2 : -2
 
@@ -53,16 +53,11 @@ const moveWater = (from: number, to: number, transitionSec: number): NextStep =>
   const cleanupDelay = (finalDelay + transitionSec) * 1000
 
   return {
-    setCleanupTimer: (elems: any, callback: any) => {
-      window.setTimeout(function () {
-        cleanup(elems, callback)
-      }, cleanupDelay)
-      return finalDelay
-    },
+    waitUntilWaterStops: () => waitUntilWaterStops(cleanupDelay),
   }
 }
 
-const cleanup = (elems: HTMLCollection, callback: any) => {
-  toggleNavItemsWaiting(elems)
-  callback()
-}
+const waitUntilWaterStops = (delay: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, delay)
+  }).then(() => toggleNavItemsWaiting)
