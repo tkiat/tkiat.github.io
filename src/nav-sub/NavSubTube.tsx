@@ -3,7 +3,7 @@ import { Link } from '@reach/router'
 import { Updater } from 'use-immer'
 import * as Nav from 'ts-type-nav'
 
-import { moveWater } from './moveWater'
+import { beginMoveWaterSequence } from './moveWater'
 import TubeText from './TubeText'
 
 import { ReactComponent as ValveBorder } from 'src/@global/asset/valve/border.svg'
@@ -25,7 +25,21 @@ export default ({
   navSubIndex,
   setNavSubIndexes,
 }: Props): React.ReactElement => {
-  const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
+  const moveWater = (from: number, to: number) => {
+    const transitionSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--anim-period'))
+    const callback = () =>
+      setNavSubIndexes((draft) => {
+        draft[navMainIndex] = to / 2
+      })
+
+    const navLinkItems = document.getElementsByClassName('nav-sub__link')
+    beginMoveWaterSequence()
+      ?.checkValidInputs(from, to)
+      ?.willSkipAnimation(callback)
+      ?.toggleNavItemsWaiting(navLinkItems)
+      ?.moveWater(from, to, transitionSec)
+      .setCleanupTimer(navLinkItems, callback)
+  }
   return (
     <nav className="nav-sub nav-sub--tube" id="nav-sub-tube">
       <ul className="nav-sub__list">
@@ -35,13 +49,7 @@ export default ({
               <Link
                 className={'nav-sub__link'}
                 to={navMainItem + navSubItem}
-                onClick={() =>
-                  moveWater({ from: navSubIndex * 2, to: i * 2 }, transitionSec, (to: number) =>
-                    setNavSubIndexes((draft) => {
-                      draft[navMainIndex] = to / 2
-                    })
-                  )
-                }
+                onClick={() => moveWater(navSubIndex * 2, i * 2)}
                 draggable="false">
                 <TubeText word={navSubItem[1].toUpperCase() + navSubItem.slice(2)} />
                 <div className="nav-sub__highlighter-wrapper">

@@ -2,27 +2,44 @@ import * as ts from 'src/@global/utils-typescript'
 
 import { getWaterMoveMethod } from './getWaterMoveMethod'
 
-const toggleElemsClassName = (elems: HTMLCollection, className: string) => {
-  Array.prototype.map.call(elems, (elem) => elem.classList.toggle(className))
+type NextStep = { [a: string]: Function }
+type NextStepOrStop = NextStep | undefined
+
+export const beginMoveWaterSequence = (): NextStep => {
+  return {
+    checkValidInputs,
+  }
 }
 
-export const moveWater = (
-  { from, to }: { from: number; to: number },
-  transitionSec: number,
-  callback: (to: number) => void
-): number => {
-  if (from === to || from < 0 || to < 0 || !ts.isEven(from) || !ts.isEven(to)) return 0
-
-  const skipAnimation = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (skipAnimation) {
-    callback(to)
-    return 0
+const checkValidInputs = (from: number, to: number): NextStepOrStop => {
+  if (from === to || from < 0 || to < 0 || !ts.isEven(from) || !ts.isEven(to)) {
+    console.error('moveWater.checkValidInputs(): either from or to is invalid')
+    return undefined
   }
+  return {
+    willSkipAnimation,
+  }
+}
 
-  const navLinkItems = document.getElementsByClassName('nav-sub__link')
-  if (!navLinkItems) return 1
-  toggleElemsClassName(navLinkItems, 'waiting')
+const willSkipAnimation = (callback: Function): NextStepOrStop => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    callback()
+    console.log('moveWater.willSkipAnimation(): skip animation due to (prefers-reduced-motion: reduce)')
+    return undefined
+  }
+  return { toggleNavItemsWaiting }
+}
 
+const toggleNavItemsWaiting = (items: HTMLCollection): NextStepOrStop => {
+  if (!items) {
+    console.error('moveWater.toggleNavItemsWaiting(): cannot find any nav items')
+    return undefined
+  }
+  Array.prototype.map.call(items, (items) => items.classList.toggle('waiting'))
+  return { moveWater }
+}
+
+const moveWater = (from: number, to: number, transitionSec: number): NextStep => {
   const flowDir = to > from ? 'right' : 'left'
   const step = to > from ? 2 : -2
 
@@ -33,9 +50,19 @@ export const moveWater = (
     return delay + method(x, delay, transitionSec)
   }, 0)
 
-  window.setTimeout(function () {
-    if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
-    callback(to)
-  }, (finalDelay + transitionSec) * 1000)
-  return finalDelay
+  const cleanupDelay = (finalDelay + transitionSec) * 1000
+
+  return {
+    setCleanupTimer: (elems: any, callback: any) => {
+      window.setTimeout(function () {
+        cleanup(elems, callback)
+      }, cleanupDelay)
+      return finalDelay
+    },
+  }
+}
+
+const cleanup = (elems: HTMLCollection, callback: any) => {
+  toggleNavItemsWaiting(elems)
+  callback()
 }
