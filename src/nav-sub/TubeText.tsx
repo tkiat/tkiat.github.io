@@ -6,8 +6,8 @@ export default ({ word }: { word: string }): React.ReactElement => (
     {Array.from(word).map((letter, i) => {
       return (
         <div key={i} className="letter">
-          {mapping[letter].border}
-          {mapping[letter].mask}
+          {mapping.border[letter]}
+          {mapping.mask[letter]}
         </div>
       )
     })}

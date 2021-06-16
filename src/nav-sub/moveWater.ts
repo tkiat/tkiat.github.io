@@ -23,21 +23,19 @@ export const moveWater = (
   if (!navLinkItems) return 1
   toggleElemsClassName(navLinkItems, 'waiting')
 
-  const willMoveRight = to > from
-  const flowDir = willMoveRight ? 'right' : 'left'
-  const step = willMoveRight ? 2 : -2
-  let delayCur = 0
+  const flowDir = to > from ? 'right' : 'left'
+  const step = to > from ? 2 : -2
 
-  const transitions = Array.from(new Array((to - from) / step + 1), (_, i) => from + i * step)
-  transitions.map((x) => {
+  const waterTransitions = Array.from(new Array((to - from) / step + 1), (_, i) => from + i * step)
+  const finalDelay = waterTransitions.reduce((delay, x) => {
     const mode = x === from ? 'drain' : x === to ? 'stuck' : 'pass'
     const method = getWaterMoveMethod(flowDir, mode)
-    delayCur += method(x, delayCur, transitionSec)
-  })
+    return delay + method(x, delay, transitionSec)
+  }, 0)
 
   window.setTimeout(function () {
     if (navLinkItems) toggleElemsClassName(navLinkItems, 'waiting')
     callback(to)
-  }, (delayCur + transitionSec) * 1000)
-  return delayCur
+  }, (finalDelay + transitionSec) * 1000)
+  return finalDelay
 }
