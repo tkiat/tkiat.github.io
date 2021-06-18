@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link } from '@reach/router'
-import TubeText from './TubeText'
+import Text from './Text'
 
 type Props = {
   i: number
@@ -13,7 +13,7 @@ type Props = {
 export default (props: Props) => {
   return (
     <Link className={'nav-sub__link'} to={props.to} onClick={props.onclick} draggable="false">
-      <TubeText word={props.word} />
+      <Text word={props.word} />
       <div className="nav-sub__highlighter-wrapper">
         <div
           id={'nav-sub__highlighter-item' + props.i * 2}

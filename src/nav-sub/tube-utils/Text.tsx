@@ -1,5 +1,5 @@
 import React from 'react'
-import { mapping } from './TubeTextMap'
+import { mapping } from './TextMap'
 
 export default ({ word }: { word: string }): React.ReactElement => (
   <>

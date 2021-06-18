@@ -2,9 +2,10 @@ import React from 'react'
 import { Updater } from 'use-immer'
 import * as Nav from 'ts-type-nav'
 
+import { moveWater } from './tube-utils/moveWater'
+
 import NodeText from './tube-utils/NodeText'
 import NodeValve from './tube-utils/NodeValve'
-import { moveWater } from './tube-utils/moveWater'
 
 type Props = {
   keyOffset: number
