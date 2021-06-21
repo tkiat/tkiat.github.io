@@ -1,0 +1,14 @@
+reading:
+  - title: Learn You a Haskell for Great Good!
+    source: Free online reading at http://learnyouahaskell.com
+    data: 2021-06-21
+    review:
+      I actually own this from Humble Bundle (2014 version) but it is also available online for free. The online version has no year given but presumably more recently updated so I decided to read the online version.
+      This book introduces Haskell basics like Type, Typeclass, Function, Pattern, Higher Order Function, Monoid, and Monad. I read this book because someone from Reddit said it is a nice pathway to Purescript. That's why I skim a lot in the other half of the book just to understand concepts only.
+      The book mainly use ghci (like Python or Node.js REPL) but the installation instructions look really intimidating for beginners who still don't know Haskell-related jargons so I used Haskell Platform instead. This got me up and running super quickly. This was not available on nix package manager (which I preferred) so, as a debian user, I simply do
+      ```
+      sudo apt-get install haskell-platform
+      ```
+      Vim has Haskell support out of the box for syntax highlighting so yeah. The language server support is overkill so I skipped it.
+
+      This book has no exercises so you shouldn't expect to be able to write code after finishing it. Just take it as an introductory book before more advance courses. I consider the material hard to grasp many times (espectially in the Functor chapter where the author simply takes some statements for granted and skips the proof). This results in me skipping a lot of stuffs. I plan to review more about this book after I have extensive experience in Haskell (that day may never come).

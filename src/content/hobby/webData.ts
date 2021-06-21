@@ -2,7 +2,7 @@ export const work = [
   {
     title: 'This Website',
     description: 'A very customizable personal website',
-    keyword: ['HTML', 'SCSS', 'JS', 'React.js', 'Inkscape', 'Vite'],
+    keyword: ['HTML', 'SCSS', 'Typescript', 'React.js', 'Inkscape'],
 
     src: 'https://github.com/tkiat/tkiat.github.io',
     type: 'Project',
