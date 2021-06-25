@@ -8,7 +8,7 @@ import { createHistory, createMemorySource, LocationProvider } from '@reach/rout
 
 import Content from './Content'
 import { pathToTestId } from 'src/@global/utils'
-import initData from 'src/appInputs'
+import initData from 'src/appData'
 
 const renderWithRouter = (
   ui: React.ReactElement,

@@ -5,7 +5,7 @@ export default ({ className }: Props): React.ReactElement => {
   return (
     <div className={className}>
       <div>
-        Content not found! But no worries we have <a href="/">HOME</a>
+        Content not found. But no worries we have <a href="/">HOME</a>
       </div>
     </div>
   )

@@ -2,29 +2,27 @@ import React from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 
 import { pathToTestId } from 'src/@global/utils'
-import initData from 'src/appInputs'
+import initData from 'src/appData'
 
 import NotFound from 'src/@global/component/NotFound'
 import Intro from 'src/content/about/Intro'
 import Credits from 'src/content/about/Credits'
-import Record from 'src/content/about/Record'
+import Items from 'src/content/about/Items'
 import Personality from 'src/content/about/Personality'
-import Environment from 'src/content/hobby/Environment'
-import Others from 'src/content/hobby/Others'
-import PC from 'src/content/hobby/PC'
-import Web from 'src/content/hobby/Web'
+import Environment from 'src/content/activity/Environment'
+import Others from 'src/content/activity/Others'
+import Software from 'src/content/activity/Software'
 import Resume from 'src/content/resume/Resume'
 
 const contents = [
   { path: initData.paths[0], elem: <Intro /> },
   { path: initData.paths[1], elem: <Personality /> },
-  { path: initData.paths[2], elem: <Record /> },
+  { path: initData.paths[2], elem: <Items /> },
   { path: initData.paths[3], elem: <Credits /> },
-  { path: initData.paths[4], elem: <Web /> },
-  { path: initData.paths[5], elem: <PC /> },
-  { path: initData.paths[6], elem: <Environment /> },
-  { path: initData.paths[7], elem: <Others /> },
-  { path: initData.paths[8], elem: <Resume /> },
+  { path: initData.paths[4], elem: <Software /> },
+  { path: initData.paths[5], elem: <Environment /> },
+  { path: initData.paths[6], elem: <Others /> },
+  { path: initData.paths[7], elem: <Resume /> },
 ]
 
 type Props = {

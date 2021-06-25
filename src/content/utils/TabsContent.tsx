@@ -5,7 +5,8 @@ const getInitTabIndex = (storage: string) => parseInt(localStorage.getItem(stora
 
 type item = {
   title: string
-  content: React.ReactElement
+  clickable?: boolean
+  content?: React.ReactElement
 }
 type Props = {
   items: item[]

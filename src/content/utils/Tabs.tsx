@@ -2,7 +2,8 @@ import React from 'react'
 import { useImmer } from 'use-immer'
 
 type TabItem = {
-  content: React.ReactElement
+  clickable?: boolean
+  content?: React.ReactElement
   title: string
 }
 type Props = {
@@ -27,21 +28,24 @@ export default ({ initIndex, cleanup, update, items }: Props): React.ReactElemen
     <>
       <div className="tabs tabs--content">
         <div className="tabs__list" role="tablist" aria-label="content tabs">
-          {items.map(({ title }, i) => (
-            <button
-              className={'tabs__button' + (cur === i ? ' tabs__button--active' : '')}
-              role="tab"
-              id={'tab' + i}
-              key={i}
-              onClick={() => {
-                setCur(i)
-                update(i)
-              }}
-              aria-controls={'panel' + i}
-              aria-selected={cur === i ? 'true' : 'false'}>
-              {title}
-            </button>
-          ))}
+          {items.map(({ clickable, title }, i) => {
+            if (clickable === false) return <div className="tabs__item tabs__decorate">{title}</div>
+            return (
+              <button
+                className={'tabs__item tabs__button' + (cur === i ? ' tabs__button--active' : '')}
+                role="tab"
+                id={'tab' + i}
+                key={i}
+                onClick={() => {
+                  setCur(i)
+                  update(i)
+                }}
+                aria-controls={'panel' + i}
+                aria-selected={cur === i ? 'true' : 'false'}>
+                {title}
+              </button>
+            )
+          })}
         </div>
       </div>
       {items.map(({ content }, i) => (

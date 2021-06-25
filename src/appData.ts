@@ -50,12 +50,12 @@ const getWavePhysicsInit = () => {
 const urls = {
   main: {
     0: '/about',
-    1: '/hobby',
-    2: '/work',
+    1: '/activity',
+    2: '/resume',
   },
   sub: {
-    0: ['/Intro', '/Personality', '/Record', '/Credits'],
-    1: ['/Web', '/PC', '/TODO', '/Others'],
+    0: ['/Intro', '/Personality', '/Items', '/Credits'],
+    1: ['/Software', '/Personal', '/General'],
   },
 }
 const paths = [
@@ -67,7 +67,6 @@ const paths = [
   urls.main[1] + urls.sub[1][0],
   urls.main[1] + urls.sub[1][1],
   urls.main[1] + urls.sub[1][2],
-  urls.main[1] + urls.sub[1][3],
 
   urls.main[2],
 ]

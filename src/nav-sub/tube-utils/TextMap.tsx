@@ -5,6 +5,7 @@ import { ReactComponent as UpperCBorder } from 'src/@global/asset/letters/_C-bor
 import { ReactComponent as UpperDBorder } from 'src/@global/asset/letters/_D-border.svg'
 import { ReactComponent as UpperEBorder } from 'src/@global/asset/letters/_E-border.svg'
 import { ReactComponent as UpperFBorder } from 'src/@global/asset/letters/_F-border.svg'
+import { ReactComponent as UpperGBorder } from 'src/@global/asset/letters/_G-border.svg'
 import { ReactComponent as UpperIBorder } from 'src/@global/asset/letters/_I-border.svg'
 import { ReactComponent as UpperMBorder } from 'src/@global/asset/letters/_M-border.svg'
 import { ReactComponent as UpperOBorder } from 'src/@global/asset/letters/_O-border.svg'
@@ -22,6 +23,7 @@ import { ReactComponent as UpperCMask } from 'src/@global/asset/letters/_C-mask.
 import { ReactComponent as UpperDMask } from 'src/@global/asset/letters/_D-mask.svg'
 import { ReactComponent as UpperEMask } from 'src/@global/asset/letters/_E-mask.svg'
 import { ReactComponent as UpperFMask } from 'src/@global/asset/letters/_F-mask.svg'
+import { ReactComponent as UpperGMask } from 'src/@global/asset/letters/_G-mask.svg'
 import { ReactComponent as UpperIMask } from 'src/@global/asset/letters/_I-mask.svg'
 import { ReactComponent as UpperMMask } from 'src/@global/asset/letters/_M-mask.svg'
 import { ReactComponent as UpperOMask } from 'src/@global/asset/letters/_O-mask.svg'
@@ -39,6 +41,7 @@ import { ReactComponent as LowerBBorder } from 'src/@global/asset/letters/b-bord
 import { ReactComponent as LowerCBorder } from 'src/@global/asset/letters/c-border.svg'
 import { ReactComponent as LowerDBorder } from 'src/@global/asset/letters/d-border.svg'
 import { ReactComponent as LowerEBorder } from 'src/@global/asset/letters/e-border.svg'
+import { ReactComponent as LowerFBorder } from 'src/@global/asset/letters/f-border.svg'
 import { ReactComponent as LowerGBorder } from 'src/@global/asset/letters/g-border.svg'
 import { ReactComponent as LowerHBorder } from 'src/@global/asset/letters/h-border.svg'
 import { ReactComponent as LowerIBorder } from 'src/@global/asset/letters/i-border.svg'
@@ -53,6 +56,7 @@ import { ReactComponent as LowerSBorder } from 'src/@global/asset/letters/s-bord
 import { ReactComponent as LowerTBorder } from 'src/@global/asset/letters/t-border.svg'
 import { ReactComponent as LowerUBorder } from 'src/@global/asset/letters/u-border.svg'
 import { ReactComponent as LowerVBorder } from 'src/@global/asset/letters/v-border.svg'
+import { ReactComponent as LowerWBorder } from 'src/@global/asset/letters/w-border.svg'
 import { ReactComponent as LowerYBorder } from 'src/@global/asset/letters/y-border.svg'
 
 import { ReactComponent as LowerAMask } from 'src/@global/asset/letters/a-mask.svg'
@@ -60,6 +64,7 @@ import { ReactComponent as LowerBMask } from 'src/@global/asset/letters/b-mask.s
 import { ReactComponent as LowerCMask } from 'src/@global/asset/letters/c-mask.svg'
 import { ReactComponent as LowerDMask } from 'src/@global/asset/letters/d-mask.svg'
 import { ReactComponent as LowerEMask } from 'src/@global/asset/letters/e-mask.svg'
+import { ReactComponent as LowerFMask } from 'src/@global/asset/letters/f-mask.svg'
 import { ReactComponent as LowerGMask } from 'src/@global/asset/letters/g-mask.svg'
 import { ReactComponent as LowerHMask } from 'src/@global/asset/letters/h-mask.svg'
 import { ReactComponent as LowerIMask } from 'src/@global/asset/letters/i-mask.svg'
@@ -74,6 +79,7 @@ import { ReactComponent as LowerSMask } from 'src/@global/asset/letters/s-mask.s
 import { ReactComponent as LowerTMask } from 'src/@global/asset/letters/t-mask.svg'
 import { ReactComponent as LowerUMask } from 'src/@global/asset/letters/u-mask.svg'
 import { ReactComponent as LowerVMask } from 'src/@global/asset/letters/v-mask.svg'
+import { ReactComponent as LowerWMask } from 'src/@global/asset/letters/w-mask.svg'
 import { ReactComponent as LowerYMask } from 'src/@global/asset/letters/y-mask.svg'
 
 type Props = {
@@ -88,6 +94,7 @@ export const mapping: Props = {
     D: <UpperDBorder />,
     E: <UpperEBorder />,
     F: <UpperFBorder />,
+    G: <UpperGBorder />,
     I: <UpperIBorder />,
     M: <UpperMBorder />,
     O: <UpperOBorder />,
@@ -105,6 +112,7 @@ export const mapping: Props = {
     c: <LowerCBorder />,
     d: <LowerDBorder />,
     e: <LowerEBorder />,
+    f: <LowerFBorder />,
     g: <LowerGBorder />,
     h: <LowerHBorder />,
     i: <LowerIBorder />,
@@ -119,6 +127,7 @@ export const mapping: Props = {
     t: <LowerTBorder />,
     u: <LowerUBorder />,
     v: <LowerVBorder />,
+    w: <LowerWBorder />,
     y: <LowerYBorder />,
   },
   mask: {
@@ -127,6 +136,7 @@ export const mapping: Props = {
     D: <UpperDMask />,
     E: <UpperEMask />,
     F: <UpperFMask />,
+    G: <UpperGMask />,
     I: <UpperIMask />,
     M: <UpperMMask />,
     O: <UpperOMask />,
@@ -144,6 +154,7 @@ export const mapping: Props = {
     c: <LowerCMask />,
     d: <LowerDMask />,
     e: <LowerEMask />,
+    f: <LowerFMask />,
     g: <LowerGMask />,
     h: <LowerHMask />,
     i: <LowerIMask />,
@@ -158,6 +169,7 @@ export const mapping: Props = {
     t: <LowerTMask />,
     u: <LowerUMask />,
     v: <LowerVMask />,
+    w: <LowerWMask />,
     y: <LowerYMask />,
   },
 }

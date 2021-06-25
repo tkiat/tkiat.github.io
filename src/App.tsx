@@ -5,7 +5,7 @@ import { Redirect, Router } from '@reach/router'
 import * as Nav from 'ts-type-nav'
 import * as Theme from 'ts-type-theme'
 
-import initData from 'src/appInputs'
+import initData from 'src/appData'
 import getWaveLine from 'src/canvas/wave/getWaveLine'
 import * as ts from 'src/@global/utils-typescript'
 import useViewportDimensions from 'src/@global/hook/useViewportDimensions'
@@ -29,6 +29,8 @@ import 'src/@sass/main.scss'
 // TODO maybe in mavsub split text and valvue in diff component
 // TODO delete obvius tests like toggler, i think write general test is better
 // TODO use currying in moveWater
+// TODO https://github.com/rollup/plugins/tree/master/packages/yaml
+// TODO tablist hover not color
 
 let willShowSafariPrompt = initData.isSafariBrowser
 

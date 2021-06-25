@@ -7,12 +7,6 @@ I did a small [**gaming channel**](https://www.youtube.com/channel/UC89LAwZdhzEA
 `
 
 export const courses = `
-# Technical
-- **2020** - Coursera Course - [**Cloud Computing Basics**](https://www.coursera.org/learn/cloud-computing-basics) - <a href='https://coursera.org/share/7fa417bc8244a27c8ccb08295906fb99' aria-label='Certificate for Introduction to Cloud Computing Basics Course'>**Verified Certificate**</a>
-- **2018-2019** - freeCodeCamp - Completed 5 web-related courses
-- **2018** - Coursera Specialization - [**Data Structures and Algorithms**](https://www.coursera.org/specializations/data-structures-algorithms) - <a href='https://coursera.org/verify/specialization/MHRFWABPYTJU' aria-label='Certificate for Data Structures and Algorithms Specialization'>**Verified Certificate**</a>
-- **2018** - Coursera Specialization - [**Algorithms**](https://www.coursera.org/specializations/algorithms) - <a href='https://coursera.org/verify/specialization/LP2AXJ7TUNRV' aria-label='Certificate for Algorithms Specialization'>**Verified Certificate**</a>
-
 # Non-Technical
 - **2020** - Coursera Course - [**Introduction to Personal Branding**](https://www.coursera.org/learn/personal-branding) - <a href='https://coursera.org/verify/AZD6S5JVYEG8' aria-label='Certificate for Introduction to Personal Branding Course'>**Verified Certificate**</a>
 - **2020** - Coursera Course - [**Sit less, get active**](https://www.coursera.org/learn/get-active) - <a href='https://coursera.org/share/896aa29cfb15efd3a8f0d08de9134c99' aria-label='certificate for sit less, get active course'>**Verified Certificate**</a>

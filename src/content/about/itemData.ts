@@ -1,3 +1,9 @@
+export const intro = `
+## I list all my belongings here because I like to be aware of what I use. This can reduce the number of my stuff which in turn leads to more personal connection to them.
+
+## I decided to show in public because, as an open-source software lover, I love to open-source myself also. Transparency promotes integrity.
+`
+
 export const gadgets = [
   `
 ### Laptop

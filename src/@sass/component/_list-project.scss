@@ -9,7 +9,7 @@
   .cards-project {
     display: block;
     border-collapse: collapse;
-    margin: 12px 0;
+    margin: 6px 0;
     padding: 0;
 
     color: var(--tube-stroke-color);
@@ -41,7 +41,9 @@
         $n: hsl(var(--hue-p180), var(--saturation), var(--luminance-base-content-nav));
         background-color: hsl(var(--hue-p180), var(--saturation), var(--luminance-base-content-nav));
         margin: 0 0 0 5px;
+        padding: 0;
         & > a {
+          padding: 2px 5px;
           color: var(--body-bg-color);
           &:after {
             width: 0;
