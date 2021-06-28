@@ -1,0 +1,19 @@
+[
+  {
+    "title": "Terminal Game Client",
+    "description": "A simple TUI game client that supports any supplemental commands such as wine64.",
+    "keyword": ["Python3", "ncurses"],
+
+    "src": "https://github.com/tkiat/terminal-game-client",
+    "live": "",
+    "type": "Project"
+  },
+  {
+    "title": "Lazyman Pomodoro",
+    "description": "A simple CLI pomodoro clock that supports pause, simple statistic, and configurable session lengths.",
+    "keyword": ["Python3", "ncurses"],
+
+    "src": "https://github.com/tkiat/lazyman-pomodoro",
+    "type": "Task"
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "title": "My Dotfiles and Configs",
+    "description": "",
+    "keyword": [],
+
+    "src": "https://github.com/tkiat/dotfiles-and-configs",
+    "live": "",
+    "type": "Config"
+  },
+  {
+    "title": "tkiat Guix Channel",
+    "description": "I fork suckless repositories and create a Guix channel for them",
+    "keyword": ["Guile"],
+
+    "src": "https://gitlab.com/tkiat/guix-channel",
+    "live": "",
+    "type": "Repository"
+  },
+  {
+    "title": "TODO",
+    "description": "TODO",
+    "keyword": ["Python3"],
+
+    "src": "",
+    "live": "",
+    "type": "Script"
+  }
+]

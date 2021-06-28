@@ -25,7 +25,6 @@ import Sidebar from 'src/sidebar/Sidebar'
 import 'src/@sass/main.scss'
 
 // TODO change body-text-color to more semantic like content-text-color
-// TODO test once tabscontent
 // TODO https://github.com/rollup/plugins/tree/master/packages/yaml
 
 let willShowSafariPrompt = initData.isSafariBrowser

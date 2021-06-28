@@ -4,7 +4,12 @@ import ListProject from 'src/content/utils/ListProject'
 import Markdown from 'src/content/utils/Markdown'
 import TabsContent from 'src/content/utils/TabsContent'
 
-import * as data from './softwareData'
+import webProject from './data/software-web-experiment.json'
+import webExperiment from './data/software-web-project.json'
+import pcProject from './data/software-pc-project.json'
+import pcUtility from './data/software-pc-utility.json'
+import { pullRequest } from './data/software-pullrequest'
+import { learning } from './data/software-learning'
 
 let index = 0
 
@@ -15,12 +20,12 @@ const items = [
   },
   {
     title: 'Project',
-    content: <ListProject items={data.webProject} />,
+    content: <ListProject items={webProject} />,
     index: index++,
   },
   {
     title: 'Experiment',
-    content: <ListProject items={data.webExperiment} />,
+    content: <ListProject items={webExperiment} />,
     index: index++,
   },
   {
@@ -28,12 +33,12 @@ const items = [
   },
   {
     title: 'Project',
-    content: <ListProject items={data.pcProject} />,
+    content: <ListProject items={pcProject} />,
     index: index++,
   },
   {
     title: 'Utility',
-    content: <ListProject items={data.pcUtility} />,
+    content: <ListProject items={pcUtility} />,
     index: index++,
   },
   {
@@ -42,12 +47,12 @@ const items = [
   },
   {
     title: 'Pull Request',
-    content: <Markdown content={data.pullRequest} />,
+    content: <Markdown content={pullRequest} />,
     index: index++,
   },
   {
     title: 'Learning',
-    content: <Markdown content={data.learning} />,
+    content: <Markdown content={learning} />,
     index: index++,
   },
 ]
