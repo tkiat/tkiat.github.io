@@ -26,7 +26,6 @@ import 'src/@sass/main.scss'
 
 // TODO write test for navmain
 // TODO change body-text-color to more semantic like content-text-color
-// TODO maybe in mavsub split text and valvue in diff component
 // TODO delete obvius tests like toggler, i think write general test is better
 // TODO use currying in moveWater
 // TODO https://github.com/rollup/plugins/tree/master/packages/yaml

@@ -29,7 +29,12 @@ export default ({ initIndex, cleanup, update, items }: Props): React.ReactElemen
       <div className="tabs tabs--content">
         <div className="tabs__list" role="tablist" aria-label="content tabs">
           {items.map(({ clickable, title }, i) => {
-            if (clickable === false) return <div className="tabs__item tabs__decorate">{title}</div>
+            if (clickable === false)
+              return (
+                <div className="tabs__item tabs__decorate" key={i}>
+                  {title}
+                </div>
+              )
             return (
               <button
                 className={'tabs__item tabs__button' + (cur === i ? ' tabs__button--active' : '')}
