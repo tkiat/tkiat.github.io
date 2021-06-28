@@ -6,36 +6,41 @@ import TabsContent from 'src/content/utils/TabsContent'
 
 import * as data from './itemData'
 
-const storage = 'tab-index-about-record'
+const storage = 'tab-index-about-items'
 const items = [
   {
     title: 'Intro',
     content: <Markdown content={data.intro} />,
+    index: 0,
   },
   {
     title: 'Physical',
-    clickable: false,
   },
   {
     title: 'Gadgets',
     content: <CardsMarkdown mdArray={data.gadgets} />,
+    index: 1,
   },
   {
     title: 'Hygiene',
     content: <Markdown content={data.hygiene} />,
+    index: 2,
   },
   // TODO
   {
     title: 'Tools',
     content: <Markdown content={data.hygiene} />,
+    index: 3,
   },
   {
     title: 'Cloths',
     content: <Markdown content={data.hygiene} />,
+    index: 4,
   },
   {
     title: 'Kitchenware',
     content: <Markdown content={data.hygiene} />,
+    index: 5,
   },
   {
     title: 'Nonphysical',
@@ -44,10 +49,12 @@ const items = [
   {
     title: 'Software',
     content: <CardsMarkdown mdArray={data.software} />,
+    index: 6,
   },
   {
     title: 'Media',
     content: <CardsMarkdown mdArray={data.software} />,
+    index: 7,
   },
 ]
 

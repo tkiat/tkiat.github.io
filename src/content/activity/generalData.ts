@@ -1,3 +1,11 @@
+export const reading = `
+### Only DRM-free digital books listed here
+
+Title - Tag - Status (- Review)
+
+- A Confession - Philosophy - 100% - Review
+`
+
 export const content = `
 # Blog
 [**My personal blog**](https://tkiat.github.io/freedom-oriented-blog/) is hosted on a small, unknown GitHub pages. The theme of the blog is directed towards freedom with the following sections: **Environment**, **FOSS**, **Media**, **Personal**, **Web**. I am planning to separate each topic into a dedicate site, which should be super fun but also very ambitious.
@@ -7,17 +15,8 @@ I did a small [**gaming channel**](https://www.youtube.com/channel/UC89LAwZdhzEA
 `
 
 export const courses = `
-# Non-Technical
-- **2020** - Coursera Course - [**Introduction to Personal Branding**](https://www.coursera.org/learn/personal-branding) - <a href='https://coursera.org/verify/AZD6S5JVYEG8' aria-label='Certificate for Introduction to Personal Branding Course'>**Verified Certificate**</a>
-- **2020** - Coursera Course - [**Sit less, get active**](https://www.coursera.org/learn/get-active) - <a href='https://coursera.org/share/896aa29cfb15efd3a8f0d08de9134c99' aria-label='certificate for sit less, get active course'>**Verified Certificate**</a>
-`
-
-export const others = `
-* **Tea**. My first love with tea began when I was in Germany where a selection of high-quality tea was available there. Now in Thailand I can't taste tea any longer.
-* **Shaving**. I have tried new blades from time to time but still haven't tried a real straight razor, a shaving brush, and fancy soaps.
-* **Gardening**. I don't like the pesticide and also plastic packages so I am growing some plants (ผักบุ้ง, ผักกาดหอม, ตั้งโอ๋).
-* **Reading Technical Blogs**. The freedom provided by web and Linux is an eye-opener for me.
-* **Reading Books**. Currently not so active as I am reading only blogs now.
+- **2020** - **Course** - Coursera - [**Introduction to Personal Branding**](https://www.coursera.org/learn/personal-branding) - <a href='https://coursera.org/verify/AZD6S5JVYEG8' aria-label='Certificate for Introduction to Personal Branding Course'>**Verified Certificate**</a>
+- **2020** - **Course** - Coursera - [**Sit less, get active**](https://www.coursera.org/learn/get-active) - <a href='https://coursera.org/share/896aa29cfb15efd3a8f0d08de9134c99' aria-label='certificate for sit less, get active course'>**Verified Certificate**</a>
 `
 
 export const archive = `

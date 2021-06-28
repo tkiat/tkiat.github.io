@@ -3,25 +3,30 @@ import React from 'react'
 import Markdown from 'src/content/utils/Markdown'
 import TabsContent from 'src/content/utils/TabsContent'
 
-import * as data from './othersData'
+import * as data from './generalData'
 
-const storage = 'tab-index-hobby-others'
+let index = 0
+const storage = 'tab-index-activity-general'
 const items = [
+  {
+    title: 'Reading',
+    content: <Markdown content={data.reading} />,
+    index: index++,
+  },
   {
     title: 'Content',
     content: <Markdown content={data.content} />,
+    index: index++,
   },
   {
     title: 'Courses',
     content: <Markdown content={data.courses} />,
-  },
-  {
-    title: 'Others',
-    content: <Markdown content={data.others} />,
+    index: index++,
   },
   {
     title: 'Archive',
     content: <Markdown content={data.archive} />,
+    index: index++,
   },
 ]
 

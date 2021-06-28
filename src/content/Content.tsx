@@ -13,7 +13,7 @@ import Personality from 'src/content/about/Personality'
 
 import Software from 'src/content/activity/Software'
 import General from 'src/content/activity/General'
-import Biography from 'src/content/activity/Biography'
+import LifeStory from 'src/content/activity/LifeStory'
 
 import Resume from 'src/content/resume/Resume'
 
@@ -24,7 +24,7 @@ const contents = [
   { path: initData.paths[3], elem: <Credits /> },
   { path: initData.paths[4], elem: <Software /> },
   { path: initData.paths[5], elem: <General /> },
-  { path: initData.paths[6], elem: <Biography /> },
+  { path: initData.paths[6], elem: <LifeStory /> },
   { path: initData.paths[7], elem: <Resume /> },
 ]
 

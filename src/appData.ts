@@ -55,7 +55,7 @@ const urls = {
   },
   sub: {
     0: ['/Intro', '/Personality', '/Items', '/Credits'],
-    1: ['/Software', '/General', '/Biography'],
+    1: ['/Software', '/General', '/LifeStory'],
   },
 }
 const paths = [
