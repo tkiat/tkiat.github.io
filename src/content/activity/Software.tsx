@@ -4,12 +4,12 @@ import ListProject from 'src/content/utils/ListProject'
 import Markdown from 'src/content/utils/Markdown'
 import TabsContent from 'src/content/utils/TabsContent'
 
-import webProject from './data/software-web-experiment.json'
-import webExperiment from './data/software-web-project.json'
-import pcProject from './data/software-pc-project.json'
-import pcUtility from './data/software-pc-utility.json'
-import { pullRequest } from './data/software-pullrequest'
-import { learning } from './data/software-learning'
+import webProject from './data-software/web-experiment.json'
+import webExperiment from './data-software/web-project.json'
+import pcProject from './data-software/pc-project.json'
+import pcUtility from './data-software/pc-utility.json'
+import { learning } from './data-software/learning'
+import { pullRequest } from './data-software/pullrequest'
 
 let index = 0
 

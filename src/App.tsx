@@ -24,6 +24,9 @@ import Sidebar from 'src/sidebar/Sidebar'
 
 import 'src/@sass/main.scss'
 
+// console.log(gcd)
+// console.log(gcd(16)(20))
+
 // TODO change body-text-color to more semantic like content-text-color
 // TODO https://github.com/rollup/plugins/tree/master/packages/yaml
 
